@@ -1,0 +1,5 @@
+{
+  "updated": "2026-07-07",
+  "_comment": "MLB Pipeline overall Top 100. Update with: node src/parse-rankings.js top100 (paste list, Ctrl-D). Players here get MLB #N badges and stronger value anchors.",
+  "prospects": []
+}

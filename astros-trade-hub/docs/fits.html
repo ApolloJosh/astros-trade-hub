@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Astros Possible Fits — BTD Trade Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.pcard .top{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.pcard img.face{width:48px;height:48px;border-radius:50%;background:var(--navy);object-fit:cover}
+.pcard .nm{font-weight:700}
+.pcard .meta{font-size:11.5px;color:var(--muted)}
+.pcard .stats{font-size:12px;background:#1c1e24;border-radius:8px;padding:6px 8px;margin:8px 0}
+.pcard .vals{display:flex;justify-content:space-between;font-size:12.5px}
+</style>
+</head><body><div class="wrap">
+<nav id="nav"></nav>
+<h1>Astros Possible Fits</h1>
+<p class="sub">The curated target board from the podcast's tracking sheet — lefty bats and bullpen arms that fit Houston, with model values.</p>
+<div class="controls">
+  <button data-f="all" class="on">All</button><button data-f="H">Hitters</button><button data-f="P">Pitchers</button>
+  <input id="q" placeholder="Search…">
+  <select id="sort"><option value="tv">Sort: Trade value</option><option value="tl">Sort: Trade likelihood</option><option value="name">Sort: Name</option></select>
+</div>
+<div class="grid" id="cards"></div>
+<p class="foot">Curated in Google Sheets · valued by the BTD model · Beyond the Diamond</p>
+<script src="assets/app.js"></script>
+<script>
+BTD.nav('fits');
+(async () => {
+  const doc = await BTD.data('fits');
+  const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.\-]/g, '')); return isNaN(n) ? null : n; };
+  const players = doc.fits.map(o => ({
+    name: (o['Player'] || '').trim(), team: o['Team'] || '', pos: o['Pos'] || '', type: o._type,
+    age: num(o['Age']), ctrl: num(o['Control']), tv: num(o['Trade Value']), tl: num(o['Trade Likelihood']),
+    tlt: o['TL Tier'] || '', sur: num(o['Surplus $M']), war: num(o['WAR']), proj: num(o['Proj WAR']),
+    id: num(o['MLBID']),
+    line: o._type === 'H'
+      ? `${o['AVG'] || '—'} AVG · ${o['OPS'] || '—'} OPS · ${o['HR'] || 0} HR · ${o['SB'] || 0} SB`
+      : `${o['ERA'] || '—'} ERA · ${o['WHIP'] || '—'} WHIP · ${o['K'] || 0} K · ${o['IP'] || 0} IP`,
+  })).filter(p => p.name);
+  const S = { f: 'all', q: '', sort: 'tv' };
+  function render() {
+    const el = document.getElementById('cards');
+    let list = players.filter(p => (S.f === 'all' || p.type === S.f) && (!S.q || p.name.toLowerCase().includes(S.q)));
+    list.sort((a, b) => S.sort === 'name' ? a.name.localeCompare(b.name)
+      : S.sort === 'tl' ? (b.tl || 0) - (a.tl || 0) : (b.tv || 0) - (a.tv || 0));
+    el.innerHTML = list.map(p => `<div class="card pcard">
+      <div class="top"><img class="face" loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">
+      <div><div class="nm">${BTD.esc(p.name)}</div><div class="meta">${BTD.esc([p.team, p.pos, p.age ? 'age ' + p.age : '', p.ctrl != null ? p.ctrl + 'y ctrl' : ''].filter(Boolean).join(' · '))}</div></div></div>
+      <div class="stats">${BTD.esc(p.line)}</div>
+      <div class="vals"><span>Trade value <b class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</b></span>
+      <span>Likelihood <b>${p.tl ?? '—'}${p.tlt ? ' · ' + BTD.esc(p.tlt) : ''}</b></span></div>
+    </div>`).join('') || '<div class="card">No players match.</div>';
+  }
+  document.querySelectorAll('button[data-f]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('button[data-f]').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); S.f = b.dataset.f; render();
+  }));
+  document.getElementById('q').addEventListener('input', e => { S.q = e.target.value.toLowerCase(); render(); });
+  document.getElementById('sort').addEventListener('change', e => { S.sort = e.target.value; render(); });
+  render();
+})().catch(e => { document.getElementById('cards').innerHTML = '<div class="card">No fits data yet — run the pipeline.</div>'; });
+</script>
+</div></body></html>
