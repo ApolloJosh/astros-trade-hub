@@ -233,7 +233,9 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const defPts = Math.sign(defR) * Math.min(Math.max(Math.abs(defR) - dz, 0) * (t.defSlope || 0.35), t.defCap || 6);
     // Hardware: MVP/CY/ROY/GG/SS/All-Star wins + manual voting finishes, recency-decayed.
     const awdPts = Math.min(toNum(sv.awardPts, 0), (t.awards && t.awards.cap) || 10);
-    let raw = (quality + quantity - penalty + t.floor + defPts + awdPts) * (t.marketMult || 1);
+    // Durability: recency-weighted IL days + stints over the last 4 seasons.
+    const durPts = Math.min(((t.dur && t.dur.k) || 0) * toNum(sv.durW, 0), (t.dur && t.dur.cap) || 20);
+    let raw = (quality + quantity - penalty + t.floor + defPts + awdPts - durPts) * (t.marketMult || 1);
     if (raw > t.squashStart) raw = t.squashStart + t.squashRange * Math.tanh((raw - t.squashStart) / t.squashRange);
     statTV = clamp(raw, 1, t.max);
   }

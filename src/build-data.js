@@ -22,6 +22,18 @@ const COTS = fs.existsSync(cotsPath) ? JSON.parse(fs.readFileSync(cotsPath, 'utf
 // Statcast Fielding Run Value (id -> [current, previous]) + award data.
 const defPath = path.join(__dirname, '..', 'data-sources', 'defense.json');
 const DEF = (fs.existsSync(defPath) ? JSON.parse(fs.readFileSync(defPath, 'utf8')) : { players: {} }).players || {};
+const ilPath = path.join(__dirname, '..', 'data-sources', 'il-history.json');
+const ILH = (fs.existsSync(ilPath) ? JSON.parse(fs.readFileSync(ilPath, 'utf8')) : { seasons: {} }).seasons || {};
+// Recency-weighted IL score: days + per-stint charge, weighted by season age.
+function durability(pid) {
+  const d = CFG.sv.tv.dur || {};
+  let w = 0, days = 0, stints = 0;
+  (d.w || [1, 0.75, 0.5, 0.3]).forEach((wt, i) => {
+    const rec = (ILH[String(CFG.season - i)] || {})[String(pid)];
+    if (rec) { w += wt * (rec.d + rec.st * (d.stintDays || 4)); days += rec.d; stints += rec.st; }
+  });
+  return { durW: Math.round(w), days, stints };
+}
 const awdPath = path.join(__dirname, '..', 'data-sources', 'awards-manual.json');
 const AWD_MAN = (fs.existsSync(awdPath) ? JSON.parse(fs.readFileSync(awdPath, 'utf8')) : { entries: [] }).entries || [];
 const AWARD_RE = /^(?:AL|NL|ML|MLB)?(MVP|CYA?|ROY|GG|SS|AS)$/;
@@ -138,6 +150,8 @@ async function valuePlayer(p, lg) {
     const tvc = CFG.sv.tv;
     if (d) sv.defR = Math.round(((tvc.defWCur ?? 0.6) * (d[0] || 0) + (tvc.defWPrev ?? 0.4) * (d[1] || 0)) * 10) / 10;
     sv.awardPts = awardPtsFor(p);
+    var dur = durability(p.id);
+    sv.durW = dur.durW;
   }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
 
@@ -157,6 +171,8 @@ async function valuePlayer(p, lg) {
     def: sv && sv.defR != null ? sv.defR : null,         // blended Fielding Run Value
     awd: sv && sv.awardPts ? sv.awardPts : null,         // awards points in the TV
     awards: awardList(p),                                // e.g. [{t:'GG',s:2025},{t:'CY',s:2025,place:3}]
+    ilDays: sv && dur && dur.days ? dur.days : null,     // IL days, last 4 seasons
+    ilStints: sv && dur && dur.stints ? dur.stints : null,
     tv, line, type: pitcher ? (base && base.sp === false ? 'RP' : 'SP') : 'H',
   };
 }
