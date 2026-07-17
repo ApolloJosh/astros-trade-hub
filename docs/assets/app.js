@@ -161,7 +161,8 @@ window.BTD = (function () {
         val('Trade Value', pts(P.tv), 'tv ' + tvCls(P.tv)) + val('WAR', P.war) + val('Proj WAR', P.proj) +
         val('Surplus', P.sur != null ? '$' + P.sur + 'M' : null) +
         val('Def (FRV)', P.def != null ? (P.def > 0 ? '+' : '') + P.def : null) +
-        val('Salary', P.salM != null ? '$' + (+P.salM).toFixed(1) + 'M/yr' : null) + '</div>' +
+        val('Salary', P.salM != null ? '$' + (+P.salM).toFixed(1) + 'M/yr' : null) +
+        val('IL · 4 yrs', P.ilDays != null ? P.ilDays + 'd / ' + (P.ilStints || 0) + ' stints' : null) + '</div>' +
       `<div class="pphd">This Season</div><div class="ppline">${statHTML(P)}</div>` +
       `<div id="ppsplits"><div class="ppload">Loading splits…</div></div>` +
       `<div id="ppbars">${barsHTML(P, _pool.players)}</div>`;
