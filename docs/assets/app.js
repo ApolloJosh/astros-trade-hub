@@ -1,4 +1,19 @@
 // Shared helpers for all pages.
+(function cleanURL() {
+  // GitHub Pages serves pages with or without .html — show the clean form.
+  if (location.protocol !== 'file:' && /\.html$/.test(location.pathname)) {
+    const p = location.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
+    history.replaceState(null, '', p + location.search + location.hash);
+  } else if (location.protocol === 'file:') {
+    // Local preview from disk: put .html back on internal links.
+    addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href]').forEach(a => {
+        const h = a.getAttribute('href');
+        if (/^(index|builder|feed|fits)([?#]|$)/.test(h)) a.setAttribute('href', h.replace(/^(\w+)/, '$1.html'));
+      });
+    });
+  }
+})();
 (function applyTheme() {  // The Wheel is the house style
   document.documentElement.dataset.theme = 'wheel';
   if (document.body) document.body.dataset.theme = 'wheel';
@@ -20,6 +35,7 @@ window.BTD = (function () {
   function badge(p) {
     let b = '';
     if (p.traded) b += ' <span class="chip traded">TRADED</span>';
+    if (p.il) b += ` <span class="chip" style="border-color:var(--bad);color:var(--bad)">${esc(p.il)}</span>`;
     if (p.top100) b += ` <span class="chip t100">MLB #${p.top100}</span>`;
     else if (p.orgRank) b += ` <span class="chip pr">Org #${p.orgRank}</span>`;
     else if (p.prospect) b += ' <span class="chip pr">PROSPECT</span>';
@@ -50,7 +66,7 @@ window.BTD = (function () {
         '<div class="mast-tag"><span class="star">★</span>&nbsp; Scout. Value. Deal. &nbsp;<span class="star">★</span></div>' +
       '</div>' +
       '<div class="tabs">' +
-        links.map(([f, t]) => `<a href="${f}.html" class="${f === active ? 'on' : ''}">${t}</a>`).join('') +
+        links.map(([f, t]) => `<a href="${f}${location.protocol === 'file:' ? '.html' : ''}" class="${f === active ? 'on' : ''}">${t}</a>`).join('') +
         '<span class="meta"><span class="upd" id="nav-upd"></span></span></div>';
     try { const m = await data('meta'); document.getElementById('nav-upd').textContent =
       'Updated ' + new Date(m.updated).toLocaleDateString(); } catch (e) {}
