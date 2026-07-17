@@ -42,12 +42,12 @@
       "gamma": 1.6,
       "annW": 0.35, "annWRP": 0.45,
       "annCapMult": 1.2, "annCapAdd": 0.5,
-      "wSur": 0.5, "surCap": 28,
+      "wSur": 0.65, "surCap": 35,
       "kPen": 0.45,
       "ageFrom": 30, "ageK": 0.10, "ageFloor": 0.55,
       "floor": 8, "squashStart": 95, "squashRange": 32, "max": 150,
       "ilQualityMult": 0.7,
-      "prospectAnchors": [[1, 52], [3, 44], [4, 34], [7, 26], [11, 18], [16, 13], [21, 9], [26, 7]],
+      "prospectAnchors": [[1, 46], [3, 38], [4, 30], [7, 22], [11, 15], [16, 11], [21, 8], [26, 6]],
       "top100Anchors": [[1, 75], [10, 65], [25, 55], [50, 45], [100, 35]],
       "prospectBlend": 0.8, "prospectCapMult": 2, "unrankedProspectCap": 18,
       "marketMult": 1.0,
@@ -59,6 +59,8 @@
     "maxCareerG": 30,
     "levels": [[11, 0.80, 0.020, 0.35], [12, 0.70, 0.030, 0.55], [13, 0.62, 0.035, 0.70], [14, 0.55, 0.040, 0.85], [16, 0.50, 0.045, 1.00]]
   },
+  "hotStove": { "days": 14, "perTrade": 0.25, "valueDiv": 150, "max": 10 },
+  "deadlineBanner": "🔥 Trade Deadline: Monday, August 3rd — 5:00 PM CT",
   "payrollDefaults": { "taxPayroll": 235252848, "threshold": 244000000, "payorStatus": "3rd" },
   "taxRates": { "1st": [0.20, 0.32, 0.625, 0.80], "2nd": [0.30, 0.42, 0.75, 0.90], "3rd": [0.50, 0.62, 0.95, 1.10] },
   "seasonLeftFrac": 0.45
