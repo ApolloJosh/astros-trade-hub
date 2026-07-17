@@ -1,9 +1,8 @@
 // Shared helpers for all pages.
-(function applyTheme() {  // before first paint
-  const t = localStorage.getItem('btdTheme') || 'wheel';
-  document.documentElement.dataset.theme = t;
-  if (document.body) document.body.dataset.theme = t;
-  else addEventListener('DOMContentLoaded', () => document.body.dataset.theme = t);
+(function applyTheme() {  // The Wheel is the house style
+  document.documentElement.dataset.theme = 'wheel';
+  if (document.body) document.body.dataset.theme = 'wheel';
+  else addEventListener('DOMContentLoaded', () => document.body.dataset.theme = 'wheel');
 })();
 window.BTD = (function () {
   async function data(name) {
@@ -42,8 +41,6 @@ window.BTD = (function () {
   async function nav(active) {
     const el = document.getElementById('mast') || document.getElementById('nav');
     const links = [['index', 'Hub'], ['builder', 'Trade Builder'], ['feed', 'Trade Feed'], ['fits', 'Astros Fits']];
-    const themes = [['wheel', 'The Wheel'], ['btd', 'BTD Classic'], ['savant', 'Dark Savant'], ['space', 'Space City']];
-    const cur = localStorage.getItem('btdTheme') || 'wheel';
     el.innerHTML =
       '<div class="deadline-banner">🔥 Trade Deadline: Monday, August 3rd — 5:00 PM CT 🔥</div>' +
       '<div class="stripe"></div>' +
@@ -54,15 +51,7 @@ window.BTD = (function () {
       '</div>' +
       '<div class="tabs">' +
         links.map(([f, t]) => `<a href="${f}.html" class="${f === active ? 'on' : ''}">${t}</a>`).join('') +
-        '<span class="meta"><span class="upd" id="nav-upd"></span>' +
-        '<select class="theme" id="themeSel" title="Theme">' +
-        themes.map(([v, t]) => `<option value="${v}" ${v === cur ? 'selected' : ''}>🎨 ${t}</option>`).join('') +
-      '</select></span></div>';
-    document.getElementById('themeSel').addEventListener('change', e => {
-      localStorage.setItem('btdTheme', e.target.value);
-      document.documentElement.dataset.theme = e.target.value;
-      document.body.dataset.theme = e.target.value;
-    });
+        '<span class="meta"><span class="upd" id="nav-upd"></span></span></div>';
     try { const m = await data('meta'); document.getElementById('nav-upd').textContent =
       'Updated ' + new Date(m.updated).toLocaleDateString(); } catch (e) {}
   }
