@@ -51,7 +51,8 @@
   <div class="blbl"><span>🚀 Send <b id="bgive">0</b></span><span><b id="bget">0</b> Receive 🎯</span></div>
   <div class="bbar"><div class="bfill" id="bfill"></div><div class="btick"></div></div>
 </div>
-<div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button></div></div>
+<div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button>
+<button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div></div>
 
 <div class="cols">
   <div class="panel">
@@ -228,6 +229,8 @@ BTD.nav('builder');
     document.getElementById('get').textContent = get.toFixed(1);
     const main = document.getElementById('vmain'), sub = document.getElementById('vsub');
     document.getElementById('share').style.display = (S.give.length && S.recv.length) ? 'inline-block' : 'none';
+    const accepted = S.give.length && S.recv.length && get > 0 && give / get >= 0.9;
+    document.getElementById('submitFan').style.display = (BTD.FAN_URL && accepted) ? 'inline-block' : 'none';
     const bw = document.getElementById('bwrap');
     if (give > 0 || get > 0) {
       bw.style.display = 'block';
@@ -401,6 +404,22 @@ BTD.nav('builder');
     document.getElementById('simg').src = url;
     document.getElementById('slink').value = shareURL();
     modal.style.display = 'flex';
+  });
+  // Submit an accepted trade to the Fan Trades feed
+  document.getElementById('submitFan').addEventListener('click', async () => {
+    const btn = document.getElementById('submitFan');
+    const name = prompt('Add your name to the trade (optional):', '');
+    if (name === null) return;
+    const slim = l => l.map(p => ({ id: p.id, name: p.name, pos: p.pos, team: p.teamId === HOU ? 'Astros' : p.team, tv: p.tv }));
+    btn.disabled = true; btn.textContent = 'Submitting…';
+    try {
+      const r = await fetch(BTD.FAN_URL, { method: 'POST', body: JSON.stringify({
+        action: 'submit', name, give: slim(S.give), get: slim(S.recv), gcash: S.gcash, rcash: S.rcash }) });
+      const d = await r.json();
+      if (d.ok) { btn.textContent = '✓ Submitted — see Fan Trades!'; }
+      else throw new Error(d.error || 'rejected');
+    } catch (e) { btn.textContent = '✗ Could not submit — try again'; btn.disabled = false; }
+    setTimeout(() => { btn.textContent = '🏆 Submit to Fan Trades'; btn.disabled = false; }, 4000);
   });
   document.getElementById('sclose').addEventListener('click', () => modal.style.display = 'none');
   modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });

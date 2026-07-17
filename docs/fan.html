@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fan Trades — BTD Trade Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.hlrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:16px}
+@media(max-width:860px){.hlrow{grid-template-columns:1fr}}
+.hlcard{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+.hlkick{font-family:var(--hd2);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.hltrade{font-size:12.5px}
+.hlnet{font-weight:800;color:var(--good)}
+.hlempty{color:var(--muted);font-size:12px}
+.top5 li{font-size:12.5px;margin-bottom:6px}
+.ftrade{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin-bottom:14px}
+.fthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:var(--muted)}
+.ftby b{color:var(--ink)}
+.fteq{display:grid;grid-template-columns:1fr auto 1fr;gap:12px}
+@media(max-width:640px){.fteq{grid-template-columns:1fr}}
+.ftside h5{margin:0 0 4px;font-size:12px;font-family:var(--hd2);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.ftpl{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;border-bottom:1px solid var(--row-line)}
+.ftsum{display:flex;justify-content:space-between;font-weight:800;font-size:12.5px;padding-top:4px}
+.fteqs{align-self:center;font-size:20px;color:var(--muted);text-align:center}
+.votes{display:flex;gap:8px;align-items:center}
+.votes button{font-size:12.5px;padding:5px 12px}
+.votes button.done{opacity:.55;pointer-events:none}
+.vnet{font-weight:800;min-width:36px;text-align:center}
+.mostrow{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--row-line);font-size:13px}
+.mostrow img{width:34px;height:34px;border-radius:50%;background:var(--navy,#16294f);object-fit:cover}
+.mostrow .cnt{margin-left:auto;font-weight:800;color:var(--accent)}
+.mostwrap{margin-bottom:16px}
+</style>
+</head><body>
+<header id="mast"></header>
+<div class="wrap">
+<div class="hero"><div class="kicker">You Make the Calls</div>
+<h1>Fan Trades</h1>
+<p class="sub">Trades submitted from the <a href="builder">Mock Trade Builder</a> — only deals the model says would get done. Vote the best to the top.</p></div>
+
+<div class="hlrow">
+  <div class="hlcard"><div class="hlkick">🔥 Trade of the Day</div><div id="hday" class="hlempty">No trades yet today — make one!</div></div>
+  <div class="hlcard"><div class="hlkick">🏆 Trade of the Week</div><div id="hweek" class="hlempty">No trades this week yet.</div></div>
+  <div class="hlcard"><div class="hlkick">⭐ Top 5 All Time</div><ol class="top5" id="htop" style="margin:0;padding-left:18px"><span class="hlempty">Nothing submitted yet.</span></ol></div>
+</div>
+
+<div class="panel mostwrap"><div class="panel-hd">🎯 Most Traded For</div>
+  <div class="note" style="margin-bottom:6px">Who Astros fans want most — every player received across all submitted trades.</div>
+  <div id="most" class="hlempty">Waiting on submissions…</div>
+</div>
+
+<div id="ftfeed"><div class="card hlempty">Loading fan trades…</div></div>
+<p class="foot">Fan-submitted mock trades · values from the BTD model · Beyond the Diamond</p>
+<script src="assets/app.js"></script>
+<script>
+BTD.nav('fan');
+(async () => {
+  const feedEl = document.getElementById('ftfeed');
+  if (!BTD.FAN_URL) { feedEl.innerHTML = '<div class="card hlempty">Fan Trades is warming up — check back soon!</div>'; return; }
+  let trades = [];
+  try { trades = (await (await fetch(BTD.FAN_URL + '?action=list')).json()).trades || []; }
+  catch (e) { feedEl.innerHTML = '<div class="card hlempty">Could not load fan trades — try a refresh.</div>'; return; }
+  const net = t => (t.likes || 0) - (t.dislikes || 0);
+  const ago = ts => {
+    const m = Math.max(0, (Date.now() - new Date(ts)) / 60000);
+    return m < 60 ? Math.round(m) + 'm ago' : m < 1440 ? Math.round(m / 60) + 'h ago' : Math.round(m / 1440) + 'd ago';
+  };
+  const oneLine = t => {
+    const names = l => l.map(p => p.name).join(', ');
+    return `${BTD.esc(names(t.give))}${t.gcash ? ' + $' + t.gcash + 'M' : ''} <b>for</b> ${BTD.esc(names(t.get))}${t.rcash ? ' + $' + t.rcash + 'M' : ''}`;
+  };
+
+  // Highlights
+  const now = Date.now(), day = 864e5;
+  const inWin = (t, d) => now - new Date(t.ts) < d;
+  const best = list => list.length ? list.reduce((a, b) => net(b) > net(a) ? b : a) : null;
+  const bd = best(trades.filter(t => inWin(t, day))), bw = best(trades.filter(t => inWin(t, 7 * day)));
+  const hl = (el, t) => { if (t) document.getElementById(el).innerHTML =
+    `<div class="hltrade">${oneLine(t)}<div style="margin-top:6px">by <b>${BTD.esc(t.name)}</b> · <span class="hlnet">+${net(t)}</span> 👍</div></div>`; };
+  hl('hday', bd); hl('hweek', bw);
+  const top5 = [...trades].sort((a, b) => net(b) - net(a)).slice(0, 5).filter(t => net(t) > 0);
+  if (top5.length) document.getElementById('htop').innerHTML =
+    top5.map(t => `<li>${oneLine(t)} <span class="hlnet">+${net(t)}</span></li>`).join('');
+
+  // Most Traded For
+  const want = new Map();
+  trades.forEach(t => (t.get || []).forEach(p => {
+    const w = want.get(p.id) || { id: p.id, name: p.name, pos: p.pos, team: p.team, n: 0 };
+    w.n++; want.set(p.id, w);
+  }));
+  const most = [...want.values()].sort((a, b) => b.n - a.n).slice(0, 10);
+  if (most.length) document.getElementById('most').innerHTML = most.map(p =>
+    `<div class="mostrow"><img loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">` +
+    `<span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="rmeta">${BTD.esc([p.pos, p.team].filter(Boolean).join(' · '))}</span></span>` +
+    `<span class="cnt">×${p.n}</span></div>`).join('');
+
+  // Feed
+  const voted = id => { try { return !!localStorage.getItem('ftv_' + id); } catch (e) { return false; } };
+  const side = (title, list, cash, total) => `<div class="ftside"><h5>${title}</h5>` +
+    list.map(p => `<div class="ftpl"><span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="rmeta">${BTD.esc(p.pos || '')}</span></span><span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span></div>`).join('') +
+    (cash ? `<div class="ftpl"><span>💵 Cash $${cash}M</span><span class="tv mid">${(cash * 0.5).toFixed(1)}</span></div>` : '') +
+    `<div class="ftsum"><span>Total</span><span>${BTD.pts(total)}</span></div></div>`;
+  feedEl.innerHTML = trades.length ? trades.map(t =>
+    `<div class="ftrade"><div class="fthead"><span class="ftby">by <b>${BTD.esc(t.name)}</b> · ${ago(t.ts)}</span>` +
+    `<span class="votes"><button data-v="1" data-id="${t.id}" class="${voted(t.id) ? 'done' : ''}">👍 ${t.likes || 0}</button>` +
+    `<span class="vnet">${net(t) > 0 ? '+' : ''}${net(t)}</span>` +
+    `<button data-v="-1" data-id="${t.id}" class="${voted(t.id) ? 'done' : ''}">👎 ${t.dislikes || 0}</button></span></div>` +
+    `<div class="fteq">${side('Astros Send', t.give, t.gcash, t.giveTotal)}<div class="fteqs">⇄</div>${side('Astros Receive', t.get, t.rcash, t.getTotal)}</div></div>`
+  ).join('') : '<div class="card hlempty">No fan trades yet — be the first from the <a href="builder">Trade Builder</a>!</div>';
+
+  feedEl.addEventListener('click', async e => {
+    const b = e.target.closest('button[data-v]');
+    if (!b || b.classList.contains('done')) return;
+    const id = b.dataset.id;
+    document.querySelectorAll(`button[data-id="${id}"]`).forEach(x => x.classList.add('done'));
+    try { localStorage.setItem('ftv_' + id, '1'); } catch (err) {}
+    b.textContent = (b.dataset.v === '1' ? '👍 ' : '👎 ') + (parseInt(b.textContent.replace(/\D/g, ''), 10) + 1);
+    try { await fetch(BTD.FAN_URL, { method: 'POST', body: JSON.stringify({ action: 'vote', id, dir: +b.dataset.v }) }); } catch (err) {}
+  });
+})();
+</script>
+</div></body></html>
