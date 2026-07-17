@@ -172,4 +172,14 @@ button.on{background:var(--accent);color:#fff;border-color:var(--card-line)}
 a{color:var(--accent)}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:var(--card-line);border-radius:6px}
-@media(max-width:640px){.tabs a{padding:12px 14px;font-size:13px}}
+/* Tabs stay on ONE line at every width (scroll horizontally if cramped) */
+.tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{white-space:nowrap;flex:0 0 auto}
+@media(max-width:640px){
+  .tabs{justify-content:flex-start}
+  .tabs a{padding:11px 12px;font-size:12px;letter-spacing:.1em}
+  .tabs .meta{display:none}
+}
+/* Wider centered layout for data-heavy pages (trade builder) */
+.wrap.wide{max-width:1400px}
