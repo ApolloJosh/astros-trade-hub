@@ -1,1 +1,12 @@
-{"updated":"2026-07-17T00:18:13.297Z","sample":true,"tradesAnalyzed":1,"tradesTotal":1,"marketTemp":1.13,"starSideMedian":1.13,"prospectPkgMedian":0.89,"suggestions":["Median trade balance 1.13 — the model is pricing the market well. No knob changes suggested."]}
+{
+  "updated": "2026-07-17T00:23:06.020Z",
+  "tradesAnalyzed": 12,
+  "tradesTotal": 12,
+  "marketTemp": 1.5899999999999999,
+  "starSideMedian": 1.5909448818897638,
+  "prospectPkgMedian": 2.1818181818181817,
+  "suggestions": [
+    "Market trades are landing 59% lopsided by our values — sellers are accepting less than the model expects. Consider LOWERING sv.tv.prospectAnchors or raising sv.tv.wSur (buyers' MLB pieces may be undervalued).",
+    "Prospect-heavy packages exchange at 2.1818181818181817x — adjust sv.tv.prospectAnchors DOWN to match the market."
+  ]
+}
