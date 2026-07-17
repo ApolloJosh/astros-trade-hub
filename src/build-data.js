@@ -14,6 +14,16 @@ const CFG = E.CFG;
 const OUT = path.join(__dirname, '..', 'docs', 'data');
 const overridesPath = path.join(__dirname, '..', 'data-sources', 'salaries-manual.json');
 const OVR = fs.existsSync(overridesPath) ? JSON.parse(fs.readFileSync(overridesPath, 'utf8')) : {};
+// Cot's Contracts data (real control + salary). Precedence: manual > Cot's > estimate.
+const cotsPath = path.join(__dirname, '..', 'data-sources', 'salaries-cots.json');
+const COTS = fs.existsSync(cotsPath) ? JSON.parse(fs.readFileSync(cotsPath, 'utf8')) : { teams: {} };
+const { norm: normName } = require('./rankings.js');
+function cotsLookup(p) {
+  const team = COTS.teams[String(p.teamId)];
+  if (!team) return null;
+  const k = normName(p.name);
+  return team.find(x => x.key === k) || null;
+}
 
 const isPitcherPos = pos => ['P', 'SP', 'RP', 'TWP'].includes(String(pos || '').toUpperCase());
 
@@ -63,9 +73,11 @@ async function valuePlayer(p, lg) {
   // p: {id,name,teamId,teamName,pos,age,bats,throws,debut,orgRank,top100,il}
   const pitcher = isPitcherPos(p.pos);
   const ovr = OVR[String(p.id)] || {};
+  const cots = cotsLookup(p);
   const est = E.estimateContract({ mlbDebutDate: p.debut }, CFG.season);
-  const control = ovr.control != null ? ovr.control : est.control;
-  const salM = ovr.salaryM != null ? ovr.salaryM : est.salM;
+  const control = ovr.control != null ? ovr.control : (cots ? cots.control : est.control);
+  const salM = ovr.salaryM != null ? ovr.salaryM : (cots ? cots.salaryM : est.salM);
+  const salSource = ovr.salaryM != null ? 'manual' : (cots ? 'cots' : 'est');
 
   const careerD = await api.careerStats(p.id, pitcher);
   const careerStat = api.statOf(careerD);
@@ -95,7 +107,7 @@ async function valuePlayer(p, lg) {
   return {
     id: p.id, name: p.name, team: p.teamName, teamId: p.teamId, pos: p.pos,
     bt: (p.bats || '?') + '/' + (p.throws || '?'), age: p.age,
-    ctrl: control, salM: salM, salEst: ovr.salaryM == null,
+    ctrl: control, salM: salM, salEst: salSource === 'est', salSource,
     prospect, orgRank: p.orgRank || null, top100: p.top100 || null, topLevel,
     war: base && !base.histOnly ? E.r1(base.war) : null,
     proj: sv ? E.r1(sv.proj) : null,
@@ -208,10 +220,34 @@ async function main() {
     process.stdout.write(`  ${t.name}: pool ${pool.size}\n`);
   }
 
-  // top-100 tags
+  // top-100 tags on pool players
   for (const p of pool.values()) {
     const r100 = R.top100Rank(top100, p.id, p.name);
     if (r100) p.top100 = r100;
+  }
+  // Top-100 prospects not in any roster/team-30 list yet: resolve and add,
+  // so every Top 100 name is tradeable in the builder.
+  const t100File = path.join(R.DIR, 'top100.json');
+  if (fs.existsSync(t100File)) {
+    const t100 = JSON.parse(fs.readFileSync(t100File, 'utf8')).prospects || [];
+    const poolNames = new Set([...pool.values()].map(p => R.norm(p.name)));
+    for (const pr of t100) {
+      if (poolNames.has(R.norm(pr.name))) continue;
+      const s = await api.search(pr.name);
+      const cand = (s && s.people || []).find(c => c.active !== false) || (s && s.people || [])[0];
+      if (!cand) { console.warn('  ? top100 unresolved:', '#' + pr.rank, pr.name); continue; }
+      const org = cand.currentTeam && (cand.currentTeam.parentOrgId || cand.currentTeam.id);
+      const team = teams.find(t => t.id === org);
+      pool.set(cand.id, {
+        id: cand.id, name: cand.fullName || pr.name,
+        teamId: team ? team.id : (org || 0), teamName: team ? team.name : 'MiLB',
+        pos: pr.pos || (cand.primaryPosition && cand.primaryPosition.abbreviation) || 'OF',
+        age: cand.currentAge, debut: cand.mlbDebutDate,
+        bats: cand.batSide && cand.batSide.code, throws: cand.pitchHand && cand.pitchHand.code,
+        top100: pr.rank,
+      });
+    }
+    console.log(`Top-100 additions -> pool ${pool.size}`);
   }
 
   console.log(`Valuing ${pool.size} players…`);
