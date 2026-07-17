@@ -9,6 +9,7 @@ const path = require('path');
 const E = require('./engine.js');
 const api = require('./mlb-api.js');
 const R = require('./rankings.js');
+const IDC = require('./id-cache.js');
 const CFG = E.CFG;
 
 const OUT = path.join(__dirname, '..', 'docs', 'data');
@@ -108,7 +109,7 @@ async function valuePlayer(p, lg) {
     id: p.id, name: p.name, team: p.teamName, teamId: p.teamId, pos: p.pos,
     bt: (p.bats || '?') + '/' + (p.throws || '?'), age: p.age,
     ctrl: control, salM: salM, salEst: salSource === 'est', salSource,
-    prospect, orgRank: p.orgRank || null, top100: p.top100 || null, topLevel,
+    prospect, orgRank: p.orgRank || null, top100: p.top100 || null, topLevel, il: p.il || null,
     war: base && !base.histOnly ? E.r1(base.war) : null,
     proj: sv ? E.r1(sv.proj) : null,
     sur: sv && sv.surplus != null ? E.r1(sv.surplus) : null,
@@ -188,35 +189,43 @@ async function main() {
     const r = await api.roster40(t.id);
     (r && r.roster || []).forEach(x => {
       const per = x.person || {};
+      // Roster status -> IL note (feeds the injury haircut in the valuation).
+      const st = (x.status && x.status.code) || '';
+      const il = st === 'D60' ? '60-day IL' : st === 'D15' ? '15-day IL' : st === 'D10' ? '10-day IL' : '';
       pool.set(per.id, {
         id: per.id, name: per.fullName, teamId: t.id, teamName: t.name,
         pos: (x.position && x.position.abbreviation) || (per.primaryPosition && per.primaryPosition.abbreviation) || '?',
         age: per.currentAge, debut: per.mlbDebutDate,
         bats: per.batSide && per.batSide.code, throws: per.pitchHand && per.pitchHand.code,
+        il,
       });
     });
-    // ranked prospects for this team (may or may not be on the 40-man)
-    for (const pr of (rankTeams[t.id] || [])) {
-      let id = pr.mlbid;
+    // ranked prospects for this team (may or may not be on the 40-man).
+    // Cached + parallel: name->id resolution only hits the API for new names.
+    await Promise.all((rankTeams[t.id] || []).map(async pr => {
+      const c = IDC.get(pr.name);
+      let id = pr.mlbid || (c && c.id);
+      let per = null;
       if (!id) {
         const s = await api.search(pr.name);
         const cand = (s && s.people || [])[0];
         id = cand && cand.id;
+        if (cand) per = cand;
       }
-      if (!id) { console.warn('  ? prospect unresolved:', t.name, pr.name); continue; }
+      if (!id) { console.warn('  ? prospect unresolved:', t.name, pr.name); return; }
       const existing = pool.get(id);
-      if (existing) { existing.orgRank = pr.rank; }
-      else {
-        const per = (await api.person(id) || {}).people?.[0] || {};
-        pool.set(id, {
-          id, name: per.fullName || pr.name, teamId: t.id, teamName: t.name,
-          pos: pr.pos || (per.primaryPosition && per.primaryPosition.abbreviation) || 'OF',
-          age: per.currentAge, debut: per.mlbDebutDate,
-          bats: per.batSide && per.batSide.code, throws: per.pitchHand && per.pitchHand.code,
-          orgRank: pr.rank,
-        });
-      }
-    }
+      if (existing) { existing.orgRank = pr.rank; IDC.put(pr.name, { id }); return; }
+      if (!per) per = (c && IDC.fresh(c) && c.age != null) ? IDC.asPerson(c)
+        : ((await api.person(id) || {}).people?.[0] || {});
+      pool.set(id, {
+        id, name: per.fullName || pr.name, teamId: t.id, teamName: t.name,
+        pos: pr.pos || (per.primaryPosition && per.primaryPosition.abbreviation) || 'OF',
+        age: per.currentAge, debut: per.mlbDebutDate,
+        bats: per.batSide && per.batSide.code, throws: per.pitchHand && per.pitchHand.code,
+        orgRank: pr.rank,
+      });
+      IDC.put(pr.name, IDC.fromPerson(id, per, { pos: pr.pos || undefined }));
+    }));
     process.stdout.write(`  ${t.name}: pool ${pool.size}\n`);
   }
 
@@ -231,22 +240,30 @@ async function main() {
   if (fs.existsSync(t100File)) {
     const t100 = JSON.parse(fs.readFileSync(t100File, 'utf8')).prospects || [];
     const poolNames = new Set([...pool.values()].map(p => R.norm(p.name)));
-    for (const pr of t100) {
-      if (poolNames.has(R.norm(pr.name))) continue;
-      const s = await api.search(pr.name);
-      const cand = (s && s.people || []).find(c => c.active !== false) || (s && s.people || [])[0];
-      if (!cand) { console.warn('  ? top100 unresolved:', '#' + pr.rank, pr.name); continue; }
-      const org = cand.currentTeam && (cand.currentTeam.parentOrgId || cand.currentTeam.id);
-      const team = teams.find(t => t.id === org);
+    await Promise.all(t100.map(async pr => {
+      if (poolNames.has(R.norm(pr.name))) return;
+      const c = IDC.get(pr.name);
+      let cand = null;
+      if (c && IDC.fresh(c) && c.id && c.teamId != null) {
+        cand = Object.assign(IDC.asPerson(c), { id: c.id });
+        cand._orgId = c.teamId;
+      } else {
+        const s = await api.search(pr.name);
+        cand = (s && s.people || []).find(x => x.active !== false) || (s && s.people || [])[0];
+        if (cand) cand._orgId = cand.currentTeam && (cand.currentTeam.parentOrgId || cand.currentTeam.id);
+      }
+      if (!cand) { console.warn('  ? top100 unresolved:', '#' + pr.rank, pr.name); return; }
+      const team = teams.find(t => t.id === cand._orgId);
       pool.set(cand.id, {
         id: cand.id, name: cand.fullName || pr.name,
-        teamId: team ? team.id : (org || 0), teamName: team ? team.name : 'MiLB',
+        teamId: team ? team.id : (cand._orgId || 0), teamName: team ? team.name : 'MiLB',
         pos: pr.pos || (cand.primaryPosition && cand.primaryPosition.abbreviation) || 'OF',
         age: cand.currentAge, debut: cand.mlbDebutDate,
         bats: cand.batSide && cand.batSide.code, throws: cand.pitchHand && cand.pitchHand.code,
         top100: pr.rank,
       });
-    }
+      IDC.put(pr.name, IDC.fromPerson(cand.id, cand, { teamId: cand._orgId || 0, pos: pr.pos || undefined }));
+    }));
     console.log(`Top-100 additions -> pool ${pool.size}`);
   }
 
@@ -279,6 +296,7 @@ async function main() {
     updated: new Date().toISOString(), season: CFG.season, baselines: lg,
     counts: { players: players.length, fits: fits.length }, marketMult: CFG.sv.tv.marketMult,
   }));
+  IDC.save();
   console.log(`DONE: ${players.length} players, ${fits.length} fits.`);
 }
 

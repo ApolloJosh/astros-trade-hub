@@ -220,7 +220,11 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const ageF = Math.max(t.ageFloor, 1 - t.ageK * Math.max(0, toNum(age, 28) - t.ageFrom));
     const quality = 100 * Math.pow(qRel, t.gamma) * ageF;
     const quantity = Math.min(t.wSur * Math.max(0, sv.surplus || 0), t.surCap);
-    const penalty = t.kPen * Math.max(0, sv.cost || 0) * Math.pow(1 - qRel, 2);
+    let penalty = t.kPen * Math.max(0, sv.cost || 0) * Math.pow(1 - qRel, 2);
+    // Big money owed to aging players carries injury/decline risk the surplus
+    // math can't see — a long expensive deal on a 31yo is NOT a clean asset.
+    penalty += (t.kAgeMoney || 0) * Math.max(0, sv.cost || 0) *
+      clamp((toNum(age, 28) - (t.ageMoneyFrom || 29)) / (t.ageMoneySpan || 6), 0, 1);
     let raw = (quality + quantity - penalty + t.floor) * (t.marketMult || 1);
     if (raw > t.squashStart) raw = t.squashStart + t.squashRange * Math.tanh((raw - t.squashStart) / t.squashRange);
     statTV = clamp(raw, 1, t.max);

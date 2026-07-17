@@ -89,6 +89,19 @@ async function main() {
     doc.players.forEach(p => byId.set(p.id, p));
   } else console.warn('players.json missing — feed will be unvalued until build-data runs.');
 
+  // Auto-valued players from previous runs (players.json is rebuilt daily and
+  // drops them, so without this every past trade re-triggers API lookups).
+  const autoPath = path.join(OUT, 'auto-players.json');
+  const autoOut = new Map();
+  if (fs.existsSync(autoPath)) {
+    try {
+      (JSON.parse(fs.readFileSync(autoPath, 'utf8')).players || []).forEach(p => {
+        autoOut.set(p.id, p);
+        if (!byId.has(p.id)) byId.set(p.id, p);
+      });
+    } catch (e) { /* rebuild from scratch */ }
+  }
+
   const end = new Date().toISOString().slice(0, 10);
   console.log(`Transactions ${CFG.feedSince} -> ${end}…`);
   const d = await api.transactions(CFG.feedSince, end);
@@ -108,7 +121,7 @@ async function main() {
         let v = byId.get(pl.id);
         if (!v) {
           v = await autoValue(pl.id, pl.name, pl.from ? { id: 0, name: pl.from } : null, lg);
-          if (v) { byId.set(v.id, v); console.log(`  + auto-valued ${v.name} (tv ${v.tv}${v.crude ? ', crude' : ''})`); }
+          if (v) { byId.set(v.id, v); autoOut.set(v.id, v); console.log(`  + auto-valued ${v.name} (tv ${v.tv}${v.crude ? ', crude' : ''})`); }
         }
         if (v && v.tv != null) { total += v.tv; valued++; }
         players.push({ id: pl.id, name: pl.name, pos: v ? v.pos : '', tv: v ? v.tv : null,
@@ -130,6 +143,7 @@ async function main() {
   feed.sort((a, b) => b.date.localeCompare(a.date));
 
   fs.writeFileSync(path.join(OUT, 'feed.json'), JSON.stringify({ updated: new Date().toISOString(), since: CFG.feedSince, trades: feed }));
+  fs.writeFileSync(autoPath, JSON.stringify({ updated: new Date().toISOString(), players: [...autoOut.values()] }));
   fs.writeFileSync(path.join(OUT, 'traded.json'), JSON.stringify({ updated: new Date().toISOString(), ids: [...tradedIds] }));
 
   if (doc) {
