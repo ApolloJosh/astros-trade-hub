@@ -1,0 +1,157 @@
+{
+  "team": "bluejays",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "JoJo Parker",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Arjun Nimmala",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Nolan Perry",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Johnny King",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Ricky Tiedemann",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Gage Stanifer",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Juan Sanchez",
+      "pos": "3B"
+    },
+    {
+      "rank": 8,
+      "name": "Jake Bloss",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "RJ Schreck",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Jake Cook",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Victor Arias",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Josh Kasevich",
+      "pos": "SS"
+    },
+    {
+      "rank": 13,
+      "name": "Silvano Hechavarria",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Blaine Bullard",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Sean Keys",
+      "pos": "3B"
+    },
+    {
+      "rank": 16,
+      "name": "Fernando Perez",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Micah Bucknam",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Edward Duran",
+      "pos": "C"
+    },
+    {
+      "rank": 19,
+      "name": "Tim Piasentin",
+      "pos": "3B"
+    },
+    {
+      "rank": 20,
+      "name": "Adam Macko",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Brandon Barriera",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Javen Coleman",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Cutter Coffey",
+      "pos": "3B"
+    },
+    {
+      "rank": 24,
+      "name": "Charles McAdoo",
+      "pos": "3B"
+    },
+    {
+      "rank": 25,
+      "name": "Danny Thompson Jr.",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Daniel Guerra",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Jared Spencer",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Carson Messina",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Adrian Pinto",
+      "pos": "2B"
+    },
+    {
+      "rank": 30,
+      "name": "Grant Rogers",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 141
+}

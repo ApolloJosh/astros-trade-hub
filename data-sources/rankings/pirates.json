@@ -1,0 +1,157 @@
+{
+  "team": "pirates",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Seth Hernandez",
+      "pos": "SP"
+    },
+    {
+      "rank": 2,
+      "name": "Edward Florentino",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Hunter Barco",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Jhostynxon Garcia",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Termarr Johnson",
+      "pos": "2B"
+    },
+    {
+      "rank": 6,
+      "name": "Wyatt Sanford",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Antwone Kelly",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Rafael Flores Jr.",
+      "pos": "C"
+    },
+    {
+      "rank": 9,
+      "name": "Esmerlyn Valdez",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Sammy Stafura",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Wilber Dotel",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Thomas Harrington",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Levi Sterling",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Omar Alfonzo",
+      "pos": "C"
+    },
+    {
+      "rank": 15,
+      "name": "Darell Morel",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Easton Carmichael",
+      "pos": "C"
+    },
+    {
+      "rank": 17,
+      "name": "Murf Gray",
+      "pos": "3B"
+    },
+    {
+      "rank": 18,
+      "name": "Yordany De Los Santos",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Axiel Plaz",
+      "pos": "C"
+    },
+    {
+      "rank": 20,
+      "name": "Edgleen Perez",
+      "pos": "C"
+    },
+    {
+      "rank": 21,
+      "name": "Khristian Curtis",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Jack Brannigan",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
+      "name": "Zander Mueth",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Reinold Navarro",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Jeter Martinez",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Duce Gourson",
+      "pos": "2B"
+    },
+    {
+      "rank": 27,
+      "name": "Tony Blanco Jr.",
+      "pos": "1B"
+    },
+    {
+      "rank": 28,
+      "name": "Callan Moss",
+      "pos": "1B"
+    },
+    {
+      "rank": 29,
+      "name": "Johan De Los Santos",
+      "pos": "SS"
+    },
+    {
+      "rank": 30,
+      "name": "Lonnie White Jr.",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 134
+}

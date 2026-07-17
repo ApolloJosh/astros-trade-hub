@@ -1,0 +1,157 @@
+{
+  "team": "guardians",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Ralphy Velazquez",
+      "pos": "1B"
+    },
+    {
+      "rank": 2,
+      "name": "Angel Genao",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Cooper Ingle",
+      "pos": "C"
+    },
+    {
+      "rank": 4,
+      "name": "Braylon Doughty",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Jaison Chourio",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Juneiker Caceres",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Khal Stephen",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Jace LaViolette",
+      "pos": "OF"
+    },
+    {
+      "rank": 9,
+      "name": "Joey Oakie",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Welbyn Francisca",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Dean Curley",
+      "pos": "SS"
+    },
+    {
+      "rank": 12,
+      "name": "Kahlil Watson",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Alfonsin Rosario",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Juan Brito",
+      "pos": "2B"
+    },
+    {
+      "rank": 15,
+      "name": "Daniel Espino",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Aaron Walton",
+      "pos": "OF"
+    },
+    {
+      "rank": 17,
+      "name": "Jacob Cozart",
+      "pos": "C"
+    },
+    {
+      "rank": 18,
+      "name": "Gabriel Rodriguez",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Robert Arias",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "Dauri Fernandez",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Justin Campbell",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Will Hynes",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Svert Reinoso",
+      "pos": "SS"
+    },
+    {
+      "rank": 24,
+      "name": "Andrew Walters",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Josh Hartle",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Rafe Schlesinger",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Jackson Humphries",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Nolan Schubart",
+      "pos": "OF"
+    },
+    {
+      "rank": 29,
+      "name": "George Valera",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Luke Hill",
+      "pos": "3B"
+    }
+  ],
+  "teamId": 114
+}

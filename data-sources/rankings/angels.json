@@ -1,0 +1,157 @@
+{
+  "team": "angels",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Tyler Bremner",
+      "pos": "SP"
+    },
+    {
+      "rank": 2,
+      "name": "Nelson Rada",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Johnny Slawinski",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "George Klassen",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Gabriel Davalillo",
+      "pos": "C"
+    },
+    {
+      "rank": 6,
+      "name": "Joswa Lugo",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Chase Shores",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Trey Gregory-Alford",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Dylan Jordan",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Hayden Alvarez",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Chris Cortez",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Talon Haley",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "CJ Gray",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Raudi Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Barrett Kent",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Nate Snead",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Juan Flores",
+      "pos": "C"
+    },
+    {
+      "rank": 18,
+      "name": "Jeyson Horton",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Joel Hurtado",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Yilver De Paula",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Xavier Mitchell",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Ubaldo Soto",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Austin Gordon",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Marlon Quintero",
+      "pos": "C"
+    },
+    {
+      "rank": 25,
+      "name": "Peyton Olejnik",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Randy De Jesus",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "Luke LaCourse",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Jake Munroe",
+      "pos": "3B"
+    },
+    {
+      "rank": 29,
+      "name": "TJ Ford",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Juan Cespedes",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 108
+}

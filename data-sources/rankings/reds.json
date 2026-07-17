@@ -1,0 +1,157 @@
+{
+  "team": "reds",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Alfredo Duno",
+      "pos": "C"
+    },
+    {
+      "rank": 2,
+      "name": "Steele Hall",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Tyson Lewis",
+      "pos": "SS"
+    },
+    {
+      "rank": 4,
+      "name": "Héctor Rodríguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Cam Collier",
+      "pos": "1B"
+    },
+    {
+      "rank": 6,
+      "name": "Aaron Watson",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Sheng-En Lin",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Jose Franco",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Mason Morris",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Liberts Aponte",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Adolfo Sanchez",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Arnaldo Lantigua",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Leo Balcazar",
+      "pos": "SS"
+    },
+    {
+      "rank": 14,
+      "name": "Carlos Jorge",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Julian Aguiar",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Luke Holman",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Mason Neville",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Jirvin Morillo",
+      "pos": "C"
+    },
+    {
+      "rank": 19,
+      "name": "Ricky Cabrera",
+      "pos": "3B"
+    },
+    {
+      "rank": 20,
+      "name": "Stharlin Torres",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "JeanPierre Ortiz",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Angel Nuñez",
+      "pos": "OF"
+    },
+    {
+      "rank": 23,
+      "name": "Carlos Sanchez",
+      "pos": "3B"
+    },
+    {
+      "rank": 24,
+      "name": "Deivi Villafana",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Hansel Jimenez",
+      "pos": "3B"
+    },
+    {
+      "rank": 26,
+      "name": "Eli Pitts",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "Alfredo Alcantara",
+      "pos": "2B"
+    },
+    {
+      "rank": 28,
+      "name": "Edgar Colon",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Jay Allen II",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Carter Graham",
+      "pos": "1B"
+    }
+  ],
+  "teamId": 113
+}

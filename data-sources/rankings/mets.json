@@ -1,0 +1,157 @@
+{
+  "team": "mets",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Jonah Tong",
+      "pos": "SP"
+    },
+    {
+      "rank": 2,
+      "name": "Ryan Clifford",
+      "pos": "1B"
+    },
+    {
+      "rank": 3,
+      "name": "Jacob Reimer",
+      "pos": "3B"
+    },
+    {
+      "rank": 4,
+      "name": "Jack Wenninger",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Mitch Voit",
+      "pos": "SS"
+    },
+    {
+      "rank": 6,
+      "name": "Elian Peña",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Jonathan Santucci",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Will Watson",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Wandy Asigen",
+      "pos": "SS"
+    },
+    {
+      "rank": 10,
+      "name": "Nick Morabito",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Eli Serrano III",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Zach Thornton",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Chris Suero",
+      "pos": "C"
+    },
+    {
+      "rank": 14,
+      "name": "Cole Mathis",
+      "pos": "1B"
+    },
+    {
+      "rank": 15,
+      "name": "Antonio Jimenez",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Ryan Lambert",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Dylan Ross",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "R.J. Gordon",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Marco Vargas",
+      "pos": "2B"
+    },
+    {
+      "rank": 20,
+      "name": "Jonathan Pintaro",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Cleiner Ramirez",
+      "pos": "OF"
+    },
+    {
+      "rank": 22,
+      "name": "Peter Kussow",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Boston Baro",
+      "pos": "SS"
+    },
+    {
+      "rank": 24,
+      "name": "Randy Guzman",
+      "pos": "1B"
+    },
+    {
+      "rank": 25,
+      "name": "Daiverson Gutierrez",
+      "pos": "C"
+    },
+    {
+      "rank": 26,
+      "name": "Camden Lohman",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Nathan Hall",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Cam Tilly",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Edward Lantigua",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Yovanny Rodriguez",
+      "pos": "C"
+    }
+  ],
+  "teamId": 121
+}

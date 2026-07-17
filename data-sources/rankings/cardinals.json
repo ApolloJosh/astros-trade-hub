@@ -1,0 +1,157 @@
+{
+  "team": "cardinals",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Rainiel Rodriguez",
+      "pos": "C"
+    },
+    {
+      "rank": 2,
+      "name": "Liam Doyle",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Joshua Báez",
+      "pos": "OF"
+    },
+    {
+      "rank": 4,
+      "name": "Jurrangelo Cijntje",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Leo Bernal",
+      "pos": "C"
+    },
+    {
+      "rank": 6,
+      "name": "Quinn Mathews",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Brandon Clarke",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Tekoah Roby",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Tanner Franklin",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Ryan Mitchell",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Yhoiker Fajardo",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Ixan Henderson",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Jacob Odle",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Tink Hence",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Yairo Padilla",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Cooper Hjerpe",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Tai Peete",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Emanuel Luna",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "Jesús Báez",
+      "pos": "SS"
+    },
+    {
+      "rank": 20,
+      "name": "Brycen Mautz",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Luis Gastelum",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Deniel Ortiz",
+      "pos": "3B"
+    },
+    {
+      "rank": 23,
+      "name": "Cade Crossland",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Chen-Wei Lin",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Blaze Jordan",
+      "pos": "1B"
+    },
+    {
+      "rank": 26,
+      "name": "Braden Davis",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Hancel Rincon",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Jack Gurevitch",
+      "pos": "1B"
+    },
+    {
+      "rank": 29,
+      "name": "Mason Molina",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Nate Dohm",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 138
+}

@@ -1,0 +1,157 @@
+{
+  "team": "athletics",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Leo De Vries",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Jamie Arnold",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Wei-En Lin",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Braden Nett",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Johenssy Colome",
+      "pos": "SS"
+    },
+    {
+      "rank": 6,
+      "name": "Devin Taylor",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Tommy White",
+      "pos": "3B"
+    },
+    {
+      "rank": 8,
+      "name": "Joshua Kuroda-Grauer",
+      "pos": "2B"
+    },
+    {
+      "rank": 9,
+      "name": "Edgar Montero",
+      "pos": "SS"
+    },
+    {
+      "rank": 10,
+      "name": "Kade Morris",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Shotaro Morii",
+      "pos": "2B"
+    },
+    {
+      "rank": 12,
+      "name": "Henry Baez",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Gavin Turley",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Steven Echavarria",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Gunnar Hoglund",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Zane Taylor",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Ryan Lasko",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Breyson Guedez",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "Kenya Huggins",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Cole Miller",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Nate Nankil",
+      "pos": "OF"
+    },
+    {
+      "rank": 22,
+      "name": "Chen Zhong-Ao Zhuang",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Darwing Ozuna",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Cameron Leary",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Bobby Boser",
+      "pos": "3B"
+    },
+    {
+      "rank": 26,
+      "name": "Davis Diaz",
+      "pos": "C"
+    },
+    {
+      "rank": 27,
+      "name": "Yunior Tur",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Nathan Dettmer",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Darian Rojas",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Daniel Bucciero",
+      "pos": "3B"
+    }
+  ],
+  "teamId": 133
+}

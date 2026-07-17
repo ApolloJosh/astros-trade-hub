@@ -1,0 +1,157 @@
+{
+  "team": "marlins",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Thomas White",
+      "pos": "SP"
+    },
+    {
+      "rank": 2,
+      "name": "Robby Snelling",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Aiva Arquette",
+      "pos": "SS"
+    },
+    {
+      "rank": 4,
+      "name": "Karson Milbrandt",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Kevin Defrank",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Starlyn Caba",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Cam Cannarella",
+      "pos": "OF"
+    },
+    {
+      "rank": 8,
+      "name": "Kemp Alderman",
+      "pos": "OF"
+    },
+    {
+      "rank": 9,
+      "name": "Dillon Lewis",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Andrew Salas",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Brandon Compton",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Santiago Solarte",
+      "pos": "SS"
+    },
+    {
+      "rank": 13,
+      "name": "Noble Meyer",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Cristian Hernández",
+      "pos": "SS"
+    },
+    {
+      "rank": 15,
+      "name": "Luis Cova",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Max Williams",
+      "pos": "OF"
+    },
+    {
+      "rank": 17,
+      "name": "Brendan Jones",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Fenwick Trimble",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "Luis Arana",
+      "pos": "SS"
+    },
+    {
+      "rank": 20,
+      "name": "Nate Payne",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Juan Matheus",
+      "pos": "3B"
+    },
+    {
+      "rank": 22,
+      "name": "José Castro",
+      "pos": "OF"
+    },
+    {
+      "rank": 23,
+      "name": "Esmil Valencia",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Ronny Muñoz",
+      "pos": "SS"
+    },
+    {
+      "rank": 25,
+      "name": "Dillon Head",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "PJ Morlando",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "Aiden May",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Grant Shepardson",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Yohanfer Santana",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Josh Ekness",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 146
+}

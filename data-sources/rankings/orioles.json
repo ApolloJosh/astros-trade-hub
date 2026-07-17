@@ -1,0 +1,156 @@
+{
+  "team": "orioles",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Nate George",
+      "pos": "OF"
+    },
+    {
+      "rank": 2,
+      "name": "Ike Irish",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Joseph Dzierwa",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Luis De León",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Trey Gibson",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Wehiwa Aloy",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Esteban Mejia",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Aron Estrada",
+      "pos": "2B"
+    },
+    {
+      "rank": 9,
+      "name": "Enrique Bradfield Jr.",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Boston Bateman",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Nestor German",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Braxton Bragg",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Levi Wells",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Juaron Watts"
+    },
+    {
+      "rank": 15,
+      "name": "Tyson Neighbors",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Jordan Sanchez",
+      "pos": "OF"
+    },
+    {
+      "rank": 17,
+      "name": "Creed Willems",
+      "pos": "C"
+    },
+    {
+      "rank": 18,
+      "name": "Thomas Sosa",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "JT Quinn",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Wilfri De La Cruz",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Jose Luis Acevedo",
+      "pos": "SS"
+    },
+    {
+      "rank": 22,
+      "name": "Andri Hidalgo",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Ethan Anderson",
+      "pos": "C"
+    },
+    {
+      "rank": 24,
+      "name": "Patrick Reilly",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Stiven Martinez",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "Griff O'Ferrall",
+      "pos": "SS"
+    },
+    {
+      "rank": 27,
+      "name": "Colin Yeaman",
+      "pos": "3B"
+    },
+    {
+      "rank": 28,
+      "name": "Vance Honeycutt",
+      "pos": "OF"
+    },
+    {
+      "rank": 29,
+      "name": "Cobb Hightower",
+      "pos": "2B"
+    },
+    {
+      "rank": 30,
+      "name": "Brandon Butterworth",
+      "pos": "2B"
+    }
+  ],
+  "teamId": 110
+}

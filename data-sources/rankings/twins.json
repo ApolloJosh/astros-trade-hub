@@ -1,0 +1,157 @@
+{
+  "team": "twins",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Walker Jenkins",
+      "pos": "OF"
+    },
+    {
+      "rank": 2,
+      "name": "Kaelen Culpepper",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Eduardo Tait",
+      "pos": "C"
+    },
+    {
+      "rank": 4,
+      "name": "Emmanuel Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Dasan Hill",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Gabriel Gonzalez",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Marek Houston",
+      "pos": "SS"
+    },
+    {
+      "rank": 8,
+      "name": "Charlee Soto",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Kendry Rojas",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Riley Quick",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Hendry Mendez",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Quentin Young",
+      "pos": "SS"
+    },
+    {
+      "rank": 13,
+      "name": "Adrian Bohorquez",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "James Ellwanger",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Brandon Winokur",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Marco Raya",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Ryan Gallagher",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "John Klein",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Kyle DeBarge",
+      "pos": "SS"
+    },
+    {
+      "rank": 20,
+      "name": "C.J. Culpepper",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Khadim Diaw",
+      "pos": "C"
+    },
+    {
+      "rank": 22,
+      "name": "Billy Amick",
+      "pos": "3B"
+    },
+    {
+      "rank": 23,
+      "name": "Santiago Castellanos",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Jose Olivares",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Enrique Jimenez",
+      "pos": "C"
+    },
+    {
+      "rank": 26,
+      "name": "Matt Barr",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Kala'i Rosario",
+      "pos": "OF"
+    },
+    {
+      "rank": 28,
+      "name": "Bruin Agbayani",
+      "pos": "SS"
+    },
+    {
+      "rank": 29,
+      "name": "Yasser Mercedes",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Ben Ross",
+      "pos": "SS"
+    }
+  ],
+  "teamId": 142
+}

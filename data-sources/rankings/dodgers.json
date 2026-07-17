@@ -1,0 +1,157 @@
+{
+  "team": "dodgers",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Josue De Paula",
+      "pos": "OF"
+    },
+    {
+      "rank": 2,
+      "name": "Mike Sirota",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Zyhir Hope",
+      "pos": "OF"
+    },
+    {
+      "rank": 4,
+      "name": "Eduardo Quintero",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Emil Morales",
+      "pos": "SS"
+    },
+    {
+      "rank": 6,
+      "name": "River Ryan",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Charles Davalan",
+      "pos": "OF"
+    },
+    {
+      "rank": 8,
+      "name": "Christian Zazueta",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "James Tibbs III",
+      "pos": "1B"
+    },
+    {
+      "rank": 10,
+      "name": "Jackson Ferris",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Adam Serwinowski",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Zach Root",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Kendall George",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Ching-Hsien Ko",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Kellon Lindsey",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Chase Harlan",
+      "pos": "3B"
+    },
+    {
+      "rank": 17,
+      "name": "Zach Ehrhard",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Marlon Nieves",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Ryan Ward",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "Joendry Vargas",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Cam Leiter",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Sterling Patick",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Payton Martin",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Elijah Hainline",
+      "pos": "SS"
+    },
+    {
+      "rank": 25,
+      "name": "Landyn Vidourek",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "Brendan Tunink",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "Noah Miller",
+      "pos": "SS"
+    },
+    {
+      "rank": 28,
+      "name": "Patrick Copen",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Brady Smith",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Peter Heubeck",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 119
+}

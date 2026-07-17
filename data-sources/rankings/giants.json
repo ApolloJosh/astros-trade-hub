@@ -1,0 +1,157 @@
+{
+  "team": "giants",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Josuar Gonzalez",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Luis Hernández",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Jhonny Level",
+      "pos": "SS"
+    },
+    {
+      "rank": 4,
+      "name": "Gavin Kilen",
+      "pos": "SS"
+    },
+    {
+      "rank": 5,
+      "name": "Dakota Jordan",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Bo Davidson",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Jacob Bresnahan",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Trevor Cohen",
+      "pos": "OF"
+    },
+    {
+      "rank": 9,
+      "name": "Blade Tidwell",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Keyner Martinez",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Carson Whisenhunt",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Argenis Cayama",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Parks Harber",
+      "pos": "3B"
+    },
+    {
+      "rank": 14,
+      "name": "Carlos Gutierrez",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Luis De La Torre",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Jesus Rodriguez",
+      "pos": "C"
+    },
+    {
+      "rank": 17,
+      "name": "Lorenzo Meola",
+      "pos": "SS"
+    },
+    {
+      "rank": 18,
+      "name": "Maui Ahuna",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Alberto Laroche",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Trent Harris",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Josh Bostick",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Jancel Villarroel",
+      "pos": "C"
+    },
+    {
+      "rank": 23,
+      "name": "Joe Whitman",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Jonah Cox",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Yunior Marte",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Carlos De La Rosa",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Leandro Rodriguez",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Yulian Barreto",
+      "pos": "2B"
+    },
+    {
+      "rank": 29,
+      "name": "Gerelmi Maldonado",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Lisbel Diaz",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 137
+}

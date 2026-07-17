@@ -1,0 +1,157 @@
+{
+  "team": "yankees",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "George Lombard Jr.",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Dax Kilby",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Elmer Rodríguez",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Carlos Lagrange",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Ben Hess",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Spencer Jones",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Bryce Cunningham",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Chase Hampton",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Thatcher Hurd",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Pico Kohn",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Kyle Carr",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Core Jackson",
+      "pos": "SS"
+    },
+    {
+      "rank": 13,
+      "name": "Kaeden Kent",
+      "pos": "SS"
+    },
+    {
+      "rank": 14,
+      "name": "Henry Lalane",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Brock Selvidge",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Cade Smith",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Wilson Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Stiven Marinez",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Jace Avina",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "Rory Fox",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Brendan Beck",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Sean Paul Liñan",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Xavier Rivas",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Mac Heuer",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Jack Cebert",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Allen Facundo",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Harrison Cohen",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Eric Reyzelman",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Mani Cedeno",
+      "pos": "SS"
+    },
+    {
+      "rank": 30,
+      "name": "Tony Rossi",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 147
+}

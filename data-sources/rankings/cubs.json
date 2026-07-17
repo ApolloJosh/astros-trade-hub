@@ -1,0 +1,156 @@
+{
+  "team": "cubs",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Jefferson Rojas",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Josiah Hartshorn",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Jaxon Wiggins",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Ethan Conrad",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Kane Kepley",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Jonathon Long",
+      "pos": "1B"
+    },
+    {
+      "rank": 7,
+      "name": "James Triantos",
+      "pos": "2B"
+    },
+    {
+      "rank": 8,
+      "name": "Owen Ayers",
+      "pos": "C"
+    },
+    {
+      "rank": 9,
+      "name": "Juan Cabada",
+      "pos": "2B"
+    },
+    {
+      "rank": 10,
+      "name": "Kaleb Wing",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Juan Tomas",
+      "pos": "SS"
+    },
+    {
+      "rank": 12,
+      "name": "Brooks Caple",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Dominick Reid",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Brandon Birdsell",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Jostin Florentino",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Jaims Martinez",
+      "pos": "SS"
+    },
+    {
+      "rank": 17,
+      "name": "Ariel Armas",
+      "pos": "C"
+    },
+    {
+      "rank": 18,
+      "name": "Brett Bateman",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "Johan Geraldo",
+      "pos": "SS"
+    },
+    {
+      "rank": 20,
+      "name": "Erian Rodriguez",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Luis Martinez"
+    },
+    {
+      "rank": 22,
+      "name": "Angel Cepeda",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
+      "name": "Ty Southisene",
+      "pos": "2B"
+    },
+    {
+      "rank": 24,
+      "name": "Kade Snell",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Riley Martin",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Grant Kipp",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Fernando Cruz",
+      "pos": "SS"
+    },
+    {
+      "rank": 28,
+      "name": "Pierce Coppola",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Mason McGwire",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Logan Poteet",
+      "pos": "C"
+    }
+  ],
+  "teamId": 112
+}

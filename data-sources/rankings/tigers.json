@@ -1,0 +1,157 @@
+{
+  "team": "tigers",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Max Clark",
+      "pos": "OF"
+    },
+    {
+      "rank": 2,
+      "name": "Bryce Rainer",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Josue Briceño",
+      "pos": "C"
+    },
+    {
+      "rank": 4,
+      "name": "Max Anderson",
+      "pos": "2B"
+    },
+    {
+      "rank": 5,
+      "name": "Thayron Liranzo",
+      "pos": "C"
+    },
+    {
+      "rank": 6,
+      "name": "Cris Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Jordan Yost",
+      "pos": "SS"
+    },
+    {
+      "rank": 8,
+      "name": "Andrew Sears",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Malachi Witherspoon",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Franyerber Montilla",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Michael Oliveto",
+      "pos": "C"
+    },
+    {
+      "rank": 12,
+      "name": "Kelvis Salcedo",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "John Peck",
+      "pos": "SS"
+    },
+    {
+      "rank": 14,
+      "name": "Jake Miller",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Ben Jacobs",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Lucas Elissalt",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Owen Hall",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Izaac Pacheco",
+      "pos": "3B"
+    },
+    {
+      "rank": 19,
+      "name": "Jaden Hamm",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Jude Warwick",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Eduardo Valencia",
+      "pos": "C"
+    },
+    {
+      "rank": 22,
+      "name": "Trei Cruz",
+      "pos": "OF"
+    },
+    {
+      "rank": 23,
+      "name": "Nick Dumesnil",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Caleb Leys",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Jackson Strong",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "Grayson Grinsell",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Randy Santana",
+      "pos": "OF"
+    },
+    {
+      "rank": 28,
+      "name": "Brett Callahan",
+      "pos": "OF"
+    },
+    {
+      "rank": 29,
+      "name": "Jhonan Coba",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Jesus Pinto",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 116
+}

@@ -1,0 +1,157 @@
+{
+  "team": "brewers",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Jesús Made",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Luis Peña",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Cooper Pratt",
+      "pos": "SS"
+    },
+    {
+      "rank": 4,
+      "name": "Luis Lara",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Jett Williams",
+      "pos": "3B"
+    },
+    {
+      "rank": 6,
+      "name": "Josh Adamczewski",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Andrew Fischer",
+      "pos": "3B"
+    },
+    {
+      "rank": 8,
+      "name": "Jeferson Quero",
+      "pos": "C"
+    },
+    {
+      "rank": 9,
+      "name": "Bishop Letson",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Marco Dinges",
+      "pos": "C"
+    },
+    {
+      "rank": 11,
+      "name": "Luke Adams",
+      "pos": "1B"
+    },
+    {
+      "rank": 12,
+      "name": "Braylon Payne",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Brady Ebel",
+      "pos": "SS"
+    },
+    {
+      "rank": 14,
+      "name": "J.D. Thompson",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Blake Burke",
+      "pos": "1B"
+    },
+    {
+      "rank": 16,
+      "name": "Tyson Hardin",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Ethan Dorchies",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Bryce Meccage",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Brock Wilken",
+      "pos": "3B"
+    },
+    {
+      "rank": 20,
+      "name": "Diego Frontado",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Josh Knoth",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Eric Bitonti",
+      "pos": "1B"
+    },
+    {
+      "rank": 23,
+      "name": "Coleman Crow",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Jayden Dubanewicz",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Frank Cairone",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Brailyn Antunez",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "Alexander Frias",
+      "pos": "OF"
+    },
+    {
+      "rank": 28,
+      "name": "Josiah Ragsdale",
+      "pos": "OF"
+    },
+    {
+      "rank": 29,
+      "name": "Ricki Moneys",
+      "pos": "SS"
+    },
+    {
+      "rank": 30,
+      "name": "Handelfry Encarnacion",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 158
+}

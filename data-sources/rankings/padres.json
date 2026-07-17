@@ -1,0 +1,157 @@
+{
+  "team": "padres",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Ethan Salas",
+      "pos": "C"
+    },
+    {
+      "rank": 2,
+      "name": "Kruz Schoolcraft",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Miguel Mendez",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Kash Mayfield",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Jorge Quintana",
+      "pos": "SS"
+    },
+    {
+      "rank": 6,
+      "name": "Ty Harvey",
+      "pos": "C"
+    },
+    {
+      "rank": 7,
+      "name": "Ryan Wideman",
+      "pos": "OF"
+    },
+    {
+      "rank": 8,
+      "name": "Kale Fountain",
+      "pos": "OF"
+    },
+    {
+      "rank": 9,
+      "name": "Tucker Musgrove",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Braedon Karpathios",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Michael Salina",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Garrett Hawkins",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Jagger Haynes",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Lamar King Jr.",
+      "pos": "C"
+    },
+    {
+      "rank": 15,
+      "name": "Joniel Hernandez",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Lan-Hong Su",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Kannon Kemp",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Luis Gutierrez",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Alex McCoy",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "Diego Serna",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Jhoan De La Cruz",
+      "pos": "SS"
+    },
+    {
+      "rank": 22,
+      "name": "Truitt Madonna",
+      "pos": "C"
+    },
+    {
+      "rank": 23,
+      "name": "Jase Bowen",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Tirso Ornelas",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Deivid Coronil",
+      "pos": "3B"
+    },
+    {
+      "rank": 26,
+      "name": "Kavares Tears",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "Romeo Sanabria",
+      "pos": "1B"
+    },
+    {
+      "rank": 28,
+      "name": "Bryan Balzer",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Jaxon Dalena",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Carson Montgomery",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 135
+}

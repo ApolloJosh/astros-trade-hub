@@ -1,0 +1,156 @@
+{
+  "team": "dbacks",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Ryan Waldschmidt",
+      "pos": "OF"
+    },
+    {
+      "rank": 2,
+      "name": "Kayson Cunningham",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Slade Caldwell",
+      "pos": "OF"
+    },
+    {
+      "rank": 4,
+      "name": "Demetrio Crisantes",
+      "pos": "2B"
+    },
+    {
+      "rank": 5,
+      "name": "JD Dix",
+      "pos": "2B"
+    },
+    {
+      "rank": 6,
+      "name": "Daniel Eagen",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "David Hagaman",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Patrick Forbes",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "LuJames Groover",
+      "pos": "3B"
+    },
+    {
+      "rank": 10,
+      "name": "Cristian Mena",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Kohl Drake",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Jansel Luis",
+      "pos": "SS"
+    },
+    {
+      "rank": 13,
+      "name": "Mitch Bratt",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Cristofer Torin",
+      "pos": "SS"
+    },
+    {
+      "rank": 15,
+      "name": "Druw Jones",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Carlos Virahonda",
+      "pos": "C"
+    },
+    {
+      "rank": 17,
+      "name": "Ashton Izzi",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Dean Livingston",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Yassel Soler",
+      "pos": "3B"
+    },
+    {
+      "rank": 20,
+      "name": "Brian Curley",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Wellington Aracena",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Junior Ciprian",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Jose Cabrera",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Daury Vasquez",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Ivan Luciano",
+      "pos": "C"
+    },
+    {
+      "rank": 26,
+      "name": "Junior Sanchez",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Alberto Barriga",
+      "pos": "C"
+    },
+    {
+      "rank": 28,
+      "name": "Mason Marriott",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Avery Owusu"
+    },
+    {
+      "rank": 30,
+      "name": "Gavin Conticello",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 109
+}

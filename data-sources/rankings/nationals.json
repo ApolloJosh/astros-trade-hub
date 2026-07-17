@@ -1,0 +1,157 @@
+{
+  "team": "nationals",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Eli Willits",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Travis Sykora",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Jarlin Susana",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Ronny Cruz",
+      "pos": "SS"
+    },
+    {
+      "rank": 5,
+      "name": "Devin Fitz-Gerald",
+      "pos": "SS"
+    },
+    {
+      "rank": 6,
+      "name": "Seaver King",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Harry Ford",
+      "pos": "C"
+    },
+    {
+      "rank": 8,
+      "name": "Gavin Fien",
+      "pos": "3B"
+    },
+    {
+      "rank": 9,
+      "name": "Luis Perales",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Luke Dickerson",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Landon Harmon",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Alex Clemmey",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Ethan Petry",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Yoel Tejeda Jr.",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Jackson Kent",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Alejandro Rosario",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Miguel Sime Jr.",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Coy James",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Christian Franklin",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "Andrew Pinckney",
+      "pos": "OF"
+    },
+    {
+      "rank": 21,
+      "name": "Yeremy Cabrera",
+      "pos": "OF"
+    },
+    {
+      "rank": 22,
+      "name": "Marconi German",
+      "pos": "2B"
+    },
+    {
+      "rank": 23,
+      "name": "Sam Petersen",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Angel Feliz",
+      "pos": "SS"
+    },
+    {
+      "rank": 25,
+      "name": "Abimelec Ortiz",
+      "pos": "1B"
+    },
+    {
+      "rank": 26,
+      "name": "Eriq Swan",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Caleb Lomavita",
+      "pos": "C"
+    },
+    {
+      "rank": 28,
+      "name": "Yohandy Morales",
+      "pos": "1B"
+    },
+    {
+      "rank": 29,
+      "name": "Nauris De La Cruz",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Samil Serrano",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 120
+}

@@ -1,0 +1,157 @@
+{
+  "team": "rangers",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Sebastian Walcott",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Caden Scarborough",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "AJ Russell",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Jose Corniell",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Winston Santos",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Josh Owens",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "David Davalillo",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Yolfran Castillo",
+      "pos": "SS"
+    },
+    {
+      "rank": 9,
+      "name": "Elian Rosario",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Dylan Dreiling",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Izack Tiger",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Dalton Pence",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Cam Cauley",
+      "pos": "SS"
+    },
+    {
+      "rank": 14,
+      "name": "Leandro Lopez",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Seong-Jun Kim",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Elorky Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 17,
+      "name": "Emiliano Teodo",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Malcolm Moore",
+      "pos": "C"
+    },
+    {
+      "rank": 19,
+      "name": "Jack Wheeler",
+      "pos": "3B"
+    },
+    {
+      "rank": 20,
+      "name": "Mason McConnaughey",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Paxton Kling",
+      "pos": "OF"
+    },
+    {
+      "rank": 22,
+      "name": "Paulino Santana",
+      "pos": "OF"
+    },
+    {
+      "rank": 23,
+      "name": "Josh Trentadue",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Maxton Martin",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Carter Baumler",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Ben Abeldt",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Jacob Johnson",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Ismael Agreda",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Hector Osorio",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Anthony Gutierrez",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 140
+}

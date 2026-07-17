@@ -1,0 +1,157 @@
+{
+  "team": "phillies",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Aidan Miller",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Gage Wood",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Francisco Renteria",
+      "pos": "OF"
+    },
+    {
+      "rank": 4,
+      "name": "Aroon Escobar",
+      "pos": "2B"
+    },
+    {
+      "rank": 5,
+      "name": "Dante Nori",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Gabriel Rincones Jr.",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Cade Obermueller",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Moisés Chace",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Ramon Marquez",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Matthew Fisher",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Griffin Burkholder",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Wen-Hui Pan",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Jean Cabrera",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Cody Bowker",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Sean Youngerman",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Carson DeMartini",
+      "pos": "3B"
+    },
+    {
+      "rank": 17,
+      "name": "Alex McFarlane",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Chan-Min Park",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "James Tallon",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Devin Saltiban",
+      "pos": "OF"
+    },
+    {
+      "rank": 21,
+      "name": "Alirio Ferrebus",
+      "pos": "C"
+    },
+    {
+      "rank": 22,
+      "name": "Juan Parra",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
+      "name": "Gabe Craig",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Romeli Espinosa",
+      "pos": "SS"
+    },
+    {
+      "rank": 25,
+      "name": "Matthew Ferrara",
+      "pos": "SS"
+    },
+    {
+      "rank": 26,
+      "name": "Mavis Graves",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Bryan Rincon",
+      "pos": "SS"
+    },
+    {
+      "rank": 28,
+      "name": "Keaton Anthony",
+      "pos": "1B"
+    },
+    {
+      "rank": 29,
+      "name": "John Spikerman",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Raylin Heredia",
+      "pos": "OF"
+    }
+  ],
+  "teamId": 143
+}

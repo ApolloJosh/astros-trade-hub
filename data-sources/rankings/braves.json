@@ -1,0 +1,157 @@
+{
+  "team": "braves",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Cam Caminiti",
+      "pos": "SP"
+    },
+    {
+      "rank": 2,
+      "name": "Eric Hartman",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Tate Southisene",
+      "pos": "2B"
+    },
+    {
+      "rank": 4,
+      "name": "Alex Lodise",
+      "pos": "SS"
+    },
+    {
+      "rank": 5,
+      "name": "Owen Murphy",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Briggs McKenzie",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Diego Tornes",
+      "pos": "OF"
+    },
+    {
+      "rank": 8,
+      "name": "Lucas Braun",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "John Gil",
+      "pos": "SS"
+    },
+    {
+      "rank": 10,
+      "name": "Luke Sinnard",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Garrett Baumann",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Conor Essenburg",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Herick Hernandez",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Blake Burkhalter",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Drue Hackenberg",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "Rolddy Muñoz",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Owen Carey",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Luis Guanipa",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "Hayden Harris",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Landon Beidelschies",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Ethan Bagwell",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Jose Perdomo",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
+      "name": "Patrick Clohisy",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Jose Manon",
+      "pos": "SS"
+    },
+    {
+      "rank": 25,
+      "name": "Dixon Williams",
+      "pos": "2B"
+    },
+    {
+      "rank": 26,
+      "name": "Raudy Reyes",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Isaiah Drake",
+      "pos": "OF"
+    },
+    {
+      "rank": 28,
+      "name": "Jim Jarvis",
+      "pos": "SS"
+    },
+    {
+      "rank": 29,
+      "name": "Rayven Antonio",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Cody Miller",
+      "pos": "2B"
+    }
+  ],
+  "teamId": 144
+}

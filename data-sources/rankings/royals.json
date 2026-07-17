@@ -1,0 +1,157 @@
+{
+  "team": "royals",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Kendry Chourio",
+      "pos": "SP"
+    },
+    {
+      "rank": 2,
+      "name": "Josh Hammond",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "David Shields",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Blake Mitchell",
+      "pos": "C"
+    },
+    {
+      "rank": 5,
+      "name": "Sean Gamble",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Angeibel Gomez",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Ramon Ramirez",
+      "pos": "C"
+    },
+    {
+      "rank": 8,
+      "name": "Ben Kudrna",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Yandel Ricardo",
+      "pos": "SS"
+    },
+    {
+      "rank": 10,
+      "name": "Drew Beam",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Steven Zobac",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Felix Arronde",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Justin Lamkin",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Michael Lombardi",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Asbel Gonzalez",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Carson Roccaforte",
+      "pos": "OF"
+    },
+    {
+      "rank": 17,
+      "name": "Ramcell Medina",
+      "pos": "SS"
+    },
+    {
+      "rank": 18,
+      "name": "Warren Calcaño",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Shane Panzini",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Freddy Contreras",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Cameron Millar",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Blake Wolters",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Dennis Colleran Jr.",
+      "pos": "SP"
+    },
+    {
+      "rank": 24,
+      "name": "Daniel Vazquez",
+      "pos": "SS"
+    },
+    {
+      "rank": 25,
+      "name": "Gavin Cross",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "Josh Hansell",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Frank Mozzicato",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Hunter Patteson",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Jaider Suárez",
+      "pos": "SS"
+    },
+    {
+      "rank": 30,
+      "name": "Grayson Boles",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 118
+}

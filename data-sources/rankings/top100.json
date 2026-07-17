@@ -1,5 +1,501 @@
 {
-  "updated": "2026-07-07",
-  "_comment": "MLB Pipeline overall Top 100. Update with: node src/parse-rankings.js top100 (paste list, Ctrl-D). Players here get MLB #N badges and stronger value anchors.",
-  "prospects": []
+  "team": "top100",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Jesús Made",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Leo De Vries",
+      "pos": "SS"
+    },
+    {
+      "rank": 3,
+      "name": "Eli Willits",
+      "pos": "SS"
+    },
+    {
+      "rank": 4,
+      "name": "Josue De Paula",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Kade Anderson",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Seth Hernandez",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Franklin Arias",
+      "pos": "SS"
+    },
+    {
+      "rank": 8,
+      "name": "Ryan Sloan",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Theo Gillen",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Sebastian Walcott",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Mike Sirota",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Rainiel Rodriguez",
+      "pos": "C"
+    },
+    {
+      "rank": 13,
+      "name": "Max Clark",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Walker Jenkins",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Josuar Gonzalez",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Caleb Bonemer",
+      "pos": "3B"
+    },
+    {
+      "rank": 17,
+      "name": "Ethan Holliday",
+      "pos": "SS"
+    },
+    {
+      "rank": 18,
+      "name": "Luis Peña"
+    },
+    {
+      "rank": 19,
+      "name": "Zyhir Hope",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "George Lombard Jr."
+    },
+    {
+      "rank": 21,
+      "name": "Thomas White",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Liam Doyle",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Braden Montgomery",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Alfredo Duno",
+      "pos": "C"
+    },
+    {
+      "rank": 25,
+      "name": "Jamie Arnold",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Lazaro Montes",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
+      "name": "JoJo Parker",
+      "pos": "SS"
+    },
+    {
+      "rank": 28,
+      "name": "Ryan Waldschmidt",
+      "pos": "OF"
+    },
+    {
+      "rank": 29,
+      "name": "Aidan Miller",
+      "pos": "SS"
+    },
+    {
+      "rank": 30,
+      "name": "Edward Florentino",
+      "pos": "OF"
+    },
+    {
+      "rank": 31,
+      "name": "Eduardo Quintero",
+      "pos": "OF"
+    },
+    {
+      "rank": 32,
+      "name": "Kaelen Culpepper",
+      "pos": "SS"
+    },
+    {
+      "rank": 33,
+      "name": "Ethan Salas",
+      "pos": "C"
+    },
+    {
+      "rank": 34,
+      "name": "Luis Hernández",
+      "pos": "SS"
+    },
+    {
+      "rank": 35,
+      "name": "Travis Sykora",
+      "pos": "SP"
+    },
+    {
+      "rank": 36,
+      "name": "Ralphy Velazquez",
+      "pos": "1B"
+    },
+    {
+      "rank": 37,
+      "name": "Robby Snelling",
+      "pos": "SP"
+    },
+    {
+      "rank": 38,
+      "name": "Eduardo Tait",
+      "pos": "C"
+    },
+    {
+      "rank": 39,
+      "name": "Bryce Rainer",
+      "pos": "SS"
+    },
+    {
+      "rank": 40,
+      "name": "Aiva Arquette",
+      "pos": "SS"
+    },
+    {
+      "rank": 41,
+      "name": "Angel Genao",
+      "pos": "SS"
+    },
+    {
+      "rank": 42,
+      "name": "Michael Arroyo",
+      "pos": "2B"
+    },
+    {
+      "rank": 43,
+      "name": "Cam Caminiti",
+      "pos": "SP"
+    },
+    {
+      "rank": 44,
+      "name": "Tyler Bremner",
+      "pos": "SP"
+    },
+    {
+      "rank": 45,
+      "name": "Arjun Nimmala",
+      "pos": "SS"
+    },
+    {
+      "rank": 46,
+      "name": "Emil Morales",
+      "pos": "SS"
+    },
+    {
+      "rank": 47,
+      "name": "Joshua Báez",
+      "pos": "OF"
+    },
+    {
+      "rank": 48,
+      "name": "Jarlin Susana",
+      "pos": "SP"
+    },
+    {
+      "rank": 49,
+      "name": "Jhonny Level",
+      "pos": "SS"
+    },
+    {
+      "rank": 50,
+      "name": "Steele Hall",
+      "pos": "SS"
+    },
+    {
+      "rank": 51,
+      "name": "Gage Wood",
+      "pos": "SP"
+    },
+    {
+      "rank": 52,
+      "name": "Anthony Eyanson",
+      "pos": "SP"
+    },
+    {
+      "rank": 53,
+      "name": "Hagen Smith",
+      "pos": "SP"
+    },
+    {
+      "rank": 54,
+      "name": "Cooper Pratt",
+      "pos": "SS"
+    },
+    {
+      "rank": 55,
+      "name": "Emmanuel Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 56,
+      "name": "Josue Briceño",
+      "pos": "C"
+    },
+    {
+      "rank": 57,
+      "name": "Nate George",
+      "pos": "OF"
+    },
+    {
+      "rank": 58,
+      "name": "Billy Carlson",
+      "pos": "SS"
+    },
+    {
+      "rank": 59,
+      "name": "Dax Kilby",
+      "pos": "SS"
+    },
+    {
+      "rank": 60,
+      "name": "Cooper Ingle",
+      "pos": "C"
+    },
+    {
+      "rank": 61,
+      "name": "Jonny Farmelo",
+      "pos": "OF"
+    },
+    {
+      "rank": 62,
+      "name": "Charlie Condon",
+      "pos": "1B"
+    },
+    {
+      "rank": 63,
+      "name": "Caden Scarborough",
+      "pos": "SP"
+    },
+    {
+      "rank": 64,
+      "name": "Jefferson Rojas",
+      "pos": "SS"
+    },
+    {
+      "rank": 65,
+      "name": "Luis Lara",
+      "pos": "OF"
+    },
+    {
+      "rank": 66,
+      "name": "Kendry Chourio",
+      "pos": "SP"
+    },
+    {
+      "rank": 67,
+      "name": "Kevin Alvarez",
+      "pos": "OF"
+    },
+    {
+      "rank": 68,
+      "name": "River Ryan",
+      "pos": "SP"
+    },
+    {
+      "rank": 69,
+      "name": "Roldy Brito",
+      "pos": "OF"
+    },
+    {
+      "rank": 70,
+      "name": "Kayson Cunningham",
+      "pos": "SS"
+    },
+    {
+      "rank": 71,
+      "name": "Felnin Celesten",
+      "pos": "SS"
+    },
+    {
+      "rank": 72,
+      "name": "Nathan Flewelling",
+      "pos": "C"
+    },
+    {
+      "rank": 73,
+      "name": "Karson Milbrandt",
+      "pos": "SP"
+    },
+    {
+      "rank": 74,
+      "name": "Elmer Rodríguez",
+      "pos": "SP"
+    },
+    {
+      "rank": 75,
+      "name": "Josiah Hartshorn",
+      "pos": "OF"
+    },
+    {
+      "rank": 76,
+      "name": "Ronny Cruz"
+    },
+    {
+      "rank": 77,
+      "name": "Eric Hartman",
+      "pos": "OF"
+    },
+    {
+      "rank": 78,
+      "name": "Jonah Tong",
+      "pos": "SP"
+    },
+    {
+      "rank": 79,
+      "name": "Jett Williams"
+    },
+    {
+      "rank": 80,
+      "name": "Ike Irish",
+      "pos": "OF"
+    },
+    {
+      "rank": 81,
+      "name": "Carlos Lagrange",
+      "pos": "SP"
+    },
+    {
+      "rank": 82,
+      "name": "Josh Hammond",
+      "pos": "SS"
+    },
+    {
+      "rank": 83,
+      "name": "Justin Gonzales",
+      "pos": "OF"
+    },
+    {
+      "rank": 84,
+      "name": "Charles Davalan",
+      "pos": "OF"
+    },
+    {
+      "rank": 85,
+      "name": "Xavier Neyens",
+      "pos": "3B"
+    },
+    {
+      "rank": 86,
+      "name": "Christian Zazueta",
+      "pos": "SP"
+    },
+    {
+      "rank": 87,
+      "name": "Devin Fitz-Gerald"
+    },
+    {
+      "rank": 88,
+      "name": "Seaver King",
+      "pos": "SS"
+    },
+    {
+      "rank": 89,
+      "name": "Jaxon Wiggins",
+      "pos": "SP"
+    },
+    {
+      "rank": 90,
+      "name": "Francisco Renteria",
+      "pos": "OF"
+    },
+    {
+      "rank": 91,
+      "name": "Josh Adamczewski",
+      "pos": "OF"
+    },
+    {
+      "rank": 92,
+      "name": "James Tibbs III",
+      "pos": "1B"
+    },
+    {
+      "rank": 93,
+      "name": "Caden Bodine",
+      "pos": "C"
+    },
+    {
+      "rank": 94,
+      "name": "Braylon Doughty",
+      "pos": "SP"
+    },
+    {
+      "rank": 95,
+      "name": "Nolan Perry",
+      "pos": "SP"
+    },
+    {
+      "rank": 96,
+      "name": "Tate Southisene",
+      "pos": "2B"
+    },
+    {
+      "rank": 97,
+      "name": "Jaison Chourio",
+      "pos": "OF"
+    },
+    {
+      "rank": 98,
+      "name": "Juneiker Caceres",
+      "pos": "OF"
+    },
+    {
+      "rank": 99,
+      "name": "Joseph Dzierwa",
+      "pos": "SP"
+    },
+    {
+      "rank": 100,
+      "name": "David Shields",
+      "pos": "SP"
+    }
+  ]
 }

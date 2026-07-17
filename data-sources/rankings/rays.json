@@ -1,0 +1,157 @@
+{
+  "team": "rays",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Theo Gillen",
+      "pos": "OF"
+    },
+    {
+      "rank": 2,
+      "name": "Nathan Flewelling",
+      "pos": "C"
+    },
+    {
+      "rank": 3,
+      "name": "Caden Bodine",
+      "pos": "C"
+    },
+    {
+      "rank": 4,
+      "name": "Brody Hopkins",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Jacob Melton",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Daniel Pierce",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Anderson Brito",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "TJ Nichols",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Michael Forret",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Santiago Suarez",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Slater de Brun",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Aidan Smith",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Xavier Isaac",
+      "pos": "1B"
+    },
+    {
+      "rank": 14,
+      "name": "Taitn Gray",
+      "pos": "1B"
+    },
+    {
+      "rank": 15,
+      "name": "Jadher Areinamo",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Trevor Harrison",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Jose Urbina",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Ty Johnson",
+      "pos": "SP"
+    },
+    {
+      "rank": 19,
+      "name": "Tre Morgan",
+      "pos": "1B"
+    },
+    {
+      "rank": 20,
+      "name": "Brendan Summerhill",
+      "pos": "OF"
+    },
+    {
+      "rank": 21,
+      "name": "Victor Valdez",
+      "pos": "SS"
+    },
+    {
+      "rank": 22,
+      "name": "Fabricio Blanco",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
+      "name": "Brailer Guerrero",
+      "pos": "OF"
+    },
+    {
+      "rank": 24,
+      "name": "Homer Bush Jr.",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Austin Overn",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "Gary Gill Hill",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Cooper Flemming",
+      "pos": "SS"
+    },
+    {
+      "rank": 28,
+      "name": "Émilien Pitre",
+      "pos": "2B"
+    },
+    {
+      "rank": 29,
+      "name": "Dean Moss",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Jackson Baumeister",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 139
+}

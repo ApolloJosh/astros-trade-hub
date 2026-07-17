@@ -1,0 +1,157 @@
+{
+  "team": "redsox",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Franklin Arias",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Anthony Eyanson",
+      "pos": "SP"
+    },
+    {
+      "rank": 3,
+      "name": "Justin Gonzales",
+      "pos": "OF"
+    },
+    {
+      "rank": 4,
+      "name": "Kyson Witherspoon",
+      "pos": "SP"
+    },
+    {
+      "rank": 5,
+      "name": "Juan Valera",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Jake Bennett",
+      "pos": "SP"
+    },
+    {
+      "rank": 7,
+      "name": "Dorian Soto",
+      "pos": "SS"
+    },
+    {
+      "rank": 8,
+      "name": "Marcus Phillips",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Henry Godbout",
+      "pos": "2B"
+    },
+    {
+      "rank": 10,
+      "name": "Enddy Azocar",
+      "pos": "OF"
+    },
+    {
+      "rank": 11,
+      "name": "Mikey Romero",
+      "pos": "SS"
+    },
+    {
+      "rank": 12,
+      "name": "John Holobetz",
+      "pos": "SP"
+    },
+    {
+      "rank": 13,
+      "name": "Tyler Uberstine",
+      "pos": "SP"
+    },
+    {
+      "rank": 14,
+      "name": "Hayden Mullins",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Miguel Bleis",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Yoeilin Cespedes",
+      "pos": "2B"
+    },
+    {
+      "rank": 17,
+      "name": "Sadbiel Delzine",
+      "pos": "SP"
+    },
+    {
+      "rank": 18,
+      "name": "Harold Rivas",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
+      "name": "Jedixson Paez",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Gage Ziehl",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Nelly Taylor",
+      "pos": "OF"
+    },
+    {
+      "rank": 22,
+      "name": "Hector Ramos",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
+      "name": "Dawvris Brito",
+      "pos": "SS"
+    },
+    {
+      "rank": 24,
+      "name": "Allan Castro",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Eduardo Rivera",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Johanfran Garcia",
+      "pos": "C"
+    },
+    {
+      "rank": 27,
+      "name": "Gerardo Rodriguez",
+      "pos": "C"
+    },
+    {
+      "rank": 28,
+      "name": "Yordanny Monegro",
+      "pos": "SP"
+    },
+    {
+      "rank": 29,
+      "name": "Conrad Cason",
+      "pos": "SP"
+    },
+    {
+      "rank": 30,
+      "name": "Jojo Ingrassia",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 111
+}

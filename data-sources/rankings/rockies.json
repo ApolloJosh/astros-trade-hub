@@ -1,0 +1,157 @@
+{
+  "team": "rockies",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Ethan Holliday",
+      "pos": "SS"
+    },
+    {
+      "rank": 2,
+      "name": "Charlie Condon",
+      "pos": "1B"
+    },
+    {
+      "rank": 3,
+      "name": "Roldy Brito",
+      "pos": "OF"
+    },
+    {
+      "rank": 4,
+      "name": "Jared Thomas",
+      "pos": "OF"
+    },
+    {
+      "rank": 5,
+      "name": "Robert Calaz",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
+      "name": "Cole Carrigg",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "JB Middleton",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Brody Brecht",
+      "pos": "SP"
+    },
+    {
+      "rank": 9,
+      "name": "Griffin Herring",
+      "pos": "SP"
+    },
+    {
+      "rank": 10,
+      "name": "Roc Riggio",
+      "pos": "2B"
+    },
+    {
+      "rank": 11,
+      "name": "Sean Sullivan",
+      "pos": "SP"
+    },
+    {
+      "rank": 12,
+      "name": "Max Belyeu",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Zac Veen",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Welinton Herrera",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Sterlin Thompson",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Gabriel Hughes",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Ethan Hedges",
+      "pos": "3B"
+    },
+    {
+      "rank": 18,
+      "name": "Wilder Dalis",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Jackson Cox",
+      "pos": "SP"
+    },
+    {
+      "rank": 20,
+      "name": "Yujanyer Herrera",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Cole Messina",
+      "pos": "C"
+    },
+    {
+      "rank": 22,
+      "name": "Cristian Arguelles",
+      "pos": "OF"
+    },
+    {
+      "rank": 23,
+      "name": "Ashly Andujar",
+      "pos": "SS"
+    },
+    {
+      "rank": 24,
+      "name": "McCade Brown",
+      "pos": "SP"
+    },
+    {
+      "rank": 25,
+      "name": "Konner Eaton",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Riley Kelly",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "RJ Petit",
+      "pos": "SP"
+    },
+    {
+      "rank": 28,
+      "name": "Richard De Los Santos",
+      "pos": "SS"
+    },
+    {
+      "rank": 29,
+      "name": "Sebastian Blanco",
+      "pos": "SS"
+    },
+    {
+      "rank": 30,
+      "name": "Tanner Thach",
+      "pos": "1B"
+    }
+  ],
+  "teamId": 115
+}

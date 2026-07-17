@@ -1,0 +1,157 @@
+{
+  "team": "whitesox",
+  "updated": "2026-07-17",
+  "prospects": [
+    {
+      "rank": 1,
+      "name": "Caleb Bonemer",
+      "pos": "3B"
+    },
+    {
+      "rank": 2,
+      "name": "Braden Montgomery",
+      "pos": "OF"
+    },
+    {
+      "rank": 3,
+      "name": "Hagen Smith",
+      "pos": "SP"
+    },
+    {
+      "rank": 4,
+      "name": "Billy Carlson",
+      "pos": "SS"
+    },
+    {
+      "rank": 5,
+      "name": "Tanner McDougal",
+      "pos": "SP"
+    },
+    {
+      "rank": 6,
+      "name": "Jaden Fauske",
+      "pos": "OF"
+    },
+    {
+      "rank": 7,
+      "name": "Christian Oppor",
+      "pos": "SP"
+    },
+    {
+      "rank": 8,
+      "name": "Kyle Lodise",
+      "pos": "SS"
+    },
+    {
+      "rank": 9,
+      "name": "William Bergolla Jr.",
+      "pos": "SS"
+    },
+    {
+      "rank": 10,
+      "name": "Mason Adams",
+      "pos": "SP"
+    },
+    {
+      "rank": 11,
+      "name": "Javier Mogollon",
+      "pos": "2B"
+    },
+    {
+      "rank": 12,
+      "name": "George Wolkow",
+      "pos": "OF"
+    },
+    {
+      "rank": 13,
+      "name": "Jeral Perez",
+      "pos": "2B"
+    },
+    {
+      "rank": 14,
+      "name": "Blake Larson",
+      "pos": "SP"
+    },
+    {
+      "rank": 15,
+      "name": "Mathias LaCombe",
+      "pos": "SP"
+    },
+    {
+      "rank": 16,
+      "name": "David Sandlin",
+      "pos": "SP"
+    },
+    {
+      "rank": 17,
+      "name": "Sebastian Romero",
+      "pos": "OF"
+    },
+    {
+      "rank": 18,
+      "name": "Landon Hodge",
+      "pos": "C"
+    },
+    {
+      "rank": 19,
+      "name": "Alexander Albertus",
+      "pos": "3B"
+    },
+    {
+      "rank": 20,
+      "name": "Aldrin Batista",
+      "pos": "SP"
+    },
+    {
+      "rank": 21,
+      "name": "Tyler Schweitzer",
+      "pos": "SP"
+    },
+    {
+      "rank": 22,
+      "name": "Gabe Davis",
+      "pos": "SP"
+    },
+    {
+      "rank": 23,
+      "name": "Fernando Graterol",
+      "pos": "C"
+    },
+    {
+      "rank": 24,
+      "name": "Rikuu Nishida",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Shane Murphy",
+      "pos": "SP"
+    },
+    {
+      "rank": 26,
+      "name": "Ky Bush",
+      "pos": "SP"
+    },
+    {
+      "rank": 27,
+      "name": "Ryan Burrowes",
+      "pos": "SS"
+    },
+    {
+      "rank": 28,
+      "name": "Anthony DePino",
+      "pos": "1B"
+    },
+    {
+      "rank": 29,
+      "name": "Ely Brown",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Duncan Davitt",
+      "pos": "SP"
+    }
+  ],
+  "teamId": 145
+}
