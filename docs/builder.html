@@ -25,6 +25,18 @@
 .pick .x{margin-left:auto;cursor:pointer;color:var(--muted);font-size:16px;padding:0 4px}
 .cbt{margin-top:14px}
 .cbtrow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--row-line)}
+.bwrap{max-width:520px;margin:12px auto 0}
+.blbl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
+.bbar{position:relative;height:16px;border:2px solid var(--card-line);border-radius:8px;background:var(--row-hover);overflow:hidden}
+.bfill{height:100%;background:var(--accent);width:50%;transition:width .25s}
+.btick{position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.6}
+.smodal{position:fixed;inset:0;background:rgba(22,41,79,.65);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.scard{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;max-width:440px;width:100%;max-height:92vh;overflow:auto;position:relative;text-align:center}
+.scard img{width:100%;height:auto;border:1px solid var(--row-line);border-radius:6px;display:block}
+.sclose{position:absolute;top:8px;right:8px;font-size:18px;line-height:1;padding:4px 10px}
+.shint{font-size:11.5px;color:var(--muted);margin:8px 0 0}
+.slink{display:flex;gap:8px;margin-top:10px}
+.slink input{flex:1;min-width:0;font-size:12px;padding:8px;border:1px solid var(--row-line);border-radius:6px;background:var(--input-bg);color:var(--ink)}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -35,7 +47,11 @@
 
 <div class="verdict"><div class="vmain" id="vmain">Add players to both sides</div>
 <div class="vsub" id="vsub">Astros send → Astros receive</div>
-<div style="margin-top:10px"><button id="share" style="display:none">📸 Share This Trade</button></div></div>
+<div class="bwrap" id="bwrap" style="display:none">
+  <div class="blbl"><span>🚀 Send <b id="bgive">0</b></span><span><b id="bget">0</b> Receive 🎯</span></div>
+  <div class="bbar"><div class="bfill" id="bfill"></div><div class="btick"></div></div>
+</div>
+<div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button></div></div>
 
 <div class="cols">
   <div class="panel">
@@ -77,6 +93,15 @@
   <div class="note" style="margin-top:6px">Salaries marked (est.) are service-time estimates — exact figures via data-sources/salaries-manual.json.</div>
 </div>
 <p class="foot">Model estimates for podcast &amp; fan discussion. · Beyond the Diamond</p>
+
+<div class="smodal" id="smodal" style="display:none">
+  <div class="scard">
+    <button class="sclose" id="sclose">×</button>
+    <img id="simg" alt="Mock trade card">
+    <div class="shint">Press &amp; hold the image on your phone (or right-click on a computer) to save it.</div>
+    <div class="slink"><input id="slink" readonly><button id="scopy">Copy link</button></div>
+  </div>
+</div>
 
 <script src="assets/app.js"></script>
 <script>
@@ -203,6 +228,13 @@ BTD.nav('builder');
     document.getElementById('get').textContent = get.toFixed(1);
     const main = document.getElementById('vmain'), sub = document.getElementById('vsub');
     document.getElementById('share').style.display = (S.give.length && S.recv.length) ? 'inline-block' : 'none';
+    const bw = document.getElementById('bwrap');
+    if (give > 0 || get > 0) {
+      bw.style.display = 'block';
+      document.getElementById('bgive').textContent = give.toFixed(1);
+      document.getElementById('bget').textContent = get.toFixed(1);
+      document.getElementById('bfill').style.width = ((give + get) > 0 ? give / (give + get) * 100 : 50) + '%';
+    } else bw.style.display = 'none';
     if ((!S.give.length && !S.gcash) || (!S.recv.length && !S.rcash)) {
       main.textContent = 'Add players to both sides'; main.style.color = 'var(--ink)';
       sub.textContent = 'Astros send → Astros receive';
@@ -258,82 +290,124 @@ BTD.nav('builder');
     if (S.rcash) q.set('rc', S.rcash);
     return location.origin + location.pathname.replace(/\.html$/, '') + '?' + q.toString();
   }
-  function drawCard() {
-    const W = 1200, H = 630, cv = document.createElement('canvas');
+  // Cross-origin image loader (MLB CDN allows canvas use); null on failure.
+  const imgCache = {};
+  const loadImg = url => new Promise(res => {
+    if (!url) return res(null);
+    if (url in imgCache) return res(imgCache[url]);
+    const im = new Image(); im.crossOrigin = 'anonymous';
+    im.onload = () => { imgCache[url] = im; res(im); };
+    im.onerror = () => { imgCache[url] = null; res(null); };
+    im.src = url;
+  });
+  const teamSpot = id => id ? `https://midfield.mlbstatic.com/v1/team/${id}/spots/72` : '';
+  async function drawCard(noImgs) {
+    const W = 1080, H = 1080, cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
     const x = cv.getContext('2d');
     const NAVY = '#16294f', CREAM = '#f5efdf', ORANGE = '#e8590c', MUTED = '#5d6a85';
+    const give = sum(S.give, S.gcash), get = sum(S.recv, S.rcash);
+    // preload art
+    const [gShots, rShots, houLogo, rLogo] = noImgs ? [[], [], null, null] : await Promise.all([
+      Promise.all(S.give.slice(0, 6).map(p => loadImg(BTD.shot(p.id)))),
+      Promise.all(S.recv.slice(0, 6).map(p => loadImg(BTD.shot(p.id)))),
+      loadImg(teamSpot(HOU)),
+      (() => { const ids = [...new Set(S.recv.map(p => p.teamId))]; return ids.length === 1 ? loadImg(teamSpot(ids[0])) : Promise.resolve(null); })(),
+    ]);
+    const rTeams = [...new Set(S.recv.map(p => p.team))];
+    const rName = rTeams.length === 1 ? rTeams[0] : 'Multiple Teams';
+
     x.fillStyle = '#efe7d4'; x.fillRect(0, 0, W, H);
     // header band
-    x.fillStyle = NAVY; x.fillRect(0, 0, W, 120);
+    x.fillStyle = NAVY; x.fillRect(0, 0, W, 150);
     x.fillStyle = ORANGE; x.fillRect(0, 0, W, 8);
     x.textAlign = 'center';
-    x.fillStyle = '#f2a33c'; x.font = '700 18px "Barlow Condensed", sans-serif';
-    x.fillText('B E Y O N D   T H E   D I A M O N D   P O D C A S T', W / 2, 40);
-    x.fillStyle = CREAM; x.font = '900 44px "Archivo Black", sans-serif';
-    x.fillText('MOCK TRADE', W / 2, 88);
+    x.fillStyle = '#f2a33c'; x.font = '700 20px "Barlow Condensed", sans-serif';
+    x.fillText('B E Y O N D   T H E   D I A M O N D   P O D C A S T', W / 2, 52);
+    x.fillStyle = CREAM; x.font = '900 52px "Archivo Black", sans-serif';
+    x.fillText('MOCK TRADE', W / 2, 115);
     // verdict
-    const give = sum(S.give, S.gcash), get = sum(S.recv, S.rcash);
     const ratio = get <= 0 ? 2 : give / get;
     const vTxt = ratio < 0.6 ? '☎ THEY HUNG UP' : ratio < 0.9 ? 'NEEDS A SWEETENER' :
       ratio <= 1.25 ? '✔ FAIR TRADE' : ratio <= 1.6 ? 'OVERPAY' : 'FLEECED';
     const vCol = (ratio >= 0.9 && ratio <= 1.25) ? '#1d7a4f' : (ratio < 0.6 || ratio > 1.6) ? '#c0392b' : '#b8860b';
-    x.fillStyle = vCol; x.font = '900 34px "Archivo Black", sans-serif';
-    x.fillText(vTxt, W / 2, 172);
+    x.fillStyle = vCol; x.font = '900 38px "Archivo Black", sans-serif';
+    x.fillText(vTxt, W / 2, 210);
+    // balance bar: orange = value Houston sends, navy = value coming back
+    const bx = 190, bwd = 700, by = 236, bh = 20;
+    const frac = (give + get) > 0 ? give / (give + get) : 0.5;
+    x.fillStyle = NAVY; x.fillRect(bx, by, bwd, bh);
+    x.fillStyle = ORANGE; x.fillRect(bx, by, bwd * frac, bh);
+    x.strokeStyle = NAVY; x.lineWidth = 2; x.strokeRect(bx, by, bwd, bh);
+    x.fillStyle = '#efe7d4'; x.fillRect(bx + bwd / 2 - 1, by - 4, 2, bh + 8);
+    x.font = '700 19px "Barlow Condensed", sans-serif';
+    x.textAlign = 'left'; x.fillStyle = ORANGE; x.fillText('SEND  ' + give.toFixed(1), bx, by + bh + 26);
+    x.textAlign = 'right'; x.fillStyle = NAVY; x.fillText('RECEIVE  ' + get.toFixed(1), bx + bwd, by + bh + 26);
     // columns
-    const col = (title, list, cash, total, cx) => {
-      x.textAlign = 'left';
-      x.fillStyle = ORANGE; x.font = '800 22px "Barlow Condensed", sans-serif';
-      x.fillText(title.toUpperCase() + '  ·  ' + total.toFixed(1), cx, 225);
+    const circle = (img, px, py, r, name) => {
+      x.save(); x.beginPath(); x.arc(px, py, r, 0, 7); x.clip();
+      if (img) { x.drawImage(img, px - r, py - r, r * 2, r * 2); }
+      else {
+        x.fillStyle = NAVY; x.fillRect(px - r, py - r, r * 2, r * 2);
+        x.fillStyle = CREAM; x.font = '700 ' + Math.round(r * 0.75) + 'px Inter, sans-serif'; x.textAlign = 'center';
+        x.fillText(String(name || '?').split(' ').map(w => w[0]).slice(0, 2).join(''), px, py + r * 0.28);
+      }
+      x.restore(); x.textAlign = 'left';
+      x.strokeStyle = NAVY; x.lineWidth = 2; x.beginPath(); x.arc(px, py, r, 0, 7); x.stroke();
+    };
+    const col = (title, logo, list, shots, cash, cx) => {
+      // team header
+      circle(logo, cx + 22, 340, 22, title);
+      x.fillStyle = NAVY; x.font = '800 27px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
+      x.fillText(title.toUpperCase(), cx + 56, 349);
       x.strokeStyle = NAVY; x.lineWidth = 2;
-      x.beginPath(); x.moveTo(cx, 236); x.lineTo(cx + 480, 236); x.stroke();
-      let y = 272;
-      const rows = list.slice(0, 6);
-      rows.forEach(p => {
+      x.beginPath(); x.moveTo(cx, 372); x.lineTo(cx + 450, 372); x.stroke();
+      let cy = 424;
+      list.slice(0, 6).forEach((p, i) => {
+        circle(shots[i], cx + 26, cy - 8, 26, p.name);
         x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif';
-        x.fillText(p.name.length > 24 ? p.name.slice(0, 23) + '…' : p.name, cx, y);
-        x.fillStyle = MUTED; x.font = '400 17px Inter, sans-serif';
-        x.fillText(p.pos + (p.teamId === HOU ? '' : ' · ' + p.team) + (p.orgRank ? ' · Org #' + p.orgRank : '') + (p.top100 ? ' · MLB #' + p.top100 : ''), cx, y + 22);
+        x.fillText(p.name.length > 20 ? p.name.slice(0, 19) + '…' : p.name, cx + 64, cy - 6);
+        x.fillStyle = MUTED; x.font = '400 15px Inter, sans-serif';
+        x.fillText(p.pos + (p.orgRank ? ' · Org #' + p.orgRank : '') + (p.top100 ? ' · MLB #' + p.top100 : ''), cx + 64, cy + 16);
         x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
-        x.fillText(BTD.pts(p.tv), cx + 480, y + 8);
-        x.textAlign = 'left';
-        y += 56;
+        x.fillText(BTD.pts(p.tv), cx + 450, cy); x.textAlign = 'left';
+        cy += 78;
       });
-      if (list.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (list.length - 6) + ' more', cx, y); y += 40; }
+      if (list.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (list.length - 6) + ' more', cx + 64, cy - 8); cy += 50; }
       if (cash > 0) {
-        x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif'; x.fillText('💵 Cash $' + cash.toFixed(1) + 'M', cx, y);
+        x.fillStyle = NAVY; x.font = '700 23px Inter, sans-serif'; x.fillText('💵 Cash $' + cash.toFixed(1) + 'M', cx + 64, cy - 6);
         x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
-        x.fillText((cash * CASH_PTS).toFixed(1), cx + 480, y); x.textAlign = 'left';
+        x.fillText((cash * CASH_PTS).toFixed(1), cx + 450, cy - 6); x.textAlign = 'left';
       }
     };
-    col('Astros send', S.give, S.gcash, give, 70);
-    col('Astros receive', S.recv, S.rcash, get, 650);
+    col('Astros Send', houLogo, S.give, gShots, S.gcash, 60);
+    col(rName, rLogo, S.recv, rShots, S.rcash, 570);
     // footer
-    x.fillStyle = NAVY; x.fillRect(0, H - 78, W, 78);
+    x.fillStyle = NAVY; x.fillRect(0, H - 100, W, 100);
     x.textAlign = 'center';
-    x.fillStyle = CREAM; x.font = '700 20px "Barlow Condensed", sans-serif';
-    x.fillText(location.host + location.pathname.replace(/\.html$/, ''), W / 2, H - 46);
-    x.fillStyle = '#f2a33c'; x.font = '700 19px "Barlow Condensed", sans-serif';
-    x.fillText('Watch the Beyond The Diamond Astros Podcast @ ApolloHOU on YouTube!', W / 2, H - 18);
+    x.fillStyle = CREAM; x.font = '700 21px "Barlow Condensed", sans-serif';
+    x.fillText(location.host + location.pathname.replace(/\.html$/, ''), W / 2, H - 58);
+    x.fillStyle = '#f2a33c'; x.font = '700 20px "Barlow Condensed", sans-serif';
+    x.fillText('Watch the Beyond The Diamond Astros Podcast @ ApolloHOU on YouTube!', W / 2, H - 26);
     return cv;
   }
+  const modal = document.getElementById('smodal');
   document.getElementById('share').addEventListener('click', async () => {
-    const btn = document.getElementById('share');
-    try { await navigator.clipboard.writeText(shareURL()); } catch (e) {}
     try { await document.fonts.ready; } catch (e) {}
-    drawCard().toBlob(async blob => {
-      const file = new File([blob], 'btd-mock-trade.png', { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try { await navigator.share({ files: [file], text: 'My Astros mock trade — ' + shareURL() }); }
-        catch (e) {}
-      } else {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob); a.download = 'btd-mock-trade.png'; a.click();
-        URL.revokeObjectURL(a.href);
-      }
-      btn.textContent = '✓ Image saved · link copied';
-      setTimeout(() => btn.textContent = '📸 Share This Trade', 3000);
-    }, 'image/png');
+    let url = null;
+    try { url = (await drawCard()).toDataURL('image/png'); }
+    catch (e) { try { url = (await drawCard(true)).toDataURL('image/png'); } catch (e2) {} }
+    if (!url) return;
+    document.getElementById('simg').src = url;
+    document.getElementById('slink').value = shareURL();
+    modal.style.display = 'flex';
+  });
+  document.getElementById('sclose').addEventListener('click', () => modal.style.display = 'none');
+  modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+  document.getElementById('scopy').addEventListener('click', async e => {
+    const inp = document.getElementById('slink');
+    try { await navigator.clipboard.writeText(inp.value); } catch (err) { inp.select(); document.execCommand('copy'); }
+    e.target.textContent = '✓ Copied'; setTimeout(() => e.target.textContent = 'Copy link', 2000);
   });
 
   // Prefill a shared trade from the URL (?g=id.id&r=id&gc=2)
