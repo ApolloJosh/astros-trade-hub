@@ -28,21 +28,12 @@
 <div class="hero"><div class="kicker">The Wire</div>
 <h1>Trade Feed</h1>
 <p class="sub" id="feedsub">Every MLB trade as a value equation — our model's totals per side, with a balance verdict. This is also the data that calibrates the Trade Value formula.</p></div>
-<div id="market" class="card" style="margin-bottom:14px;display:none"></div>
 <div id="feed"></div>
 <p class="foot">Values from the BTD model at time of refresh · Beyond the Diamond</p>
 <script src="assets/app.js"></script>
 <script>
 BTD.nav('feed');
 (async () => {
-  try {
-    const c = await BTD.data('calibration');
-    if (c.tradesAnalyzed) {
-      const el = document.getElementById('market'); el.style.display = 'block';
-      el.innerHTML = `<b>🌡️ Market temperature: ${c.marketTemp ?? '—'}</b> across ${c.tradesAnalyzed} fully-valued trades ` +
-        `(1.0 = model matches market).<br><span class="note">${(c.suggestions || []).map(BTD.esc).join('<br>')}</span>`;
-    }
-  } catch (e) {}
   const f = await BTD.data('feed');
   document.getElementById('feedsub').innerHTML += ` <b>${f.trades.length}</b> trades since ${f.since}.`;
   const el = document.getElementById('feed');

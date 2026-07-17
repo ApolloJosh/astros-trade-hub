@@ -10,42 +10,109 @@
 <h1>Every player. Every value. Every trade.</h1>
 <p class="sub">League-wide trade values, a live trade feed with value math, and the Astros mock trade builder — refreshed automatically from MLB data.</p></div>
 
-<div class="grid" id="cards">
-  <a class="card" href="builder.html" style="text-decoration:none;color:inherit">
-    <h3>🔁 Mock Trade Builder</h3>
-    <p class="sub">Build Astros trades against any team — every 40-man player and ranked prospect in the league carries a value.</p>
-  </a>
-  <a class="card" href="feed.html" style="text-decoration:none;color:inherit">
-    <h3>📰 Trade Feed</h3>
-    <p class="sub">Every MLB trade as a value equation: who sent what, totals per side, balanced or lopsided.</p>
-  </a>
-  <a class="card" href="fits.html" style="text-decoration:none;color:inherit">
-    <h3>🎯 Astros Possible Fits</h3>
-    <p class="sub">The curated target board (from the podcast's tracking sheet) with full value breakdowns.</p>
-  </a>
-  <div class="card" id="payroll-card"><h3>💰 Luxury Tax</h3><p class="sub" id="payroll-body">Loading…</p></div>
-  <div class="card" id="market-card"><h3>🌡️ Market Temperature</h3><p class="sub" id="market-body">Loading…</p></div>
+<div class="hl-grid">
+  <a class="hl" href="feed.html"><div class="card">
+    <h3>📰 The Wire</h3>
+    <div id="hl-feed"><p class="sub">Loading recent trades…</p></div>
+    <span class="more">Full Trade Feed →</span>
+  </div></a>
+  <a class="hl" href="builder.html"><div class="card">
+    <h3>🔁 Make Your Call</h3>
+    <div id="hl-mock"><p class="sub">Loading mock trade…</p></div>
+    <span class="more">Open the Trade Builder →</span>
+  </div></a>
+  <a class="hl" href="fits.html"><div class="card">
+    <h3>🎯 The Shopping List</h3>
+    <div id="hl-fits"><p class="sub">Loading Astros fits…</p></div>
+    <span class="more">All Astros Fits →</span>
+  </div></a>
 </div>
+
+<div class="card" style="margin-top:16px">
+  <h3 style="text-align:center">🔥 The Hot Stove</h3>
+  <div class="stove" id="stove"><p class="sub">Reading the market…</p></div>
+</div>
+
 <p class="foot">Model estimates for podcast &amp; fan discussion — not front-office projections. · Beyond the Diamond</p>
 <script src="assets/app.js"></script>
 <script>
 BTD.nav('index');
 (async () => {
+  // ---- Recent trades highlight ----
   try {
-    const p = await BTD.data('payroll');
-    const room = (p.threshold || 0) - (p.taxPayroll || 0);
-    document.getElementById('payroll-body').innerHTML =
-      `Tax payroll <b>${BTD.money(p.taxPayroll)}</b> vs the <b>${BTD.money(p.threshold)}</b> threshold — ` +
-      `<b style="color:${room >= 0 ? 'var(--good)' : 'var(--bad)'}">${BTD.money(room)}</b> of wiggle room. ` +
-      `${p.payorStatus || '3rd'}-time payor rates apply above the line.`;
-  } catch (e) { document.getElementById('payroll-body').textContent = 'No payroll data yet — run the pipeline.'; }
+    const f = await BTD.data('feed');
+    const el = document.getElementById('hl-feed');
+    const recent = f.trades.slice(0, 3);
+    el.innerHTML = recent.length ? recent.map(t => {
+      const [a, b] = t.sides;
+      const names = s => s.players.slice(0, 2).map(p => p.name.split(' ').slice(-1)[0]).join(', ') +
+        (s.players.length > 2 ? ' +' + (s.players.length - 2) : '');
+      return `<div class="hl-row"><span class="nm">${BTD.esc(a.team)} get ${BTD.esc(names(a))}` +
+        `<div class="sub2">${BTD.esc(b.team)} get ${BTD.esc(names(b))} · ${BTD.esc(t.date)}</div></span>` +
+        `<span class="tv ${BTD.tvCls(a.total)}">${BTD.pts(a.total)}<span class="sub2"> / ${BTD.pts(b.total)}</span></span></div>`;
+    }).join('') : '<p class="sub">No trades yet in the window.</p>';
+  } catch (e) { document.getElementById('hl-feed').innerHTML = '<p class="sub">Feed warming up…</p>'; }
+
+  // ---- Mock trade example ----
+  try {
+    const doc = await BTD.data('players');
+    const find = n => doc.players.find(p => p.name.toLowerCase().includes(n));
+    const give = [find('blubaugh'), find('dezenzo')].filter(Boolean);
+    const get = [find("o'hearn") || find('hearn')].filter(Boolean);
+    const el = document.getElementById('hl-mock');
+    if (give.length === 2 && get.length === 1) {
+      const sum = l => Math.round(l.reduce((a, p) => a + (p.tv || 0), 0) * 10) / 10;
+      const g = sum(give), r = sum(get), ratio = r > 0 ? g / r : 2;
+      const verdict = ratio >= 0.9 && ratio <= 1.25 ? ['✅ Fair trade', 'var(--good)'] :
+        ratio < 0.9 ? ['🤏 Needs a sweetener', 'var(--warn)'] : ['💸 Overpay', 'var(--warn)'];
+      const row = p => `<div class="hl-row"><span class="nm">${BTD.esc(p.name)} <span class="sub2">${BTD.esc(p.pos)}</span></span>` +
+        `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span></div>`;
+      el.innerHTML = `<div class="mini-eq"><div class="side-hd">Astros send · ${g.toFixed(1)}</div>${give.map(row).join('')}` +
+        `<div class="side-hd">Astros receive · ${r.toFixed(1)}</div>${get.map(row).join('')}` +
+        `<div class="mini-verdict" style="color:${verdict[1]}">${verdict[0]}</div></div>`;
+    } else el.innerHTML = '<p class="sub">Build any deal — every player in baseball carries a value.</p>';
+  } catch (e) { document.getElementById('hl-mock').innerHTML = '<p class="sub">Values loading…</p>'; }
+
+  // ---- Astros fits highlight (2 hitters + 2 pitchers by trade value) ----
+  try {
+    const doc = await BTD.data('fits');
+    const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.\-]/g, '')); return isNaN(n) ? null : n; };
+    const players = doc.fits.map(o => ({ name: (o['Player'] || '').trim(), team: o['Team'] || '',
+      pos: o['Pos'] || '', type: o._type, tv: num(o['Trade Value']) })).filter(p => p.name && p.tv != null);
+    const top = t => players.filter(p => p.type === t).sort((a, b) => b.tv - a.tv).slice(0, 2);
+    const el = document.getElementById('hl-fits');
+    const picks = [...top('H'), ...top('P')];
+    el.innerHTML = picks.length ? picks.map(p =>
+      `<div class="hl-row"><span class="nm">${BTD.esc(p.name)} <span class="sub2">${BTD.esc(p.pos)} · ${BTD.esc(p.team)}</span></span>` +
+      `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span></div>`).join('')
+      : '<p class="sub">The curated Astros target board, with model values.</p>';
+  } catch (e) { document.getElementById('hl-fits').innerHTML = '<p class="sub">Board loading…</p>'; }
+
+  // ---- Hot Stove gauge ----
   try {
     const c = await BTD.data('calibration');
-    document.getElementById('market-body').innerHTML = c.marketTemp == null
-      ? `Watching the trade log (${c.tradesTotal || 0} trades tracked) — not enough fully-valued trades to read the market yet.`
-      : `Across <b>${c.tradesAnalyzed}</b> valued trades, the median balance is <b>${c.marketTemp}</b> ` +
-        `(1.0 = our values price the market perfectly).<br><span class="note">${BTD.esc((c.suggestions || [])[0] || '')}</span>`;
-  } catch (e) { document.getElementById('market-body').textContent = 'No calibration data yet — run the pipeline.'; }
+    const s = c.hotStove || { score: 0, label: 'Cold', recentTrades: 0, windowDays: 14 };
+    const pct = Math.max(0, Math.min(1, s.score / 10));
+    const ang = -90 + pct * 180;
+    document.getElementById('stove').innerHTML =
+      `<svg class="dial" viewBox="0 0 200 120">
+        <path d="M 15 105 A 85 85 0 0 1 185 105" fill="none" stroke="var(--row-line)" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 15 105 A 85 85 0 0 1 185 105" fill="none" stroke="url(#hg)" stroke-width="14" stroke-linecap="round"
+          stroke-dasharray="${(pct * 267).toFixed(0)} 267"/>
+        <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#4d86ff"/><stop offset=".5" stop-color="var(--accent2)"/><stop offset="1" stop-color="#c8102e"/>
+        </linearGradient></defs>
+        <g transform="rotate(${ang.toFixed(1)} 100 105)">
+          <line x1="100" y1="105" x2="100" y2="34" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="100" cy="105" r="7" fill="var(--ink)"/>
+        </g>
+        <text x="12" y="118" font-size="11" fill="var(--muted)">0</text>
+        <text x="180" y="118" font-size="11" fill="var(--muted)">10</text>
+      </svg>
+      <div><div class="score">${s.score.toFixed(1)}<small>/10</small></div>
+      <div class="slabel">${BTD.esc(s.label)}</div>
+      <div class="snote">${s.recentTrades} trade${s.recentTrades === 1 ? '' : 's'} across the league in the last ${s.windowDays} days. The dial climbs as deals heat up toward the deadline.</div></div>`;
+  } catch (e) { document.getElementById('stove').innerHTML = '<p class="sub">The stove lights when trades start flowing.</p>'; }
 })();
 </script>
 </div></body></html>
