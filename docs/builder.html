@@ -28,13 +28,14 @@
 </style>
 </head><body>
 <header id="mast"></header>
-<div class="wrap">
+<div class="wrap wide">
 <div class="hero"><div class="kicker">Make Your Call</div>
 <h1>Mock Trade Builder</h1>
 <p class="sub">Every player carries a <b>Trade Value (1–150)</b> from the calibrated model. Traded players drop out automatically. A deal gets done when both totals roughly match.</p></div>
 
 <div class="verdict"><div class="vmain" id="vmain">Add players to both sides</div>
-<div class="vsub" id="vsub">Astros send → Astros receive</div></div>
+<div class="vsub" id="vsub">Astros send → Astros receive</div>
+<div style="margin-top:10px"><button id="share" style="display:none">📸 Share This Trade</button></div></div>
 
 <div class="cols">
   <div class="panel">
@@ -57,6 +58,7 @@
       <button data-view="all" class="on">All Players</button>
       <button data-view="t100">Top 100</button>
       <button data-view="t30" id="t30btn" title="Pick a team to see their Top 30">Top 30</button>
+      <button data-view="fits" title="The curated Astros Fits board">Astros Fits</button>
     </div>
     <div class="controls">
       <select id="team"><option value="all">All teams</option></select>
@@ -85,6 +87,16 @@ BTD.nav('builder');
   const doc = await BTD.data('players');
   let payroll = { taxPayroll: 235252848, threshold: 244000000 };
   try { payroll = await BTD.data('payroll'); } catch (e) {}
+  // Astros Fits board membership (for the "Astros Fits" view)
+  let fitIds = new Set(), fitNames = new Set();
+  try {
+    const fd = await BTD.data('fits');
+    fd.fits.forEach(o => {
+      const id = parseFloat(o['MLBID']); if (id) fitIds.add(id);
+      if (o['Player']) fitNames.add(String(o['Player']).trim().toLowerCase());
+    });
+  } catch (e) {}
+  const isFit = p => fitIds.has(p.id) || fitNames.has(p.name.toLowerCase());
 
   const all = doc.players.filter(p => p.tv != null && !p.traded);
   const CASH_PTS = 0.5; // TV points per $M of cash (mirrors config sv.tv.cashPtsPerM)
@@ -146,16 +158,17 @@ BTD.nav('builder');
       (!S.rq || p.name.toLowerCase().includes(S.rq)));
     if (S.view === 't100') { r = r.filter(p => p.top100 != null); r.sort(byRank('top100')); }
     else if (S.view === 't30') { r = r.filter(p => p.orgRank != null); r.sort(S.team === 'all' ? ((a, b) => a.team.localeCompare(b.team) || byRank('orgRank')(a, b)) : byRank('orgRank')); }
+    else if (S.view === 'fits') { r = r.filter(isFit); r.sort(cmp(S.rsort)); }
     else r.sort(cmp(S.rsort));
     renderList(document.getElementById('rlist'), r, p => { S.recv.push(p); renderAll(); });
 
     const note = document.getElementById('rnote');
     if (S.view !== 'all' && !r.length) {
       note.style.display = 'block';
-      note.textContent = S.view === 't100'
-        ? 'No Top 100 rankings on file yet — paste the list with: node src/parse-rankings.js top100'
-        : (S.team === 'all' ? 'Pick a team to see their Top 30 (rankings on file are shown league-wide here).'
-          : `No Top 30 list on file for the ${S.team} yet — add one with: node src/parse-rankings.js`);
+      note.textContent = S.view === 't100' ? 'Top 100 rankings are loading with the next data refresh.'
+        : S.view === 'fits' ? 'No Astros Fits players match the current filters.'
+        : (S.team === 'all' ? 'Pick a team to see their Top 30.'
+          : `No Top 30 on file for the ${S.team} yet.`);
     } else note.style.display = 'none';
   }
   function renderPicked() {
@@ -189,8 +202,9 @@ BTD.nav('builder');
     document.getElementById('give').textContent = give.toFixed(1);
     document.getElementById('get').textContent = get.toFixed(1);
     const main = document.getElementById('vmain'), sub = document.getElementById('vsub');
+    document.getElementById('share').style.display = (S.give.length && S.recv.length) ? 'inline-block' : 'none';
     if ((!S.give.length && !S.gcash) || (!S.recv.length && !S.rcash)) {
-      main.textContent = 'Add players to both sides'; main.style.color = '#fff';
+      main.textContent = 'Add players to both sides'; main.style.color = 'var(--ink)';
       sub.textContent = 'Astros send → Astros receive';
     } else {
       const ratio = get <= 0 ? 2 : give / get;
@@ -234,6 +248,103 @@ BTD.nav('builder');
   const askCash = k => { const v = parseFloat(prompt('Cash amount ($ millions):', '2')); if (v > 0) { S[k] = Math.round(v * 10) / 10; renderAll(); } };
   document.getElementById('gcash').addEventListener('click', () => askCash('gcash'));
   document.getElementById('rcash').addEventListener('click', () => askCash('rcash'));
+
+  // ---- Share: PNG card + link that reloads this exact trade ----
+  function shareURL() {
+    const q = new URLSearchParams();
+    if (S.give.length) q.set('g', S.give.map(p => p.id).join('.'));
+    if (S.recv.length) q.set('r', S.recv.map(p => p.id).join('.'));
+    if (S.gcash) q.set('gc', S.gcash);
+    if (S.rcash) q.set('rc', S.rcash);
+    return location.origin + location.pathname + '?' + q.toString();
+  }
+  function drawCard() {
+    const W = 1200, H = 630, cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const x = cv.getContext('2d');
+    const NAVY = '#16294f', CREAM = '#f5efdf', ORANGE = '#e8590c', MUTED = '#5d6a85';
+    x.fillStyle = '#efe7d4'; x.fillRect(0, 0, W, H);
+    // header band
+    x.fillStyle = NAVY; x.fillRect(0, 0, W, 120);
+    x.fillStyle = ORANGE; x.fillRect(0, 0, W, 8);
+    x.textAlign = 'center';
+    x.fillStyle = '#f2a33c'; x.font = '700 18px "Barlow Condensed", sans-serif';
+    x.fillText('B E Y O N D   T H E   D I A M O N D   P O D C A S T', W / 2, 40);
+    x.fillStyle = CREAM; x.font = '900 44px "Archivo Black", sans-serif';
+    x.fillText('MOCK TRADE', W / 2, 88);
+    // verdict
+    const give = sum(S.give, S.gcash), get = sum(S.recv, S.rcash);
+    const ratio = get <= 0 ? 2 : give / get;
+    const vTxt = ratio < 0.6 ? '☎ THEY HUNG UP' : ratio < 0.9 ? 'NEEDS A SWEETENER' :
+      ratio <= 1.25 ? '✔ FAIR TRADE' : ratio <= 1.6 ? 'OVERPAY' : 'FLEECED';
+    const vCol = (ratio >= 0.9 && ratio <= 1.25) ? '#1d7a4f' : (ratio < 0.6 || ratio > 1.6) ? '#c0392b' : '#b8860b';
+    x.fillStyle = vCol; x.font = '900 34px "Archivo Black", sans-serif';
+    x.fillText(vTxt, W / 2, 172);
+    // columns
+    const col = (title, list, cash, total, cx) => {
+      x.textAlign = 'left';
+      x.fillStyle = ORANGE; x.font = '800 22px "Barlow Condensed", sans-serif';
+      x.fillText(title.toUpperCase() + '  ·  ' + total.toFixed(1), cx, 225);
+      x.strokeStyle = NAVY; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(cx, 236); x.lineTo(cx + 480, 236); x.stroke();
+      let y = 272;
+      const rows = list.slice(0, 6);
+      rows.forEach(p => {
+        x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif';
+        x.fillText(p.name.length > 24 ? p.name.slice(0, 23) + '…' : p.name, cx, y);
+        x.fillStyle = MUTED; x.font = '400 17px Inter, sans-serif';
+        x.fillText(p.pos + (p.teamId === HOU ? '' : ' · ' + p.team) + (p.orgRank ? ' · Org #' + p.orgRank : '') + (p.top100 ? ' · MLB #' + p.top100 : ''), cx, y + 22);
+        x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
+        x.fillText(BTD.pts(p.tv), cx + 480, y + 8);
+        x.textAlign = 'left';
+        y += 56;
+      });
+      if (list.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (list.length - 6) + ' more', cx, y); y += 40; }
+      if (cash > 0) {
+        x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif'; x.fillText('💵 Cash $' + cash.toFixed(1) + 'M', cx, y);
+        x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
+        x.fillText((cash * CASH_PTS).toFixed(1), cx + 480, y); x.textAlign = 'left';
+      }
+    };
+    col('Astros send', S.give, S.gcash, give, 70);
+    col('Astros receive', S.recv, S.rcash, get, 650);
+    // footer
+    x.fillStyle = NAVY; x.fillRect(0, H - 78, W, 78);
+    x.textAlign = 'center';
+    x.fillStyle = CREAM; x.font = '700 20px "Barlow Condensed", sans-serif';
+    x.fillText(location.host + location.pathname, W / 2, H - 46);
+    x.fillStyle = '#f2a33c'; x.font = '700 19px "Barlow Condensed", sans-serif';
+    x.fillText('Watch the Beyond The Diamond Astros Podcast @ ApolloHOU on YouTube!', W / 2, H - 18);
+    return cv;
+  }
+  document.getElementById('share').addEventListener('click', async () => {
+    const btn = document.getElementById('share');
+    try { await navigator.clipboard.writeText(shareURL()); } catch (e) {}
+    try { await document.fonts.ready; } catch (e) {}
+    drawCard().toBlob(async blob => {
+      const file = new File([blob], 'btd-mock-trade.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], text: 'My Astros mock trade — ' + shareURL() }); }
+        catch (e) {}
+      } else {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob); a.download = 'btd-mock-trade.png'; a.click();
+        URL.revokeObjectURL(a.href);
+      }
+      btn.textContent = '✓ Image saved · link copied';
+      setTimeout(() => btn.textContent = '📸 Share This Trade', 3000);
+    }, 'image/png');
+  });
+
+  // Prefill a shared trade from the URL (?g=id.id&r=id&gc=2)
+  (function loadShared() {
+    const q = new URLSearchParams(location.search);
+    const byId = id => all.find(p => p.id === +id);
+    (q.get('g') || '').split('.').map(byId).filter(Boolean).forEach(p => S.give.push(p));
+    (q.get('r') || '').split('.').map(byId).filter(Boolean).forEach(p => S.recv.push(p));
+    S.gcash = parseFloat(q.get('gc')) || 0;
+    S.rcash = parseFloat(q.get('rc')) || 0;
+  })();
   renderAll();
 })().catch(e => { document.getElementById('vmain').textContent = 'No data yet — run the pipeline (npm run build).'; });
 </script>
