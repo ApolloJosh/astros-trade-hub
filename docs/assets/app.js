@@ -9,7 +9,7 @@
     addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('a[href]').forEach(a => {
         const h = a.getAttribute('href');
-        if (/^(index|builder|feed|fits)([?#]|$)/.test(h)) a.setAttribute('href', h.replace(/^(\w+)/, '$1.html'));
+        if (/^(index|builder|feed|fan|fits)([?#]|$)/.test(h)) a.setAttribute('href', h.replace(/^(\w+)/, '$1.html'));
       });
     });
   }
@@ -20,6 +20,8 @@
   else addEventListener('DOMContentLoaded', () => document.body.dataset.theme = 'wheel');
 })();
 window.BTD = (function () {
+  // Fan Trades backend (Google Apps Script Web App /exec URL). Empty = feature hidden.
+  const FAN_URL = 'https://script.google.com/macros/s/AKfycbxwOBVkYQDwKBag8srvgyK-5dFDfS8e7fysyTjWHmq2f42NU1LXiIlZEMRNIMDtmsLr/exec';
   async function data(name) {
     const r = await fetch('data/' + name + '.json?cb=' + Date.now());
     if (!r.ok) throw new Error(name + ' ' + r.status);
@@ -56,7 +58,7 @@ window.BTD = (function () {
   }
   async function nav(active) {
     const el = document.getElementById('mast') || document.getElementById('nav');
-    const links = [['index', 'Hub'], ['builder', 'Trade Builder'], ['feed', 'Trade Feed'], ['fits', 'Astros Fits']];
+    const links = [['index', 'Hub'], ['builder', 'Trade Builder'], ['feed', 'Trade Feed'], ['fan', 'Fan Trades'], ['fits', 'Astros Fits']];
     el.innerHTML =
       '<div class="deadline-banner">🔥 Trade Deadline: Monday, August 3rd — 5:00 PM CT 🔥</div>' +
       '<div class="stripe"></div>' +
@@ -175,5 +177,5 @@ window.BTD = (function () {
     const n = e.target.closest('.pn');
     if (n && n.dataset.pid) { e.stopPropagation(); e.preventDefault(); openPlayer(+n.dataset.pid); }
   }, true);
-  return { data, shot, logo, esc, pts, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool };
+  return { data, shot, logo, esc, pts, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, FAN_URL };
 })();
