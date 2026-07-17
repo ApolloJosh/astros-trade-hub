@@ -1,0 +1,6 @@
+{
+  "_comment": "Award VOTING finishes (top-5) aren't in the MLB API — add them here. Wins are picked up automatically from player award histories. award: MVP|CY|ROY|GG|SS|AS. place 1-5.",
+  "entries": [
+    { "name": "Hunter Brown", "award": "CY", "place": 3, "season": 2025 }
+  ]
+}
