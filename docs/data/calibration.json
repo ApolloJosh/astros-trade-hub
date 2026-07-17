@@ -1,12 +1,12 @@
 {
-  "updated": "2026-07-17T00:25:34.742Z",
+  "updated": "2026-07-17T01:58:18.591Z",
   "tradesAnalyzed": 12,
   "tradesTotal": 12,
-  "marketTemp": 1.5899999999999999,
-  "starSideMedian": 1.5909448818897638,
-  "prospectPkgMedian": 2.1818181818181817,
+  "marketTemp": 1.73,
+  "starSideMedian": 1.729555638536221,
+  "prospectPkgMedian": 2.011173184357542,
   "suggestions": [
-    "Market trades are landing 59% lopsided by our values — sellers are accepting less than the model expects. Consider LOWERING sv.tv.prospectAnchors or raising sv.tv.wSur (buyers' MLB pieces may be undervalued).",
-    "Prospect-heavy packages exchange at 2.1818181818181817x — adjust sv.tv.prospectAnchors DOWN to match the market."
+    "Market trades are landing 73% lopsided by our values — sellers are accepting less than the model expects. Consider LOWERING sv.tv.prospectAnchors or raising sv.tv.wSur (buyers' MLB pieces may be undervalued).",
+    "Prospect-heavy packages exchange at 2.011173184357542x — adjust sv.tv.prospectAnchors DOWN to match the market."
   ]
 }
