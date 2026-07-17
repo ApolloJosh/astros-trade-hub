@@ -47,7 +47,7 @@ BTD.nav('fits');
       : S.sort === 'tl' ? (b.tl || 0) - (a.tl || 0) : (b.tv || 0) - (a.tv || 0));
     el.innerHTML = list.map(p => `<div class="card pcard">
       <div class="top"><img class="face" loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">
-      <div><div class="nm">${BTD.esc(p.name)}</div><div class="meta">${BTD.esc([p.team, p.pos, p.age ? 'age ' + p.age : '', p.ctrl != null ? p.ctrl + 'y ctrl' : ''].filter(Boolean).join(' · '))}</div></div></div>
+      <div><div class="nm">${p.id ? `<span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span>` : BTD.esc(p.name)}</div><div class="meta">${BTD.esc([p.team, p.pos, p.age ? 'age ' + p.age : '', p.ctrl != null ? p.ctrl + 'y ctrl' : ''].filter(Boolean).join(' · '))}</div></div></div>
       <div class="stats">${BTD.esc(p.line)}</div>
       <div class="vals"><span>Trade value <b class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</b></span>
       <span>Likelihood <b>${p.tl ?? '—'}${p.tlt ? ' · ' + BTD.esc(p.tlt) : ''}</b></span></div>

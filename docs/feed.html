@@ -41,7 +41,7 @@ BTD.nav('feed');
   el.innerHTML = f.trades.map(t => {
     const [a, b] = t.sides;
     const side = s => `<div class="side"><h4><img src="${BTD.logo(s.teamId)}" onerror="this.style.display='none'">${BTD.esc(s.team)} receive</h4>` +
-      s.players.map(p => `<div class="pl"><span>${BTD.esc(p.name)} <span class="chip">${BTD.esc(p.pos || '?')}</span>${p.top100 ? ` <span class="chip t100">MLB #${p.top100}</span>` : p.prospect ? ' <span class="chip pr">PROSPECT</span>' : ''}${p.crude ? ' <span class="chip">rough est.</span>' : ''}${p.rem != null ? ` <span class="chip">~$${(+p.rem).toFixed(1)}M owed</span>` : ''}</span>` +
+      s.players.map(p => `<div class="pl"><span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="chip">${BTD.esc(p.pos || '?')}</span>${p.top100 ? ` <span class="chip t100">MLB #${p.top100}</span>` : p.prospect ? ' <span class="chip pr">PROSPECT</span>' : ''}${p.crude ? ' <span class="chip">rough est.</span>' : ''}${p.rem != null ? ` <span class="chip">~$${(+p.rem).toFixed(1)}M owed</span>` : ''}</span>` +
         `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span></div>`).join('') +
       (s.cashM != null ? `<div class="pl"><span>💵 Cash <span class="chip">$${(+s.cashM).toFixed(1)}M</span></span><span class="tv mid">${(s.cashM * 0.5).toFixed(1)}</span></div>` : '') +
       `<div class="sum"><span>Total</span><span class="tv ${BTD.tvCls(s.total)}">${BTD.pts(s.total)}</span></div></div>`;

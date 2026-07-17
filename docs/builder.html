@@ -158,7 +158,7 @@ BTD.nav('builder');
     const owed = p.rem != null ? '~$' + p.rem.toFixed(1) + 'M owed' + (p.salEst ? ' (est.)' : '') : '';
     const meta = [p.pos, p.bt, p.age ? 'age ' + p.age : '', p.ctrl ? p.ctrl + 'y ctrl' : '', owed, p.teamId === HOU ? '' : p.team].filter(Boolean).join(' · ');
     return `<img loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">` +
-      `<div class="rname">${BTD.esc(p.name)}${BTD.badge(p)}<div class="rmeta">${BTD.esc(meta)} · ${BTD.statHTML(p)}</div></div>` +
+      `<div class="rname"><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span>${BTD.badge(p)}<div class="rmeta">${BTD.esc(meta)} · ${BTD.statHTML(p)}</div></div>` +
       `<div class="rtv tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</div>`;
   }
   function renderList(el, players, onClick) {
@@ -202,7 +202,7 @@ BTD.nav('builder');
       list.forEach((p, i) => {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
         const owed = p.rem != null ? ' · ~$' + p.rem.toFixed(1) + 'M owed' : '';
-        d.innerHTML = `<span>${BTD.esc(p.name)} <span class="rmeta">${BTD.esc(p.pos)}${p.teamId === HOU ? '' : ' · ' + BTD.esc(p.team)}${owed}</span></span>` +
+        d.innerHTML = `<span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="rmeta">${BTD.esc(p.pos)}${p.teamId === HOU ? '' : ' · ' + BTD.esc(p.team)}${owed}</span></span>` +
           `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span><span class="x">×</span>`;
         d.querySelector('.x').addEventListener('click', () => { list.splice(i, 1); renderAll(); });
         el.appendChild(d);
