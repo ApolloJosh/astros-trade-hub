@@ -81,8 +81,33 @@ body{margin:0;background:var(--bg);background-image:var(--bg-tex);background-siz
   color:var(--ink);font-family:var(--body);font-size:14px}
 [data-theme="btd"] body,[data-theme="savant"] body{background-size:auto}
 
-/* Top stripe + masthead + tab bar (all pages) */
+/* Deadline banner + top stripe + masthead + tab bar (all pages) */
+.deadline-banner{background:var(--accent);color:#fff;text-align:center;
+  font-family:var(--hd2);font-weight:800;font-size:13.5px;letter-spacing:.14em;
+  text-transform:uppercase;padding:8px 12px}
 .stripe{height:10px;background:var(--stripe)}
+
+/* Hot Stove gauge (home page) */
+.stove{display:flex;gap:26px;align-items:center;justify-content:center;flex-wrap:wrap;padding:10px 0}
+.stove .dial{width:230px}
+.stove .score{font-family:var(--hd);font-size:52px;line-height:1}
+.stove .score small{font-size:22px;color:var(--muted)}
+.stove .slabel{font-family:var(--hd2);font-weight:800;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.stove .snote{font-size:12.5px;color:var(--muted);max-width:34ch}
+
+/* Home highlights */
+.hl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:900px){.hl-grid{grid-template-columns:1fr}}
+a.hl{display:block;text-decoration:none;color:inherit}
+.hl .card{height:100%}
+.hl .more{display:block;margin-top:10px;font-family:var(--hd2);font-weight:800;font-size:12.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.hl-row{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--row-line)}
+.hl-row .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hl-row .sub2{color:var(--muted);font-size:11px}
+.mini-eq{font-size:12.5px}
+.mini-eq .side-hd{font-family:var(--hd2);font-weight:800;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:8px 0 2px}
+.mini-verdict{margin-top:10px;text-align:center;font-family:var(--hd2);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
 .masthead{background:var(--mast-bg);color:var(--mast-ink);text-align:center;padding:22px 16px 18px}
 .mast-kicker{font-family:var(--hd2);font-weight:700;font-size:13px;letter-spacing:.35em;text-transform:uppercase;color:var(--accent2);margin-bottom:4px}
 .mast-title{font-family:var(--hd);font-size:clamp(34px,6vw,58px);line-height:1;text-transform:uppercase;

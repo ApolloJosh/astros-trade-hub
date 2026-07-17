@@ -45,6 +45,7 @@ window.BTD = (function () {
     const themes = [['wheel', 'The Wheel'], ['btd', 'BTD Classic'], ['savant', 'Dark Savant'], ['space', 'Space City']];
     const cur = localStorage.getItem('btdTheme') || 'wheel';
     el.innerHTML =
+      '<div class="deadline-banner">🔥 Trade Deadline: Monday, August 3rd — 5:00 PM CT 🔥</div>' +
       '<div class="stripe"></div>' +
       '<div class="masthead">' +
         '<div class="mast-kicker">Beyond the Diamond Podcast</div>' +
