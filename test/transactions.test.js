@@ -35,5 +35,14 @@ ok(verdictFor(null).label === 'Unvalued', 'null unvalued');
 
 ok(median([1, 3, 2]) === 2 && median([1, 2, 3, 4]) === 2.5 && median([]) === null, 'median helper');
 
+
+// Cash detection
+const { cashFor } = require('../src/transactions.js');
+const gCash = { desc: 'Astros traded RHP Lance McCullers Jr. and cash considerations to Brewers for OF Prospect.', cashHint: true };
+const cash = cashFor(gCash, { team: 'Milwaukee Brewers' });
+ok(cash && cash.cashM === 2.1 && cash.tv === 1.1, 'manual cash matched to receiving side', JSON.stringify(cash));
+ok(cashFor(gCash, { team: 'Houston Astros' }) === null, 'cash not applied to sending side');
+ok(cashFor({ desc: 'Rays traded X to Cubs.' }, { team: 'Cubs' }) === null, 'no cash when none reported');
+
 console.log(fails ? `\n${fails} FAILURES` : '\nTRANSACTIONS TESTS OK');
 process.exit(fails ? 1 : 0);

@@ -19,6 +19,7 @@ function mk(name, teamId, team, pos, age, bt, ctrl, salM, stat, pitcher, opts = 
     bt, age, ctrl, salM, salEst: !!opts.salEst, prospect: !!opts.prospect,
     orgRank: opts.rank || null, top100: opts.top100 || null, topLevel: opts.topLevel || null,
     war: E.r1(base.war), proj: E.r1(sv.proj), sur: sv.surplus != null ? E.r1(sv.surplus) : null,
+    rem: sv.cost != null ? E.r1(sv.cost) : null,
     tv, traded: opts.traded || undefined,
     line: pitcher ? { ip: stat.inningsPitched, era: stat.era, whip: 1.1, k: stat.strikeOuts, g: stat.gamesPlayed, gs: stat.gamesStarted }
       : { pa: stat.plateAppearances, avg: 0.280, ops: Math.round(((stat.obp || 0.33) + (stat.slg || 0.45)) * 1000) / 1000, hr: stat.homeRuns || 10, sb: stat.stolenBases || 3, g: 80 },
@@ -45,7 +46,7 @@ fs.writeFileSync(path.join(OUT, 'feed.json'), JSON.stringify({
     desc: 'Rockies traded OF Mickey Moniak to Astros for prospects.',
     sides: [
       { team: 'Astros', teamId: 117, players: [{ id: 666160, name: 'Mickey Moniak', pos: 'OF', tv: p('Mickey Moniak').tv }], total: p('Mickey Moniak').tv, coverage: 1 },
-      { team: 'Rockies', teamId: 115, players: [{ id: 1, name: 'Sample Prospect A', pos: 'SP', tv: 31.9, prospect: true }, { id: 2, name: 'Sample Prospect B', pos: 'OF', tv: 17.3, prospect: true }], total: 49.2, coverage: 1 },
+      { team: 'Rockies', teamId: 115, players: [{ id: 1, name: 'Sample Prospect A', pos: 'SP', tv: 31.9, prospect: true }, { id: 2, name: 'Sample Prospect B', pos: 'OF', tv: 15.2, prospect: true, crude: true }], cashM: 2.1, total: 48.2, coverage: 1 },
     ],
     ratio: Math.round(Math.max(p('Mickey Moniak').tv, 49.2) / Math.min(p('Mickey Moniak').tv, 49.2) * 100) / 100,
     verdict: { label: 'Balanced', cls: 'fair' },

@@ -1,0 +1,6 @@
+{
+  "_comment": "Reported cash/retained salary in trades (the API only says 'cash considerations', never amounts). match = substring of the trade description or a player in it; toTeam = team name RECEIVING the cash; cashM = $ millions. Example below is the Brewers taking on ~$2M of McCullers' deal.",
+  "entries": [
+    { "match": "McCullers", "toTeam": "Brewers", "cashM": 2.1 }
+  ]
+}

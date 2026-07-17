@@ -4,62 +4,72 @@
 <title>Mock Trade Builder — BTD Trade Hub</title>
 <link rel="stylesheet" href="assets/style.css">
 <style>
-.verdict{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px 16px;margin:12px 0;text-align:center}
-.vmain{font-size:19px;font-weight:800}
+.verdict{border:var(--card-line-w) solid var(--card-line);background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin:12px 0;text-align:center}
+.vmain{font-family:var(--hd2);font-size:22px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .vsub{font-size:12.5px;color:var(--muted);margin-top:4px}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:760px){.cols{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
-.total{font-size:13px;margin:8px 0;padding:8px 10px;background:#1c1e24;border-radius:8px;display:flex;justify-content:space-between}
-.list{max-height:380px;overflow:auto;border:1px solid var(--line);border-radius:10px}
-.row{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #1e2027;cursor:pointer;font-size:12.5px}
-.row:hover{background:#1c1e24}
+
+.total{font-size:13px;margin:8px 0;padding:8px 10px;background:var(--row-hover);border:1px solid var(--row-line);border-radius:6px;display:flex;justify-content:space-between}
+.list{max-height:380px;overflow:auto;border:1px solid var(--row-line);border-radius:6px;background:var(--input-bg)}
+.row{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid var(--row-line);cursor:pointer;font-size:12.5px}
+.row:hover{background:var(--row-hover)}
 .row img{width:26px;height:26px;border-radius:50%;background:var(--navy);object-fit:cover;flex:0 0 auto}
 .rname{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rmeta{color:var(--muted);font-size:11px}
 .rtv{font-weight:800;min-width:48px;text-align:right}
 .picked{margin:10px 0 4px;display:flex;flex-direction:column;gap:6px}
-.pick{display:flex;align-items:center;gap:8px;background:#1b2b4a;border:1px solid #2a4a7a;border-radius:10px;padding:7px 10px;font-size:12.5px}
-.pick.away{background:#2b1d10;border-color:#6a4a2a}
+.pick{display:flex;align-items:center;gap:8px;background:var(--row-hover);border:2px solid var(--card-line);border-radius:6px;padding:7px 10px;font-size:12.5px;box-shadow:var(--shadow)}
+.pick.away{border-color:var(--accent)}
 .pick .x{margin-left:auto;cursor:pointer;color:var(--muted);font-size:16px;padding:0 4px}
 .cbt{margin-top:14px}
-.cbtrow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid #23252d}
+.cbtrow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--row-line)}
 </style>
-</head><body><div class="wrap">
-<nav id="nav"></nav>
+</head><body>
+<header id="mast"></header>
+<div class="wrap">
+<div class="hero"><div class="kicker">Make Your Call</div>
 <h1>Mock Trade Builder</h1>
-<p class="sub">Every player carries a <b>Trade Value (1–150)</b> from the calibrated model. Traded players drop out automatically. A deal gets done when both totals roughly match.</p>
+<p class="sub">Every player carries a <b>Trade Value (1–150)</b> from the calibrated model. Traded players drop out automatically. A deal gets done when both totals roughly match.</p></div>
 
 <div class="verdict"><div class="vmain" id="vmain">Add players to both sides</div>
 <div class="vsub" id="vsub">Astros send → Astros receive</div></div>
 
 <div class="cols">
   <div class="panel">
-    <div style="font-weight:700">🚀 Astros send</div>
+    <div class="panel-hd">🚀 Astros Send</div>
     <div class="total"><span>Value going out</span><b id="give">0.0</b></div>
     <div class="picked" id="gpicked"></div>
     <div class="controls">
       <input id="gsearch" placeholder="Search Astros…">
-      <select id="gfilter"><option value="all">All</option><option value="pr">Prospects</option><option value="ml">MLB roster</option></select>
+      <select id="gfilter"><option value="all">All</option><option value="pr">Prospects</option><option value="t30">Top 30 (by rank)</option><option value="ml">MLB roster</option></select>
       <select id="gsort"></select>
+      <button id="gcash" title="Astros send cash / eat salary">＋ Cash</button>
     </div>
     <div class="list" id="glist"></div>
   </div>
   <div class="panel">
-    <div style="font-weight:700">🎯 Astros receive</div>
+    <div class="panel-hd">🎯 Astros Receive</div>
     <div class="total"><span>Value coming in</span><b id="get">0.0</b></div>
     <div class="picked" id="rpicked"></div>
+    <div class="controls">
+      <button data-view="all" class="on">All Players</button>
+      <button data-view="t100">Top 100</button>
+      <button data-view="t30" id="t30btn" title="Pick a team to see their Top 30">Top 30</button>
+    </div>
     <div class="controls">
       <select id="team"><option value="all">All teams</option></select>
       <input id="rsearch" placeholder="Search league…">
       <select id="rsort"></select>
+      <button id="rcash" title="Astros receive cash / partner eats salary">＋ Cash</button>
     </div>
     <div class="list" id="rlist"></div>
+    <div class="note" id="rnote" style="margin-top:6px;display:none"></div>
   </div>
 </div>
 
 <div class="panel cbt" id="cbt" style="display:none">
-  <div style="font-weight:700;color:var(--orange);font-size:12px;text-transform:uppercase;letter-spacing:.06em">Luxury tax impact</div>
+  <div class="panel-hd">💰 Luxury Tax Impact</div>
   <div id="cbtrows"></div>
   <div class="note" style="margin-top:6px">Salaries marked (est.) are service-time estimates — exact figures via data-sources/salaries-manual.json.</div>
 </div>
@@ -76,7 +86,8 @@ BTD.nav('builder');
   try { payroll = await BTD.data('payroll'); } catch (e) {}
 
   const all = doc.players.filter(p => p.tv != null && !p.traded);
-  const S = { give: [], recv: [], gq: '', rq: '', gf: 'all', team: 'all', gsort: 'tv', rsort: 'tv' };
+  const CASH_PTS = 0.5; // TV points per $M of cash (mirrors config sv.tv.cashPtsPerM)
+  const S = { give: [], recv: [], gcash: 0, rcash: 0, gq: '', rq: '', gf: 'all', team: 'all', gsort: 'tv', rsort: 'tv', view: 'all' };
 
   const SORTS = [['tv', 'Trade value'], ['hit', 'Hitters first'], ['pit', 'Pitchers first'], ['pos', 'Position'],
     ['hand', 'Handedness'], ['ops', 'OPS'], ['era', 'ERA'], ['ctrl', 'Most control'], ['age', 'Youngest']];
@@ -106,9 +117,10 @@ BTD.nav('builder');
 
   const inTrade = p => S.give.includes(p) || S.recv.includes(p);
   function rowHTML(p) {
-    const meta = [p.pos, p.bt, p.age ? 'age ' + p.age : '', p.ctrl ? p.ctrl + 'y ctrl' : '', p.teamId === HOU ? '' : p.team].filter(Boolean).join(' · ');
+    const owed = p.rem != null ? '~$' + p.rem.toFixed(1) + 'M owed' + (p.salEst ? ' (est.)' : '') : '';
+    const meta = [p.pos, p.bt, p.age ? 'age ' + p.age : '', p.ctrl ? p.ctrl + 'y ctrl' : '', owed, p.teamId === HOU ? '' : p.team].filter(Boolean).join(' · ');
     return `<img loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">` +
-      `<div class="rname">${BTD.esc(p.name)}${BTD.badge(p)}<div class="rmeta">${BTD.esc(meta)} · ${BTD.esc(BTD.statLine(p))}</div></div>` +
+      `<div class="rname">${BTD.esc(p.name)}${BTD.badge(p)}<div class="rmeta">${BTD.esc(meta)} · ${BTD.statHTML(p)}</div></div>` +
       `<div class="rtv tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</div>`;
   }
   function renderList(el, players, onClick) {
@@ -119,40 +131,64 @@ BTD.nav('builder');
       d.addEventListener('click', () => onClick(p)); el.appendChild(d);
     });
   }
+  const byRank = k => (a, b) => (a[k] ?? 999) - (b[k] ?? 999);
   function renderLists() {
-    const g = all.filter(p => p.teamId === HOU && !inTrade(p) &&
+    let g = all.filter(p => p.teamId === HOU && !inTrade(p) &&
       (S.gf !== 'pr' || p.prospect) && (S.gf !== 'ml' || !p.prospect) &&
-      (!S.gq || p.name.toLowerCase().includes(S.gq))).sort(cmp(S.gsort));
+      (S.gf !== 't30' || p.orgRank != null) &&
+      (!S.gq || p.name.toLowerCase().includes(S.gq)));
+    g.sort(S.gf === 't30' ? byRank('orgRank') : cmp(S.gsort));
     renderList(document.getElementById('glist'), g, p => { S.give.push(p); renderAll(); });
-    const r = all.filter(p => p.teamId !== HOU && !inTrade(p) &&
+
+    let r = all.filter(p => p.teamId !== HOU && !inTrade(p) &&
       (S.team === 'all' || p.team === S.team) &&
-      (!S.rq || p.name.toLowerCase().includes(S.rq))).sort(cmp(S.rsort));
+      (!S.rq || p.name.toLowerCase().includes(S.rq)));
+    if (S.view === 't100') { r = r.filter(p => p.top100 != null); r.sort(byRank('top100')); }
+    else if (S.view === 't30') { r = r.filter(p => p.orgRank != null); r.sort(S.team === 'all' ? ((a, b) => a.team.localeCompare(b.team) || byRank('orgRank')(a, b)) : byRank('orgRank')); }
+    else r.sort(cmp(S.rsort));
     renderList(document.getElementById('rlist'), r, p => { S.recv.push(p); renderAll(); });
+
+    const note = document.getElementById('rnote');
+    if (S.view !== 'all' && !r.length) {
+      note.style.display = 'block';
+      note.textContent = S.view === 't100'
+        ? 'No Top 100 rankings on file yet — paste the list with: node src/parse-rankings.js top100'
+        : (S.team === 'all' ? 'Pick a team to see their Top 30 (rankings on file are shown league-wide here).'
+          : `No Top 30 list on file for the ${S.team} yet — add one with: node src/parse-rankings.js`);
+    } else note.style.display = 'none';
   }
   function renderPicked() {
-    [['gpicked', S.give, 'away'], ['rpicked', S.recv, '']].forEach(([id, list, cls]) => {
+    [['gpicked', S.give, 'away', 'gcash'], ['rpicked', S.recv, '', 'rcash']].forEach(([id, list, cls, ck]) => {
       const el = document.getElementById(id); el.innerHTML = '';
       list.forEach((p, i) => {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
-        d.innerHTML = `<span>${BTD.esc(p.name)} <span class="rmeta">${BTD.esc(p.pos)}${p.teamId === HOU ? '' : ' · ' + BTD.esc(p.team)}</span></span>` +
+        const owed = p.rem != null ? ' · ~$' + p.rem.toFixed(1) + 'M owed' : '';
+        d.innerHTML = `<span>${BTD.esc(p.name)} <span class="rmeta">${BTD.esc(p.pos)}${p.teamId === HOU ? '' : ' · ' + BTD.esc(p.team)}${owed}</span></span>` +
           `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span><span class="x">×</span>`;
         d.querySelector('.x').addEventListener('click', () => { list.splice(i, 1); renderAll(); });
         el.appendChild(d);
       });
+      if (S[ck] > 0) {
+        const d = document.createElement('div'); d.className = 'pick ' + cls;
+        d.innerHTML = `<span>💵 Cash <span class="rmeta">$${S[ck].toFixed(1)}M</span></span>` +
+          `<span class="tv mid">${(S[ck] * CASH_PTS).toFixed(1)}</span><span class="x">×</span>`;
+        d.querySelector('.x').addEventListener('click', () => { S[ck] = 0; renderAll(); });
+        el.appendChild(d);
+      }
     });
   }
-  const sum = l => Math.round(l.reduce((a, p) => a + (p.tv || 0), 0) * 10) / 10;
+  const sum = (l, cash) => Math.round((l.reduce((a, p) => a + (p.tv || 0), 0) + (cash || 0) * CASH_PTS) * 10) / 10;
   function taxBill(pay) {
     let over = Math.max(0, pay - payroll.threshold), bill = 0;
     for (let b = 0; b < 4 && over > 0; b++) { const amt = Math.min(over, TAX.bands[b]); bill += amt * TAX.rates[b]; over -= amt; }
     return bill;
   }
   function renderVerdict() {
-    const give = sum(S.give), get = sum(S.recv);
+    const give = sum(S.give, S.gcash), get = sum(S.recv, S.rcash);
     document.getElementById('give').textContent = give.toFixed(1);
     document.getElementById('get').textContent = get.toFixed(1);
     const main = document.getElementById('vmain'), sub = document.getElementById('vsub');
-    if (!S.give.length || !S.recv.length) {
+    if ((!S.give.length && !S.gcash) || (!S.recv.length && !S.rcash)) {
       main.textContent = 'Add players to both sides'; main.style.color = '#fff';
       sub.textContent = 'Astros send → Astros receive';
     } else {
@@ -166,10 +202,10 @@ BTD.nav('builder');
       main.textContent = t; main.style.color = c; sub.textContent = s;
     }
     const cbt = document.getElementById('cbt');
-    if (S.give.length || S.recv.length) {
+    if (S.give.length || S.recv.length || S.gcash || S.rcash) {
       cbt.style.display = 'block';
-      const inSal = S.recv.reduce((a, p) => a + (p.salM || 0) * 1e6 * SEASON_LEFT, 0);
-      const outSal = S.give.reduce((a, p) => a + (p.salM || 0) * 1e6 * SEASON_LEFT, 0);
+      const inSal = S.recv.reduce((a, p) => a + (p.salM || 0) * 1e6 * SEASON_LEFT, 0) - S.rcash * 1e6;
+      const outSal = S.give.reduce((a, p) => a + (p.salM || 0) * 1e6 * SEASON_LEFT, 0) - S.gcash * 1e6;
       const newPay = (payroll.taxPayroll || 0) + inSal - outSal;
       const room = (payroll.threshold || 0) - newPay;
       const bill = taxBill(newPay);
@@ -190,6 +226,13 @@ BTD.nav('builder');
   document.getElementById('team').addEventListener('change', e => { S.team = e.target.value; renderLists(); });
   document.getElementById('gsort').addEventListener('change', e => { S.gsort = e.target.value; renderLists(); });
   document.getElementById('rsort').addEventListener('change', e => { S.rsort = e.target.value; renderLists(); });
+  document.querySelectorAll('button[data-view]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('button[data-view]').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); S.view = b.dataset.view; renderLists();
+  }));
+  const askCash = k => { const v = parseFloat(prompt('Cash amount ($ millions):', '2')); if (v > 0) { S[k] = Math.round(v * 10) / 10; renderAll(); } };
+  document.getElementById('gcash').addEventListener('click', () => askCash('gcash'));
+  document.getElementById('rcash').addEventListener('click', () => askCash('rcash'));
   renderAll();
 })().catch(e => { document.getElementById('vmain').textContent = 'No data yet — run the pipeline (npm run build).'; });
 </script>

@@ -100,6 +100,7 @@ async function valuePlayer(p, lg) {
     war: base && !base.histOnly ? E.r1(base.war) : null,
     proj: sv ? E.r1(sv.proj) : null,
     sur: sv && sv.surplus != null ? E.r1(sv.surplus) : null,
+    rem: sv && sv.cost != null ? E.r1(sv.cost) : null,   // salary still owed ($M, discounted)
     tv, line, type: pitcher ? (base && base.sp === false ? 'RP' : 'SP') : 'H',
   };
 }

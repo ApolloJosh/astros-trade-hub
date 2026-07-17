@@ -50,7 +50,9 @@
       "prospectAnchors": [[1, 52], [3, 44], [4, 34], [7, 26], [11, 18], [16, 13], [21, 9], [26, 7]],
       "top100Anchors": [[1, 75], [10, 65], [25, 55], [50, 45], [100, 35]],
       "prospectBlend": 0.8, "prospectCapMult": 2, "unrankedProspectCap": 18,
-      "marketMult": 1.0
+      "marketMult": 1.0,
+      "cashPtsPerM": 0.5,
+      "crudeFallback": { "MLB": 12, "AAA": 8, "AA": 6, "A+": 4, "A": 3, "Rk": 2, "youngBonusU23": 4 }
     }
   },
   "prospect": {
