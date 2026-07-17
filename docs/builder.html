@@ -256,7 +256,7 @@ BTD.nav('builder');
     if (S.recv.length) q.set('r', S.recv.map(p => p.id).join('.'));
     if (S.gcash) q.set('gc', S.gcash);
     if (S.rcash) q.set('rc', S.rcash);
-    return location.origin + location.pathname + '?' + q.toString();
+    return location.origin + location.pathname.replace(/\.html$/, '') + '?' + q.toString();
   }
   function drawCard() {
     const W = 1200, H = 630, cv = document.createElement('canvas');
@@ -312,7 +312,7 @@ BTD.nav('builder');
     x.fillStyle = NAVY; x.fillRect(0, H - 78, W, 78);
     x.textAlign = 'center';
     x.fillStyle = CREAM; x.font = '700 20px "Barlow Condensed", sans-serif';
-    x.fillText(location.host + location.pathname, W / 2, H - 46);
+    x.fillText(location.host + location.pathname.replace(/\.html$/, ''), W / 2, H - 46);
     x.fillStyle = '#f2a33c'; x.font = '700 19px "Barlow Condensed", sans-serif';
     x.fillText('Watch the Beyond The Diamond Astros Podcast @ ApolloHOU on YouTube!', W / 2, H - 18);
     return cv;
