@@ -1,15 +1,18 @@
 {
   "name": "astros-trade-hub",
   "version": "1.0.0",
-  "description": "Beyond the Diamond — league-wide MLB trade values, trade feed, and Astros mock trade builder",
+  "description": "Beyond the Diamond \u2014 league-wide MLB trade values, trade feed, and Astros mock trade builder",
   "private": true,
   "scripts": {
-    "build": "node src/build-data.js && node src/transactions.js && node src/calibrate.js",
+    "build": "node src/fetch-salaries.js && node src/build-data.js && node src/transactions.js && node src/calibrate.js",
+    "salaries": "node src/fetch-salaries.js",
     "data": "node src/build-data.js",
     "transactions": "node src/transactions.js",
     "calibrate": "node src/calibrate.js",
     "rankings": "node src/parse-rankings.js",
-    "test": "node test/parity.test.js && node test/transactions.test.js"
+    "test": "node test/parity.test.js && node test/transactions.test.js && node test/salaries.test.js"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
