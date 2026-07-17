@@ -216,16 +216,24 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const aw = isRP ? t.annWRP : t.annW;
     const q = aw * annC + (1 - aw) * proj;
     const top = isRP ? t.topRP : (pitcher ? t.topP : t.topH);
-    const qRel = clamp(q / top, 0, 1);
+    const qRelRaw = q / top;
+    const qRel = clamp(qRelRaw, 0, 1);
     const ageF = Math.max(t.ageFloor, 1 - t.ageK * Math.max(0, toNum(age, 28) - t.ageFrom));
-    const quality = 100 * Math.pow(qRel, t.gamma) * ageF;
+    let quality = 100 * Math.pow(qRel, t.gamma) * ageF;
+    // Stars beyond the role cap keep separating instead of all pinning at 100.
+    if (qRelRaw > 1) quality += Math.min((qRelRaw - 1) * (t.overK || 0) * 100, t.overCap || 15) * ageF;
     const quantity = Math.min(t.wSur * Math.max(0, sv.surplus || 0), t.surCap);
     let penalty = t.kPen * Math.max(0, sv.cost || 0) * Math.pow(1 - qRel, 2);
     // Big money owed to aging players carries injury/decline risk the surplus
     // math can't see — a long expensive deal on a 31yo is NOT a clean asset.
     penalty += (t.kAgeMoney || 0) * Math.max(0, sv.cost || 0) *
       clamp((toNum(age, 28) - (t.ageMoneyFrom || 29)) / (t.ageMoneySpan || 6), 0, 1);
-    let raw = (quality + quantity - penalty + t.floor) * (t.marketMult || 1);
+    // Defense: Statcast FRV (runs), dead zone so only notable gloves move the number.
+    const defR = toNum(sv.defR, 0), dz = t.defDead || 3;
+    const defPts = Math.sign(defR) * Math.min(Math.max(Math.abs(defR) - dz, 0) * (t.defSlope || 0.35), t.defCap || 6);
+    // Hardware: MVP/CY/ROY/GG/SS/All-Star wins + manual voting finishes, recency-decayed.
+    const awdPts = Math.min(toNum(sv.awardPts, 0), (t.awards && t.awards.cap) || 10);
+    let raw = (quality + quantity - penalty + t.floor + defPts + awdPts) * (t.marketMult || 1);
     if (raw > t.squashStart) raw = t.squashStart + t.squashRange * Math.tanh((raw - t.squashStart) / t.squashRange);
     statTV = clamp(raw, 1, t.max);
   }

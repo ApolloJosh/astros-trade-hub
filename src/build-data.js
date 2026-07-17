@@ -18,6 +18,40 @@ const OVR = fs.existsSync(overridesPath) ? JSON.parse(fs.readFileSync(overridesP
 // Cot's Contracts data (real control + salary). Precedence: manual > Cot's > estimate.
 const cotsPath = path.join(__dirname, '..', 'data-sources', 'salaries-cots.json');
 const COTS = fs.existsSync(cotsPath) ? JSON.parse(fs.readFileSync(cotsPath, 'utf8')) : { teams: {} };
+
+// Statcast Fielding Run Value (id -> [current, previous]) + award data.
+const defPath = path.join(__dirname, '..', 'data-sources', 'defense.json');
+const DEF = (fs.existsSync(defPath) ? JSON.parse(fs.readFileSync(defPath, 'utf8')) : { players: {} }).players || {};
+const awdPath = path.join(__dirname, '..', 'data-sources', 'awards-manual.json');
+const AWD_MAN = (fs.existsSync(awdPath) ? JSON.parse(fs.readFileSync(awdPath, 'utf8')) : { entries: [] }).entries || [];
+const AWARD_RE = /^(?:AL|NL|ML|MLB)?(MVP|CYA?|ROY|GG|SS|AS)$/;
+const parseAwards = list => (list || []).map(a => {
+  const m = String(a.id || '').match(AWARD_RE);
+  return m ? { t: m[1] === 'CYA' ? 'CY' : m[1], s: +a.season || CFG.season } : null;
+}).filter(Boolean);
+function awardPtsFor(p) {
+  const t = CFG.sv.tv.awards; if (!t) return 0;
+  let pts = 0;
+  (p.awards || []).forEach(a => {
+    pts += (t.base[a.t] || 0) * Math.pow(t.decay, Math.max(0, CFG.season - a.s));
+  });
+  AWD_MAN.forEach(e => {
+    const hit = e.id ? e.id === p.id : normName(e.name || '') === normName(p.name || '');
+    if (!hit) return;
+    const pf = (t.place || [1])[Math.min((e.place || 1) - 1, (t.place || [1]).length - 1)] || 0;
+    pts += (t.base[e.award] || 0) * pf * Math.pow(t.decay, Math.max(0, CFG.season - (+e.season || CFG.season)));
+  });
+  return Math.round(Math.min(pts, t.cap || 10) * 10) / 10;
+}
+// Full award list (wins + manual voting finishes) for the player popup.
+function awardList(p) {
+  const l = (p.awards || []).map(a => ({ t: a.t, s: a.s }));
+  AWD_MAN.forEach(e => {
+    const hit = e.id ? e.id === p.id : normName(e.name || '') === normName(p.name || '');
+    if (hit) l.push({ t: e.award, s: +e.season || CFG.season, place: e.place || 1 });
+  });
+  return l.length ? l.sort((a, b) => b.s - a.s).slice(0, 12) : undefined;
+}
 const { norm: normName } = require('./rankings.js');
 function cotsLookup(p) {
   const team = COTS.teams[String(p.teamId)];
@@ -99,6 +133,12 @@ async function valuePlayer(p, lg) {
 
   let sv = base ? E.valueFromBase(base, pitcher, p.age, control, salM) : null;
   sv = E.adjustProspectValue(sv, p.orgRank || null, prospect);
+  if (sv) {
+    const d = DEF[String(p.id)];
+    const tvc = CFG.sv.tv;
+    if (d) sv.defR = Math.round(((tvc.defWCur ?? 0.6) * (d[0] || 0) + (tvc.defWPrev ?? 0.4) * (d[1] || 0)) * 10) / 10;
+    sv.awardPts = awardPtsFor(p);
+  }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
 
   const line = display ? (pitcher
@@ -114,6 +154,9 @@ async function valuePlayer(p, lg) {
     proj: sv ? E.r1(sv.proj) : null,
     sur: sv && sv.surplus != null ? E.r1(sv.surplus) : null,
     rem: sv && sv.cost != null ? E.r1(sv.cost) : null,   // salary still owed ($M, discounted)
+    def: sv && sv.defR != null ? sv.defR : null,         // blended Fielding Run Value
+    awd: sv && sv.awardPts ? sv.awardPts : null,         // awards points in the TV
+    awards: awardList(p),                                // e.g. [{t:'GG',s:2025},{t:'CY',s:2025,place:3}]
     tv, line, type: pitcher ? (base && base.sp === false ? 'RP' : 'SP') : 'H',
   };
 }
@@ -197,7 +240,7 @@ async function main() {
         pos: (x.position && x.position.abbreviation) || (per.primaryPosition && per.primaryPosition.abbreviation) || '?',
         age: per.currentAge, debut: per.mlbDebutDate,
         bats: per.batSide && per.batSide.code, throws: per.pitchHand && per.pitchHand.code,
-        il,
+        il, awards: parseAwards(per.awards),
       });
     });
     // ranked prospects for this team (may or may not be on the 40-man).
