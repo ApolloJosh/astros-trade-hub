@@ -235,7 +235,12 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const awdPts = Math.min(toNum(sv.awardPts, 0), (t.awards && t.awards.cap) || 10);
     // Durability: recency-weighted IL days + stints over the last 4 seasons.
     const durPts = Math.min(((t.dur && t.dur.k) || 0) * toNum(sv.durW, 0), (t.dur && t.dur.cap) || 20);
-    let raw = (quality + quantity - penalty + t.floor + defPts + awdPts - durPts) * (t.marketMult || 1);
+    // Elite closer premium: lock-down 9th-inning arms carry a deadline scarcity
+    // tax the pure production math misses (Hader '22 fetched a real package).
+    const erp = t.eliteRP || {};
+    const rpPrem = (isRP && qRelRaw >= (erp.qMin || 0.8))
+      ? (erp.pts || 10) * Math.min(1, toNum(sv.closerSv, 0) / (erp.savesRef || 25)) * Math.min(1.2, qRelRaw) : 0;
+    let raw = (quality + quantity - penalty + t.floor + defPts + awdPts - durPts + rpPrem) * (t.marketMult || 1);
     if (raw > t.squashStart) raw = t.squashStart + t.squashRange * Math.tanh((raw - t.squashStart) / t.squashRange);
     statTV = clamp(raw, 1, t.max);
   }

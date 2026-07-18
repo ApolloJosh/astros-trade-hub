@@ -152,6 +152,7 @@ async function valuePlayer(p, lg) {
     sv.awardPts = awardPtsFor(p);
     var dur = durability(p.id);
     sv.durW = dur.durW;
+    if (pitcher && base && base.sp === false && display) sv.closerSv = E.toNum(display.saves, 0);
   }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
 
@@ -343,6 +344,13 @@ async function main() {
   });
   await Promise.all(workers);
   players.sort((a, b) => (b.tv || 0) - (a.tv || 0));
+
+  // Untouchable tier: franchise players other teams simply don't trade.
+  const uc = CFG.sv.tv.untouchable || {};
+  players.forEach(p => {
+    const mvps = (p.awards || []).filter(a => a.t === 'MVP' && (a.place == null || a.place === 1)).length;
+    if ((p.tv || 0) >= (uc.tvMin || 140) || mvps >= (uc.mvpMin || 2) || (uc.ids || []).includes(p.id)) p.unt = true;
+  });
 
   console.log('Astros fits + payroll from Sheet…');
   const fits = await buildFits();
