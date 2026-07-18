@@ -37,6 +37,7 @@ window.BTD = (function () {
   function badge(p) {
     let b = '';
     if (p.traded) b += ' <span class="chip traded">TRADED</span>';
+    if (p.unt) b += ' <span class="chip" style="border-color:#8a1c1c;color:#8a1c1c">🔒 UNTOUCHABLE</span>';
     if (p.il) b += ` <span class="chip" style="border-color:var(--bad);color:var(--bad)">${esc(p.il)}</span>`;
     if (p.top100) b += ` <span class="chip t100">MLB #${p.top100}</span>`;
     else if (p.orgRank) b += ` <span class="chip pr">Org #${p.orgRank}</span>`;
