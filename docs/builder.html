@@ -85,6 +85,7 @@
     </div>
     <div class="list" id="rlist"></div>
     <div class="note" id="rnote" style="margin-top:6px;display:none"></div>
+    <div class="note" id="needsline" style="margin-top:6px;display:none"></div>
   </div>
 </div>
 
@@ -218,6 +219,34 @@ BTD.nav('builder');
     });
   }
   const sum = (l, cash) => Math.round((l.reduce((a, p) => a + (p.tv || 0), 0) + (cash || 0) * CASH_PTS) * 10) / 10;
+
+  // ---- "Common sense" trade math ----
+  // Extra pieces count less: front offices have 26 roster spots, so a pile of
+  // role players can never add up to one superstar.
+  const PKG_W = [1, 0.8, 0.6, 0.45, 0.35, 0.25, 0.18, 0.12];
+  const NEED_MULT = 1.08, UNT_REQ = 1.3, HL_TV = 110, HL_FRAC = 0.45;
+  let NEEDS = {};
+  try { NEEDS = (await BTD.data('team-needs')).teams || {}; } catch (e) {}
+  const OF_POS = ['LF', 'CF', 'RF', 'OF'];
+  function fitsNeed(p, needs) {
+    if (!needs || !needs.length) return false;
+    return needs.includes(p.pos) || (needs.includes('OF') && OF_POS.includes(p.pos)) ||
+      (needs.includes('SP') && p.type === 'SP') || (needs.includes('RP') && p.type === 'RP') ||
+      (needs.includes('LHH') && p.type === 'H' && String(p.bt || '').startsWith('L')) ||
+      (needs.includes('RHH') && p.type === 'H' && String(p.bt || '').startsWith('R')) ||
+      (needs.includes('BAT') && p.type === 'H') ||
+      (needs.includes('YNG') && (p.prospect || (p.age || 99) <= 24)) ||
+      (needs.includes('CTRL') && (p.ctrl || 0) >= 4);
+  }
+  function effSum(list, cash, needs) {
+    const sorted = [...list].sort((a, b) => (b.tv || 0) - (a.tv || 0));
+    let v = 0;
+    sorted.forEach((p, i) => {
+      const w = PKG_W[Math.min(i, PKG_W.length - 1)];
+      v += (p.tv || 0) * w * (fitsNeed(p, needs) ? NEED_MULT : 1);
+    });
+    return Math.round((v + (cash || 0) * CASH_PTS) * 10) / 10;
+  }
   function taxBill(pay) {
     let over = Math.max(0, pay - payroll.threshold), bill = 0;
     for (let b = 0; b < 4 && over > 0; b++) { const amt = Math.min(over, TAX.bands[b]); bill += amt * TAX.rates[b]; over -= amt; }
@@ -229,28 +258,54 @@ BTD.nav('builder');
     document.getElementById('get').textContent = get.toFixed(1);
     const main = document.getElementById('vmain'), sub = document.getElementById('vsub');
     document.getElementById('share').style.display = (S.give.length && S.recv.length) ? 'inline-block' : 'none';
-    const accepted = S.give.length && S.recv.length && get > 0 && give / get >= 0.9;
-    document.getElementById('submitFan').style.display = (BTD.FAN_URL && accepted) ? 'inline-block' : 'none';
+
+    // Partner needs (only when everything coming back is from one team)
+    const partnerTeams = [...new Set(S.recv.map(p => p.team))];
+    const needs = partnerTeams.length === 1 ? (NEEDS[partnerTeams[0]] || []) : [];
+    const nl = document.getElementById('needsline');
+    if (partnerTeams.length === 1 && needs.length) {
+      nl.style.display = 'block';
+      nl.textContent = `🎯 ${partnerTeams[0]} needs: ${needs.join(' · ')} — Astros players filling a need count extra with them.`;
+    } else nl.style.display = 'none';
+
+    // Package-adjusted values + special rules
+    const effGive = effSum(S.give, S.gcash, needs), effGet = effSum(S.recv, S.rcash, null);
+    S.effGive = effGive; S.effGet = effGet;
+    const unt = S.recv.filter(p => p.unt);
+    const bestG = Math.max(0, ...S.give.map(p => p.tv || 0)), bestR = Math.max(0, ...S.recv.map(p => p.tv || 0));
+    const needHead = bestR >= HL_TV && bestG < HL_FRAC * bestR;
+    const req = unt.length ? UNT_REQ : 1;
+    const r = (effGet <= 0 ? 2 : effGive / effGet) / req;
+
     const bw = document.getElementById('bwrap');
-    if (give > 0 || get > 0) {
+    if (effGive > 0 || effGet > 0) {
       bw.style.display = 'block';
-      document.getElementById('bgive').textContent = give.toFixed(1);
-      document.getElementById('bget').textContent = get.toFixed(1);
-      document.getElementById('bfill').style.width = ((give + get) > 0 ? give / (give + get) * 100 : 50) + '%';
+      document.getElementById('bgive').textContent = effGive.toFixed(1);
+      document.getElementById('bget').textContent = (effGet * req).toFixed(1);
+      document.getElementById('bfill').style.width = ((effGive + effGet * req) > 0 ? effGive / (effGive + effGet * req) * 100 : 50) + '%';
     } else bw.style.display = 'none';
+
+    S.accepted = false;
     if ((!S.give.length && !S.gcash) || (!S.recv.length && !S.rcash)) {
       main.textContent = 'Add players to both sides'; main.style.color = 'var(--ink)';
       sub.textContent = 'Astros send → Astros receive';
+      S.vCard = null;
     } else {
-      const ratio = get <= 0 ? 2 : give / get;
       let t, c, s;
-      if (ratio < 0.6) { t = '☎️ They hung up'; c = 'var(--bad)'; s = `${give.toFixed(1)} points for ${get.toFixed(1)} — nobody says yes.`; }
-      else if (ratio < 0.9) { t = '🤏 Close — sweeten it'; c = 'var(--warn)'; s = `Offer is ${Math.round((1 - ratio) * 100)}% light. Add a mid-tier piece.`; }
-      else if (ratio <= 1.25) { t = '✅ Fair trade — this gets done'; c = 'var(--good)'; s = `${give.toFixed(1)} for ${get.toFixed(1)} — inside the negotiation band.`; }
-      else if (ratio <= 1.6) { t = '💸 Overpay — instant yes'; c = 'var(--warn)'; s = `Houston gives ${(give - get).toFixed(1)} points more than it gets.`; }
-      else { t = '🚨 Fleeced'; c = 'var(--bad)'; s = 'This is how you end up in a “worst trades” listicle.'; }
+      if (needHead) {
+        t = '☎️ No headliner, no call back'; c = 'var(--bad)';
+        s = `A package of role players doesn't buy a ${bestR.toFixed(0)}-value star — the best piece offered (${bestG.toFixed(1)}) isn't close.`;
+      } else if (r < 0.6) { t = '☎️ They hung up'; c = 'var(--bad)'; s = `${effGive.toFixed(1)} in real value for ${(effGet * req).toFixed(1)} — nobody says yes.`; }
+      else if (r < 0.9) { t = '🤏 Close — sweeten it'; c = 'var(--warn)'; s = `Offer is ${Math.round((1 - r) * 100)}% light. Add a mid-tier piece.`; }
+      else if (r <= 1.25) { t = '✅ Fair trade — this gets done'; c = 'var(--good)'; s = `${effGive.toFixed(1)} for ${(effGet * req).toFixed(1)} — inside the negotiation band.`; S.accepted = true; }
+      else if (r <= 1.6) { t = '💸 Overpay — instant yes'; c = 'var(--warn)'; s = `Houston gives ${(effGive - effGet * req).toFixed(1)} points more than it needs to.`; S.accepted = true; }
+      else { t = '🚨 Fleeced'; c = 'var(--bad)'; s = 'This is how you end up in a “worst trades” listicle.'; S.accepted = true; }
+      if (unt.length) s += ` 🔒 ${unt[0].name} is untouchable — it takes a ${UNT_REQ}× blow-them-away offer.`;
+      else if (Math.abs(effGive - give) > 2 || Math.abs(effGet - get) > 2) s += ' (Extra pieces count less — 26 roster spots.)';
       main.textContent = t; main.style.color = c; sub.textContent = s;
+      S.vCard = { txt: t.replace(/[^\x20-\x7E]/g, '').trim().toUpperCase(), col: c === 'var(--good)' ? '#1d7a4f' : c === 'var(--warn)' ? '#b8860b' : '#c0392b' };
     }
+    document.getElementById('submitFan').style.display = (BTD.FAN_URL && S.accepted && S.give.length && S.recv.length) ? 'inline-block' : 'none';
     const cbt = document.getElementById('cbt');
     if (S.give.length || S.recv.length || S.gcash || S.rcash) {
       cbt.style.display = 'block';
@@ -329,16 +384,15 @@ BTD.nav('builder');
     x.fillText('B E Y O N D   T H E   D I A M O N D   P O D C A S T', W / 2, 52);
     x.fillStyle = CREAM; x.font = '900 52px "Archivo Black", sans-serif';
     x.fillText('MOCK TRADE', W / 2, 115);
-    // verdict
-    const ratio = get <= 0 ? 2 : give / get;
-    const vTxt = ratio < 0.6 ? '☎ THEY HUNG UP' : ratio < 0.9 ? 'NEEDS A SWEETENER' :
-      ratio <= 1.25 ? '✔ FAIR TRADE' : ratio <= 1.6 ? 'OVERPAY' : 'FLEECED';
-    const vCol = (ratio >= 0.9 && ratio <= 1.25) ? '#1d7a4f' : (ratio < 0.6 || ratio > 1.6) ? '#c0392b' : '#b8860b';
+    // verdict (matches the on-page package-adjusted call)
+    const vTxt = S.vCard ? S.vCard.txt : 'MOCK TRADE';
+    const vCol = S.vCard ? S.vCard.col : NAVY;
     x.fillStyle = vCol; x.font = '900 38px "Archivo Black", sans-serif';
     x.fillText(vTxt, W / 2, 210);
     // balance bar: orange = value Houston sends, navy = value coming back
     const bx = 190, bwd = 700, by = 236, bh = 20;
-    const frac = (give + get) > 0 ? give / (give + get) : 0.5;
+    const eg = S.effGive ?? give, er = S.effGet ?? get;
+    const frac = (eg + er) > 0 ? eg / (eg + er) : 0.5;
     x.fillStyle = NAVY; x.fillRect(bx, by, bwd, bh);
     x.fillStyle = ORANGE; x.fillRect(bx, by, bwd * frac, bh);
     x.strokeStyle = NAVY; x.lineWidth = 2; x.strokeRect(bx, by, bwd, bh);
