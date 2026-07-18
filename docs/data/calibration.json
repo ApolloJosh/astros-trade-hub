@@ -1,13 +1,13 @@
 {
- "updated": "2026-07-17T23:25:13.527Z",
+ "updated": "2026-07-18T12:01:44.573Z",
  "tradesAnalyzed": 12,
  "tradesTotal": 12,
- "marketTemp": 1.8199999999999998,
+ "marketTemp": 1.855,
  "hotStove": {
-  "score": 1,
+  "score": 1.1,
   "label": "Cold",
   "recentTrades": 3,
-  "recentValue": 44.9,
+  "recentValue": 45.6,
   "windowDays": 14
  }
 }
