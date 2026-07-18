@@ -212,7 +212,11 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const ann = (base && base.n > 0) ? base.war * full / base.n : sv.proj;
     let proj = Math.max(sv.proj, 0);
     if (/60-day|tommy john/i.test(String(il || ''))) proj *= t.ilQualityMult;
-    const annC = Math.min(Math.max(ann, 0), t.annCapMult * proj + t.annCapAdd);
+    // RP seasons are only ~65 IP, so a closer's annualized rate IS his real
+    // rate — the anti-fluke cap is looser for relievers.
+    const capM = isRP ? (t.annCapMultRP ?? t.annCapMult) : t.annCapMult;
+    const capA = isRP ? (t.annCapAddRP ?? t.annCapAdd) : t.annCapAdd;
+    const annC = Math.min(Math.max(ann, 0), capM * proj + capA);
     const aw = isRP ? t.annWRP : t.annW;
     const q = aw * annC + (1 - aw) * proj;
     const top = isRP ? t.topRP : (pitcher ? t.topP : t.topH);
