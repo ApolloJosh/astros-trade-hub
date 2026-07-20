@@ -238,7 +238,11 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     let quality = 100 * Math.pow(qRel, t.gamma) * ageF;
     // Stars beyond the role cap keep separating instead of all pinning at 100.
     if (qRelRaw > 1) quality += Math.min((qRelRaw - 1) * (t.overK || 0) * 100, t.overCap || 15) * ageF;
-    const quantity = Math.min(t.wSur * Math.max(0, sv.surplus || 0), t.surCap);
+    // Cheap years only count if the player is actually good. A utility guy on
+    // the minimum shows huge "paper surplus" but has no real trade market —
+    // so the surplus contribution scales with quality.
+    const quantity = Math.min(t.wSur * Math.max(0, sv.surplus || 0), t.surCap) *
+      Math.pow(qRel, t.surQPow != null ? t.surQPow : 0);
     let penalty = t.kPen * Math.max(0, sv.cost || 0) * Math.pow(1 - qRel, 2);
     // Big money owed to aging players carries injury/decline risk the surplus
     // math can't see — a long expensive deal on a 31yo is NOT a clean asset.

@@ -28,28 +28,36 @@ const isPitcherPos = pos => pos === 'P' || pos === 'SP' || pos === 'RP' || pos =
 
 // Prospect ranks (current lists, used as a proxy for rank at trade time —
 // far better than treating every traded prospect as unranked).
+// Keyed by MLBID where the ranking files have one, and ALSO by normalized name
+// so the other 29 team lists (pasted without IDs) still resolve — no id-cache
+// dependency and no extra API calls.
 const RANKS = new Map(), TOP100 = new Map();
+const RANKS_N = new Map(), TOP100_N = new Map();
+let normName = s => String(s || '').toLowerCase().normalize('NFD')
+  .replace(/[̀-ͯ]/g, '').replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim();
 try {
   const R = require('./rankings.js');
-  const IDC = require('./id-cache.js');
-  let resolved = 0;
+  if (typeof R.norm === 'function') normName = R.norm;
   for (const f of fs.readdirSync(R.DIR)) {
     if (!f.endsWith('.json')) continue;
     const doc = JSON.parse(fs.readFileSync(path.join(R.DIR, f), 'utf8'));
     (doc.prospects || []).forEach(p => {
-      // Most ranking files were pasted without MLBIDs — recover them from the
-      // name->id cache the daily build maintains.
-      let id = p.mlbid;
-      if (!id) { const c = IDC.get(p.name); id = c && c.id; if (id) resolved++; }
-      if (!id) return;
-      if (doc.team === 'top100') TOP100.set(id, p.rank);
-      else if (!RANKS.has(id)) RANKS.set(id, p.rank);
+      const n = normName(p.name);
+      if (doc.team === 'top100') {
+        if (p.mlbid) TOP100.set(p.mlbid, p.rank);
+        if (n && !TOP100_N.has(n)) TOP100_N.set(n, p.rank);
+      } else {
+        if (p.mlbid && !RANKS.has(p.mlbid)) RANKS.set(p.mlbid, p.rank);
+        if (n && !RANKS_N.has(n)) RANKS_N.set(n, p.rank);
+      }
     });
   }
-  console.log(`Prospect ranks: ${RANKS.size} org + ${TOP100.size} top-100 (${resolved} via id-cache).`);
+  console.log(`Prospect ranks loaded: ${RANKS_N.size} org + ${TOP100_N.size} top-100 (by name), ${RANKS.size} by id.`);
 } catch (e) { console.warn('rankings unavailable:', e.message); }
+const rankFor = (id, name) => RANKS.get(id) || RANKS_N.get(normName(name)) || null;
+const top100For = (id, name) => TOP100.get(id) || TOP100_N.get(normName(name)) || null;
 // Bump when the valuation path changes so stale cached values are discarded.
-const CACHE_V = 4;
+const CACHE_V = 6;
 let cache = {};
 try {
   const c = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
@@ -106,7 +114,7 @@ async function valueAt(id, season, lg) {
     const prospect = careerG < (CFG.prospect.maxCareerG || 30);
     // No MLB line: value off his actual minor-league season (level-adjusted),
     // exactly like the live pipeline does for prospects.
-    const orgRank = RANKS.get(id) || null, top100 = TOP100.get(id) || null;
+    const orgRank = rankFor(id, per.fullName), top100 = top100For(id, per.fullName);
     if (!cur && prospect) {
       const c = await milbBase(id, pitcher, pos, season, lg);
       if (c && c.base) {
@@ -187,25 +195,30 @@ async function main() {
   const all = rows.map(r => r.ratio);
   const med = median(all);
   const within = all.filter(r => r <= 1.25).length;
-  const has = (r, f) => r.hi.vals.some(f) || r.lo.vals.some(f);
-  const bucket = (label, f) => {
-    const sub = rows.filter(r => has(r, f));
-    return { label, n: sub.length, med: median(sub.map(r => r.ratio)) };
-  };
   // Veteran-only trades are the cleanest signal (no prospect guesswork at all).
   const vetOnly = rows.filter(r => ![...r.hi.vals, ...r.lo.vals].some(v => v.prospect));
   const vetMed = median(vetOnly.map(r => r.ratio));
-  const buckets = [
-    bucket('Rentals (≤1.5y control)', v => v.rental),
-    bucket('Controlled (≥4y)', v => v.ctrl >= 4),
-    bucket('Closers (10+ SV)', v => v.closer),
-    bucket('Prospects / rookies', v => v.prospect),
-    bucket('MiLB-only (level-adjusted)', v => v.milb),
-    bucket('Ranked prospects', v => v.ranked),
-    bucket('MLB-only trades', () => true),
-    bucket('Pitchers', v => v.pitcher),
-    bucket('Hitters', v => !v.pitcher),
-  ];
+
+  // Classify each trade ONCE, by its headliner (highest-valued player in the
+  // deal). Overlapping buckets made every archetype read the same number.
+  const headliner = r => [...r.hi.vals, ...r.lo.vals].reduce((a, v) => v.tv > a.tv ? v : a);
+  const kindOf = r => {
+    const h = headliner(r);
+    if (h.prospect) return 'Prospect headliner';
+    if (h.closer) return 'Closer headliner';
+    if (h.rental) return 'Rental headliner';
+    if (h.ctrl >= 4) return 'Controlled headliner (≥4y)';
+    return 'Mid-control headliner';
+  };
+  const kinds = {};
+  rows.forEach(r => { const k = kindOf(r); (kinds[k] = kinds[k] || []).push(r.ratio); });
+  const buckets = Object.entries(kinds).map(([label, v]) => ({ label, n: v.length, med: median(v) }))
+    .sort((a, b) => b.n - a.n);
+
+  // The single best eyeball test: who are we saying is most valuable?
+  const everyone = [];
+  rows.forEach(r => [...r.hi.vals, ...r.lo.vals].forEach(v => everyone.push(v)));
+  const topVals = [...everyone].sort((a, b) => b.tv - a.tv).slice(0, 15);
   const worst = [...rows].sort((a, b) => b.ratio - a.ratio).slice(0, 8);
 
   const sug = [];
@@ -230,8 +243,11 @@ async function main() {
     `- **Established-players-only trades (cleanest signal): median ${vetMed ?? 'n/a'} across ${vetOnly.length}**`,
     `- Trades our model calls near-fair (≤1.25x): ${rows.length ? Math.round(within / rows.length * 100) : 0}%`,
     ``,
-    `## By archetype`,
+    `## By archetype (each trade counted once, by its headliner)`,
     ...buckets.map(b => `- ${b.label}: n=${b.n}, median ${b.med ?? 'n/a'}`),
+    ``,
+    `## Highest values we assigned — do these pass the eye test?`,
+    ...topVals.map(v => `- ${v.name} — **${v.tv}** (${v.pos}${v.prospect ? ', prospect' + (v.level ? ' ' + v.level : '') : ''}${v.closer ? ', closer' : ''}${v.rental ? ', rental' : ''})`),
     ``,
     `## Most lopsided by our math (best tuning clues)`,
     ...worst.map(r => `- ${r.date} · **${r.ratio}x** — ${r.hi.team} got ${r.hi.total} (${r.hi.vals.map(v => v.name + ' ' + v.tv).join(', ')}) vs ${r.lo.team} ${r.lo.total} (${r.lo.vals.map(v => v.name + ' ' + v.tv).join(', ')})`),
@@ -239,7 +255,8 @@ async function main() {
     `## Suggestions`,
     ...sug.map(s => `- ${s}`),
     ``,
-    `Caveats: salaries at trade time are service-time estimates, prospect ranks as of the trade aren't applied, and players with no MLB record are skipped — so prospect-heavy deals read light here.`,
+    `Caveats: salaries at trade time are service-time estimates (so big-contract penalties don't fire — Correa reads far higher here than on the site), prospect ranks are current-day not as-of-trade, and minor leaguers are valued from their MiLB line.`,
+    `Prospect rank lookups available: ${RANKS_N.size} org + ${TOP100_N.size} top-100 (matched by name).`,
     `Knobs live in config.json under sv.tv (mirror any change in Code.gs).`,
   ].join('\n');
 
