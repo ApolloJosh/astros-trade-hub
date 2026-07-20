@@ -18,9 +18,11 @@ jobs:
       - name: Analyze past trades
         run: node src/calibrate-trades.js --months=12
       - name: Save report
+        if: always()
+        continue-on-error: true
         run: |
-          git config user.name "trade-hub-bot"
-          git config user.email "actions@github.com"
-          git add reports data-sources/trade-calibration-cache.json
-          git diff --cached --quiet || git commit -m "trade calibration"
-          git pushif (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
+          git config user.name trade-hub-bot
+          git config user.email actions@github.com
+          git add reports data-sources/trade-calibration-cache.json || true
+          git commit -m 'trade calibration' || echo 'nothing to commit'
+          git push || echo 'push skipped'
