@@ -25,8 +25,14 @@ const CACHE = path.join(__dirname, '..', 'data-sources', 'trade-calibration-cach
 const months = (() => { const a = process.argv.find(x => x.startsWith('--months=')); return a ? +a.split('=')[1] : 12; })();
 
 const isPitcherPos = pos => pos === 'P' || pos === 'SP' || pos === 'RP' || pos === 'LHP' || pos === 'RHP';
+// Bump when the valuation path changes so stale cached values are discarded.
+const CACHE_V = 2;
 let cache = {};
-try { cache = JSON.parse(fs.readFileSync(CACHE, 'utf8')); } catch (e) {}
+try {
+  const c = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
+  if (c._v === CACHE_V) cache = c;
+} catch (e) {}
+cache._v = CACHE_V;
 
 // Value a player as of `season` (that season's line + earlier history only).
 async function valueAt(id, season, lg) {
@@ -39,6 +45,11 @@ async function valueAt(id, season, lg) {
     const pitcher = isPitcherPos(pos);
     const age = (per.currentAge != null) ? per.currentAge - (CFG.season - season) : 28;
 
+    // Career games BEFORE this season decide prospect status — a fringe rookie
+    // must not be valued like an established big leaguer.
+    const careerStat = api.statOf(await api.careerStats(id, pitcher));
+    const careerG = careerStat ? E.toNum(careerStat.gamesPlayed, 0) : 0;
+
     const cur = api.statOf(await api.seasonStatsYear(id, pitcher, season));
     const yby = await api.yearByYear(id, pitcher);
     const splits = (yby && yby.stats && yby.stats[0] && yby.stats[0].splits) || [];
@@ -49,7 +60,15 @@ async function valueAt(id, season, lg) {
         const b = pitcher ? E.warPitcher(s.stat, lg) : E.warHitter(s.stat, pos, lg);
         return b ? { war: b.war, n: b.n, sp: b.sp, season: +s.season } : null;
       }).filter(Boolean);
-    if (!cur && !hist.length) { cache[key] = null; return null; }
+    const prospect = careerG < (CFG.prospect.maxCareerG || 30);
+    // No MLB record at all: value as an unranked prospect rather than skipping,
+    // so prospect-for-veteran deals still count toward the sample.
+    if (!cur && !hist.length) {
+      if (!prospect) { cache[key] = null; return null; }
+      out = { tv: Math.min(CFG.sv.tv.unrankedProspectCap || 18, 10), name: per.fullName, pos, pitcher,
+        prospect: true, noStats: true, rental: false, ctrl: 6, closer: false };
+      cache[key] = out; return out;
+    }
 
     let base = cur ? (pitcher ? E.warPitcher(cur, lg) : E.warHitter(cur, pos, lg)) : null;
     if (base) base.hist = hist; else base = { war: 0, n: 0, sp: hist[0] && hist[0].sp, hist, histOnly: true };
@@ -57,12 +76,13 @@ async function valueAt(id, season, lg) {
     // Contract at trade time is unknowable from this API; use the service-time
     // estimate (documented limitation — mostly affects the salary penalty).
     const est = E.estimateContract({ mlbDebutDate: per.mlbDebutDate }, season);
-    const sv = E.valueFromBase(base, pitcher, age, est.control, est.salM);
+    let sv = E.valueFromBase(base, pitcher, age, est.control, est.salM);
+    sv = E.adjustProspectValue(sv, null, prospect);
     if (sv) { sv.ctrl = est.control; if (pitcher && base.sp === false && cur) sv.closerSv = E.toNum(cur.saves, 0); }
-    const tv = E.tradeValue2(sv, base, pitcher, age, null, false, '', null);
+    const tv = E.tradeValue2(sv, base, pitcher, age, null, prospect, '', null);
     out = tv == null ? null : {
-      tv, name: per.fullName, pos, pitcher,
-      rental: est.control <= 1.5, ctrl: est.control,
+      tv, name: per.fullName, pos, pitcher, prospect,
+      rental: !prospect && est.control <= 1.5, ctrl: est.control,
       closer: pitcher && base.sp === false && E.toNum(cur && cur.saves, 0) >= 10,
       rookie: !!(per.mlbDebutDate && +String(per.mlbDebutDate).slice(0, 4) >= season - 1),
     };
@@ -123,6 +143,7 @@ async function main() {
     bucket('Rentals (≤1.5y control)', v => v.rental),
     bucket('Controlled (≥4y)', v => v.ctrl >= 4),
     bucket('Closers (10+ SV)', v => v.closer),
+    bucket('Prospects / rookies', v => v.prospect),
     bucket('Pitchers', v => v.pitcher),
     bucket('Hitters', v => !v.pitcher),
   ];

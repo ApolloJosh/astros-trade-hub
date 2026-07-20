@@ -29,7 +29,10 @@ function groupTrades(txs) {
     if (!t.person || !t.toTeam) return;
     const teamKey = t.toTeam.id;
     if (!g.sides.has(teamKey)) g.sides.set(teamKey, { teamId: t.toTeam.id, team: t.toTeam.name, gets: [] });
-    g.sides.get(teamKey).gets.push({ id: t.person.id, name: t.person.fullName, from: t.fromTeam ? t.fromTeam.name : null });
+    const side = g.sides.get(teamKey);
+    // The API sometimes repeats the same transaction row — never count a player twice.
+    if (side.gets.some(x => x.id === t.person.id)) return;
+    side.gets.push({ id: t.person.id, name: t.person.fullName, from: t.fromTeam ? t.fromTeam.name : null });
   });
   return [...groups.values()].filter(g => g.sides.size >= 2);
 }
