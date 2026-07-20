@@ -25,14 +25,57 @@ const CACHE = path.join(__dirname, '..', 'data-sources', 'trade-calibration-cach
 const months = (() => { const a = process.argv.find(x => x.startsWith('--months=')); return a ? +a.split('=')[1] : 12; })();
 
 const isPitcherPos = pos => pos === 'P' || pos === 'SP' || pos === 'RP' || pos === 'LHP' || pos === 'RHP';
+
+// Prospect ranks (current lists, used as a proxy for rank at trade time —
+// far better than treating every traded prospect as unranked).
+const RANKS = new Map(), TOP100 = new Map();
+try {
+  const R = require('./rankings.js');
+  const IDC = require('./id-cache.js');
+  let resolved = 0;
+  for (const f of fs.readdirSync(R.DIR)) {
+    if (!f.endsWith('.json')) continue;
+    const doc = JSON.parse(fs.readFileSync(path.join(R.DIR, f), 'utf8'));
+    (doc.prospects || []).forEach(p => {
+      // Most ranking files were pasted without MLBIDs — recover them from the
+      // name->id cache the daily build maintains.
+      let id = p.mlbid;
+      if (!id) { const c = IDC.get(p.name); id = c && c.id; if (id) resolved++; }
+      if (!id) return;
+      if (doc.team === 'top100') TOP100.set(id, p.rank);
+      else if (!RANKS.has(id)) RANKS.set(id, p.rank);
+    });
+  }
+  console.log(`Prospect ranks: ${RANKS.size} org + ${TOP100.size} top-100 (${resolved} via id-cache).`);
+} catch (e) { console.warn('rankings unavailable:', e.message); }
 // Bump when the valuation path changes so stale cached values are discarded.
-const CACHE_V = 2;
+const CACHE_V = 4;
 let cache = {};
 try {
   const c = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
   if (c._v === CACHE_V) cache = c;
 } catch (e) {}
 cache._v = CACHE_V;
+
+// Minor-league line for `season`, translated to MLB equivalence the same way
+// the daily pipeline does (level factors + bust risk). Without this, every
+// prospect in a trade reads as a flat placeholder and skews the whole study.
+async function milbBase(id, pitcher, pos, season, lg) {
+  const levels = [[1, 1.0, 0, 0]].concat(CFG.prospect.levels);
+  const rows = []; let topSport = null;
+  for (const lv of levels) {
+    const s = api.statOf(await api.seasonStatsSportYear(id, pitcher, lv[0], season));
+    if (s) { rows.push({ s, f: lv[1], wp: lv[2] || 0, ep: lv[3] || 0 }); if (topSport == null) topSport = lv[0]; }
+  }
+  if (!rows.length) return null;
+  const out = pitcher ? E.combinePitching(rows, lg) : E.combineHitting(rows, pos, lg);
+  if (out && out.base) {
+    const rk = CFG.sv.prospectRisk[String(topSport)];
+    out.base.risk = rk != null ? rk : 0.5;
+    out.topLevel = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'A+', 14: 'A', 16: 'Rk' }[topSport] || '?';
+  }
+  return out;
+}
 
 // Value a player as of `season` (that season's line + earlier history only).
 async function valueAt(id, season, lg) {
@@ -61,14 +104,24 @@ async function valueAt(id, season, lg) {
         return b ? { war: b.war, n: b.n, sp: b.sp, season: +s.season } : null;
       }).filter(Boolean);
     const prospect = careerG < (CFG.prospect.maxCareerG || 30);
-    // No MLB record at all: value as an unranked prospect rather than skipping,
-    // so prospect-for-veteran deals still count toward the sample.
-    if (!cur && !hist.length) {
-      if (!prospect) { cache[key] = null; return null; }
-      out = { tv: Math.min(CFG.sv.tv.unrankedProspectCap || 18, 10), name: per.fullName, pos, pitcher,
-        prospect: true, noStats: true, rental: false, ctrl: 6, closer: false };
-      cache[key] = out; return out;
+    // No MLB line: value off his actual minor-league season (level-adjusted),
+    // exactly like the live pipeline does for prospects.
+    const orgRank = RANKS.get(id) || null, top100 = TOP100.get(id) || null;
+    if (!cur && prospect) {
+      const c = await milbBase(id, pitcher, pos, season, lg);
+      if (c && c.base) {
+        let psv = E.valueFromBase(c.base, pitcher, age, 6, 0.8);
+        psv = E.adjustProspectValue(psv, orgRank, true);
+        if (psv) psv.ctrl = 6;
+        const ptv = E.tradeValue2(psv, c.base, pitcher, age, orgRank, true, '', top100);
+        if (ptv != null) {
+          out = { tv: ptv, name: per.fullName, pos, pitcher, prospect: true, milb: true,
+            ranked: !!(orgRank || top100), level: c.topLevel, rental: false, ctrl: 6, closer: false };
+          cache[key] = out; return out;
+        }
+      }
     }
+    if (!cur && !hist.length) { cache[key] = null; return null; }
 
     let base = cur ? (pitcher ? E.warPitcher(cur, lg) : E.warHitter(cur, pos, lg)) : null;
     if (base) base.hist = hist; else base = { war: 0, n: 0, sp: hist[0] && hist[0].sp, hist, histOnly: true };
@@ -77,11 +130,11 @@ async function valueAt(id, season, lg) {
     // estimate (documented limitation — mostly affects the salary penalty).
     const est = E.estimateContract({ mlbDebutDate: per.mlbDebutDate }, season);
     let sv = E.valueFromBase(base, pitcher, age, est.control, est.salM);
-    sv = E.adjustProspectValue(sv, null, prospect);
+    sv = E.adjustProspectValue(sv, orgRank, prospect);
     if (sv) { sv.ctrl = est.control; if (pitcher && base.sp === false && cur) sv.closerSv = E.toNum(cur.saves, 0); }
-    const tv = E.tradeValue2(sv, base, pitcher, age, null, prospect, '', null);
+    const tv = E.tradeValue2(sv, base, pitcher, age, orgRank, prospect, '', top100);
     out = tv == null ? null : {
-      tv, name: per.fullName, pos, pitcher, prospect,
+      tv, name: per.fullName, pos, pitcher, prospect, ranked: !!(orgRank || top100),
       rental: !prospect && est.control <= 1.5, ctrl: est.control,
       closer: pitcher && base.sp === false && E.toNum(cur && cur.saves, 0) >= 10,
       rookie: !!(per.mlbDebutDate && +String(per.mlbDebutDate).slice(0, 4) >= season - 1),
@@ -139,11 +192,17 @@ async function main() {
     const sub = rows.filter(r => has(r, f));
     return { label, n: sub.length, med: median(sub.map(r => r.ratio)) };
   };
+  // Veteran-only trades are the cleanest signal (no prospect guesswork at all).
+  const vetOnly = rows.filter(r => ![...r.hi.vals, ...r.lo.vals].some(v => v.prospect));
+  const vetMed = median(vetOnly.map(r => r.ratio));
   const buckets = [
     bucket('Rentals (≤1.5y control)', v => v.rental),
     bucket('Controlled (≥4y)', v => v.ctrl >= 4),
     bucket('Closers (10+ SV)', v => v.closer),
     bucket('Prospects / rookies', v => v.prospect),
+    bucket('MiLB-only (level-adjusted)', v => v.milb),
+    bucket('Ranked prospects', v => v.ranked),
+    bucket('MLB-only trades', () => true),
     bucket('Pitchers', v => v.pitcher),
     bucket('Hitters', v => !v.pitcher),
   ];
@@ -168,6 +227,7 @@ async function main() {
     `Assumption: real trades are roughly balanced, so a healthy median is ~1.0-1.2.`,
     ``,
     `- **Median ratio (bigger/smaller side): ${med ?? 'n/a'}**`,
+    `- **Established-players-only trades (cleanest signal): median ${vetMed ?? 'n/a'} across ${vetOnly.length}**`,
     `- Trades our model calls near-fair (≤1.25x): ${rows.length ? Math.round(within / rows.length * 100) : 0}%`,
     ``,
     `## By archetype`,
