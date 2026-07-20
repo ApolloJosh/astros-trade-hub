@@ -230,6 +230,16 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
       const rental = clamp((ref - ctrl) / Math.max(0.5, ref - 0.5), 0, 1);
       aw = Math.min(cold.maxW || 0.9, aw + shortfall * ((cold.k || 0) + (cold.kRental || 0) * rental));
     }
+    // The mirror image: a YOUNG player breaking out is showing real skill
+    // growth, so his weak earlier seasons shouldn't drag him down. The older
+    // the player, the more a spike looks like noise and the less this applies.
+    const bo = t.breakout || {};
+    if (enoughNow && proj > 0 && annC > proj) {
+      const excess = clamp((annC - proj) / proj, 0, 1);
+      const a = toNum(age, 28);
+      const young = clamp(((bo.ageOld || 31) - a) / Math.max(1, (bo.ageOld || 31) - (bo.ageYoung || 26)), 0, 1);
+      aw = Math.min(bo.maxW || 0.75, aw + excess * young * (bo.k || 0));
+    }
     const q = aw * annC + (1 - aw) * proj;
     const top = isRP ? t.topRP : (pitcher ? t.topP : t.topH);
     const qRelRaw = q / top;

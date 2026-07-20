@@ -56,8 +56,22 @@ try {
 } catch (e) { console.warn('rankings unavailable:', e.message); }
 const rankFor = (id, name) => RANKS.get(id) || RANKS_N.get(normName(name)) || null;
 const top100For = (id, name) => TOP100.get(id) || TOP100_N.get(normName(name)) || null;
+
+// Real contracts from Cot's, matched by name across all 30 clubs. Service-time
+// ESTIMATES were badly overvaluing expensive veterans (Correa read 61.7 with
+// his $110M invisible), which inflated the heavy side of many trades.
+const COTS_N = new Map();
+try {
+  const c = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data-sources', 'salaries-cots.json'), 'utf8'));
+  Object.values(c.teams || {}).forEach(list => (list || []).forEach(p => {
+    const k = p.key || normName(p.name);
+    if (k && !COTS_N.has(k)) COTS_N.set(k, p);
+  }));
+  console.log(`Real contracts loaded for ${COTS_N.size} players.`);
+} catch (e) { console.warn('salaries-cots.json unavailable — falling back to service-time estimates.'); }
+const contractFor = name => COTS_N.get(normName(name)) || null;
 // Bump when the valuation path changes so stale cached values are discarded.
-const CACHE_V = 7;
+const CACHE_V = 8;
 let cache = {};
 try {
   const c = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
@@ -134,15 +148,18 @@ async function valueAt(id, season, lg) {
     let base = cur ? (pitcher ? E.warPitcher(cur, lg) : E.warHitter(cur, pos, lg)) : null;
     if (base) base.hist = hist; else base = { war: 0, n: 0, sp: hist[0] && hist[0].sp, hist, histOnly: true };
 
-    // Contract at trade time is unknowable from this API; use the service-time
-    // estimate (documented limitation — mostly affects the salary penalty).
-    const est = E.estimateContract({ mlbDebutDate: per.mlbDebutDate }, season);
+    // Real contract when we have one (big-money penalties then fire properly);
+    // service-time estimate only as a fallback.
+    const cots = contractFor(per.fullName);
+    const estOnly = E.estimateContract({ mlbDebutDate: per.mlbDebutDate }, season);
+    const est = cots ? { control: cots.control, salM: cots.salaryM } : estOnly;
     let sv = E.valueFromBase(base, pitcher, age, est.control, est.salM);
     sv = E.adjustProspectValue(sv, orgRank, prospect);
     if (sv) { sv.ctrl = est.control; if (pitcher && base.sp === false && cur) sv.closerSv = E.toNum(cur.saves, 0); }
     const tv = E.tradeValue2(sv, base, pitcher, age, orgRank, prospect, '', top100);
     out = tv == null ? null : {
       tv, name: per.fullName, pos, pitcher, prospect, ranked: !!(orgRank || top100),
+      realDeal: !!cots, salM: est.salM,
       rental: !prospect && est.control <= 1.5, ctrl: est.control,
       closer: pitcher && base.sp === false && E.toNum(cur && cur.saves, 0) >= 10,
       rookie: !!(per.mlbDebutDate && +String(per.mlbDebutDate).slice(0, 4) >= season - 1),
@@ -259,7 +276,7 @@ async function main() {
     ...buckets.map(b => `- ${b.label}: n=${b.n}, median ${b.med ?? 'n/a'}`),
     ``,
     `## Highest values we assigned — do these pass the eye test?`,
-    ...topVals.map(v => `- ${v.name} — **${v.tv}** (${v.pos}${v.prospect ? ', prospect' + (v.level ? ' ' + v.level : '') : ''}${v.closer ? ', closer' : ''}${v.rental ? ', rental' : ''})`),
+    ...topVals.map(v => `- ${v.name} — **${v.tv}** (${v.pos}${v.prospect ? ', prospect' + (v.level ? ' ' + v.level : '') : ''}${v.closer ? ', closer' : ''}${v.rental ? ', rental' : ''}${v.salM != null ? ', $' + (+v.salM).toFixed(1) + 'M/yr' + (v.realDeal ? '' : ' est') : ''})`),
     ``,
     `## Most lopsided by our math (best tuning clues)`,
     ...worst.map(r => `- ${r.date} · **${r.ratio}x** — ${r.hi.team} got ${r.hi.total} (${r.hi.vals.map(v => v.name + ' ' + v.tv).join(', ')}) vs ${r.lo.team} ${r.lo.total} (${r.lo.vals.map(v => v.name + ' ' + v.tv).join(', ')})`),
