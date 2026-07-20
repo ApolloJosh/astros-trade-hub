@@ -153,6 +153,7 @@ async function valuePlayer(p, lg) {
     var dur = durability(p.id);
     sv.durW = dur.durW;
     if (pitcher && base && base.sp === false && display) sv.closerSv = E.toNum(display.saves, 0);
+    sv.ctrl = control;   // rentals lose more value when they're slumping
   }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
 

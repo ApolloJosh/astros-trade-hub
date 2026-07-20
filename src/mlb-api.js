@@ -29,6 +29,7 @@ const api = {
   teams: () => get(`${BASE}/teams?sportId=1&season=${CFG.season}`),
   roster40: teamId => get(`${BASE}/teams/${teamId}/roster?rosterType=40Man&season=${CFG.season}&hydrate=person(currentAge,mlbDebutDate,batSide,pitchHand,primaryPosition,awards)`),
   seasonStats: (id, pitcher) => get(`${BASE}/people/${id}/stats?stats=season&season=${CFG.season}&group=${pitcher ? 'pitching' : 'hitting'}`),
+  seasonStatsYear: (id, pitcher, season) => get(`${BASE}/people/${id}/stats?stats=season&season=${season}&group=${pitcher ? 'pitching' : 'hitting'}`),
   seasonStatsSport: (id, pitcher, sportId) => get(`${BASE}/people/${id}/stats?stats=season&season=${CFG.season}&group=${pitcher ? 'pitching' : 'hitting'}&sportId=${sportId}`),
   careerStats: (id, pitcher) => get(`${BASE}/people/${id}/stats?stats=career&group=${pitcher ? 'pitching' : 'hitting'}`),
   yearByYear: (id, pitcher) => get(`${BASE}/people/${id}/stats?stats=yearByYear&group=${pitcher ? 'pitching' : 'hitting'}`),

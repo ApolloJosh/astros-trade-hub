@@ -217,7 +217,19 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const capM = isRP ? (t.annCapMultRP ?? t.annCapMult) : t.annCapMult;
     const capA = isRP ? (t.annCapAddRP ?? t.annCapAdd) : t.annCapAdd;
     const annC = Math.min(Math.max(ann, 0), capM * proj + capA);
-    const aw = isRP ? t.annWRP : t.annW;
+    let aw = isRP ? t.annWRP : t.annW;
+    // "Who are you RIGHT NOW": a player having a bad season is worth less than
+    // his track record says — teams trade for present help. Rentals get hit
+    // hardest; years of control buy time to rediscover the old form.
+    const cold = t.cold || {};
+    const enoughNow = base && base.n >= (cold.minFrac || 0.35) * full;
+    if (enoughNow && proj > 0 && annC < proj) {
+      const shortfall = clamp((proj - annC) / proj, 0, 1);
+      const ctrl = toNum(sv.ctrl, 3);
+      const ref = cold.ctrlRef || 4;
+      const rental = clamp((ref - ctrl) / Math.max(0.5, ref - 0.5), 0, 1);
+      aw = Math.min(cold.maxW || 0.9, aw + shortfall * ((cold.k || 0) + (cold.kRental || 0) * rental));
+    }
     const q = aw * annC + (1 - aw) * proj;
     const top = isRP ? t.topRP : (pitcher ? t.topP : t.topH);
     const qRelRaw = q / top;
