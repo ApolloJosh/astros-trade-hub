@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}
   push:
     branches: [main]
-    paths: ["src/**", "config.json", "data-sources/**", "docs/**", "!docs/data/**"]
+    paths: ["src/**", "config.json", "data-sources/**", "!data-sources/id-cache.json", "!data-sources/defense.json", "!data-sources/il-history.json", "!data-sources/salaries-cots.json", "docs/**", "!docs/data/**"]
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "trade-hub-bot"
           git config user.email "actions@github.com"
-          git add docs/data
+          git add docs/data reports data-sources/id-cache.json data-sources/defense.json data-sources/il-history.json data-sources/salaries-cots.json
           git diff --cached --quiet || git commit -m "data refresh $(date -u +%F)"
           git push
       - name: Upload site
