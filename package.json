@@ -11,6 +11,7 @@
     "data": "node src/build-data.js",
     "transactions": "node src/transactions.js",
     "calibrate": "node src/calibrate.js",
+    "calibrate:trades": "node src/calibrate-trades.js",
     "rankings": "node src/parse-rankings.js",
     "test": "node test/parity.test.js && node test/transactions.test.js && node test/salaries.test.js"
   },

@@ -52,6 +52,7 @@
       "awards": { "base": { "MVP": 6, "CY": 6, "ROY": 2, "GG": 1.5, "SS": 1.5, "AS": 1 }, "decay": 0.85, "cap": 10, "place": [1, 0.6, 0.5, 0.35, 0.25] },
       "dur": { "w": [1, 0.75, 0.5, 0.3], "stintDays": 4, "k": 0.1, "cap": 20 },
       "eliteRP": { "qMin": 0.7, "pts": 10, "savesRef": 25 },
+      "cold": { "minFrac": 0.35, "k": 0.25, "kRental": 0.3, "maxW": 0.9, "ctrlRef": 4 },
       "untouchable": { "tvMin": 140, "mvpMin": 2, "ids": [] },
       "floor": 8, "squashStart": 95, "squashRange": 55, "max": 150,
       "ilQualityMult": 0.7,
