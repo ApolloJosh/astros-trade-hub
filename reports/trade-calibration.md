@@ -3,8 +3,10 @@
 Window: last 12 months · 146 trades found · 135 fully valued at time of trade.
 Assumption: real trades are roughly balanced, so a healthy median is ~1.0-1.2.
 
-- **Median ratio (bigger/smaller side): 1.85**
-- **Established-players-only trades (cleanest signal): median 2.465 across 12**
+- **TALENT-FOR-TALENT (real piece both sides — the deals that SHOULD be even):**
+  **median 1.71 across 13 trades · 46% within 1.5x**
+- Established-players-only: median 2.465 across 12
+- All trades (includes salary dumps & depth swaps, which are genuinely lopsided): median 1.85
 - Trades our model calls near-fair (≤1.25x): 19%
 
 ## By archetype (each trade counted once, by its headliner)
@@ -42,7 +44,8 @@ Assumption: real trades are roughly balanced, so a healthy median is ~1.0-1.2.
 - 2025-07-31 · **8x** — Colorado Rockies got 38.4 (Ben Shields 12, Roc Riggio 26.4) vs New York Yankees 4.8 (Jake Bird 4.8)
 
 ## Suggestions
-- Median real trade reads 1.85x lopsided — the model systematically OVERVALUES whatever tends to land on the heavier side. Check the buckets below for which archetype.
+- Talent-for-talent median 1.71 — the SPREAD between good and mediocre players is too wide. Lower sv.tv.gamma (flattens the curve) and/or raise sv.tv.floor.
+- All-trades median 1.85 is expected to run high: salary dumps and depth swaps are lopsided in talent by design.
 - Rental headliner: median 1.5750000000000002 across 48 trades — likely OVERvalued by the model.
 - Prospect headliner: median 2.14 across 47 trades — likely OVERvalued by the model.
 - Controlled headliner (≥4y): median 2.87 across 19 trades — likely OVERvalued by the model.
