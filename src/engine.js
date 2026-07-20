@@ -214,8 +214,15 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     if (/60-day|tommy john/i.test(String(il || ''))) proj *= t.ilQualityMult;
     // RP seasons are only ~65 IP, so a closer's annualized rate IS his real
     // rate — the anti-fluke cap is looser for relievers.
-    const capM = isRP ? (t.annCapMultRP ?? t.annCapMult) : t.annCapMult;
-    const capA = isRP ? (t.annCapAddRP ?? t.annCapAdd) : t.annCapAdd;
+    let capM = isRP ? (t.annCapMultRP ?? t.annCapMult) : t.annCapMult;
+    let capA = isRP ? (t.annCapAddRP ?? t.annCapAdd) : t.annCapAdd;
+    // A young player's breakout is skill growth, not a fluke — loosen the cap
+    // so it can actually show up. Otherwise the cap silently erases it.
+    const bo = t.breakout || {};
+    const youngF = clamp(((bo.ageOld || 29) - toNum(age, 28)) /
+      Math.max(1, (bo.ageOld || 29) - (bo.ageYoung || 25)), 0, 1);
+    capM += youngF * (bo.capBoostMult || 0);
+    capA += youngF * (bo.capBoostAdd || 0);
     const annC = Math.min(Math.max(ann, 0), capM * proj + capA);
     let aw = isRP ? t.annWRP : t.annW;
     // "Who are you RIGHT NOW": a player having a bad season is worth less than
@@ -233,12 +240,12 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     // The mirror image: a YOUNG player breaking out is showing real skill
     // growth, so his weak earlier seasons shouldn't drag him down. The older
     // the player, the more a spike looks like noise and the less this applies.
-    const bo = t.breakout || {};
-    if (enoughNow && proj > 0 && annC > proj) {
+    // Breakouts need less playing time to count than slumps do: the cap above
+    // already limits how far a hot streak can carry a small sample.
+    const enoughBO = base && base.n >= (bo.minFrac || 0.2) * full;
+    if (enoughBO && proj > 0 && annC > proj) {
       const excess = clamp((annC - proj) / proj, 0, 1);
-      const a = toNum(age, 28);
-      const young = clamp(((bo.ageOld || 31) - a) / Math.max(1, (bo.ageOld || 31) - (bo.ageYoung || 26)), 0, 1);
-      aw = Math.min(bo.maxW || 0.75, aw + excess * young * (bo.k || 0));
+      aw = Math.min(bo.maxW || 0.75, aw + excess * youngF * (bo.k || 0));
     }
     const q = aw * annC + (1 - aw) * proj;
     const top = isRP ? t.topRP : (pitcher ? t.topP : t.topH);
