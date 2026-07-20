@@ -5,9 +5,9 @@ Assumption: real trades are roughly balanced, so a healthy median is ~1.0-1.2.
 
 - **TALENT-FOR-TALENT (real piece both sides — the deals that SHOULD be even):**
   **median 1.71 across 13 trades · 46% within 1.5x**
-- Established-players-only: median 2.465 across 12
+- Established-players-only: median 2.4400000000000004 across 12
 - All trades (includes salary dumps & depth swaps, which are genuinely lopsided): median 1.85
-- Trades our model calls near-fair (≤1.25x): 19%
+- Trades our model calls near-fair (≤1.25x): 18%
 
 ## By archetype (each trade counted once, by its headliner)
 - Rental headliner: n=48, median 1.5750000000000002
@@ -17,26 +17,26 @@ Assumption: real trades are roughly balanced, so a healthy median is ~1.0-1.2.
 - Closer headliner: n=7, median 1.35
 
 ## Highest values we assigned — do these pass the eye test?
-- Kyle Harrison — **111.2** (P)
-- Jhoan Duran — **108.9** (P, closer)
-- Mason Miller — **100.5** (P, closer)
-- TJ Rumfield — **86.8** (1B)
-- Stephen Kolek — **79.3** (P)
-- Grayson Rodriguez — **69.8** (P)
+- Kyle Harrison — **113.4** (P, $2.0M/yr est)
+- Jhoan Duran — **110.2** (P, closer, $2.0M/yr est)
+- Mason Miller — **101.2** (P, closer, $0.8M/yr est)
+- TJ Rumfield — **88.2** (1B, $0.8M/yr est)
+- Stephen Kolek — **79.8** (P, $0.8M/yr est)
+- Grayson Rodriguez — **69.8** (P, $0.8M/yr est)
+- Blaze Alexander — **69.8** (3B, $0.8M/yr est)
 - Leo De Vries — **69.7** (SS, prospect AA)
-- Blaze Alexander — **68.9** (3B)
+- Isaac Collins — **64.8** (LF, $0.8M/yr est)
 - Shane Bieber — **64.1** (P, rental)
-- Isaac Collins — **64** (LF)
 - Carlos Correa — **61.7** (SS, rental)
 - David Bednar — **60.7** (P, closer, rental)
-- Jake McCarthy — **60** (CF, rental)
-- Curtis Mead — **57.7** (3B)
-- José Caballero — **56.2** (SS)
+- Jake McCarthy — **60.4** (CF, rental, $2.0M/yr est)
+- Curtis Mead — **59.3** (3B, $2.0M/yr est)
+- José Caballero — **56.6** (SS, $0.8M/yr est)
 
 ## Most lopsided by our math (best tuning clues)
 - 2025-07-31 · **18.7x** — Houston Astros got 61.7 (Carlos Correa 61.7) vs Minnesota Twins 3.3 (Matt Mikulski 3.3)
-- 2025-07-31 · **15.61x** — New York Yankees got 56.2 (José Caballero 56.2) vs Tampa Bay Rays 3.6 (Everson Pereira 3.6)
-- 2026-01-28 · **10.21x** — Colorado Rockies got 86.8 (TJ Rumfield 86.8) vs New York Yankees 8.5 (Angel Chivilli 8.5)
+- 2025-07-31 · **15.72x** — New York Yankees got 56.6 (José Caballero 56.6) vs Tampa Bay Rays 3.6 (Everson Pereira 3.6)
+- 2026-01-28 · **10.38x** — Colorado Rockies got 88.2 (TJ Rumfield 88.2) vs New York Yankees 8.5 (Angel Chivilli 8.5)
 - 2025-07-30 · **9.81x** — Pittsburgh Pirates got 36.3 (Taylor Rogers 13.4, Sammy Stafura 22.9) vs Cincinnati Reds 3.7 (Ke'Bryan Hayes 3.7)
 - 2026-03-04 · **9.6x** — Pittsburgh Pirates got 43.2 (Tyler Callihan 43.2) vs Cincinnati Reds 4.5 (Kyle Nicolas 4.5)
 - 2025-07-31 · **9.05x** — San Diego Padres got 49.8 (Jorge Quintana 27.7, Nestor Cortes 22.1) vs Milwaukee Brewers 5.5 (Brandon Lockridge 5.5)
