@@ -29,12 +29,18 @@ jobs:
       - name: Build data (rosters, values, transactions, calibration)
         run: npm run build
       - name: Commit refreshed data
+        continue-on-error: true
         run: |
-          git config user.name "trade-hub-bot"
-          git config user.email "actions@github.com"
-          git add docs/data reports data-sources/id-cache.json data-sources/defense.json data-sources/il-history.json data-sources/salaries-cots.json
-          git diff --cached --quiet || git commit -m "data refresh $(date -u +%F)"
-          git push
+          git config user.name trade-hub-bot
+          git config user.email actions@github.com
+          git add docs/data reports || true
+          # Generated caches: add only if the step that writes them succeeded,
+          # so one flaky data source can never fail the whole build.
+          for f in data-sources/id-cache.json data-sources/defense.json data-sources/il-history.json data-sources/salaries-cots.json; do
+            if [ -f "$f" ]; then git add -f "$f" || true; else echo "skip missing $f"; fi
+          done
+          git diff --cached --quiet || git commit -m 'data refresh'
+          git push || echo 'push skipped'
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with: { path: docs }
