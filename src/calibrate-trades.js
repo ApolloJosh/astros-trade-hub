@@ -57,7 +57,7 @@ try {
 const rankFor = (id, name) => RANKS.get(id) || RANKS_N.get(normName(name)) || null;
 const top100For = (id, name) => TOP100.get(id) || TOP100_N.get(normName(name)) || null;
 // Bump when the valuation path changes so stale cached values are discarded.
-const CACHE_V = 6;
+const CACHE_V = 7;
 let cache = {};
 try {
   const c = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
@@ -195,9 +195,18 @@ async function main() {
   const all = rows.map(r => r.ratio);
   const med = median(all);
   const within = all.filter(r => r <= 1.25).length;
-  // Veteran-only trades are the cleanest signal (no prospect guesswork at all).
+  // Veteran-only trades (no prospect guesswork at all).
   const vetOnly = rows.filter(r => ![...r.hi.vals, ...r.lo.vals].some(v => v.prospect));
   const vetMed = median(vetOnly.map(r => r.ratio));
+
+  // THE key metric. "Real trades are balanced" is only true for talent-for-
+  // talent swaps: salary dumps and depth/DFA-shuffle trades are genuinely
+  // lopsided in talent, with money doing the balancing. Requiring a real piece
+  // on BOTH sides isolates the deals that actually should come out even.
+  const best = s => Math.max(...s.vals.map(v => v.tv), 0);
+  const t4t = rows.filter(r => best(r.hi) >= 25 && best(r.lo) >= 25);
+  const t4tMed = median(t4t.map(r => r.ratio));
+  const t4tFair = t4t.filter(r => r.ratio <= 1.5).length;
 
   // Classify each trade ONCE, by its headliner (highest-valued player in the
   // deal). Overlapping buckets made every archetype read the same number.
@@ -222,11 +231,12 @@ async function main() {
   const worst = [...rows].sort((a, b) => b.ratio - a.ratio).slice(0, 8);
 
   const sug = [];
-  if (med != null) {
-    if (med > 1.25) sug.push(`Median real trade reads ${med}x lopsided — the model systematically OVERVALUES whatever tends to land on the heavier side. Check the buckets below for which archetype.`);
-    else if (med < 0.85) sug.push(`Median ${med} — model UNDERVALUES the headline side.`);
-    else sug.push(`Median ${med} — model is pricing real trades well overall.`);
-  }
+  if (t4tMed != null) {
+    if (t4tMed > 1.6) sug.push(`Talent-for-talent median ${t4tMed} — the SPREAD between good and mediocre players is too wide. Lower sv.tv.gamma (flattens the curve) and/or raise sv.tv.floor.`);
+    else if (t4tMed < 1.1) sug.push(`Talent-for-talent median ${t4tMed} — spread may be too narrow; raise sv.tv.gamma.`);
+    else sug.push(`Talent-for-talent median ${t4tMed} — the model is pricing real swaps well. This is the number that matters.`);
+  } else sug.push('Not enough talent-for-talent trades in the window — widen with --months=24.');
+  if (med != null) sug.push(`All-trades median ${med} is expected to run high: salary dumps and depth swaps are lopsided in talent by design.`);
   buckets.forEach(b => {
     if (b.n >= 4 && b.med != null && (b.med > 1.35 || b.med < 0.75)) {
       sug.push(`${b.label}: median ${b.med} across ${b.n} trades — ${b.med > 1 ? 'likely OVERvalued' : 'likely UNDERvalued'} by the model.`);
@@ -239,8 +249,10 @@ async function main() {
     `Window: last ${months} months · ${trades.length} trades found · ${rows.length} fully valued at time of trade.`,
     `Assumption: real trades are roughly balanced, so a healthy median is ~1.0-1.2.`,
     ``,
-    `- **Median ratio (bigger/smaller side): ${med ?? 'n/a'}**`,
-    `- **Established-players-only trades (cleanest signal): median ${vetMed ?? 'n/a'} across ${vetOnly.length}**`,
+    `- **TALENT-FOR-TALENT (real piece both sides — the deals that SHOULD be even):**`,
+    `  **median ${t4tMed ?? 'n/a'} across ${t4t.length} trades · ${t4t.length ? Math.round(t4tFair / t4t.length * 100) : 0}% within 1.5x**`,
+    `- Established-players-only: median ${vetMed ?? 'n/a'} across ${vetOnly.length}`,
+    `- All trades (includes salary dumps & depth swaps, which are genuinely lopsided): median ${med ?? 'n/a'}`,
     `- Trades our model calls near-fair (≤1.25x): ${rows.length ? Math.round(within / rows.length * 100) : 0}%`,
     ``,
     `## By archetype (each trade counted once, by its headliner)`,
