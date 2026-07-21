@@ -20,6 +20,9 @@ const cotsPath = path.join(__dirname, '..', 'data-sources', 'salaries-cots.json'
 const COTS = fs.existsSync(cotsPath) ? JSON.parse(fs.readFileSync(cotsPath, 'utf8')) : { teams: {} };
 
 // Statcast Fielding Run Value (id -> [current, previous]) + award data.
+const scPath = path.join(__dirname, '..', 'data-sources', 'statcast.json');
+const SC = (fs.existsSync(scPath) ? JSON.parse(fs.readFileSync(scPath, 'utf8')) : { players: {} }).players || {};
+
 const defPath = path.join(__dirname, '..', 'data-sources', 'defense.json');
 const DEF = (fs.existsSync(defPath) ? JSON.parse(fs.readFileSync(defPath, 'utf8')) : { players: {} }).players || {};
 // Manual value overrides — Josh's eye test, applied last.
@@ -195,6 +198,7 @@ async function valuePlayer(p, lg) {
     proj: sv ? E.r1(sv.proj) : null,
     sur: sv && sv.surplus != null ? E.r1(sv.surplus) : null,
     rem: sv && sv.cost != null ? E.r1(sv.cost) : null,   // salary still owed ($M, discounted)
+    sc: SC[String(p.id)] || null,                        // Statcast values + percentiles (Baseball Savant)
     def: sv && sv.defR != null ? sv.defR : null,         // blended Fielding Run Value
     awd: sv && sv.awardPts ? sv.awardPts : null,         // awards points in the TV
     awards: awardList(p),                                // e.g. [{t:'GG',s:2025},{t:'CY',s:2025,place:3}]
