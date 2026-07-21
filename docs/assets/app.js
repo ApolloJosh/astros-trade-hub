@@ -31,6 +31,12 @@ window.BTD = (function () {
   const logo = teamId => teamId ? `https://www.mlbstatic.com/team-logos/${teamId}.svg` : '';
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const pts = v => v == null ? '—' : (+v).toFixed(1);
+  // Baseball number conventions: rate stats keep 3 decimals and drop the
+  // leading zero (.650, not .65); ERA/WHIP take 2; WAR takes 1.
+  const r3 = v => { if (v == null || v === '' || isNaN(+v)) return '—';
+    const s = Math.abs(+v).toFixed(3); return (+v < 0 ? '-' : '') + (Math.abs(+v) < 1 ? s.slice(1) : s); };
+  const r2 = v => (v == null || v === '' || isNaN(+v)) ? '—' : (+v).toFixed(2);
+  const r1 = v => (v == null || v === '' || isNaN(+v)) ? '—' : (+v).toFixed(1);
   const tvCls = v => v == null ? 'lo' : v >= 70 ? 'hi' : v >= 30 ? 'mid' : 'lo';
   const money = n => { if (n == null || isNaN(n)) return '—'; const neg = n < 0; n = Math.abs(n);
     const s = n >= 1e6 ? '$' + (n / 1e6).toFixed(1) + 'M' : '$' + Math.round(n / 1e3) + 'K'; return (neg ? '−' : '') + s; };
@@ -47,8 +53,8 @@ window.BTD = (function () {
   function statLine(p) {
     if (!p.line) return p.prospect ? 'No 2026 stats yet' : '—';
     return p.type === 'H'
-      ? `${p.line.avg ?? '—'} AVG · ${p.line.ops ?? '—'} OPS · ${p.line.hr ?? 0} HR · ${p.line.sb ?? 0} SB`
-      : `${p.line.era ?? '—'} ERA · ${p.line.whip ?? '—'} WHIP · ${p.line.k ?? 0} K · ${p.line.ip ?? 0} IP`;
+      ? `${r3(p.line.avg)} AVG · ${r3(p.line.ops)} OPS · ${p.line.hr ?? 0} HR · ${p.line.sb ?? 0} SB`
+      : `${r2(p.line.era)} ERA · ${r2(p.line.whip)} WHIP · ${p.line.k ?? 0} K · ${p.line.ip ?? 0} IP`;
   }
   // Stat line as HTML: full ink for MLB stats, greyed for minor-league lines.
   function statHTML(p) {
@@ -93,27 +99,57 @@ window.BTD = (function () {
     const p = 100 * (below + 0.5 * eq) / arr.length;
     return Math.round(inv ? 100 - p : p);
   }
+  // Statcast percentile bars, styled like Baseball Savant: blue = poor,
+  // grey = average, red = elite, with the percentile in the bubble.
+  const SAVANT_H = [
+    ['Batting Run Value', 'bat_rv', null], ['xwOBA', 'xwoba', 3], ['xBA', 'xba', 3], ['xSLG', 'xslg', 3],
+    ['Avg Exit Velo', 'ev', 1], ['Barrel %', 'barrel', 1], ['Hard-Hit %', 'hardhit', 1],
+    ['Chase %', 'chase', 1], ['Whiff %', 'whiff', 1], ['K %', 'kpct', 1], ['BB %', 'bbpct', 1],
+    ['Fielding Run Value', 'frv', 0], ['Sprint Speed', 'sprint', 1],
+  ];
+  const SAVANT_P = [
+    ['xERA', 'xera', 2], ['xBA', 'pxba', 3], ['Fastball Velo', 'velo', 1], ['Avg Exit Velo', 'pev', 1],
+    ['Chase %', 'pchase', 1], ['Whiff %', 'pwhiff', 1], ['K %', 'pk', 1], ['BB %', 'pbb', 1],
+    ['Barrel %', 'pbarrel', 1], ['Hard-Hit %', 'phardhit', 1], ['GB %', 'gb', 1],
+  ];
+  // Savant's diverging scale: deep blue (0) -> light grey (50) -> deep red (100)
+  function savantColor(pc) {
+    const stops = [[0, [50, 84, 168]], [25, [126, 155, 203]], [50, [186, 194, 202]], [75, [214, 122, 106]], [100, [196, 40, 40]]];
+    let a = stops[0], b = stops[stops.length - 1];
+    for (let i = 0; i < stops.length - 1; i++) if (pc >= stops[i][0] && pc <= stops[i + 1][0]) { a = stops[i]; b = stops[i + 1]; break; }
+    const t = b[0] === a[0] ? 0 : (pc - a[0]) / (b[0] - a[0]);
+    const c = a[1].map((v, i) => Math.round(v + (b[1][i] - v) * t));
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+  }
+  function fmtStat(v, dec) {
+    if (v == null || isNaN(v)) return '—';
+    if (dec === 3) return r3(v);
+    if (dec === 2) return r2(v);
+    if (dec === 0) return String(Math.round(v));
+    return r1(v);
+  }
   function barsHTML(p, all) {
     const isH = p.type === 'H';
-    const peers = all.filter(q => (isH ? q.type === 'H' : q.type !== 'H') && q.line &&
-      (isH ? (q.line.pa || 0) >= 100 : numv(q.line.ip) >= 30));
-    const defPeers = peers.filter(q => q.def != null);
-    const M = isH
-      ? [['OPS', q => numv(q.line.ops)], ['AVG', q => numv(q.line.avg)], ['HR', q => q.line.hr],
-         ['SB', q => q.line.sb], ['WAR', q => q.war], ['Defense', q => q.def, false, defPeers], ['Trade Val', q => q.tv]]
-      : [['ERA', q => numv(q.line.era), true], ['WHIP', q => numv(q.line.whip), true], ['K', q => q.line.k],
-         ['IP', q => numv(q.line.ip)], ['WAR', q => q.war], ['Trade Val', q => q.tv]];
-    const rows = M.map(([lbl, get, inv, pl]) => {
-      const grp = pl || peers;
-      const v = p.line || lbl === 'WAR' || lbl === 'Trade Val' || lbl === 'Defense' ? get(p) : null;
-      const pc = pctile(grp.map(get).filter(x => x != null && !isNaN(x)), v, inv);
-      if (pc == null) return '';
-      const col = `hsl(${Math.round(220 - 2.12 * pc)},68%,44%)`;
-      return `<div class="pbar"><span class="plbl">${lbl}</span><span class="pval">${v != null ? v : '—'}</span>` +
-        `<span class="ptrack"><span class="pfill" style="width:${pc}%;background:${col}"></span>` +
-        `<span class="pdot" style="left:max(0%,calc(${pc}% - 22px));background:${col}">${pc}</span></span></div>`;
-    }).filter(Boolean).join('');
-    return rows ? `<div class="pphd">League Percentiles <span class="ppnote">vs ${isH ? 'hitters, 100+ PA' : 'pitchers, 30+ IP'}</span></div>${rows}` : '';
+    const sc = p.sc || { v: {}, p: {} };
+    const rows = [];
+    // Run values come from our own data (Savant's are on the same scale)
+    const extras = { frv: p.def, bat_rv: null };
+    (isH ? SAVANT_H : SAVANT_P).forEach(([label, key, dec]) => {
+      let val = sc.v[key], pc = sc.p[key];
+      if (key === 'frv' && p.def != null) { val = p.def; pc = pctile(all.filter(q => q.def != null).map(q => q.def), p.def); }
+      if (key === 'bat_rv') return;
+      if (pc == null || val == null) return;
+      const col = savantColor(pc);
+      rows.push(`<div class="sbar"><span class="slbl">${label}</span>` +
+        `<span class="strack"><span class="sfill" style="width:${pc}%;background:${col}"></span>` +
+        `<span class="sdot" style="left:calc(${pc}% - 11px);background:${col}">${pc}</span></span>` +
+        `<span class="sval">${fmtStat(val, dec)}</span></div>`);
+    });
+    if (!rows.length) return '';
+    return `<div class="pphd">${isH ? 'Batting' : 'Pitching'} percentiles <span class="ppnote">vs qualified ${isH ? 'hitters' : 'pitchers'}</span></div>` +
+      `<div class="sscale"><span style="color:#3254a8">POOR</span><span>AVERAGE</span><span style="color:#c42828">GREAT</span></div>` +
+      rows.join('') +
+      `<div class="ppnote" style="margin-top:8px">Statcast data via <a href="https://baseballsavant.mlb.com" target="_blank" rel="noopener">Baseball Savant</a></div>`;
   }
   async function splitsHTML(p, season) {
     if (!p.id || p.prospect && p.topLevel !== 'MLB') return '';
@@ -178,5 +214,5 @@ window.BTD = (function () {
     const n = e.target.closest('.pn');
     if (n && n.dataset.pid) { e.stopPropagation(); e.preventDefault(); openPlayer(+n.dataset.pid); }
   }, true);
-  return { data, shot, logo, esc, pts, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, FAN_URL };
+  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, FAN_URL };
 })();
