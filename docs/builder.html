@@ -223,8 +223,8 @@ BTD.nav('builder');
   // ---- "Common sense" trade math ----
   // Extra pieces count less: front offices have 26 roster spots, so a pile of
   // role players can never add up to one superstar.
-  const PKG_W = [1, 0.8, 0.6, 0.45, 0.35, 0.25, 0.18, 0.12];
-  const NEED_MULT = 1.08, UNT_REQ = 1.3, HL_TV = 110, HL_FRAC = 0.45;
+  const PKG_W = [1, 0.74, 0.52, 0.36, 0.25, 0.17, 0.11, 0.07];
+  const NEED_MULT = 1.08, UNT_REQ = 1.5, HL_TV = 110, HL_FRAC = 0.45;
   let NEEDS = {};
   try { NEEDS = (await BTD.data('team-needs')).teams || {}; } catch (e) {}
   const OF_POS = ['LF', 'CF', 'RF', 'OF'];
@@ -301,6 +301,7 @@ BTD.nav('builder');
       else if (r <= 1.6) { t = '💸 Overpay — instant yes'; c = 'var(--warn)'; s = `Houston gives ${(effGive - effGet * req).toFixed(1)} points more than it needs to.`; S.accepted = true; }
       else { t = '🚨 Fleeced'; c = 'var(--bad)'; s = 'This is how you end up in a “worst trades” listicle.'; S.accepted = true; }
       if (unt.length) s += ` 🔒 ${unt[0].name} is untouchable — it takes a ${UNT_REQ}× blow-them-away offer.`;
+      else if (S.give.length >= 4) s += ' Piling on extra names barely moves the needle — 26 roster spots.';
       else if (Math.abs(effGive - give) > 2 || Math.abs(effGet - get) > 2) s += ' (Extra pieces count less — 26 roster spots.)';
       main.textContent = t; main.style.color = c; sub.textContent = s;
       S.vCard = { txt: t.replace(/[^\x20-\x7E]/g, '').trim().toUpperCase(), col: c === 'var(--good)' ? '#1d7a4f' : c === 'var(--warn)' ? '#b8860b' : '#c0392b' };
