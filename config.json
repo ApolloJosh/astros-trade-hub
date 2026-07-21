@@ -54,7 +54,7 @@
       "eliteRP": { "qMin": 0.7, "pts": 10, "savesRef": 25 },
       "cold": { "minFrac": 0.35, "k": 0.25, "kRental": 0.3, "maxW": 0.9, "ctrlRef": 4 },
       "breakout": { "ageYoung": 25, "ageOld": 27, "k": 0.28, "maxW": 0.75, "minFrac": 0.2, "capBoostMult": 0.12, "capBoostAdd": 0.5 },
-      "untouchable": { "tvMin": 140, "mvpMin": 2, "ids": [] },
+      "untouchable": { "tvMin": 140, "mvpMin": 2, "ids": [], "tiers": [[26, 125], [30, 133.5]] },
       "floor": 5, "squashStart": 95, "squashRange": 55, "max": 150,
       "ilQualityMult": 0.7,
       "prospectAnchors": [[1, 46], [3, 38], [4, 30], [7, 22], [11, 15], [16, 11], [21, 8], [26, 6]],
