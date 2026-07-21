@@ -286,19 +286,27 @@ BTD.nav('builder');
       (needs.includes('YNG') && (p.prospect || (p.age || 99) <= 24)) ||
       (needs.includes('CTRL') && (p.ctrl || 0) >= 4);
   }
-  function effSum(list, cash, needs) {
-    // Negative players are liabilities — they never get the diminishing-returns
-    // discount, because dumping a bad contract doesn't get cheaper in bulk.
+  // Returns each player's list value AND what he's actually worth in THIS deal
+  // after stacking discounts, need bonuses and the untouchable premium — so the
+  // card can show the real math instead of a bare sum.
+  function effList(list, cash, needs, untouchable) {
     const pos = list.filter(p => (p.tv || 0) > 0).sort((a, b) => (b.tv || 0) - (a.tv || 0));
     const neg = list.filter(p => (p.tv || 0) <= 0);
-    let v = 0;
+    const rows = [];
     pos.forEach((p, i) => {
       const w = PKG_W[Math.min(i, PKG_W.length - 1)];
-      v += (p.tv || 0) * w * (fitsNeed(p, needs) ? NEED_MULT : 1);
+      const need = fitsNeed(p, needs) ? NEED_MULT : 1;
+      const unt = (untouchable && p.unt) ? UNT_REQ : 1;
+      rows.push({ p, base: p.tv || 0, eff: (p.tv || 0) * w * need * unt,
+        why: [w < 1 ? 'stacked' : '', need > 1 ? 'fits need' : '', unt > 1 ? 'untouchable' : ''].filter(Boolean) });
     });
-    neg.forEach(p => { v += (p.tv || 0); });
-    return Math.round((v + (cash || 0) * CASH_PTS) * 10) / 10;
+    // Liabilities never get the stacking discount — bad contracts don't get
+    // cheaper in bulk.
+    neg.forEach(p => rows.push({ p, base: p.tv || 0, eff: p.tv || 0, why: [] }));
+    const total = rows.reduce((a, r) => a + r.eff, 0) + (cash || 0) * CASH_PTS;
+    return { rows, total: Math.round(total * 10) / 10 };
   }
+  const effSum = (list, cash, needs, unt) => effList(list, cash, needs, unt).total;
   function taxBill(pay) {
     let over = Math.max(0, pay - payroll.threshold), bill = 0;
     for (let b = 0; b < 4 && over > 0; b++) { const amt = Math.min(over, TAX.bands[b]); bill += amt * TAX.rates[b]; over -= amt; }
@@ -321,12 +329,14 @@ BTD.nav('builder');
     } else nl.style.display = 'none';
 
     // Package-adjusted values + special rules
-    const effGive = effSum(S.give, S.gcash, needs), effGet = effSum(S.recv, S.rcash, null);
-    S.effGive = effGive; S.effGet = effGet;
+    const gList = effList(S.give, S.gcash, needs, false);
+    const rList = effList(S.recv, S.rcash, null, true);
+    const effGive = gList.total, effGet = rList.total;
+    S.effGive = effGive; S.effGet = effGet; S.gRows = gList.rows; S.rRows = rList.rows;
     const unt = S.recv.filter(p => p.unt);
     const bestG = Math.max(0, ...S.give.map(p => p.tv || 0)), bestR = Math.max(0, ...S.recv.map(p => p.tv || 0));
     const needHead = bestR >= HL_TV && bestG < HL_FRAC * bestR;
-    const req = unt.length ? UNT_REQ : 1;
+    const req = 1;   // untouchable premium is now priced per player
     // A negative return means you're being PAID to take a bad contract —
     // ratio math breaks down, so treat it as a salary dump.
     const dump = effGet <= 0;
@@ -431,11 +441,12 @@ BTD.nav('builder');
     cv.width = W; cv.height = H;
     const x = cv.getContext('2d');
     const NAVY = '#16294f', CREAM = '#f5efdf', ORANGE = '#e8590c', MUTED = '#5d6a85';
-    const give = sum(S.give, S.gcash), get = sum(S.recv, S.rcash);
+    const give = S.effGive != null ? S.effGive : sum(S.give, S.gcash);
+    const get = S.effGet != null ? S.effGet : sum(S.recv, S.rcash);
     // preload art
     const [gShots, rShots, houLogo, rLogo] = noImgs ? [[], [], null, null] : await Promise.all([
-      Promise.all(S.give.slice(0, 6).map(p => loadImg(BTD.shot(p.id)))),
-      Promise.all(S.recv.slice(0, 6).map(p => loadImg(BTD.shot(p.id)))),
+      Promise.all((S.gRows || []).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
+      Promise.all((S.rRows || []).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
       loadImg(teamSpot(HOU)),
       (() => { const ids = [...new Set(S.recv.map(p => p.teamId))]; return ids.length === 1 ? loadImg(teamSpot(ids[0])) : Promise.resolve(null); })(),
     ]);
@@ -498,7 +509,7 @@ BTD.nav('builder');
       x.restore(); x.textAlign = 'left';
       x.strokeStyle = NAVY; x.lineWidth = 2; x.beginPath(); x.arc(px, py, r, 0, 7); x.stroke();
     };
-    const col = (title, logo, list, shots, cash, cx) => {
+    const col = (title, logo, rows, shots, cash, cx, total) => {
       // team header
       circle(logo, cx + 22, 392, 22, title);
       x.fillStyle = NAVY; x.font = '800 27px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
@@ -506,25 +517,48 @@ BTD.nav('builder');
       x.strokeStyle = NAVY; x.lineWidth = 2;
       x.beginPath(); x.moveTo(cx, 420); x.lineTo(cx + 450, 420); x.stroke();
       let cy = 468;
-      list.slice(0, 6).forEach((p, i) => {
+      rows.slice(0, 6).forEach((row, i) => {
+        const p = row.p, changed = Math.abs(row.eff - row.base) > 0.05;
         circle(shots[i], cx + 26, cy - 8, 26, p.name);
-        x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif';
-        x.fillText(p.name.length > 20 ? p.name.slice(0, 19) + '…' : p.name, cx + 64, cy - 6);
+        x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif'; x.textAlign = 'left';
+        x.fillText(p.name.length > 18 ? p.name.slice(0, 17) + '…' : p.name, cx + 64, cy - 6);
         x.fillStyle = MUTED; x.font = '400 15px Inter, sans-serif';
-        x.fillText(p.pos + (p.orgRank ? ' · Org #' + p.orgRank : '') + (p.top100 ? ' · MLB #' + p.top100 : ''), cx + 64, cy + 16);
-        x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
-        x.fillText(BTD.pts(p.tv), cx + 450, cy); x.textAlign = 'left';
+        const tags = [p.pos, p.orgRank ? 'Org #' + p.orgRank : '', p.top100 ? 'MLB #' + p.top100 : '',
+          changed ? row.why.join(' · ') : ''].filter(Boolean).join(' · ');
+        x.fillText(tags, cx + 64, cy + 16);
+        // exchange value on the right; the list value struck through beside it
+        x.textAlign = 'right';
+        x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
+        x.fillText(BTD.pts(row.eff), cx + 450, cy);
+        if (changed) {
+          const base = BTD.pts(row.base);
+          x.font = '600 19px Inter, sans-serif'; x.fillStyle = MUTED;
+          const effW = x.measureText(BTD.pts(row.eff)).width;
+          const bx2 = cx + 450 - 62, bw2 = x.measureText(base).width;
+          x.fillText(base, bx2, cy - 1);
+          x.strokeStyle = MUTED; x.lineWidth = 2;
+          x.beginPath(); x.moveTo(bx2 - bw2 - 2, cy - 7); x.lineTo(bx2 + 2, cy - 7); x.stroke();
+        }
+        x.textAlign = 'left';
         cy += 70;
       });
-      if (list.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (list.length - 6) + ' more', cx + 64, cy - 8); cy += 50; }
+      if (rows.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (rows.length - 6) + ' more', cx + 64, cy - 8); cy += 50; }
       if (cash > 0) {
         x.fillStyle = NAVY; x.font = '700 23px Inter, sans-serif'; x.fillText('💵 Cash $' + cash.toFixed(1) + 'M', cx + 64, cy - 6);
         x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
         x.fillText((cash * CASH_PTS).toFixed(1), cx + 450, cy - 6); x.textAlign = 'left';
+        cy += 46;
       }
+      // side total (this is the number the verdict actually uses)
+      x.strokeStyle = NAVY; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(cx + 250, cy - 34); x.lineTo(cx + 450, cy - 34); x.stroke();
+      x.fillStyle = NAVY; x.font = '800 20px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
+      x.fillText('TRADE VALUE', cx + 250, cy - 8);
+      x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '900 28px Inter, sans-serif';
+      x.fillText(BTD.pts(total), cx + 450, cy - 6); x.textAlign = 'left';
     };
-    col('Astros Send', houLogo, S.give, gShots, S.gcash, 60);
-    col(rName, rLogo, S.recv, rShots, S.rcash, 570);
+    col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 60, give);
+    col(rName, rLogo, S.rRows || [], rShots, S.rcash, 570, get);
     // footer
     x.fillStyle = NAVY; x.fillRect(0, H - 100, W, 100);
     x.textAlign = 'center';
