@@ -1,0 +1,9 @@
+{
+  "_comment": "YOUR overrides — the eye test beats the math. Each entry matches by name (or id) and can set: max (cap the value), min (floor it), mult (scale it), or tv (force an exact value). Applied after everything else. Edit freely; the pipeline never overwrites this file.",
+  "entries": [
+    { "name": "Hyeseong Kim", "max": 9, "why": "not a piece anyone is paying for" },
+    { "name": "Carlos Correa", "max": 9, "why": "huge contract on an often-injured 31yo; Astros got him for nothing" },
+    { "name": "Anthony Volpe", "max": 9, "why": "production doesn't match the name value" },
+    { "name": "Shohei Ohtani", "min": 165, "why": "repeat MVP; the one asset allowed above the 150 scale" }
+  ]
+}
