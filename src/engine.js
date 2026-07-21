@@ -315,10 +315,13 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     const ceiling = cap * (fl + (1 - fl) * perf);
     return statTV == null ? r1(ceiling) : r1(clamp(Math.min(statTV, ceiling), 0.5, t.max));
   }
-  // A real major leaguer is never quite worthless — someone will take the
-  // roster spot — unless he's carrying money, which the negative side handles.
+  // A player is only a LIABILITY if he's bad AND owed real money — that's the
+  // McCullers case. A cheap struggling or injured big leaguer is simply worth
+  // little; someone will always take the roster spot at the minimum.
   if (statTV == null) return null;
-  if (statTV > 0 && statTV < (t.mlbFloor || 0)) statTV = t.mlbFloor;
+  const owed = Math.max(0, sv && sv.cost || 0);
+  if (owed < (t.negMinOwed != null ? t.negMinOwed : 9)) statTV = Math.max(statTV, t.mlbFloor || 1);
+  else if (statTV > 0 && statTV < (t.mlbFloor || 0)) statTV = t.mlbFloor;
   return r1(statTV);
 }
 

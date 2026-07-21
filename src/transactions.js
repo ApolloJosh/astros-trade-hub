@@ -37,7 +37,9 @@ function groupTrades(txs) {
   return [...groups.values()].filter(g => g.sides.size >= 2);
 }
 
-function verdictFor(ratio) {
+function verdictFor(ratio, dump) {
+  // One side taking on negative value = a salary dump, not a talent swap.
+  if (dump) return { label: 'Salary dump', cls: 'edge' };
   if (ratio == null) return { label: 'Unvalued', cls: 'na' };
   if (ratio >= 0.9 && ratio <= 1.25) return { label: 'Balanced', cls: 'fair' };
   if ((ratio >= 0.6 && ratio < 0.9) || (ratio > 1.25 && ratio <= 1.6)) return { label: 'Slight edge', cls: 'edge' };
@@ -96,12 +98,21 @@ async function main() {
   // drops them, so without this every past trade re-triggers API lookups).
   const autoPath = path.join(OUT, 'auto-players.json');
   const autoOut = new Map();
+  // Cached values are only valid for the model that produced them. Any change
+  // to the valuation knobs invalidates them, otherwise old numbers (every
+  // prospect stuck at the old cap) survive forever.
+  const modelSig = JSON.stringify(CFG.sv.tv).length + ':' +
+    [CFG.sv.tv.unrankedProspectCap, CFG.sv.tv.min, CFG.sv.tv.mlbFloor, CFG.sv.tv.floor,
+     JSON.stringify(CFG.sv.tv.unrankedCapByLevel)].join('|');
   if (fs.existsSync(autoPath)) {
     try {
-      (JSON.parse(fs.readFileSync(autoPath, 'utf8')).players || []).forEach(p => {
-        autoOut.set(p.id, p);
-        if (!byId.has(p.id)) byId.set(p.id, p);
-      });
+      const doc2 = JSON.parse(fs.readFileSync(autoPath, 'utf8'));
+      if (doc2.modelSig === modelSig) {
+        (doc2.players || []).forEach(p => {
+          autoOut.set(p.id, p);
+          if (!byId.has(p.id)) byId.set(p.id, p);
+        });
+      } else console.log('Model changed — re-valuing auto-added players from scratch.');
     } catch (e) { /* rebuild from scratch */ }
   }
 
@@ -146,14 +157,15 @@ async function main() {
     }
     sides.sort((a, b) => b.total - a.total);
     const fullCover = sides.every(x => x.coverage >= 0.99 && x.players.length);
+    const dump = fullCover && sides.some(x => x.total <= 0);
     const ratio = fullCover && sides[1].total > 0 ? Math.round(sides[0].total / sides[1].total * 100) / 100 : null;
-    feed.push({ date: g.date, desc: g.desc, sides, ratio, verdict: verdictFor(ratio),
+    feed.push({ date: g.date, desc: g.desc, sides, ratio, dump: dump || undefined, verdict: verdictFor(ratio, dump),
       cashUnknown: g.cashHint && !sides.some(x => x.cashM != null) || undefined });
   }
   feed.sort((a, b) => b.date.localeCompare(a.date));
 
   fs.writeFileSync(path.join(OUT, 'feed.json'), JSON.stringify({ updated: new Date().toISOString(), since: CFG.feedSince, trades: feed }));
-  fs.writeFileSync(autoPath, JSON.stringify({ updated: new Date().toISOString(), players: [...autoOut.values()] }));
+  fs.writeFileSync(autoPath, JSON.stringify({ updated: new Date().toISOString(), modelSig, players: [...autoOut.values()] }));
   fs.writeFileSync(path.join(OUT, 'traded.json'), JSON.stringify({ updated: new Date().toISOString(), ids: [...tradedIds] }));
 
   if (doc) {
