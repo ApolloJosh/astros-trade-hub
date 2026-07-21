@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-20T23:26:47.455Z",
+ "updated": "2026-07-21T00:20:28.976Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -260,8 +260,8 @@
     "key": "gustavocampero",
     "svc": 0.158,
     "control": 5.5,
-    "salaryM": 0.478,
-    "remM": 0.2,
+    "salaryM": 0.297,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -4666,15 +4666,6 @@
     "exactFA": false
    },
    {
-    "name": "Nate Pearson",
-    "key": "natepearson",
-    "svc": 4.005,
-    "control": 1.5,
-    "salaryM": 1.35,
-    "remM": 0.7,
-    "exactFA": false
-   },
-   {
     "name": "Christian Vázquez",
     "key": "christianvazquez",
     "svc": 11.031,
@@ -4823,8 +4814,8 @@
     "key": "rayneldelgado",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.154,
-    "remM": 0.1,
+    "salaryM": 0.402,
+    "remM": 0.2,
     "exactFA": false
    },
    {
