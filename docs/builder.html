@@ -275,12 +275,16 @@ BTD.nav('builder');
       (needs.includes('CTRL') && (p.ctrl || 0) >= 4);
   }
   function effSum(list, cash, needs) {
-    const sorted = [...list].sort((a, b) => (b.tv || 0) - (a.tv || 0));
+    // Negative players are liabilities — they never get the diminishing-returns
+    // discount, because dumping a bad contract doesn't get cheaper in bulk.
+    const pos = list.filter(p => (p.tv || 0) > 0).sort((a, b) => (b.tv || 0) - (a.tv || 0));
+    const neg = list.filter(p => (p.tv || 0) <= 0);
     let v = 0;
-    sorted.forEach((p, i) => {
+    pos.forEach((p, i) => {
       const w = PKG_W[Math.min(i, PKG_W.length - 1)];
       v += (p.tv || 0) * w * (fitsNeed(p, needs) ? NEED_MULT : 1);
     });
+    neg.forEach(p => { v += (p.tv || 0); });
     return Math.round((v + (cash || 0) * CASH_PTS) * 10) / 10;
   }
   function taxBill(pay) {
@@ -311,7 +315,10 @@ BTD.nav('builder');
     const bestG = Math.max(0, ...S.give.map(p => p.tv || 0)), bestR = Math.max(0, ...S.recv.map(p => p.tv || 0));
     const needHead = bestR >= HL_TV && bestG < HL_FRAC * bestR;
     const req = unt.length ? UNT_REQ : 1;
-    const r = (effGet <= 0 ? 2 : effGive / effGet) / req;
+    // A negative return means you're being PAID to take a bad contract —
+    // ratio math breaks down, so treat it as a salary dump.
+    const dump = effGet <= 0;
+    const r = (dump ? (effGive <= 0 ? 1 : 3) : effGive / effGet) / req;
 
     const bw = document.getElementById('bwrap');
     if (effGive > 0 || effGet > 0) {

@@ -41,7 +41,16 @@ BTD.nav('feed');
   el.innerHTML = f.trades.map(t => {
     const [a, b] = t.sides;
     const side = s => `<div class="side"><h4><img src="${BTD.logo(s.teamId)}" onerror="this.style.display='none'">${BTD.esc(s.team)} receive</h4>` +
-      s.players.map(p => `<div class="pl"><span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="chip">${BTD.esc(p.pos || '?')}</span>${p.top100 ? ` <span class="chip t100">MLB #${p.top100}</span>` : p.prospect ? ' <span class="chip pr">PROSPECT</span>' : ''}${p.crude ? ' <span class="chip">rough est.</span>' : ''}${p.rem != null ? ` <span class="chip">~$${(+p.rem).toFixed(1)}M owed</span>` : ''}</span>` +
+      s.players.map(p => `<div class="pl"><span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="chip">${BTD.esc(p.pos || '?')}</span>` +
+        `${p.bt ? ` <span class="chip">${BTD.esc(p.bt)}</span>` : ''}` +
+        `${p.age ? ` <span class="chip">age ${p.age}</span>` : ''}` +
+        `${p.top100 ? ` <span class="chip t100">MLB #${p.top100}</span>` : ''}` +
+        `${p.orgRank ? ` <span class="chip pr">Org #${p.orgRank}</span>` : ''}` +
+        `${p.prospect && !p.top100 && !p.orgRank ? ' <span class="chip pr">PROSPECT</span>' : ''}` +
+        `${p.level ? ` <span class="chip">${BTD.esc(p.level)}</span>` : ''}` +
+        `${p.il ? ` <span class="chip" style="border-color:var(--bad);color:var(--bad)">${BTD.esc(p.il)}</span>` : ''}` +
+        `${p.owed != null ? ` <span class="chip">$${(+p.owed).toFixed(1)}M guaranteed</span>` : ''}` +
+        `${p.crude ? ' <span class="chip">rough est.</span>' : ''}</span>` +
         `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span></div>`).join('') +
       (s.cashM != null ? `<div class="pl"><span>💵 Cash <span class="chip">$${(+s.cashM).toFixed(1)}M</span></span><span class="tv mid">${(s.cashM * 0.5).toFixed(1)}</span></div>` : '') +
       `<div class="sum"><span>Total</span><span class="tv ${BTD.tvCls(s.total)}">${BTD.pts(s.total)}</span></div></div>`;
