@@ -64,7 +64,7 @@
       "prospectBlend": 0.8, "prospectCapMult": 2, "unrankedProspectCap": 12,
       "unrankedCapByLevel": { "MLB": 14, "AAA": 12, "AA": 9, "A+": 6, "A": 4, "Rk": 3 },
       "unrankedRefWar": 2.0, "unrankedFloorFrac": 0.18,
-      "min": -30, "mlbFloor": 2,
+      "min": -30, "mlbFloor": 2, "negMinOwed": 9,
       "marketMult": 1.0,
       "cashPtsPerM": 0.5,
       "crudeFallback": { "MLB": 12, "AAA": 8, "AA": 6, "A+": 4, "A": 3, "Rk": 2, "youngBonusU23": 4 }
