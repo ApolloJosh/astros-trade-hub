@@ -22,6 +22,30 @@ const COTS = fs.existsSync(cotsPath) ? JSON.parse(fs.readFileSync(cotsPath, 'utf
 // Statcast Fielding Run Value (id -> [current, previous]) + award data.
 const defPath = path.join(__dirname, '..', 'data-sources', 'defense.json');
 const DEF = (fs.existsSync(defPath) ? JSON.parse(fs.readFileSync(defPath, 'utf8')) : { players: {} }).players || {};
+// Manual value overrides — Josh's eye test, applied last.
+const vmPath = path.join(__dirname, '..', 'data-sources', 'value-manual.json');
+let VMAN = [];
+if (fs.existsSync(vmPath)) {
+  try {
+    VMAN = JSON.parse(fs.readFileSync(vmPath, 'utf8')).entries || [];
+    console.log(`value-manual.json: ${VMAN.length} override(s) — ${VMAN.map(e => e.name || e.id).join(', ')}`);
+  } catch (e) { console.warn('!! value-manual.json is invalid JSON — overrides SKIPPED:', e.message); }
+} else {
+  console.warn('!! value-manual.json NOT FOUND — no manual overrides will be applied.');
+}
+function applyManual(p) {
+  const e = VMAN.find(x => x.id ? x.id === p.id : normName(x.name || '') === normName(p.name || ''));
+  if (!e || p.tv == null) return p;
+  let tv = p.tv;
+  if (e.tv != null) tv = e.tv;
+  if (e.mult != null) tv *= e.mult;
+  if (e.min != null) tv = Math.max(tv, e.min);
+  if (e.max != null) tv = Math.min(tv, e.max);
+  tv = Math.max(1, Math.round(tv * 10) / 10);
+  if (tv !== p.tv) { p.tvModel = p.tv; p.tv = tv; p.manual = true; }
+  return p;
+}
+
 const ilPath = path.join(__dirname, '..', 'data-sources', 'il-history.json');
 const ILH = (fs.existsSync(ilPath) ? JSON.parse(fs.readFileSync(ilPath, 'utf8')) : { seasons: {} }).seasons || {};
 // Recency-weighted IL score: days + per-stint charge, weighted by season age.
@@ -161,7 +185,7 @@ async function valuePlayer(p, lg) {
     ? { ip: display.inningsPitched, era: display.era, whip: display.whip, k: display.strikeOuts, sv: display.saves, g: display.gamesPlayed, gs: display.gamesStarted }
     : { pa: display.plateAppearances, avg: display.avg, ops: display.ops ?? (display.obp != null && display.slg != null ? Math.round((display.obp + display.slg) * 1000) / 1000 : null), hr: display.homeRuns, rbi: display.rbi, sb: display.stolenBases, g: display.gamesPlayed }) : null;
 
-  return {
+  return applyManual({
     id: p.id, name: p.name, team: p.teamName, teamId: p.teamId, pos: p.pos,
     bt: (p.bats || '?') + '/' + (p.throws || '?'), age: p.age,
     ctrl: control, salM: salM, salEst: salSource === 'est', salSource,
@@ -176,7 +200,7 @@ async function valuePlayer(p, lg) {
     ilDays: sv && dur && dur.days ? dur.days : null,     // IL days, last 4 seasons
     ilStints: sv && dur && dur.stints ? dur.stints : null,
     tv, line, type: pitcher ? (base && base.sp === false ? 'RP' : 'SP') : 'H',
-  };
+  });
 }
 
 async function fetchSheetCsv(tab) {
@@ -344,6 +368,14 @@ async function main() {
     }
   });
   await Promise.all(workers);
+  const overridden = players.filter(p => p.manual);
+  console.log(overridden.length
+    ? `Manual overrides applied: ${overridden.map(p => `${p.name} ${p.tvModel}->${p.tv}`).join(', ')}`
+    : `Manual overrides applied: NONE${VMAN.length ? ' (names in value-manual.json matched no players — check spelling)' : ''}`);
+  // Names in the file that never matched anyone — usually a typo.
+  const unmatched = VMAN.filter(e => !players.some(p =>
+    e.id ? e.id === p.id : normName(e.name || '') === normName(p.name || '')));
+  if (unmatched.length) console.warn('!! No player matched these overrides:', unmatched.map(e => e.name || e.id).join(', '));
   players.sort((a, b) => (b.tv || 0) - (a.tv || 0));
 
   // Untouchable tier: franchise players other teams simply don't trade.
@@ -368,6 +400,9 @@ async function main() {
   fs.writeFileSync(path.join(OUT, 'meta.json'), JSON.stringify({
     updated: new Date().toISOString(), season: CFG.season, baselines: lg,
     counts: { players: players.length, fits: fits.length }, marketMult: CFG.sv.tv.marketMult,
+    // Verify from the live site: /data/meta.json should list your overrides.
+    manualOverrides: { file: fs.existsSync(vmPath), entries: VMAN.length, applied: overridden.length,
+      players: overridden.map(p => `${p.name} ${p.tvModel}->${p.tv}`) },
   }));
   IDC.save();
   console.log(`DONE: ${players.length} players, ${fits.length} fits.`);
