@@ -211,21 +211,3 @@ a{color:var(--accent)}
 .ptrack{position:relative;height:12px;background:var(--row-hover);border:1px solid var(--row-line);border-radius:99px}
 .pfill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;opacity:.45}
 .pdot{position:absolute;top:-5px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--card)}
-
-/* ---------- Tank Commander cross-promo ---------- */
-.tcbox{display:flex;align-items:center;gap:18px;margin-top:20px;padding:16px 20px;
-  background:#0d0d0d;border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
-  box-shadow:var(--shadow);text-decoration:none;color:#fff;transition:transform .12s}
-.tcbox:hover{transform:translate(-2px,-2px)}
-.tcbox img{width:270px;max-width:42%;height:auto;flex:0 0 auto}
-.tctext{flex:1;min-width:0}
-.tckick{font-family:var(--hd2);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#dc2927}
-.tctitle{font-family:var(--hd2);font-size:20px;font-weight:800;letter-spacing:.02em;margin:3px 0 4px;color:#fff}
-.tcsub{font-size:12.5px;color:#b9b9b9}
-.tccta{flex:0 0 auto;font-family:var(--hd2);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-  background:#dc2927;color:#fff;padding:9px 16px;border-radius:6px;white-space:nowrap}
-@media(max-width:700px){
-  .tcbox{flex-direction:column;text-align:center;gap:12px}
-  .tcbox img{width:220px;max-width:80%}
-  .tctitle{font-size:17px}
-}
