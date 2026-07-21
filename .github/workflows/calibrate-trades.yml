@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 20
       - name: Analyze past trades
-        run: node src/calibrate-trades.js --months=12
+        run: node src/calibrate-trades.js --months=24
       - name: Save report
         if: always()
         continue-on-error: true
