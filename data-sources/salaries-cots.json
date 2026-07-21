@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-21T01:17:55.529Z",
+ "updated": "2026-07-21T01:49:49.455Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -13672,8 +13672,8 @@
     "key": "kervincastro",
     "svc": 0.057,
     "control": 5.5,
-    "salaryM": 0.134,
-    "remM": 0.1,
+    "salaryM": 0.382,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -13753,8 +13753,8 @@
     "key": "elmerrodriguez",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.102,
-    "remM": 0.1,
+    "salaryM": 0.374,
+    "remM": 0.2,
     "exactFA": false
    },
    {
