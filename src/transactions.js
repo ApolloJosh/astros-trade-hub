@@ -127,9 +127,16 @@ async function main() {
           if (v) { byId.set(v.id, v); autoOut.set(v.id, v); console.log(`  + auto-valued ${v.name} (tv ${v.tv}${v.crude ? ', crude' : ''})`); }
         }
         if (v && v.tv != null) { total += v.tv; valued++; }
+        // Baseball facts, not projected salary. "Owed" only means something for
+        // real guaranteed money, so it's flagged separately below.
+        const bigDeal = v && v.salSource === 'cots' && (v.rem || 0) >= (CFG.feedOwedMin || 15) && !v.prospect;
         players.push({ id: pl.id, name: pl.name, pos: v ? v.pos : '', tv: v ? v.tv : null,
-          rem: v ? v.rem : null, prospect: v ? !!v.prospect : undefined,
-          top100: v ? v.top100 : undefined, crude: v && v.crude || undefined });
+          age: v ? v.age : undefined, bt: v ? v.bt : undefined,
+          level: v && v.prospect ? v.topLevel : undefined,
+          orgRank: v ? v.orgRank : undefined, top100: v ? v.top100 : undefined,
+          il: v ? v.il : undefined,
+          owed: bigDeal ? v.rem : undefined,
+          prospect: v ? !!v.prospect : undefined, crude: v && v.crude || undefined });
       }
       const side = { team: s.team, teamId: s.teamId, players, coverage: players.length ? valued / players.length : 0 };
       const cash = cashFor(g, side);

@@ -178,6 +178,7 @@ async function valuePlayer(p, lg) {
     sv.durW = dur.durW;
     if (pitcher && base && base.sp === false && display) sv.closerSv = E.toNum(display.saves, 0);
     sv.ctrl = control;   // rentals lose more value when they're slumping
+    sv.level = topLevel; // unranked prospects are capped by how high they've climbed
   }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
 

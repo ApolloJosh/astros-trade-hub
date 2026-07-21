@@ -255,6 +255,13 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     let quality = 100 * Math.pow(qRel, t.gamma) * ageF;
     // Stars beyond the role cap keep separating instead of all pinning at 100.
     if (qRelRaw > 1) quality += Math.min((qRelRaw - 1) * (t.overK || 0) * 100, t.overCap || 15) * ageF;
+    // You only get the talent for as long as you control him. Two months of a
+    // good arm is not four years of him — rentals cost far less in the market.
+    const cq = t.ctrlQ || {};
+    if (cq.full) {
+      const fl = cq.floor != null ? cq.floor : 0.6;
+      quality *= fl + (1 - fl) * clamp(toNum(sv.ctrl, cq.full) / cq.full, 0, 1);
+    }
     // Cheap years only count if the player is actually good. A utility guy on
     // the minimum shows huge "paper surplus" but has no real trade market —
     // so the surplus contribution scales with quality.
@@ -279,7 +286,11 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
       ? (erp.pts || 10) * Math.min(1, toNum(sv.closerSv, 0) / (erp.savesRef || 25)) * Math.min(1.2, qRelRaw) : 0;
     let raw = (quality + quantity - penalty + t.floor + defPts + awdPts - durPts + rpPrem) * (t.marketMult || 1);
     if (raw > t.squashStart) raw = t.squashStart + t.squashRange * Math.tanh((raw - t.squashStart) / t.squashRange);
-    statTV = clamp(raw, 1, t.max);
+    // Negative values are real: a bad player on guaranteed money is a liability
+    // you must pay someone to absorb (see McCullers to Milwaukee). Below zero
+    // we compress, so a bad contract is a drag without being a black hole.
+    if (raw < 0) raw = -Math.sqrt(-raw) * 3;
+    statTV = clamp(raw, t.min != null ? t.min : 1, t.max);
   }
   if (prospect) {
     let anchor = null;
@@ -292,9 +303,23 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
       const s = (statTV == null) ? anchor : Math.min(statTV, t.prospectCapMult * anchor);
       return r1(clamp(t.prospectBlend * anchor + (1 - t.prospectBlend) * s, 1, t.max));
     }
-    return statTV == null ? null : r1(Math.min(statTV, t.unrankedProspectCap));
+    // UNRANKED prospect: nobody's top-30 list has him, so his ceiling depends
+    // on how far he's actually climbed and how well he's playing there. A
+    // 9.00-ERA A-ball arm and a dominant AAA arm must not both cap out.
+    const caps = t.unrankedCapByLevel || {};
+    const lvl = String(sv && sv.level || '').toUpperCase();
+    let cap = t.unrankedProspectCap || 12;
+    Object.keys(caps).forEach(k => { if (k.toUpperCase() === lvl) cap = caps[k]; });
+    const fl = t.unrankedFloorFrac != null ? t.unrankedFloorFrac : 0.18;
+    const perf = clamp((sv && sv.proj || 0) / (t.unrankedRefWar || 2), 0, 1);
+    const ceiling = cap * (fl + (1 - fl) * perf);
+    return statTV == null ? r1(ceiling) : r1(clamp(Math.min(statTV, ceiling), 0.5, t.max));
   }
-  return statTV == null ? null : r1(statTV);
+  // A real major leaguer is never quite worthless — someone will take the
+  // roster spot — unless he's carrying money, which the negative side handles.
+  if (statTV == null) return null;
+  if (statTV > 0 && statTV < (t.mlbFloor || 0)) statTV = t.mlbFloor;
+  return r1(statTV);
 }
 
 // ---- Salary/control estimation for league-wide players (no public salary API) ----
