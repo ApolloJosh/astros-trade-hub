@@ -3,6 +3,28 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Beyond the Diamond — Trade Hub</title>
 <link rel="stylesheet" href="assets/style.css">
+<style>
+/* Tank Commander cross-promo (inline so it always renders) */
+.tcbox{margin:34px 0 8px;padding:26px 22px 24px;background:#0d0d0d;
+  border:var(--card-line-w,3px) solid var(--card-line,#16294f);border-radius:var(--radius,10px);
+  box-shadow:var(--shadow,4px 4px 0 #16294f);text-align:center}
+.tcbox img{display:block;width:520px;max-width:88%;height:auto;margin:0 auto 16px}
+.tcbox .tckick{font-family:var(--hd2,inherit);font-size:11px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:#9bd430;margin-bottom:8px}
+.tcbox .tctitle{font-family:var(--hd2,inherit);font-size:24px;font-weight:800;letter-spacing:.01em;
+  color:#fff;margin:0 0 8px;line-height:1.25}
+.tcbox .tcsub{font-size:14px;color:#c4c4c4;margin:0 auto 18px;max-width:520px;line-height:1.5}
+.tcbox .tcbtn{display:inline-block;background:#9bd430;color:#0d0d0d;text-decoration:none;
+  font-family:var(--hd2,inherit);font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:13px 34px;border-radius:6px;box-shadow:3px 3px 0 #5f8a12;transition:transform .12s,box-shadow .12s}
+.tcbox .tcbtn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #5f8a12}
+@media(max-width:640px){
+  .tcbox{padding:22px 16px}
+  .tcbox .tctitle{font-size:19px}
+  .tcbox .tcsub{font-size:13px}
+  .tcbox .tcbtn{width:100%;padding:14px 0}
+}
+</style>
 </head><body>
 <header id="mast"></header>
 <div class="wrap">
@@ -33,15 +55,13 @@
   <div class="stove" id="stove"><p class="sub">Reading the market…</p></div>
 </div>
 
-<a class="tcbox" href="https://tankcommanderbaseball.com" target="_blank" rel="noopener">
-  <img src="assets/tank-commander-wide.svg" alt="Tank Commander Baseball">
-  <div class="tctext">
-    <div class="tckick">From the same dugout</div>
-    <div class="tctitle">Try our Baseball GM Simulator Game!</div>
-    <div class="tcsub">Build your roster, run the deadline, win the ring — at tankcommanderbaseball.com</div>
-  </div>
-  <span class="tccta">Play now →</span>
-</a>
+<div class="tcbox">
+  <img src="assets/tank-commander-wide.svg" alt="Baseball Tank Commander">
+  <div class="tckick">From the same dugout</div>
+  <div class="tctitle">Try our Baseball GM Simulator Game!</div>
+  <p class="tcsub">Build your roster, run the deadline, win the ring.</p>
+  <a class="tcbtn" href="https://tankcommanderbaseball.com" target="_blank" rel="noopener">Play Now</a>
+</div>
 
 <p class="foot">Model estimates for podcast &amp; fan discussion — not front-office projections. · Beyond the Diamond</p>
 <script src="assets/app.js"></script>
