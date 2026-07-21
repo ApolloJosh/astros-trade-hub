@@ -52,7 +52,8 @@
   <div class="bbar"><div class="bfill" id="bfill"></div><div class="btick"></div></div>
 </div>
 <div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button>
-<button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div></div>
+<button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div>
+<div class="note" id="fanNote" style="display:none;margin-top:8px">Only trades the other GM would actually accept can be posted to Fan Trades.</div></div>
 
 <div class="cols">
   <div class="panel">
@@ -223,6 +224,41 @@ BTD.nav('builder');
   // ---- "Common sense" trade math ----
   // Extra pieces count less: front offices have 26 roster spots, so a pile of
   // role players can never add up to one superstar.
+  // Verdict tiers. Each has a headline, an accept/reject flag, and a few
+  // blurbs — one is picked deterministically from the trade itself so the
+  // card and the page always say the same thing.
+  const TIERS = [
+    { max: 0.45, ok: false, title: '☎️ They hung up', stamp: 'NO DEAL', blurbs: [
+      'Their GM is worried you\'re drunk on the job.',
+      'They blocked your number and changed the locks.',
+      'The call ended before you finished the sentence.',
+      'They forwarded this to the league office as a prank.' ] },
+    { max: 0.6, ok: false, title: '🚫 Not close', stamp: 'NO DEAL', blurbs: [
+      'They laughed, then realized you were serious.',
+      'That\'s not a trade offer, that\'s a wish list.',
+      'Their intern turned this one down.' ] },
+    { max: 0.9, ok: false, title: '🤏 Close — sweeten it', stamp: 'NOT YET', blurbs: [
+      'They\'re listening. Add a real piece and call back.',
+      'Almost. Their GM asked "who else you got?"',
+      'Keep talking — this one\'s in the neighborhood.' ] },
+    { max: 1.25, ok: true, title: '✅ Fair trade — this gets done', stamp: 'ACCEPTED', blurbs: [
+      'Both GMs hang up happy. Deal.',
+      'Right in the negotiation band — pending physicals.',
+      'Nobody wins the press conference. That\'s a fair trade.' ] },
+    { max: 1.6, ok: true, title: '💸 Overpay — instant yes', stamp: 'ACCEPTED', blurbs: [
+      'They said yes before you finished the sentence.',
+      'Their GM is buying a round for the whole office.',
+      'Accepted so fast the fax machine caught fire.' ] },
+    { max: Infinity, ok: true, title: '🚨 Fleeced', stamp: 'ACCEPTED', blurbs: [
+      'This is how you end up in a "worst trades" listicle.',
+      'Their GM just got a contract extension for this.',
+      'Somewhere, a rival front office is framing this offer.' ] },
+  ];
+  const NO_HEADLINER = { ok: false, title: '☎️ No headliner, no call back', stamp: 'NO DEAL', blurbs: [
+    'Quantity isn\'t a headliner. They want a real player.',
+    'You can\'t buy a star with a pile of spare parts.' ] };
+  const pickBlurb = (tier, seed) => tier.blurbs[Math.abs(seed) % tier.blurbs.length];
+
   const PKG_W = [1, 0.74, 0.52, 0.36, 0.25, 0.17, 0.11, 0.07];
   const NEED_MULT = 1.08, UNT_REQ = 1.5, HL_TV = 110, HL_FRAC = 0.45;
   let NEEDS = {};
@@ -291,22 +327,29 @@ BTD.nav('builder');
       sub.textContent = 'Astros send → Astros receive';
       S.vCard = null;
     } else {
-      let t, c, s;
-      if (needHead) {
-        t = '☎️ No headliner, no call back'; c = 'var(--bad)';
-        s = `A package of role players doesn't buy a ${bestR.toFixed(0)}-value star — the best piece offered (${bestG.toFixed(1)}) isn't close.`;
-      } else if (r < 0.6) { t = '☎️ They hung up'; c = 'var(--bad)'; s = `${effGive.toFixed(1)} in real value for ${(effGet * req).toFixed(1)} — nobody says yes.`; }
-      else if (r < 0.9) { t = '🤏 Close — sweeten it'; c = 'var(--warn)'; s = `Offer is ${Math.round((1 - r) * 100)}% light. Add a mid-tier piece.`; }
-      else if (r <= 1.25) { t = '✅ Fair trade — this gets done'; c = 'var(--good)'; s = `${effGive.toFixed(1)} for ${(effGet * req).toFixed(1)} — inside the negotiation band.`; S.accepted = true; }
-      else if (r <= 1.6) { t = '💸 Overpay — instant yes'; c = 'var(--warn)'; s = `Houston gives ${(effGive - effGet * req).toFixed(1)} points more than it needs to.`; S.accepted = true; }
-      else { t = '🚨 Fleeced'; c = 'var(--bad)'; s = 'This is how you end up in a “worst trades” listicle.'; S.accepted = true; }
-      if (unt.length) s += ` 🔒 ${unt[0].name} is untouchable — it takes a ${UNT_REQ}× blow-them-away offer.`;
+      const tier = needHead ? NO_HEADLINER : (TIERS.find(x => r < x.max) || TIERS[TIERS.length - 1]);
+      S.accepted = !!tier.ok;
+      // stable per-trade pick so the page and the shared PNG never disagree
+      const seed = [...S.give, ...S.recv].reduce((a, p) => a + (p.id || 0), 0) + Math.round(r * 100);
+      const blurb = pickBlurb(tier, seed);
+      const c = !tier.ok ? 'var(--bad)' : (r > 1.6 ? 'var(--bad)' : r > 1.25 ? 'var(--warn)' : 'var(--good)');
+      let s = blurb + ' ';
+      s += needHead
+        ? `Best piece offered is ${bestG.toFixed(1)} against a ${bestR.toFixed(0)}-value target.`
+        : `${effGive.toFixed(1)} for ${(effGet * req).toFixed(1)} in real value.`;
+      if (unt.length) s += ` \u{1F512} ${unt[0].name} is untouchable — it takes a ${UNT_REQ}× blow-them-away offer.`;
       else if (S.give.length >= 4) s += ' Piling on extra names barely moves the needle — 26 roster spots.';
-      else if (Math.abs(effGive - give) > 2 || Math.abs(effGet - get) > 2) s += ' (Extra pieces count less — 26 roster spots.)';
-      main.textContent = t; main.style.color = c; sub.textContent = s;
-      S.vCard = { txt: t.replace(/[^\x20-\x7E]/g, '').trim().toUpperCase(), col: c === 'var(--good)' ? '#1d7a4f' : c === 'var(--warn)' ? '#b8860b' : '#c0392b' };
+      main.textContent = tier.title; main.style.color = c; sub.textContent = s;
+      S.vCard = {
+        txt: tier.title.replace(/[^\x20-\x7E]/g, '').trim().toUpperCase(),
+        col: c === 'var(--good)' ? '#1d7a4f' : c === 'var(--warn)' ? '#b8860b' : '#c0392b',
+        ok: !!tier.ok, stamp: tier.stamp, blurb,
+      };
     }
-    document.getElementById('submitFan').style.display = (BTD.FAN_URL && S.accepted && S.give.length && S.recv.length) ? 'inline-block' : 'none';
+    const canSubmit = BTD.FAN_URL && S.accepted && S.give.length && S.recv.length;
+    document.getElementById('submitFan').style.display = canSubmit ? 'inline-block' : 'none';
+    const fn = document.getElementById('fanNote');
+    if (fn) fn.style.display = (BTD.FAN_URL && !S.accepted && S.give.length && S.recv.length) ? 'block' : 'none';
     const cbt = document.getElementById('cbt');
     if (S.give.length || S.recv.length || S.gcash || S.rcash) {
       cbt.style.display = 'block';
@@ -385,13 +428,32 @@ BTD.nav('builder');
     x.fillText('B E Y O N D   T H E   D I A M O N D   P O D C A S T', W / 2, 52);
     x.fillStyle = CREAM; x.font = '900 52px "Archivo Black", sans-serif';
     x.fillText('MOCK TRADE', W / 2, 115);
-    // verdict (matches the on-page package-adjusted call)
+    // ACCEPTED / NO DEAL stamp — the first thing anyone should see
     const vTxt = S.vCard ? S.vCard.txt : 'MOCK TRADE';
     const vCol = S.vCard ? S.vCard.col : NAVY;
-    x.fillStyle = vCol; x.font = '900 38px "Archivo Black", sans-serif';
-    x.fillText(vTxt, W / 2, 210);
+    if (S.vCard) {
+      const ok = S.vCard.ok, badge = ok ? '#1d7a4f' : '#c0392b';
+      const label = (ok ? '✔  ' : '✘  ') + S.vCard.stamp;
+      x.font = '900 30px "Archivo Black", sans-serif';
+      const tw = x.measureText(label).width, pw = tw + 56, px0 = (W - pw) / 2;
+      x.fillStyle = badge;
+      if (x.roundRect) { x.beginPath(); x.roundRect(px0, 172, pw, 50, 25); x.fill(); }
+      else x.fillRect(px0, 172, pw, 50);
+      x.fillStyle = '#fff'; x.textAlign = 'center';
+      x.fillText(label, W / 2, 206);
+    }
+    x.textAlign = 'center';
+    x.fillStyle = vCol; x.font = '900 28px "Archivo Black", sans-serif';
+    x.fillText(vTxt, W / 2, 256);
+    // the funny part
+    if (S.vCard && S.vCard.blurb) {
+      x.fillStyle = MUTED; x.font = 'italic 20px Inter, sans-serif';
+      let b = S.vCard.blurb;
+      while (x.measureText(b).width > W - 120 && b.length > 10) b = b.slice(0, -4) + '…';
+      x.fillText(b, W / 2, 288);
+    }
     // balance bar: orange = value Houston sends, navy = value coming back
-    const bx = 190, bwd = 700, by = 236, bh = 20;
+    const bx = 190, bwd = 700, by = 306, bh = 20;
     const eg = S.effGive ?? give, er = S.effGet ?? get;
     const frac = (eg + er) > 0 ? eg / (eg + er) : 0.5;
     x.fillStyle = NAVY; x.fillRect(bx, by, bwd, bh);
@@ -415,12 +477,12 @@ BTD.nav('builder');
     };
     const col = (title, logo, list, shots, cash, cx) => {
       // team header
-      circle(logo, cx + 22, 340, 22, title);
+      circle(logo, cx + 22, 392, 22, title);
       x.fillStyle = NAVY; x.font = '800 27px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
-      x.fillText(title.toUpperCase(), cx + 56, 349);
+      x.fillText(title.toUpperCase(), cx + 56, 401);
       x.strokeStyle = NAVY; x.lineWidth = 2;
-      x.beginPath(); x.moveTo(cx, 372); x.lineTo(cx + 450, 372); x.stroke();
-      let cy = 424;
+      x.beginPath(); x.moveTo(cx, 420); x.lineTo(cx + 450, 420); x.stroke();
+      let cy = 468;
       list.slice(0, 6).forEach((p, i) => {
         circle(shots[i], cx + 26, cy - 8, 26, p.name);
         x.fillStyle = NAVY; x.font = '700 24px Inter, sans-serif';
@@ -429,7 +491,7 @@ BTD.nav('builder');
         x.fillText(p.pos + (p.orgRank ? ' · Org #' + p.orgRank : '') + (p.top100 ? ' · MLB #' + p.top100 : ''), cx + 64, cy + 16);
         x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
         x.fillText(BTD.pts(p.tv), cx + 450, cy); x.textAlign = 'left';
-        cy += 78;
+        cy += 70;
       });
       if (list.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (list.length - 6) + ' more', cx + 64, cy - 8); cy += 50; }
       if (cash > 0) {
@@ -463,6 +525,12 @@ BTD.nav('builder');
   // Submit an accepted trade to the Fan Trades feed
   document.getElementById('submitFan').addEventListener('click', async () => {
     const btn = document.getElementById('submitFan');
+    // Hard gate — the button is hidden for rejected trades, but never trust the DOM.
+    if (!S.accepted || !S.give.length || !S.recv.length) {
+      btn.textContent = '✗ Only accepted trades can be posted';
+      setTimeout(() => btn.textContent = '🏆 Submit to Fan Trades', 2500);
+      return;
+    }
     const name = prompt('Add your name to the trade (optional):', '');
     if (name === null) return;
     const slim = l => l.map(p => ({ id: p.id, name: p.name, pos: p.pos, team: p.teamId === HOU ? 'Astros' : p.team, tv: p.tv }));
