@@ -257,6 +257,18 @@ BTD.nav('builder');
   const NO_HEADLINER = { ok: false, title: '☎️ No headliner, no call back', stamp: 'NO DEAL', blurbs: [
     'Quantity isn\'t a headliner. They want a real player.',
     'You can\'t buy a star with a pile of spare parts.' ] };
+  // Real trades stay close. Nothing on the live feed has come in more than
+  // ~12 points apart, so anything wider isn't a deal — in either direction.
+  const MAX_GAP = 12;
+  const TOO_FAR_OVER = { ok: false, title: '🔥 Your GM would be fired', stamp: 'NO DEAL', blurbs: [
+    'They\'d accept in a heartbeat. That\'s the problem.',
+    'Their GM is trying not to laugh on the call.',
+    'This gets you run out of Houston by sundown.',
+    'Great trade! For them.' ] };
+  const TOO_FAR_LIGHT = { ok: false, title: '📏 Not in the same ballpark', stamp: 'NO DEAL', blurbs: [
+    'That gap is wider than any real trade all season.',
+    'Front offices don\'t hand out gifts that size.',
+    'You\'re not negotiating, you\'re daydreaming.' ] };
   const pickBlurb = (tier, seed) => tier.blurbs[Math.abs(seed) % tier.blurbs.length];
 
   const PKG_W = [1, 0.74, 0.52, 0.36, 0.25, 0.17, 0.11, 0.07];
@@ -334,7 +346,10 @@ BTD.nav('builder');
       sub.textContent = 'Astros send → Astros receive';
       S.vCard = null;
     } else {
-      const tier = needHead ? NO_HEADLINER : (TIERS.find(x => r < x.max) || TIERS[TIERS.length - 1]);
+      const gap = Math.abs(effGive - effGet * req);
+      let tier = needHead ? NO_HEADLINER : (TIERS.find(x => r < x.max) || TIERS[TIERS.length - 1]);
+      // Absolute gap trumps the ratio: 124 for 64 is not a trade, it's a gift.
+      if (!needHead && gap > MAX_GAP) tier = effGive > effGet * req ? TOO_FAR_OVER : TOO_FAR_LIGHT;
       S.accepted = !!tier.ok;
       // stable per-trade pick so the page and the shared PNG never disagree
       const seed = [...S.give, ...S.recv].reduce((a, p) => a + (p.id || 0), 0) + Math.round(r * 100);
@@ -343,7 +358,8 @@ BTD.nav('builder');
       let s = blurb + ' ';
       s += needHead
         ? `Best piece offered is ${bestG.toFixed(1)} against a ${bestR.toFixed(0)}-value target.`
-        : `${effGive.toFixed(1)} for ${(effGet * req).toFixed(1)} in real value.`;
+        : `${effGive.toFixed(1)} for ${(effGet * req).toFixed(1)} in real value` +
+          (gap > MAX_GAP ? ` — a ${gap.toFixed(1)}-point gap. Real deals land inside ${MAX_GAP}.` : '.');
       if (unt.length) s += ` \u{1F512} ${unt[0].name} is untouchable — it takes a ${UNT_REQ}× blow-them-away offer.`;
       else if (S.give.length >= 4) s += ' Piling on extra names barely moves the needle — 26 roster spots.';
       main.textContent = tier.title; main.style.color = c; sub.textContent = s;
