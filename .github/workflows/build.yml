@@ -36,7 +36,7 @@ jobs:
           git add docs/data reports || true
           # Generated caches: add only if the step that writes them succeeded,
           # so one flaky data source can never fail the whole build.
-          for f in data-sources/id-cache.json data-sources/defense.json data-sources/il-history.json data-sources/salaries-cots.json; do
+          for f in data-sources/id-cache.json data-sources/defense.json data-sources/il-history.json data-sources/salaries-cots.json data-sources/statcast.json; do
             if [ -f "$f" ]; then git add -f "$f" || true; else echo "skip missing $f"; fi
           done
           git diff --cached --quiet || git commit -m 'data refresh'
