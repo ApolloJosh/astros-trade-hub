@@ -4,6 +4,7 @@
     { "name": "Hyeseong Kim", "max": 9, "why": "not a piece anyone is paying for" },
     { "name": "Carlos Correa", "max": 9, "why": "huge contract on an often-injured 31yo; Astros got him for nothing" },
     { "name": "Anthony Volpe", "max": 9, "why": "production doesn't match the name value" },
+    { "name": "Yordan Alvarez", "min": 135.7, "why": "production doesn't match the name value" },
     { "name": "Shohei Ohtani", "min": 165, "why": "repeat MVP; the one asset allowed above the 150 scale" }
   ]
 }
