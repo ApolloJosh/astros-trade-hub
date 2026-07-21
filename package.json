@@ -4,7 +4,8 @@
   "description": "Beyond the Diamond \u2014 league-wide MLB trade values, trade feed, and Astros mock trade builder",
   "private": true,
   "scripts": {
-    "build": "node src/fetch-salaries.js && node src/fetch-defense.js && node src/fetch-il.js && node src/build-data.js && node src/transactions.js && node src/calibrate.js",
+    "build": "node src/fetch-salaries.js && node src/fetch-defense.js && node src/fetch-statcast.js && node src/fetch-il.js && node src/build-data.js && node src/transactions.js && node src/calibrate.js",
+    "statcast": "node src/fetch-statcast.js",
     "il": "node src/fetch-il.js",
     "defense": "node src/fetch-defense.js",
     "salaries": "node src/fetch-salaries.js",
