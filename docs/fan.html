@@ -94,14 +94,25 @@ BTD.nav('fan');
     });
   }
   window.BTD_jsonp = jsonp;
+  // Try a normal fetch AND JSONP — whichever the deployment supports wins.
+  async function tryFetch(params) {
+    const res = await fetch(BTD.FAN_URL + '?' + params + '&cb=' + Date.now());
+    return res.json();
+  }
+  function callApi(params) {
+    return Promise.any([jsonp(params), tryFetch(params)])
+      .catch(errs => { throw (errs && errs.errors ? errs.errors[0] : errs); });
+  }
+  window.BTD_api = callApi;
   let trades = [];
   try {
-    const data = await jsonp('action=list');
+    const data = await callApi('action=list');
     if (data.error) throw new Error(data.error);
     trades = data.trades || [];
   } catch (e) {
-    feedEl.innerHTML = '<div class="card hlempty">Could not load Fan Trades (' + BTD.esc(e.message) +
-      '). Make sure the Apps Script is deployed with Access: Anyone and re-run the deployment.</div>';
+    feedEl.innerHTML = '<div class="card hlempty">Could not load Fan Trades. ' +
+      'Open the script URL with <code>?callback=test123</code> — if the reply isn\'t wrapped in <code>test123(...)</code>, ' +
+      'the backend needs re-deploying as a <b>New version</b>.</div>';
     console.error('Fan Trades load failed:', e);
     return;
   }
@@ -192,7 +203,7 @@ BTD.nav('fan');
     document.querySelectorAll(`button[data-id="${id}"]`).forEach(x => x.classList.add('done'));
     try { localStorage.setItem('ftv_' + id, '1'); } catch (err) {}
     b.textContent = (b.dataset.v === '1' ? '👍 ' : '👎 ') + (parseInt(b.textContent.replace(/\D/g, ''), 10) + 1);
-    try { await jsonp('action=vote&id=' + encodeURIComponent(id) + '&dir=' + b.dataset.v); } catch (err) {}
+    try { await callApi('action=vote&id=' + encodeURIComponent(id) + '&dir=' + b.dataset.v); } catch (err) {}
   });
 })();
 </script>
