@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-21T00:20:28.976Z",
+ "updated": "2026-07-21T01:10:43.357Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -5682,8 +5682,8 @@
     "key": "kylehurt",
     "svc": 1.099,
     "control": 4.5,
-    "salaryM": 0.578,
-    "remM": 0.3,
+    "salaryM": 0.732,
+    "remM": 0.4,
     "exactFA": false
    },
    {
@@ -6784,7 +6784,7 @@
     "key": "zackshort",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.081,
+    "salaryM": 0.094,
     "remM": 0,
     "exactFA": false
    },
@@ -7733,8 +7733,8 @@
     "key": "kristiancurtis",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.302,
-    "remM": 0.2,
+    "salaryM": 0.053,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -13283,8 +13283,8 @@
     "key": "grahampauley",
     "svc": 1.005,
     "control": 4.5,
-    "salaryM": 0.445,
-    "remM": 0.2,
+    "salaryM": 0.63,
+    "remM": 0.3,
     "exactFA": false
    },
    {
