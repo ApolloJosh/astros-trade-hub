@@ -79,28 +79,30 @@ BTD.nav('fan');
 (async () => {
   const feedEl = document.getElementById('ftfeed');
   if (!BTD.FAN_URL) { feedEl.innerHTML = '<div class="card hlempty">Fan Trades is warming up — check back soon!</div>'; return; }
+  // JSONP: load via a <script> tag so we bypass the CORS wall that makes a
+  // plain fetch() to Apps Script fail with "Failed to fetch".
+  function jsonp(params) {
+    return new Promise((resolve, reject) => {
+      const cb = 'btd_' + Math.random().toString(36).slice(2);
+      const s = document.createElement('script');
+      const timer = setTimeout(() => { cleanup(); reject(new Error('timeout — the script did not respond')); }, 15000);
+      function cleanup() { clearTimeout(timer); delete window[cb]; s.remove(); }
+      window[cb] = d => { cleanup(); resolve(d); };
+      s.onerror = () => { cleanup(); reject(new Error('could not reach the Fan Trades script')); };
+      s.src = BTD.FAN_URL + '?' + params + '&callback=' + cb + '&cb=' + Date.now();
+      document.head.appendChild(s);
+    });
+  }
+  window.BTD_jsonp = jsonp;
   let trades = [];
   try {
-    const res = await fetch(BTD.FAN_URL + '?action=list&cb=' + Date.now());
-    const text = await res.text();
-    let data;
-    try { data = JSON.parse(text); }
-    catch (parseErr) {
-      // Apps Script hands back an HTML page for sign-in walls and script errors.
-      const signin = /accounts\.google\.com|Sign in|authorization/i.test(text);
-      feedEl.innerHTML = '<div class="card hlempty">' + (signin
-        ? 'Fan Trades is asking for a Google sign-in, which means the web app\'s access isn\'t set to <b>Anyone</b>. Re-deploy it with Access: Anyone.'
-        : 'The Fan Trades service returned an error instead of data. Open the script URL directly to see it.') +
-        '</div>';
-      console.error('Fan Trades raw response:', text.slice(0, 400));
-      return;
-    }
+    const data = await jsonp('action=list');
     if (data.error) throw new Error(data.error);
     trades = data.trades || [];
   } catch (e) {
-    feedEl.innerHTML = '<div class="card hlempty">Could not reach Fan Trades (' + BTD.esc(e.message) +
-      '). If you just re-deployed the script, the /exec URL changed — update FAN_URL in assets/app.js.</div>';
-    console.error('Fan Trades fetch failed:', e);
+    feedEl.innerHTML = '<div class="card hlempty">Could not load Fan Trades (' + BTD.esc(e.message) +
+      '). Make sure the Apps Script is deployed with Access: Anyone and re-run the deployment.</div>';
+    console.error('Fan Trades load failed:', e);
     return;
   }
   const net = t => (t.likes || 0) - (t.dislikes || 0);
@@ -190,7 +192,7 @@ BTD.nav('fan');
     document.querySelectorAll(`button[data-id="${id}"]`).forEach(x => x.classList.add('done'));
     try { localStorage.setItem('ftv_' + id, '1'); } catch (err) {}
     b.textContent = (b.dataset.v === '1' ? '👍 ' : '👎 ') + (parseInt(b.textContent.replace(/\D/g, ''), 10) + 1);
-    try { await fetch(BTD.FAN_URL, { method: 'POST', body: JSON.stringify({ action: 'vote', id, dir: +b.dataset.v }) }); } catch (err) {}
+    try { await jsonp('action=vote&id=' + encodeURIComponent(id) + '&dir=' + b.dataset.v); } catch (err) {}
   });
 })();
 </script>
