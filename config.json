@@ -49,7 +49,7 @@
       "kAgeMoney": 0.2, "ageMoneyFrom": 29, "ageMoneySpan": 6,
       "ageFrom": 30, "ageK": 0.10, "ageFloor": 0.55,
       "overK": 0.5, "overCap": 18,
-      "ctrlQ": { "full": 3.5, "floor": 0.62 },
+      "ctrlQ": { "full": 2.5, "floor": 0.62 },
       "defWCur": 0.6, "defWPrev": 0.4, "defDead": 3, "defSlope": 0.35, "defCap": 6,
       "awards": { "base": { "MVP": 8, "CY": 7, "ROY": 2, "GG": 1.5, "SS": 1.5, "AS": 1 }, "decay": 0.85, "cap": 18, "place": [1, 0.6, 0.5, 0.35, 0.25] },
       "dur": { "w": [1, 0.75, 0.5, 0.3], "stintDays": 4, "k": 0.1, "cap": 20 },
