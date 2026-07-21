@@ -350,7 +350,12 @@ async function main() {
   const uc = CFG.sv.tv.untouchable || {};
   players.forEach(p => {
     const mvps = (p.awards || []).filter(a => a.t === 'MVP' && (a.place == null || a.place === 1)).length;
-    if ((p.tv || 0) >= (uc.tvMin || 140) || mvps >= (uc.mvpMin || 2) || (uc.ids || []).includes(p.id)) p.unt = true;
+    // Age-scaled tiers: [under this age, above this value] — a 24-year-old at
+    // 128 is a franchise cornerstone even though he's short of the flat cutoff.
+    const tier = (uc.tiers || []).some(([maxAge, minTv]) =>
+      p.age != null && p.age < maxAge && (p.tv || 0) > minTv);
+    if ((p.tv || 0) >= (uc.tvMin || 140) || mvps >= (uc.mvpMin || 2) ||
+        tier || (uc.ids || []).includes(p.id)) p.unt = true;
   });
 
   console.log('Astros fits + payroll from Sheet…');
