@@ -27,6 +27,22 @@ window.BTD = (function () {
     if (!r.ok) throw new Error(name + ' ' + r.status);
     return r.json();
   }
+  // Fan Trades feed (JSONP + fetch race — same channel as the Fan Trades page).
+  function fanTrades() {
+    if (!FAN_URL) return Promise.resolve([]);
+    const jsonp = () => new Promise((resolve, reject) => {
+      const cb = 'btd_' + Math.random().toString(36).slice(2);
+      const s = document.createElement('script');
+      const t = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 15000);
+      function cleanup() { clearTimeout(t); delete window[cb]; s.remove(); }
+      window[cb] = d => { cleanup(); resolve(d); };
+      s.onerror = () => { cleanup(); reject(new Error('script error')); };
+      s.src = FAN_URL + '?action=list&callback=' + cb + '&cb=' + Date.now();
+      document.head.appendChild(s);
+    });
+    const fx = async () => (await fetch(FAN_URL + '?action=list&cb=' + Date.now())).json();
+    return Promise.any([jsonp(), fx()]).then(d => (d && d.trades) || []).catch(() => []);
+  }
   const shot = id => id ? `https://midfield.mlbstatic.com/v1/people/${id}/spots/120` : '';
   const logo = teamId => teamId ? `https://www.mlbstatic.com/team-logos/${teamId}.svg` : '';
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -214,5 +230,5 @@ window.BTD = (function () {
     const n = e.target.closest('.pn');
     if (n && n.dataset.pid) { e.stopPropagation(); e.preventDefault(); openPlayer(+n.dataset.pid); }
   }, true);
-  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, FAN_URL };
+  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, fanTrades, FAN_URL };
 })();
