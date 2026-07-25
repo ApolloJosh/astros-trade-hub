@@ -99,7 +99,7 @@ function cotsLookup(p) {
   return team.find(x => x.key === k) || null;
 }
 
-const isPitcherPos = pos => ['P', 'SP', 'RP', 'TWP'].includes(String(pos || '').toUpperCase());
+const isPitcherPos = pos => ['P', 'SP', 'RP', 'TWP', 'RHP', 'LHP'].includes(String(pos || '').toUpperCase());
 
 async function historyBases(id, pitcher, pos, lg) {
   const d = await api.yearByYear(id, pitcher);
