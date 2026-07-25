@@ -127,18 +127,27 @@ async function historyBases(id, pitcher, pos, lg) {
 
 async function combinedSeason(id, pitcher, pos, lg) {
   const levels = [[1, 1.0, 0, 0]].concat(CFG.prospect.levels);
-  const rows = []; let topSport = null;
+  const rows = []; const times = [];   // playing time per level (PA or IP)
   for (const lv of levels) {
     const d = await api.seasonStatsSport(id, pitcher, lv[0]);
     const s = api.statOf(d);
-    if (s) { rows.push({ s, f: lv[1], wp: lv[2] || 0, ep: lv[3] || 0 }); if (topSport == null) topSport = lv[0]; }
+    if (s) {
+      rows.push({ s, f: lv[1], wp: lv[2] || 0, ep: lv[3] || 0 });
+      times.push({ sport: lv[0], time: pitcher ? E.ipNum(s.inningsPitched) : E.toNum(s.plateAppearances, 0) });
+    }
   }
   if (!rows.length) return null;
   const out = pitcher ? E.combinePitching(rows, lg) : E.combineHitting(rows, pos, lg);
   if (out && out.base) {
-    const rk = CFG.sv.prospectRisk[String(topSport)];
-    out.base.risk = rk != null ? rk : 0.5;
-    out.topLevel = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'A+', 14: 'A', 16: 'Rk' }[topSport] || '?';
+    // Level attribution by where he ACTUALLY played the most — a handful of
+    // MLB at-bats must not label a AAA season "MLB" or grant it MLB bust-risk.
+    const totalT = times.reduce((a, x) => a + x.time, 0) || 1;
+    const dom = times.reduce((a, x) => x.time > a.time ? x : a, times[0]);
+    // Bust risk blended across the levels he appeared at, weighted by time.
+    let riskW = 0;
+    times.forEach(x => { const r = CFG.sv.prospectRisk[String(x.sport)]; riskW += (r != null ? r : 0.5) * x.time; });
+    out.base.risk = riskW / totalT;
+    out.topLevel = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'A+', 14: 'A', 16: 'Rk' }[dom.sport] || '?';
   }
   return out;
 }
