@@ -1,11 +1,12 @@
 {
   "team": "royals",
-  "updated": "2026-07-17",
+  "teamId": 118,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
       "name": "Kendry Chourio",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 2,
@@ -15,32 +16,32 @@
     {
       "rank": 3,
       "name": "David Shields",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 4,
-      "name": "Blake Mitchell",
-      "pos": "C"
-    },
-    {
-      "rank": 5,
-      "name": "Sean Gamble",
-      "pos": "OF"
-    },
-    {
-      "rank": 6,
       "name": "Angeibel Gomez",
       "pos": "OF"
     },
     {
-      "rank": 7,
+      "rank": 5,
+      "name": "Blake Mitchell",
+      "pos": "C"
+    },
+    {
+      "rank": 6,
       "name": "Ramon Ramirez",
       "pos": "C"
     },
     {
+      "rank": 7,
+      "name": "Justin Lamkin",
+      "pos": "LHP"
+    },
+    {
       "rank": 8,
-      "name": "Ben Kudrna",
-      "pos": "SP"
+      "name": "Sean Gamble",
+      "pos": "OF"
     },
     {
       "rank": 9,
@@ -49,38 +50,38 @@
     },
     {
       "rank": 10,
-      "name": "Drew Beam",
-      "pos": "SP"
+      "name": "Michael Lombardi",
+      "pos": "RHP"
     },
     {
       "rank": 11,
-      "name": "Steven Zobac",
-      "pos": "SP"
+      "name": "Drew Beam",
+      "pos": "RHP"
     },
     {
       "rank": 12,
-      "name": "Felix Arronde",
-      "pos": "SP"
+      "name": "Steven Zobac",
+      "pos": "RHP"
     },
     {
       "rank": 13,
-      "name": "Justin Lamkin",
-      "pos": "SP"
+      "name": "Felix Arronde",
+      "pos": "RHP"
     },
     {
       "rank": 14,
-      "name": "Michael Lombardi",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
       "name": "Asbel Gonzalez",
       "pos": "OF"
     },
     {
-      "rank": 16,
+      "rank": 15,
       "name": "Carson Roccaforte",
       "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Jaider Suárez",
+      "pos": "SS"
     },
     {
       "rank": 17,
@@ -94,28 +95,28 @@
     },
     {
       "rank": 19,
-      "name": "Shane Panzini",
-      "pos": "SP"
+      "name": "Ben Kudrna",
+      "pos": "RHP"
     },
     {
       "rank": 20,
       "name": "Freddy Contreras",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 21,
       "name": "Cameron Millar",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 22,
       "name": "Blake Wolters",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 23,
       "name": "Dennis Colleran Jr.",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 24,
@@ -130,28 +131,27 @@
     {
       "rank": 26,
       "name": "Josh Hansell",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 27,
       "name": "Frank Mozzicato",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 28,
       "name": "Hunter Patteson",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 29,
-      "name": "Jaider Suárez",
-      "pos": "SS"
+      "name": "Grayson Boles",
+      "pos": "RHP"
     },
     {
       "rank": 30,
-      "name": "Grayson Boles",
-      "pos": "SP"
+      "name": "Shane Panzini",
+      "pos": "RHP"
     }
-  ],
-  "teamId": 118
+  ]
 }

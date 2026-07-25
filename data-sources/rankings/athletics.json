@@ -1,6 +1,7 @@
 {
   "team": "athletics",
-  "updated": "2026-07-17",
+  "teamId": 133,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -10,22 +11,22 @@
     {
       "rank": 2,
       "name": "Jamie Arnold",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 3,
-      "name": "Wei-En Lin",
-      "pos": "SP"
+      "name": "Joshua Kuroda-Grauer",
+      "pos": "2B"
     },
     {
       "rank": 4,
-      "name": "Braden Nett",
-      "pos": "SP"
+      "name": "Johenssy Colome",
+      "pos": "SS"
     },
     {
       "rank": 5,
-      "name": "Johenssy Colome",
-      "pos": "SS"
+      "name": "Wei-En Lin",
+      "pos": "LHP"
     },
     {
       "rank": 6,
@@ -39,68 +40,68 @@
     },
     {
       "rank": 8,
-      "name": "Joshua Kuroda-Grauer",
-      "pos": "2B"
-    },
-    {
-      "rank": 9,
-      "name": "Edgar Montero",
-      "pos": "SS"
-    },
-    {
-      "rank": 10,
-      "name": "Kade Morris",
-      "pos": "SP"
-    },
-    {
-      "rank": 11,
-      "name": "Shotaro Morii",
-      "pos": "2B"
-    },
-    {
-      "rank": 12,
-      "name": "Henry Baez",
-      "pos": "SP"
-    },
-    {
-      "rank": 13,
-      "name": "Gavin Turley",
-      "pos": "OF"
-    },
-    {
-      "rank": 14,
-      "name": "Steven Echavarria",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
-      "name": "Gunnar Hoglund",
-      "pos": "SP"
-    },
-    {
-      "rank": 16,
-      "name": "Zane Taylor",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
-      "name": "Ryan Lasko",
-      "pos": "OF"
-    },
-    {
-      "rank": 18,
       "name": "Breyson Guedez",
       "pos": "OF"
     },
     {
+      "rank": 9,
+      "name": "Braden Nett",
+      "pos": "RHP"
+    },
+    {
+      "rank": 10,
+      "name": "Edgar Montero",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Kade Morris",
+      "pos": "RHP"
+    },
+    {
+      "rank": 12,
+      "name": "Shotaro Morii",
+      "pos": "2B"
+    },
+    {
+      "rank": 13,
+      "name": "Henry Baez",
+      "pos": "RHP"
+    },
+    {
+      "rank": 14,
+      "name": "Steven Echavarria",
+      "pos": "RHP"
+    },
+    {
+      "rank": 15,
+      "name": "Gunnar Hoglund",
+      "pos": "RHP"
+    },
+    {
+      "rank": 16,
+      "name": "Davis Diaz",
+      "pos": "C"
+    },
+    {
+      "rank": 17,
+      "name": "Yunior Tur",
+      "pos": "RHP"
+    },
+    {
+      "rank": 18,
+      "name": "Zane Taylor",
+      "pos": "RHP"
+    },
+    {
       "rank": 19,
       "name": "Kenya Huggins",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 20,
       "name": "Cole Miller",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 21,
@@ -110,7 +111,7 @@
     {
       "rank": 22,
       "name": "Chen Zhong-Ao Zhuang",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 23,
@@ -124,23 +125,23 @@
     },
     {
       "rank": 25,
+      "name": "Gavin Turley",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
       "name": "Bobby Boser",
       "pos": "3B"
     },
     {
-      "rank": 26,
-      "name": "Davis Diaz",
-      "pos": "C"
-    },
-    {
       "rank": 27,
-      "name": "Yunior Tur",
-      "pos": "SP"
+      "name": "Ryan Lasko",
+      "pos": "OF"
     },
     {
       "rank": 28,
       "name": "Nathan Dettmer",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 29,
@@ -152,6 +153,5 @@
       "name": "Daniel Bucciero",
       "pos": "3B"
     }
-  ],
-  "teamId": 133
+  ]
 }

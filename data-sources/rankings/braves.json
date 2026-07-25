@@ -1,11 +1,12 @@
 {
   "team": "braves",
-  "updated": "2026-07-17",
+  "teamId": 144,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
       "name": "Cam Caminiti",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 2,
@@ -19,43 +20,43 @@
     },
     {
       "rank": 4,
+      "name": "Briggs McKenzie",
+      "pos": "LHP"
+    },
+    {
+      "rank": 5,
       "name": "Alex Lodise",
       "pos": "SS"
     },
     {
-      "rank": 5,
-      "name": "Owen Murphy",
-      "pos": "SP"
-    },
-    {
       "rank": 6,
-      "name": "Briggs McKenzie",
-      "pos": "SP"
-    },
-    {
-      "rank": 7,
-      "name": "Diego Tornes",
-      "pos": "OF"
-    },
-    {
-      "rank": 8,
-      "name": "Lucas Braun",
-      "pos": "SP"
-    },
-    {
-      "rank": 9,
       "name": "John Gil",
       "pos": "SS"
     },
     {
+      "rank": 7,
+      "name": "Owen Murphy",
+      "pos": "RHP"
+    },
+    {
+      "rank": 8,
+      "name": "Lucas Braun",
+      "pos": "RHP"
+    },
+    {
+      "rank": 9,
+      "name": "Herick Hernandez",
+      "pos": "LHP"
+    },
+    {
       "rank": 10,
       "name": "Luke Sinnard",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 11,
-      "name": "Garrett Baumann",
-      "pos": "SP"
+      "name": "Diego Tornes",
+      "pos": "OF"
     },
     {
       "rank": 12,
@@ -64,94 +65,93 @@
     },
     {
       "rank": 13,
-      "name": "Herick Hernandez",
-      "pos": "SP"
+      "name": "Blake Burkhalter",
+      "pos": "RHP"
     },
     {
       "rank": 14,
-      "name": "Blake Burkhalter",
-      "pos": "SP"
+      "name": "Drue Hackenberg",
+      "pos": "RHP"
     },
     {
       "rank": 15,
-      "name": "Drue Hackenberg",
-      "pos": "SP"
+      "name": "Rolddy Muñoz",
+      "pos": "RHP"
     },
     {
       "rank": 16,
-      "name": "Rolddy Muñoz",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
       "name": "Owen Carey",
       "pos": "OF"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "name": "Luis Guanipa",
       "pos": "OF"
     },
     {
+      "rank": 18,
+      "name": "Jim Jarvis",
+      "pos": "INF"
+    },
+    {
       "rank": 19,
       "name": "Hayden Harris",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 20,
       "name": "Landon Beidelschies",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 21,
       "name": "Ethan Bagwell",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 22,
+      "name": "Garrett Baumann",
+      "pos": "RHP"
+    },
+    {
+      "rank": 23,
       "name": "Jose Perdomo",
       "pos": "SS"
     },
     {
-      "rank": 23,
+      "rank": 24,
       "name": "Patrick Clohisy",
       "pos": "OF"
     },
     {
-      "rank": 24,
+      "rank": 25,
       "name": "Jose Manon",
       "pos": "SS"
     },
     {
-      "rank": 25,
+      "rank": 26,
       "name": "Dixon Williams",
       "pos": "2B"
     },
     {
-      "rank": 26,
+      "rank": 27,
       "name": "Raudy Reyes",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 27,
+      "rank": 28,
       "name": "Isaiah Drake",
       "pos": "OF"
     },
     {
-      "rank": 28,
-      "name": "Jim Jarvis",
-      "pos": "SS"
-    },
-    {
       "rank": 29,
       "name": "Rayven Antonio",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 30,
       "name": "Cody Miller",
       "pos": "2B"
     }
-  ],
-  "teamId": 144
+  ]
 }

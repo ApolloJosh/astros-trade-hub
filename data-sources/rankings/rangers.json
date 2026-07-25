@@ -1,6 +1,7 @@
 {
   "team": "rangers",
-  "updated": "2026-07-17",
+  "teamId": 140,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -10,42 +11,42 @@
     {
       "rank": 2,
       "name": "Caden Scarborough",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 3,
       "name": "AJ Russell",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 4,
-      "name": "Jose Corniell",
-      "pos": "SP"
+      "name": "Malcolm Moore",
+      "pos": "C"
     },
     {
       "rank": 5,
-      "name": "Winston Santos",
-      "pos": "SP"
-    },
-    {
-      "rank": 6,
-      "name": "Josh Owens",
-      "pos": "SS"
-    },
-    {
-      "rank": 7,
-      "name": "David Davalillo",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
       "name": "Yolfran Castillo",
       "pos": "SS"
     },
     {
+      "rank": 6,
+      "name": "Seong-Jun Kim",
+      "pos": "SS"
+    },
+    {
+      "rank": 7,
+      "name": "Josh Owens",
+      "pos": "SS"
+    },
+    {
+      "rank": 8,
+      "name": "Dalton Pence",
+      "pos": "LHP"
+    },
+    {
       "rank": 9,
       "name": "Elian Rosario",
-      "pos": "OF"
+      "pos": "3B"
     },
     {
       "rank": 10,
@@ -54,53 +55,53 @@
     },
     {
       "rank": 11,
-      "name": "Izack Tiger",
-      "pos": "SP"
+      "name": "Winston Santos",
+      "pos": "RHP"
     },
     {
       "rank": 12,
-      "name": "Dalton Pence",
-      "pos": "SP"
+      "name": "David Davalillo",
+      "pos": "RHP"
     },
     {
       "rank": 13,
       "name": "Cam Cauley",
-      "pos": "SS"
+      "pos": "INF"
     },
     {
       "rank": 14,
-      "name": "Leandro Lopez",
-      "pos": "SP"
+      "name": "Jacob Johnson",
+      "pos": "RHP"
     },
     {
       "rank": 15,
-      "name": "Seong-Jun Kim",
+      "name": "Daniel Rodriguez",
       "pos": "SS"
     },
     {
       "rank": 16,
-      "name": "Elorky Rodriguez",
+      "name": "Hector Osorio",
       "pos": "OF"
     },
     {
       "rank": 17,
       "name": "Emiliano Teodo",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 18,
-      "name": "Malcolm Moore",
-      "pos": "C"
+      "name": "Jack Wheeler",
+      "pos": "3B"
     },
     {
       "rank": 19,
-      "name": "Jack Wheeler",
+      "name": "Rafe Perich",
       "pos": "3B"
     },
     {
       "rank": 20,
       "name": "Mason McConnaughey",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 21,
@@ -109,49 +110,58 @@
     },
     {
       "rank": 22,
+      "name": "Jose Corniell",
+      "pos": "RHP"
+    },
+    {
+      "rank": 23,
+      "name": "Izack Tiger",
+      "pos": "RHP"
+    },
+    {
+      "rank": 24,
       "name": "Paulino Santana",
       "pos": "OF"
     },
     {
-      "rank": 23,
-      "name": "Josh Trentadue",
-      "pos": "SP"
+      "rank": 25,
+      "name": "Leandro Lopez",
+      "pos": "RHP"
     },
     {
-      "rank": 24,
+      "rank": 26,
+      "name": "Elorky Rodriguez",
+      "pos": "2B"
+    },
+    {
+      "rank": 27,
       "name": "Maxton Martin",
       "pos": "OF"
     },
     {
-      "rank": 25,
-      "name": "Carter Baumler",
-      "pos": "SP"
-    },
-    {
-      "rank": 26,
-      "name": "Ben Abeldt",
-      "pos": "SP"
-    },
-    {
-      "rank": 27,
-      "name": "Jacob Johnson",
-      "pos": "SP"
-    },
-    {
       "rank": 28,
-      "name": "Ismael Agreda",
-      "pos": "SP"
+      "name": "Carter Baumler",
+      "pos": "RHP"
     },
     {
       "rank": 29,
-      "name": "Hector Osorio",
-      "pos": "OF"
+      "name": "Ben Abeldt",
+      "pos": "LHP"
     },
     {
       "rank": 30,
+      "name": "Ismael Agreda",
+      "pos": "RHP"
+    },
+    {
+      "rank": null,
+      "name": "Josh Trentadue",
+      "pos": "SP"
+    },
+    {
+      "rank": null,
       "name": "Anthony Gutierrez",
       "pos": "OF"
     }
-  ],
-  "teamId": 140
+  ]
 }

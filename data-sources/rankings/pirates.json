@@ -1,11 +1,12 @@
 {
   "team": "pirates",
-  "updated": "2026-07-17",
+  "teamId": 134,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
       "name": "Seth Hernandez",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 2,
@@ -14,98 +15,98 @@
     },
     {
       "rank": 3,
-      "name": "Hunter Barco",
-      "pos": "SP"
-    },
-    {
-      "rank": 4,
-      "name": "Jhostynxon Garcia",
-      "pos": "OF"
-    },
-    {
-      "rank": 5,
-      "name": "Termarr Johnson",
-      "pos": "2B"
-    },
-    {
-      "rank": 6,
-      "name": "Wyatt Sanford",
-      "pos": "SS"
-    },
-    {
-      "rank": 7,
-      "name": "Antwone Kelly",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
-      "name": "Rafael Flores Jr.",
-      "pos": "C"
-    },
-    {
-      "rank": 9,
-      "name": "Esmerlyn Valdez",
-      "pos": "OF"
-    },
-    {
-      "rank": 10,
-      "name": "Sammy Stafura",
-      "pos": "SS"
-    },
-    {
-      "rank": 11,
-      "name": "Wilber Dotel",
-      "pos": "SP"
-    },
-    {
-      "rank": 12,
-      "name": "Thomas Harrington",
-      "pos": "SP"
-    },
-    {
-      "rank": 13,
-      "name": "Levi Sterling",
-      "pos": "SP"
-    },
-    {
-      "rank": 14,
-      "name": "Omar Alfonzo",
-      "pos": "C"
-    },
-    {
-      "rank": 15,
-      "name": "Darell Morel",
-      "pos": "SS"
-    },
-    {
-      "rank": 16,
-      "name": "Easton Carmichael",
-      "pos": "C"
-    },
-    {
-      "rank": 17,
       "name": "Murf Gray",
       "pos": "3B"
     },
     {
-      "rank": 18,
-      "name": "Yordany De Los Santos",
+      "rank": 4,
+      "name": "Wyatt Sanford",
       "pos": "SS"
     },
     {
-      "rank": 19,
+      "rank": 5,
+      "name": "Jhostynxon Garcia",
+      "pos": "OF"
+    },
+    {
+      "rank": 6,
       "name": "Axiel Plaz",
       "pos": "C"
     },
     {
-      "rank": 20,
+      "rank": 7,
+      "name": "Easton Carmichael",
+      "pos": "C"
+    },
+    {
+      "rank": 8,
       "name": "Edgleen Perez",
       "pos": "C"
     },
     {
+      "rank": 9,
+      "name": "Sammy Stafura",
+      "pos": "SS"
+    },
+    {
+      "rank": 10,
+      "name": "Hunter Barco",
+      "pos": "LHP"
+    },
+    {
+      "rank": 11,
+      "name": "Termarr Johnson",
+      "pos": "2B"
+    },
+    {
+      "rank": 12,
+      "name": "Antwone Kelly",
+      "pos": "RHP"
+    },
+    {
+      "rank": 13,
+      "name": "Reinold Navarro",
+      "pos": "LHP"
+    },
+    {
+      "rank": 14,
+      "name": "Rafael Flores Jr.",
+      "pos": "C"
+    },
+    {
+      "rank": 15,
+      "name": "Wilber Dotel",
+      "pos": "RHP"
+    },
+    {
+      "rank": 16,
+      "name": "Levi Sterling",
+      "pos": "RHP"
+    },
+    {
+      "rank": 17,
+      "name": "Omar Alfonzo",
+      "pos": "C"
+    },
+    {
+      "rank": 18,
+      "name": "Darell Morel",
+      "pos": "SS"
+    },
+    {
+      "rank": 19,
+      "name": "Johan De Los Santos",
+      "pos": "SS"
+    },
+    {
+      "rank": 20,
+      "name": "Yordany De Los Santos",
+      "pos": "SS"
+    },
+    {
       "rank": 21,
       "name": "Khristian Curtis",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 22,
@@ -114,44 +115,48 @@
     },
     {
       "rank": 23,
-      "name": "Zander Mueth",
-      "pos": "SP"
+      "name": "Thomas Harrington",
+      "pos": "RHP"
     },
     {
       "rank": 24,
-      "name": "Reinold Navarro",
-      "pos": "SP"
+      "name": "Zander Mueth",
+      "pos": "RHP"
     },
     {
       "rank": 25,
       "name": "Jeter Martinez",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 26,
+      "name": "Carlos Tejera",
+      "pos": "OF"
+    },
+    {
+      "rank": 27,
       "name": "Duce Gourson",
       "pos": "2B"
     },
     {
-      "rank": 27,
+      "rank": 28,
       "name": "Tony Blanco Jr.",
       "pos": "1B"
     },
     {
-      "rank": 28,
+      "rank": 29,
       "name": "Callan Moss",
       "pos": "1B"
-    },
-    {
-      "rank": 29,
-      "name": "Johan De Los Santos",
-      "pos": "SS"
     },
     {
       "rank": 30,
       "name": "Lonnie White Jr.",
       "pos": "OF"
+    },
+    {
+      "rank": null,
+      "name": "Esmerlyn Valdez",
+      "pos": "OF"
     }
-  ],
-  "teamId": 134
+  ]
 }

@@ -1,6 +1,7 @@
 {
   "team": "cardinals",
-  "updated": "2026-07-17",
+  "teamId": 138,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -10,7 +11,7 @@
     {
       "rank": 2,
       "name": "Liam Doyle",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 3,
@@ -19,8 +20,8 @@
     },
     {
       "rank": 4,
-      "name": "Jurrangelo Cijntje",
-      "pos": "SP"
+      "name": "Tanner Franklin",
+      "pos": "RHP"
     },
     {
       "rank": 5,
@@ -29,129 +30,133 @@
     },
     {
       "rank": 6,
-      "name": "Quinn Mathews",
-      "pos": "SP"
+      "name": "Brandon Clarke",
+      "pos": "LHP"
     },
     {
       "rank": 7,
-      "name": "Brandon Clarke",
-      "pos": "SP"
+      "name": "Quinn Mathews",
+      "pos": "LHP"
     },
     {
       "rank": 8,
-      "name": "Tekoah Roby",
-      "pos": "SP"
+      "name": "Jurrangelo Cijntje",
+      "pos": "RHP"
     },
     {
       "rank": 9,
-      "name": "Tanner Franklin",
-      "pos": "SP"
+      "name": "Yhoiker Fajardo",
+      "pos": "RHP"
     },
     {
       "rank": 10,
-      "name": "Ryan Mitchell",
-      "pos": "OF"
+      "name": "Tekoah Roby",
+      "pos": "RHP"
     },
     {
       "rank": 11,
-      "name": "Yhoiker Fajardo",
-      "pos": "SP"
+      "name": "Jacob Odle",
+      "pos": "RHP"
     },
     {
       "rank": 12,
-      "name": "Ixan Henderson",
-      "pos": "SP"
+      "name": "Sebastian Dos Santos",
+      "pos": "SS"
     },
     {
       "rank": 13,
-      "name": "Jacob Odle",
-      "pos": "SP"
-    },
-    {
-      "rank": 14,
-      "name": "Tink Hence",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
       "name": "Yairo Padilla",
       "pos": "SS"
     },
     {
-      "rank": 16,
+      "rank": 14,
       "name": "Cooper Hjerpe",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
-      "rank": 17,
+      "rank": 15,
+      "name": "Mason Molina",
+      "pos": "LHP"
+    },
+    {
+      "rank": 16,
       "name": "Tai Peete",
       "pos": "OF"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "name": "Emanuel Luna",
       "pos": "OF"
     },
     {
-      "rank": 19,
+      "rank": 18,
       "name": "Jesús Báez",
-      "pos": "SS"
+      "pos": "INF"
+    },
+    {
+      "rank": 19,
+      "name": "Brycen Mautz",
+      "pos": "LHP"
     },
     {
       "rank": 20,
-      "name": "Brycen Mautz",
-      "pos": "SP"
+      "name": "Ryan Mitchell",
+      "pos": "OF"
     },
     {
       "rank": 21,
       "name": "Luis Gastelum",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 22,
+      "name": "Ixan Henderson",
+      "pos": "LHP"
+    },
+    {
+      "rank": 23,
       "name": "Deniel Ortiz",
       "pos": "3B"
     },
     {
-      "rank": 23,
-      "name": "Cade Crossland",
-      "pos": "SP"
-    },
-    {
       "rank": 24,
-      "name": "Chen-Wei Lin",
-      "pos": "SP"
+      "name": "Cade Crossland",
+      "pos": "LHP"
     },
     {
       "rank": 25,
-      "name": "Blaze Jordan",
-      "pos": "1B"
+      "name": "Chen-Wei Lin",
+      "pos": "RHP"
     },
     {
       "rank": 26,
-      "name": "Braden Davis",
-      "pos": "SP"
-    },
-    {
-      "rank": 27,
-      "name": "Hancel Rincon",
-      "pos": "SP"
-    },
-    {
-      "rank": 28,
       "name": "Jack Gurevitch",
       "pos": "1B"
     },
     {
+      "rank": 27,
+      "name": "Blaze Jordan",
+      "pos": "1B"
+    },
+    {
+      "rank": 28,
+      "name": "Tink Hence",
+      "pos": "RHP"
+    },
+    {
       "rank": 29,
-      "name": "Mason Molina",
-      "pos": "SP"
+      "name": "Braden Davis",
+      "pos": "LHP"
     },
     {
       "rank": 30,
+      "name": "Hancel Rincon",
+      "pos": "RHP"
+    },
+    {
+      "rank": null,
       "name": "Nate Dohm",
       "pos": "SP"
     }
-  ],
-  "teamId": 138
+  ]
 }

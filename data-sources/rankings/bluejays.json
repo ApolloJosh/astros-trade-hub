@@ -1,6 +1,7 @@
 {
   "team": "bluejays",
-  "updated": "2026-07-17",
+  "teamId": 141,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -15,32 +16,32 @@
     {
       "rank": 3,
       "name": "Nolan Perry",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 4,
       "name": "Johnny King",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 5,
-      "name": "Ricky Tiedemann",
-      "pos": "SP"
-    },
-    {
-      "rank": 6,
-      "name": "Gage Stanifer",
-      "pos": "SP"
-    },
-    {
-      "rank": 7,
       "name": "Juan Sanchez",
       "pos": "3B"
     },
     {
+      "rank": 6,
+      "name": "Sean Keys",
+      "pos": "INF"
+    },
+    {
+      "rank": 7,
+      "name": "Gage Stanifer",
+      "pos": "RHP"
+    },
+    {
       "rank": 8,
-      "name": "Jake Bloss",
-      "pos": "SP"
+      "name": "Blaine Bullard",
+      "pos": "OF"
     },
     {
       "rank": 9,
@@ -49,109 +50,118 @@
     },
     {
       "rank": 10,
-      "name": "Jake Cook",
-      "pos": "OF"
+      "name": "Ricky Tiedemann",
+      "pos": "LHP"
     },
     {
       "rank": 11,
-      "name": "Victor Arias",
-      "pos": "OF"
+      "name": "Jake Bloss",
+      "pos": "RHP"
     },
     {
       "rank": 12,
-      "name": "Josh Kasevich",
-      "pos": "SS"
-    },
-    {
-      "rank": 13,
-      "name": "Silvano Hechavarria",
-      "pos": "SP"
-    },
-    {
-      "rank": 14,
-      "name": "Blaine Bullard",
-      "pos": "OF"
-    },
-    {
-      "rank": 15,
-      "name": "Sean Keys",
-      "pos": "3B"
-    },
-    {
-      "rank": 16,
-      "name": "Fernando Perez",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
-      "name": "Micah Bucknam",
-      "pos": "SP"
-    },
-    {
-      "rank": 18,
-      "name": "Edward Duran",
-      "pos": "C"
-    },
-    {
-      "rank": 19,
-      "name": "Tim Piasentin",
-      "pos": "3B"
-    },
-    {
-      "rank": 20,
-      "name": "Adam Macko",
-      "pos": "SP"
-    },
-    {
-      "rank": 21,
-      "name": "Brandon Barriera",
-      "pos": "SP"
-    },
-    {
-      "rank": 22,
-      "name": "Javen Coleman",
-      "pos": "SP"
-    },
-    {
-      "rank": 23,
-      "name": "Cutter Coffey",
-      "pos": "3B"
-    },
-    {
-      "rank": 24,
       "name": "Charles McAdoo",
       "pos": "3B"
     },
     {
-      "rank": 25,
+      "rank": 13,
+      "name": "Victor Arias",
+      "pos": "OF"
+    },
+    {
+      "rank": 14,
+      "name": "Josh Kasevich",
+      "pos": "SS"
+    },
+    {
+      "rank": 15,
       "name": "Danny Thompson Jr.",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 16,
+      "name": "Daniel Guerra",
+      "pos": "RHP"
+    },
+    {
+      "rank": 17,
+      "name": "Silvano Hechavarria",
+      "pos": "RHP"
+    },
+    {
+      "rank": 18,
+      "name": "Juan Caricote",
+      "pos": "C"
+    },
+    {
+      "rank": 19,
+      "name": "Jay Harry",
+      "pos": "SS"
+    },
+    {
+      "rank": 20,
+      "name": "Jake Cook",
+      "pos": "OF"
+    },
+    {
+      "rank": 21,
+      "name": "Javen Coleman",
+      "pos": "LHP"
+    },
+    {
+      "rank": 22,
+      "name": "Cutter Coffey",
+      "pos": "3B"
+    },
+    {
+      "rank": 23,
+      "name": "Jared Spencer",
+      "pos": "LHP"
+    },
+    {
+      "rank": 24,
+      "name": "Carson Messina",
+      "pos": "RHP"
+    },
+    {
+      "rank": 25,
+      "name": "Fernando Perez",
+      "pos": "RHP"
     },
     {
       "rank": 26,
-      "name": "Daniel Guerra",
-      "pos": "SP"
+      "name": "Micah Bucknam",
+      "pos": "RHP"
     },
     {
       "rank": 27,
-      "name": "Jared Spencer",
-      "pos": "SP"
+      "name": "Edward Duran",
+      "pos": "C"
     },
     {
       "rank": 28,
-      "name": "Carson Messina",
-      "pos": "SP"
+      "name": "Tim Piasentin",
+      "pos": "3B"
     },
     {
       "rank": 29,
       "name": "Adrian Pinto",
-      "pos": "2B"
+      "pos": "UTIL"
     },
     {
       "rank": 30,
+      "name": "Brandon Barriera",
+      "pos": "LHP"
+    },
+    {
+      "rank": null,
+      "name": "Adam Macko",
+      "pos": "SP"
+    },
+    {
+      "rank": null,
       "name": "Grant Rogers",
       "pos": "SP"
     }
-  ],
-  "teamId": 141
+  ]
 }

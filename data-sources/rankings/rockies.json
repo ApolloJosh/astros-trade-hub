@@ -1,6 +1,7 @@
 {
   "team": "rockies",
-  "updated": "2026-07-17",
+  "teamId": 115,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -9,13 +10,13 @@
     },
     {
       "rank": 2,
-      "name": "Charlie Condon",
-      "pos": "1B"
+      "name": "Roldy Brito",
+      "pos": "OF"
     },
     {
       "rank": 3,
-      "name": "Roldy Brito",
-      "pos": "OF"
+      "name": "Charlie Condon",
+      "pos": "1B"
     },
     {
       "rank": 4,
@@ -24,134 +25,143 @@
     },
     {
       "rank": 5,
-      "name": "Robert Calaz",
-      "pos": "OF"
-    },
-    {
-      "rank": 6,
-      "name": "Cole Carrigg",
-      "pos": "OF"
-    },
-    {
-      "rank": 7,
-      "name": "JB Middleton",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
-      "name": "Brody Brecht",
-      "pos": "SP"
-    },
-    {
-      "rank": 9,
-      "name": "Griffin Herring",
-      "pos": "SP"
-    },
-    {
-      "rank": 10,
-      "name": "Roc Riggio",
-      "pos": "2B"
-    },
-    {
-      "rank": 11,
-      "name": "Sean Sullivan",
-      "pos": "SP"
-    },
-    {
-      "rank": 12,
-      "name": "Max Belyeu",
-      "pos": "OF"
-    },
-    {
-      "rank": 13,
-      "name": "Zac Veen",
-      "pos": "OF"
-    },
-    {
-      "rank": 14,
-      "name": "Welinton Herrera",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
-      "name": "Sterlin Thompson",
-      "pos": "OF"
-    },
-    {
-      "rank": 16,
-      "name": "Gabriel Hughes",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
-      "name": "Ethan Hedges",
-      "pos": "3B"
-    },
-    {
-      "rank": 18,
-      "name": "Wilder Dalis",
-      "pos": "SS"
-    },
-    {
-      "rank": 19,
-      "name": "Jackson Cox",
-      "pos": "SP"
-    },
-    {
-      "rank": 20,
-      "name": "Yujanyer Herrera",
-      "pos": "SP"
-    },
-    {
-      "rank": 21,
-      "name": "Cole Messina",
-      "pos": "C"
-    },
-    {
-      "rank": 22,
       "name": "Cristian Arguelles",
       "pos": "OF"
     },
     {
+      "rank": 6,
+      "name": "Jackson Cox",
+      "pos": "RHP"
+    },
+    {
+      "rank": 7,
+      "name": "Zac Veen",
+      "pos": "OF"
+    },
+    {
+      "rank": 8,
+      "name": "Max Belyeu",
+      "pos": "OF"
+    },
+    {
+      "rank": 9,
+      "name": "Sterlin Thompson",
+      "pos": "OF"
+    },
+    {
+      "rank": 10,
+      "name": "Brody Brecht",
+      "pos": "RHP"
+    },
+    {
+      "rank": 11,
+      "name": "Roc Riggio",
+      "pos": "2B"
+    },
+    {
+      "rank": 12,
+      "name": "Sean Sullivan",
+      "pos": "LHP"
+    },
+    {
+      "rank": 13,
+      "name": "Welinton Herrera",
+      "pos": "LHP"
+    },
+    {
+      "rank": 14,
+      "name": "Konner Eaton",
+      "pos": "LHP"
+    },
+    {
+      "rank": 15,
+      "name": "Robert Calaz",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "JB Middleton",
+      "pos": "RHP"
+    },
+    {
+      "rank": 17,
+      "name": "Andy Perez",
+      "pos": "SS"
+    },
+    {
+      "rank": 18,
+      "name": "Gabriel Hughes",
+      "pos": "RHP"
+    },
+    {
+      "rank": 19,
+      "name": "Tanner Thach",
+      "pos": "1B"
+    },
+    {
+      "rank": 20,
+      "name": "Ethan Hedges",
+      "pos": "3B"
+    },
+    {
+      "rank": 21,
+      "name": "Wilder Dalis",
+      "pos": "INF"
+    },
+    {
+      "rank": 22,
+      "name": "Bryant Betancourt",
+      "pos": "C"
+    },
+    {
       "rank": 23,
+      "name": "Yujanyer Herrera",
+      "pos": "RHP"
+    },
+    {
+      "rank": 24,
+      "name": "Cole Messina",
+      "pos": "C"
+    },
+    {
+      "rank": 25,
       "name": "Ashly Andujar",
       "pos": "SS"
     },
     {
-      "rank": 24,
-      "name": "McCade Brown",
-      "pos": "SP"
-    },
-    {
-      "rank": 25,
-      "name": "Konner Eaton",
-      "pos": "SP"
-    },
-    {
       "rank": 26,
-      "name": "Riley Kelly",
-      "pos": "SP"
+      "name": "McCade Brown",
+      "pos": "RHP"
     },
     {
       "rank": 27,
-      "name": "RJ Petit",
-      "pos": "SP"
+      "name": "Riley Kelly",
+      "pos": "RHP"
     },
     {
       "rank": 28,
+      "name": "RJ Petit",
+      "pos": "RHP"
+    },
+    {
+      "rank": 29,
       "name": "Richard De Los Santos",
       "pos": "SS"
     },
     {
-      "rank": 29,
+      "rank": 30,
       "name": "Sebastian Blanco",
       "pos": "SS"
     },
     {
-      "rank": 30,
-      "name": "Tanner Thach",
-      "pos": "1B"
+      "rank": null,
+      "name": "Cole Carrigg",
+      "pos": "OF"
+    },
+    {
+      "rank": null,
+      "name": "Griffin Herring",
+      "pos": "SP"
     }
-  ],
-  "teamId": 115
+  ]
 }

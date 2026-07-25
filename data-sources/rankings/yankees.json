@@ -1,6 +1,7 @@
 {
   "team": "yankees",
-  "updated": "2026-07-17",
+  "teamId": 147,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -15,132 +16,132 @@
     {
       "rank": 3,
       "name": "Elmer Rodríguez",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 4,
       "name": "Carlos Lagrange",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 5,
-      "name": "Ben Hess",
-      "pos": "SP"
+      "name": "Henry Lalane",
+      "pos": "LHP"
     },
     {
       "rank": 6,
+      "name": "Ben Hess",
+      "pos": "RHP"
+    },
+    {
+      "rank": 7,
       "name": "Spencer Jones",
       "pos": "OF"
     },
     {
-      "rank": 7,
-      "name": "Bryce Cunningham",
-      "pos": "SP"
-    },
-    {
       "rank": 8,
-      "name": "Chase Hampton",
-      "pos": "SP"
+      "name": "Thatcher Hurd",
+      "pos": "RHP"
     },
     {
       "rank": 9,
-      "name": "Thatcher Hurd",
-      "pos": "SP"
+      "name": "Allen Facundo",
+      "pos": "LHP"
     },
     {
       "rank": 10,
-      "name": "Pico Kohn",
-      "pos": "SP"
+      "name": "Bryce Cunningham",
+      "pos": "RHP"
     },
     {
       "rank": 11,
-      "name": "Kyle Carr",
-      "pos": "SP"
+      "name": "Pico Kohn",
+      "pos": "LHP"
     },
     {
       "rank": 12,
+      "name": "Kyle Carr",
+      "pos": "LHP"
+    },
+    {
+      "rank": 13,
       "name": "Core Jackson",
       "pos": "SS"
     },
     {
-      "rank": 13,
+      "rank": 14,
       "name": "Kaeden Kent",
       "pos": "SS"
     },
     {
-      "rank": 14,
-      "name": "Henry Lalane",
-      "pos": "SP"
-    },
-    {
       "rank": 15,
-      "name": "Brock Selvidge",
-      "pos": "SP"
+      "name": "Jack Cebert",
+      "pos": "RHP"
     },
     {
       "rank": 16,
       "name": "Cade Smith",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 17,
-      "name": "Wilson Rodriguez",
+      "name": "Wilberson De Pena",
       "pos": "OF"
     },
     {
       "rank": 18,
+      "name": "Wilson Rodriguez",
+      "pos": "OF"
+    },
+    {
+      "rank": 19,
       "name": "Stiven Marinez",
       "pos": "SS"
     },
     {
-      "rank": 19,
+      "rank": 20,
       "name": "Jace Avina",
       "pos": "OF"
     },
     {
-      "rank": 20,
-      "name": "Rory Fox",
-      "pos": "SP"
-    },
-    {
       "rank": 21,
-      "name": "Brendan Beck",
-      "pos": "SP"
+      "name": "Rory Fox",
+      "pos": "RHP"
     },
     {
       "rank": 22,
-      "name": "Sean Paul Liñan",
-      "pos": "SP"
+      "name": "Chase Hampton",
+      "pos": "RHP"
     },
     {
       "rank": 23,
-      "name": "Xavier Rivas",
-      "pos": "SP"
+      "name": "Brendan Beck",
+      "pos": "RHP"
     },
     {
       "rank": 24,
-      "name": "Mac Heuer",
-      "pos": "SP"
+      "name": "Sean Paul Liñan",
+      "pos": "RHP"
     },
     {
       "rank": 25,
-      "name": "Jack Cebert",
-      "pos": "SP"
+      "name": "Xavier Rivas",
+      "pos": "LHP"
     },
     {
       "rank": 26,
-      "name": "Allen Facundo",
-      "pos": "SP"
+      "name": "Mac Heuer",
+      "pos": "RHP"
     },
     {
       "rank": 27,
-      "name": "Harrison Cohen",
-      "pos": "SP"
+      "name": "Brock Selvidge",
+      "pos": "LHP"
     },
     {
       "rank": 28,
       "name": "Eric Reyzelman",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 29,
@@ -150,8 +151,12 @@
     {
       "rank": 30,
       "name": "Tony Rossi",
+      "pos": "RHP"
+    },
+    {
+      "rank": null,
+      "name": "Harrison Cohen",
       "pos": "SP"
     }
-  ],
-  "teamId": 147
+  ]
 }

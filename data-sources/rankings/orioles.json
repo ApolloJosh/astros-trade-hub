@@ -1,6 +1,7 @@
 {
   "team": "orioles",
-  "updated": "2026-07-17",
+  "teamId": 110,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -15,66 +16,67 @@
     {
       "rank": 3,
       "name": "Joseph Dzierwa",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 4,
-      "name": "Luis De León",
-      "pos": "SP"
-    },
-    {
-      "rank": 5,
-      "name": "Trey Gibson",
-      "pos": "SP"
-    },
-    {
-      "rank": 6,
       "name": "Wehiwa Aloy",
       "pos": "SS"
     },
     {
-      "rank": 7,
-      "name": "Esteban Mejia",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
+      "rank": 5,
       "name": "Aron Estrada",
       "pos": "2B"
     },
     {
+      "rank": 6,
+      "name": "Boston Bateman",
+      "pos": "LHP"
+    },
+    {
+      "rank": 7,
+      "name": "Luis De León",
+      "pos": "LHP"
+    },
+    {
+      "rank": 8,
+      "name": "Trey Gibson",
+      "pos": "RHP"
+    },
+    {
       "rank": 9,
+      "name": "Esteban Mejia",
+      "pos": "RHP"
+    },
+    {
+      "rank": 10,
       "name": "Enrique Bradfield Jr.",
       "pos": "OF"
     },
     {
-      "rank": 10,
-      "name": "Boston Bateman",
-      "pos": "SP"
-    },
-    {
       "rank": 11,
-      "name": "Nestor German",
-      "pos": "SP"
+      "name": "Caden Hunter",
+      "pos": "LHP"
     },
     {
       "rank": 12,
-      "name": "Braxton Bragg",
-      "pos": "SP"
+      "name": "Ethan Anderson",
+      "pos": "C"
     },
     {
       "rank": 13,
-      "name": "Levi Wells",
-      "pos": "SP"
+      "name": "Nestor German",
+      "pos": "RHP"
     },
     {
       "rank": 14,
-      "name": "Juaron Watts"
+      "name": "Braxton Bragg",
+      "pos": "RHP"
     },
     {
       "rank": 15,
-      "name": "Tyson Neighbors",
-      "pos": "SP"
+      "name": "Levi Wells",
+      "pos": "RHP"
     },
     {
       "rank": 16,
@@ -93,64 +95,78 @@
     },
     {
       "rank": 19,
-      "name": "JT Quinn",
-      "pos": "SP"
+      "name": "Jaiden Lo Re",
+      "pos": "UTIL"
     },
     {
       "rank": 20,
-      "name": "Wilfri De La Cruz",
+      "name": "DJ Layton",
       "pos": "SS"
     },
     {
       "rank": 21,
+      "name": "JT Quinn",
+      "pos": "RHP"
+    },
+    {
+      "rank": 22,
+      "name": "Wilfri De La Cruz",
+      "pos": "SS"
+    },
+    {
+      "rank": 23,
       "name": "Jose Luis Acevedo",
       "pos": "SS"
     },
     {
-      "rank": 22,
-      "name": "Andri Hidalgo",
-      "pos": "SP"
-    },
-    {
-      "rank": 23,
-      "name": "Ethan Anderson",
-      "pos": "C"
-    },
-    {
       "rank": 24,
-      "name": "Patrick Reilly",
-      "pos": "SP"
+      "name": "Andri Hidalgo",
+      "pos": "LHP"
     },
     {
       "rank": 25,
+      "name": "Patrick Reilly",
+      "pos": "RHP"
+    },
+    {
+      "rank": 26,
       "name": "Stiven Martinez",
       "pos": "OF"
     },
     {
-      "rank": 26,
+      "rank": 27,
+      "name": "Juaron Watts-Brown",
+      "pos": "RHP"
+    },
+    {
+      "rank": 28,
+      "name": "Tyson Neighbors",
+      "pos": "RHP"
+    },
+    {
+      "rank": 29,
       "name": "Griff O'Ferrall",
       "pos": "SS"
     },
     {
-      "rank": 27,
+      "rank": 30,
       "name": "Colin Yeaman",
       "pos": "3B"
     },
     {
-      "rank": 28,
+      "rank": null,
       "name": "Vance Honeycutt",
       "pos": "OF"
     },
     {
-      "rank": 29,
+      "rank": null,
       "name": "Cobb Hightower",
       "pos": "2B"
     },
     {
-      "rank": 30,
+      "rank": null,
       "name": "Brandon Butterworth",
       "pos": "2B"
     }
-  ],
-  "teamId": 110
+  ]
 }

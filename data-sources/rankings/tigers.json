@@ -1,6 +1,7 @@
 {
   "team": "tigers",
-  "updated": "2026-07-17",
+  "teamId": 116,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -19,139 +20,143 @@
     },
     {
       "rank": 4,
-      "name": "Max Anderson",
-      "pos": "2B"
-    },
-    {
-      "rank": 5,
-      "name": "Thayron Liranzo",
-      "pos": "C"
-    },
-    {
-      "rank": 6,
-      "name": "Cris Rodriguez",
-      "pos": "OF"
-    },
-    {
-      "rank": 7,
       "name": "Jordan Yost",
       "pos": "SS"
     },
     {
+      "rank": 5,
+      "name": "Ben Jacobs",
+      "pos": "LHP"
+    },
+    {
+      "rank": 6,
+      "name": "Max Anderson",
+      "pos": "2B"
+    },
+    {
+      "rank": 7,
+      "name": "Malachi Witherspoon",
+      "pos": "RHP"
+    },
+    {
       "rank": 8,
-      "name": "Andrew Sears",
-      "pos": "SP"
+      "name": "Cris Rodriguez",
+      "pos": "OF"
     },
     {
       "rank": 9,
-      "name": "Malachi Witherspoon",
-      "pos": "SP"
+      "name": "Andrew Sears",
+      "pos": "LHP"
     },
     {
       "rank": 10,
-      "name": "Franyerber Montilla",
-      "pos": "SS"
-    },
-    {
-      "rank": 11,
-      "name": "Michael Oliveto",
+      "name": "Thayron Liranzo",
       "pos": "C"
     },
     {
-      "rank": 12,
-      "name": "Kelvis Salcedo",
-      "pos": "SP"
-    },
-    {
-      "rank": 13,
-      "name": "John Peck",
-      "pos": "SS"
-    },
-    {
-      "rank": 14,
-      "name": "Jake Miller",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
-      "name": "Ben Jacobs",
-      "pos": "SP"
-    },
-    {
-      "rank": 16,
-      "name": "Lucas Elissalt",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
-      "name": "Owen Hall",
-      "pos": "SP"
-    },
-    {
-      "rank": 18,
-      "name": "Izaac Pacheco",
-      "pos": "3B"
-    },
-    {
-      "rank": 19,
-      "name": "Jaden Hamm",
-      "pos": "SP"
-    },
-    {
-      "rank": 20,
-      "name": "Jude Warwick",
-      "pos": "SS"
-    },
-    {
-      "rank": 21,
+      "rank": 11,
       "name": "Eduardo Valencia",
       "pos": "C"
     },
     {
-      "rank": 22,
-      "name": "Trei Cruz",
-      "pos": "OF"
+      "rank": 12,
+      "name": "Michael Oliveto",
+      "pos": "C"
     },
     {
-      "rank": 23,
-      "name": "Nick Dumesnil",
-      "pos": "OF"
+      "rank": 13,
+      "name": "Kelvis Salcedo",
+      "pos": "RHP"
     },
     {
-      "rank": 24,
-      "name": "Caleb Leys",
-      "pos": "SP"
-    },
-    {
-      "rank": 25,
-      "name": "Jackson Strong",
-      "pos": "OF"
-    },
-    {
-      "rank": 26,
-      "name": "Grayson Grinsell",
-      "pos": "SP"
-    },
-    {
-      "rank": 27,
-      "name": "Randy Santana",
-      "pos": "OF"
-    },
-    {
-      "rank": 28,
+      "rank": 14,
       "name": "Brett Callahan",
       "pos": "OF"
     },
     {
-      "rank": 29,
+      "rank": 15,
+      "name": "John Peck",
+      "pos": "SS"
+    },
+    {
+      "rank": 16,
+      "name": "Jesus Pinto",
+      "pos": "OF"
+    },
+    {
+      "rank": 17,
+      "name": "Jake Miller",
+      "pos": "LHP"
+    },
+    {
+      "rank": 18,
+      "name": "Lucas Elissalt",
+      "pos": "RHP"
+    },
+    {
+      "rank": 19,
       "name": "Jhonan Coba",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 20,
+      "name": "Manuel Bolivar",
+      "pos": "C"
+    },
+    {
+      "rank": 21,
+      "name": "Franyerber Montilla",
+      "pos": "SS"
+    },
+    {
+      "rank": 22,
+      "name": "Owen Hall",
+      "pos": "RHP"
+    },
+    {
+      "rank": 23,
+      "name": "Jude Warwick",
+      "pos": "SS"
+    },
+    {
+      "rank": 24,
+      "name": "Trei Cruz",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Nick Dumesnil",
+      "pos": "OF"
+    },
+    {
+      "rank": 26,
+      "name": "Caleb Leys",
+      "pos": "LHP"
+    },
+    {
+      "rank": 27,
+      "name": "Jackson Strong",
+      "pos": "OF"
+    },
+    {
+      "rank": 28,
+      "name": "Grayson Grinsell",
+      "pos": "LHP"
+    },
+    {
+      "rank": 29,
+      "name": "Jaden Hamm",
+      "pos": "RHP"
     },
     {
       "rank": 30,
-      "name": "Jesus Pinto",
+      "name": "Izaac Pacheco",
+      "pos": "3B"
+    },
+    {
+      "rank": null,
+      "name": "Randy Santana",
       "pos": "OF"
     }
-  ],
-  "teamId": 116
+  ]
 }

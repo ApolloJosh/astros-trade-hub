@@ -1,36 +1,37 @@
 {
   "team": "mariners",
-  "updated": "2026-07-17",
+  "teamId": 136,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
       "name": "Kade Anderson",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 2,
       "name": "Ryan Sloan",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 3,
+      "name": "Felnin Celesten",
+      "pos": "SS"
+    },
+    {
+      "rank": 4,
       "name": "Lazaro Montes",
       "pos": "OF"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "name": "Michael Arroyo",
       "pos": "2B"
     },
     {
-      "rank": 5,
+      "rank": 6,
       "name": "Jonny Farmelo",
       "pos": "OF"
-    },
-    {
-      "rank": 6,
-      "name": "Felnin Celesten",
-      "pos": "SS"
     },
     {
       "rank": 7,
@@ -49,109 +50,118 @@
     },
     {
       "rank": 10,
-      "name": "Griffin Hugus",
-      "pos": "SP"
-    },
-    {
-      "rank": 11,
-      "name": "Korbyn Dickerson",
-      "pos": "OF"
-    },
-    {
-      "rank": 12,
-      "name": "Teddy McGraw",
-      "pos": "SP"
-    },
-    {
-      "rank": 13,
       "name": "Juan Rijo",
       "pos": "OF"
     },
     {
-      "rank": 14,
-      "name": "Mason Peters",
-      "pos": "SP"
+      "rank": 11,
+      "name": "Griffin Hugus",
+      "pos": "RHP"
     },
     {
-      "rank": 15,
-      "name": "Michael Morales",
-      "pos": "SP"
-    },
-    {
-      "rank": 16,
-      "name": "Jared Sundstrom",
+      "rank": 12,
+      "name": "Korbyn Dickerson",
       "pos": "OF"
     },
     {
-      "rank": 17,
+      "rank": 13,
+      "name": "Mason Peters",
+      "pos": "LHP"
+    },
+    {
+      "rank": 14,
+      "name": "Charlie Beilenson",
+      "pos": "RHP"
+    },
+    {
+      "rank": 15,
       "name": "Brock Rodden",
       "pos": "2B"
     },
     {
+      "rank": 16,
+      "name": "Lucas Kelly",
+      "pos": "RHP"
+    },
+    {
+      "rank": 17,
+      "name": "Colton Shaw",
+      "pos": "RHP"
+    },
+    {
       "rank": 18,
-      "name": "Chia-Shi Shen",
-      "pos": "SP"
+      "name": "Jackson Steensma",
+      "pos": "RHP"
     },
     {
       "rank": 19,
-      "name": "Marcelo Perez",
-      "pos": "SP"
+      "name": "Gregory Pio",
+      "pos": "OF"
     },
     {
       "rank": 20,
+      "name": "Marcelo Perez",
+      "pos": "RHP"
+    },
+    {
+      "rank": 21,
       "name": "Carlos Jimenez",
       "pos": "OF"
     },
     {
-      "rank": 21,
-      "name": "Grant Knipp",
-      "pos": "SP"
-    },
-    {
       "rank": 22,
       "name": "Robinson Ortiz",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 23,
-      "name": "Po-Chun Lin",
-      "pos": "SP"
+      "name": "Grant Knipp",
+      "pos": "RHP"
     },
     {
       "rank": 24,
-      "name": "Charlie Beilenson",
-      "pos": "SP"
+      "name": "Po-Chun Lin",
+      "pos": "RHP"
     },
     {
       "rank": 25,
-      "name": "Tyler Cleveland",
-      "pos": "SP"
+      "name": "Teddy McGraw",
+      "pos": "RHP"
     },
     {
       "rank": 26,
-      "name": "Kendry Martínez",
-      "pos": "SS"
-    },
-    {
-      "rank": 27,
-      "name": "Lucas Kelly",
-      "pos": "SP"
-    },
-    {
-      "rank": 28,
       "name": "Aiden Taurek",
       "pos": "OF"
     },
     {
+      "rank": 27,
+      "name": "Casey Hintz",
+      "pos": "RHP"
+    },
+    {
+      "rank": 28,
+      "name": "Chia-Shi Shen",
+      "pos": "RHP"
+    },
+    {
       "rank": 29,
-      "name": "Jackson Steensma",
-      "pos": "SP"
+      "name": "Michael Morales",
+      "pos": "RHP"
     },
     {
       "rank": 30,
-      "name": "Casey Hintz",
+      "name": "Jared Sundstrom",
+      "pos": "OF"
+    },
+    {
+      "rank": null,
+      "name": "Tyler Cleveland",
       "pos": "SP"
+    },
+    {
+      "rank": null,
+      "name": "Kendry Martínez",
+      "pos": "SS"
     }
-  ],
-  "teamId": 136
+  ]
 }

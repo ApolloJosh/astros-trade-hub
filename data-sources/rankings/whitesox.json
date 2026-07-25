@@ -1,6 +1,7 @@
 {
   "team": "whitesox",
-  "updated": "2026-07-17",
+  "teamId": 145,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -9,133 +10,133 @@
     },
     {
       "rank": 2,
-      "name": "Braden Montgomery",
-      "pos": "OF"
+      "name": "Hagen Smith",
+      "pos": "LHP"
     },
     {
       "rank": 3,
-      "name": "Hagen Smith",
-      "pos": "SP"
-    },
-    {
-      "rank": 4,
       "name": "Billy Carlson",
       "pos": "SS"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "name": "Tanner McDougal",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "name": "Jaden Fauske",
       "pos": "OF"
     },
     {
-      "rank": 7,
-      "name": "Christian Oppor",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
-      "name": "Kyle Lodise",
-      "pos": "SS"
-    },
-    {
-      "rank": 9,
+      "rank": 6,
       "name": "William Bergolla Jr.",
       "pos": "SS"
     },
     {
-      "rank": 10,
-      "name": "Mason Adams",
-      "pos": "SP"
+      "rank": 7,
+      "name": "David Sandlin",
+      "pos": "RHP"
     },
     {
-      "rank": 11,
+      "rank": 8,
+      "name": "Mason Adams",
+      "pos": "RHP"
+    },
+    {
+      "rank": 9,
       "name": "Javier Mogollon",
       "pos": "2B"
     },
     {
-      "rank": 12,
+      "rank": 10,
+      "name": "Kyle Lodise",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
       "name": "George Wolkow",
       "pos": "OF"
     },
     {
+      "rank": 12,
+      "name": "Blake Larson",
+      "pos": "LHP"
+    },
+    {
       "rank": 13,
-      "name": "Jeral Perez",
-      "pos": "2B"
+      "name": "Mathias LaCombe",
+      "pos": "RHP"
     },
     {
       "rank": 14,
-      "name": "Blake Larson",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
-      "name": "Mathias LaCombe",
-      "pos": "SP"
-    },
-    {
-      "rank": 16,
-      "name": "David Sandlin",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
       "name": "Sebastian Romero",
       "pos": "OF"
     },
     {
-      "rank": 18,
+      "rank": 15,
+      "name": "Boston Smith",
+      "pos": "C"
+    },
+    {
+      "rank": 16,
       "name": "Landon Hodge",
       "pos": "C"
     },
     {
-      "rank": 19,
+      "rank": 17,
       "name": "Alexander Albertus",
       "pos": "3B"
     },
     {
+      "rank": 18,
+      "name": "Tyler Schweitzer",
+      "pos": "LHP"
+    },
+    {
+      "rank": 19,
+      "name": "Gabe Davis",
+      "pos": "RHP"
+    },
+    {
       "rank": 20,
-      "name": "Aldrin Batista",
-      "pos": "SP"
+      "name": "Pierce George",
+      "pos": "RHP"
     },
     {
       "rank": 21,
-      "name": "Tyler Schweitzer",
-      "pos": "SP"
+      "name": "Christian Oppor",
+      "pos": "LHP"
     },
     {
       "rank": 22,
-      "name": "Gabe Davis",
-      "pos": "SP"
-    },
-    {
-      "rank": 23,
       "name": "Fernando Graterol",
       "pos": "C"
     },
     {
+      "rank": 23,
+      "name": "Jeral Perez",
+      "pos": "2B"
+    },
+    {
       "rank": 24,
       "name": "Rikuu Nishida",
-      "pos": "OF"
+      "pos": "2B"
     },
     {
       "rank": 25,
       "name": "Shane Murphy",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 26,
       "name": "Ky Bush",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 27,
       "name": "Ryan Burrowes",
-      "pos": "SS"
+      "pos": "INF"
     },
     {
       "rank": 28,
@@ -150,8 +151,17 @@
     {
       "rank": 30,
       "name": "Duncan Davitt",
+      "pos": "RHP"
+    },
+    {
+      "rank": null,
+      "name": "Braden Montgomery",
+      "pos": "OF"
+    },
+    {
+      "rank": null,
+      "name": "Aldrin Batista",
       "pos": "SP"
     }
-  ],
-  "teamId": 145
+  ]
 }

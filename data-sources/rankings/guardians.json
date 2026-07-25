@@ -1,6 +1,7 @@
 {
   "team": "guardians",
-  "updated": "2026-07-17",
+  "teamId": 114,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -20,7 +21,7 @@
     {
       "rank": 4,
       "name": "Braylon Doughty",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 5,
@@ -34,124 +35,123 @@
     },
     {
       "rank": 7,
-      "name": "Khal Stephen",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
-      "name": "Jace LaViolette",
-      "pos": "OF"
-    },
-    {
-      "rank": 9,
-      "name": "Joey Oakie",
-      "pos": "SP"
-    },
-    {
-      "rank": 10,
-      "name": "Welbyn Francisca",
-      "pos": "SS"
-    },
-    {
-      "rank": 11,
       "name": "Dean Curley",
       "pos": "SS"
     },
     {
-      "rank": 12,
-      "name": "Kahlil Watson",
-      "pos": "OF"
-    },
-    {
-      "rank": 13,
-      "name": "Alfonsin Rosario",
-      "pos": "OF"
-    },
-    {
-      "rank": 14,
-      "name": "Juan Brito",
-      "pos": "2B"
-    },
-    {
-      "rank": 15,
-      "name": "Daniel Espino",
-      "pos": "SP"
-    },
-    {
-      "rank": 16,
+      "rank": 8,
       "name": "Aaron Walton",
       "pos": "OF"
     },
     {
+      "rank": 9,
+      "name": "Justin Campbell",
+      "pos": "RHP"
+    },
+    {
+      "rank": 10,
+      "name": "Khal Stephen",
+      "pos": "RHP"
+    },
+    {
+      "rank": 11,
+      "name": "Jace LaViolette",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Joey Oakie",
+      "pos": "RHP"
+    },
+    {
+      "rank": 13,
+      "name": "Welbyn Francisca",
+      "pos": "SS"
+    },
+    {
+      "rank": 14,
+      "name": "Kahlil Watson",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Alfonsin Rosario",
+      "pos": "OF"
+    },
+    {
+      "rank": 16,
+      "name": "Daniel Espino",
+      "pos": "RHP"
+    },
+    {
       "rank": 17,
+      "name": "Luke Hill",
+      "pos": "3B"
+    },
+    {
+      "rank": 18,
       "name": "Jacob Cozart",
       "pos": "C"
     },
     {
-      "rank": 18,
+      "rank": 19,
       "name": "Gabriel Rodriguez",
-      "pos": "SS"
+      "pos": "INF"
     },
     {
-      "rank": 19,
+      "rank": 20,
       "name": "Robert Arias",
       "pos": "OF"
     },
     {
-      "rank": 20,
-      "name": "Dauri Fernandez",
-      "pos": "SS"
-    },
-    {
       "rank": 21,
-      "name": "Justin Campbell",
-      "pos": "SP"
+      "name": "Dauri Fernandez",
+      "pos": "INF"
     },
     {
       "rank": 22,
       "name": "Will Hynes",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 23,
       "name": "Svert Reinoso",
-      "pos": "SS"
+      "pos": "INF"
     },
     {
       "rank": 24,
       "name": "Andrew Walters",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 25,
       "name": "Josh Hartle",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 26,
       "name": "Rafe Schlesinger",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 27,
       "name": "Jackson Humphries",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 28,
       "name": "Nolan Schubart",
-      "pos": "OF"
+      "pos": "1B"
     },
     {
       "rank": 29,
-      "name": "George Valera",
-      "pos": "OF"
+      "name": "Juan Brito",
+      "pos": "2B"
     },
     {
       "rank": 30,
-      "name": "Luke Hill",
-      "pos": "3B"
+      "name": "George Valera",
+      "pos": "OF"
     }
-  ],
-  "teamId": 114
+  ]
 }

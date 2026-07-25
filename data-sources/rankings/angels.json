@@ -1,26 +1,27 @@
 {
   "team": "angels",
-  "updated": "2026-07-17",
+  "teamId": 108,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
       "name": "Tyler Bremner",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 2,
-      "name": "Nelson Rada",
+      "name": "Hayden Alvarez",
       "pos": "OF"
     },
     {
       "rank": 3,
-      "name": "Johnny Slawinski",
-      "pos": "SP"
+      "name": "Nelson Rada",
+      "pos": "OF"
     },
     {
       "rank": 4,
-      "name": "George Klassen",
-      "pos": "SP"
+      "name": "Johnny Slawinski",
+      "pos": "LHP"
     },
     {
       "rank": 5,
@@ -34,68 +35,68 @@
     },
     {
       "rank": 7,
-      "name": "Chase Shores",
-      "pos": "SP"
+      "name": "Dylan Jordan",
+      "pos": "RHP"
     },
     {
       "rank": 8,
       "name": "Trey Gregory-Alford",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 9,
-      "name": "Dylan Jordan",
-      "pos": "SP"
+      "name": "George Klassen",
+      "pos": "RHP"
     },
     {
       "rank": 10,
-      "name": "Hayden Alvarez",
-      "pos": "OF"
+      "name": "Chase Shores",
+      "pos": "RHP"
     },
     {
       "rank": 11,
-      "name": "Chris Cortez",
-      "pos": "SP"
+      "name": "Talon Haley",
+      "pos": "LHP"
     },
     {
       "rank": 12,
-      "name": "Talon Haley",
-      "pos": "SP"
+      "name": "CJ Gray",
+      "pos": "RHP"
     },
     {
       "rank": 13,
-      "name": "CJ Gray",
-      "pos": "SP"
-    },
-    {
-      "rank": 14,
       "name": "Raudi Rodriguez",
       "pos": "OF"
     },
     {
-      "rank": 15,
+      "rank": 14,
       "name": "Barrett Kent",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 15,
+      "name": "Nate Snead",
+      "pos": "RHP"
     },
     {
       "rank": 16,
-      "name": "Nate Snead",
-      "pos": "SP"
-    },
-    {
-      "rank": 17,
       "name": "Juan Flores",
       "pos": "C"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "name": "Jeyson Horton",
       "pos": "SS"
     },
     {
+      "rank": 18,
+      "name": "Jake Munroe",
+      "pos": "3B"
+    },
+    {
       "rank": 19,
       "name": "Joel Hurtado",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 20,
@@ -105,17 +106,17 @@
     {
       "rank": 21,
       "name": "Xavier Mitchell",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 22,
       "name": "Ubaldo Soto",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 23,
       "name": "Austin Gordon",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 24,
@@ -124,23 +125,23 @@
     },
     {
       "rank": 25,
-      "name": "Peyton Olejnik",
-      "pos": "SP"
+      "name": "Chris Cortez",
+      "pos": "RHP"
     },
     {
       "rank": 26,
+      "name": "Peyton Olejnik",
+      "pos": "RHP"
+    },
+    {
+      "rank": 27,
       "name": "Randy De Jesus",
       "pos": "OF"
     },
     {
-      "rank": 27,
-      "name": "Luke LaCourse",
-      "pos": "SP"
-    },
-    {
       "rank": 28,
-      "name": "Jake Munroe",
-      "pos": "3B"
+      "name": "Luke LaCourse",
+      "pos": "RHP"
     },
     {
       "rank": 29,
@@ -152,6 +153,5 @@
       "name": "Juan Cespedes",
       "pos": "OF"
     }
-  ],
-  "teamId": 108
+  ]
 }

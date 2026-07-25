@@ -1,21 +1,22 @@
 {
   "team": "cubs",
-  "updated": "2026-07-17",
+  "teamId": 112,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
-      "name": "Jefferson Rojas",
-      "pos": "SS"
-    },
-    {
-      "rank": 2,
       "name": "Josiah Hartshorn",
       "pos": "OF"
     },
     {
+      "rank": 2,
+      "name": "Jefferson Rojas",
+      "pos": "3B"
+    },
+    {
       "rank": 3,
-      "name": "Jaxon Wiggins",
-      "pos": "SP"
+      "name": "Owen Ayers",
+      "pos": "C"
     },
     {
       "rank": 4,
@@ -29,18 +30,18 @@
     },
     {
       "rank": 6,
-      "name": "Jonathon Long",
-      "pos": "1B"
+      "name": "Jaxon Wiggins",
+      "pos": "RHP"
     },
     {
       "rank": 7,
-      "name": "James Triantos",
-      "pos": "2B"
+      "name": "Kaleb Wing",
+      "pos": "RHP"
     },
     {
       "rank": 8,
-      "name": "Owen Ayers",
-      "pos": "C"
+      "name": "Brooks Caple",
+      "pos": "RHP"
     },
     {
       "rank": 9,
@@ -49,108 +50,113 @@
     },
     {
       "rank": 10,
-      "name": "Kaleb Wing",
-      "pos": "SP"
+      "name": "Jonathon Long",
+      "pos": "1B"
     },
     {
       "rank": 11,
-      "name": "Juan Tomas",
-      "pos": "SS"
+      "name": "James Triantos",
+      "pos": "2B"
     },
     {
       "rank": 12,
-      "name": "Brooks Caple",
-      "pos": "SP"
+      "name": "Juan Tomas",
+      "pos": "3B"
     },
     {
       "rank": 13,
-      "name": "Dominick Reid",
-      "pos": "SP"
+      "name": "Ty Southisene",
+      "pos": "SS"
     },
     {
       "rank": 14,
-      "name": "Brandon Birdsell",
-      "pos": "SP"
+      "name": "Dominick Reid",
+      "pos": "RHP"
     },
     {
       "rank": 15,
-      "name": "Jostin Florentino",
-      "pos": "SP"
+      "name": "Brandon Birdsell",
+      "pos": "RHP"
     },
     {
       "rank": 16,
+      "name": "Jostin Florentino",
+      "pos": "RHP"
+    },
+    {
+      "rank": 17,
       "name": "Jaims Martinez",
       "pos": "SS"
     },
     {
-      "rank": 17,
-      "name": "Ariel Armas",
-      "pos": "C"
-    },
-    {
       "rank": 18,
-      "name": "Brett Bateman",
+      "name": "Jose Escobar",
       "pos": "OF"
     },
     {
       "rank": 19,
+      "name": "Mason McGwire",
+      "pos": "RHP"
+    },
+    {
+      "rank": 20,
+      "name": "Ariel Armas",
+      "pos": "C"
+    },
+    {
+      "rank": 21,
+      "name": "Brett Bateman",
+      "pos": "OF"
+    },
+    {
+      "rank": 22,
       "name": "Johan Geraldo",
       "pos": "SS"
     },
     {
-      "rank": 20,
-      "name": "Erian Rodriguez",
-      "pos": "SP"
-    },
-    {
-      "rank": 21,
-      "name": "Luis Martinez"
-    },
-    {
-      "rank": 22,
-      "name": "Angel Cepeda",
-      "pos": "SS"
-    },
-    {
       "rank": 23,
-      "name": "Ty Southisene",
-      "pos": "2B"
+      "name": "Luis Martinez-Gomez",
+      "pos": "RHP"
     },
     {
       "rank": 24,
+      "name": "Angel Cepeda",
+      "pos": "INF"
+    },
+    {
+      "rank": 25,
       "name": "Kade Snell",
       "pos": "OF"
     },
     {
-      "rank": 25,
-      "name": "Riley Martin",
-      "pos": "SP"
-    },
-    {
       "rank": 26,
-      "name": "Grant Kipp",
-      "pos": "SP"
+      "name": "Riley Martin",
+      "pos": "LHP"
     },
     {
       "rank": 27,
+      "name": "Grant Kipp",
+      "pos": "RHP"
+    },
+    {
+      "rank": 28,
       "name": "Fernando Cruz",
       "pos": "SS"
     },
     {
-      "rank": 28,
-      "name": "Pierce Coppola",
-      "pos": "SP"
-    },
-    {
       "rank": 29,
-      "name": "Mason McGwire",
-      "pos": "SP"
+      "name": "Pierce Coppola",
+      "pos": "LHP"
     },
     {
       "rank": 30,
       "name": "Logan Poteet",
       "pos": "C"
+    },
+    {
+      "rank": null,
+      "name": "Erian Rodriguez",
+      "pos": "SP"
     }
-  ],
-  "teamId": 112
+  ]
 }

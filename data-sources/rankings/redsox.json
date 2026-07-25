@@ -1,6 +1,7 @@
 {
   "team": "redsox",
-  "updated": "2026-07-17",
+  "teamId": 111,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -10,7 +11,7 @@
     {
       "rank": 2,
       "name": "Anthony Eyanson",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 3,
@@ -20,112 +21,112 @@
     {
       "rank": 4,
       "name": "Kyson Witherspoon",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 5,
-      "name": "Juan Valera",
-      "pos": "SP"
-    },
-    {
-      "rank": 6,
-      "name": "Jake Bennett",
-      "pos": "SP"
-    },
-    {
-      "rank": 7,
-      "name": "Dorian Soto",
-      "pos": "SS"
-    },
-    {
-      "rank": 8,
-      "name": "Marcus Phillips",
-      "pos": "SP"
-    },
-    {
-      "rank": 9,
-      "name": "Henry Godbout",
-      "pos": "2B"
-    },
-    {
-      "rank": 10,
       "name": "Enddy Azocar",
       "pos": "OF"
     },
     {
-      "rank": 11,
-      "name": "Mikey Romero",
+      "rank": 6,
+      "name": "Franklin Primera",
+      "pos": "C"
+    },
+    {
+      "rank": 7,
+      "name": "Henry Godbout",
       "pos": "SS"
     },
     {
+      "rank": 8,
+      "name": "Juan Valera",
+      "pos": "RHP"
+    },
+    {
+      "rank": 9,
+      "name": "Sadbiel Delzine",
+      "pos": "RHP"
+    },
+    {
+      "rank": 10,
+      "name": "Dorian Soto",
+      "pos": "SS"
+    },
+    {
+      "rank": 11,
+      "name": "Marcus Phillips",
+      "pos": "RHP"
+    },
+    {
       "rank": 12,
-      "name": "John Holobetz",
-      "pos": "SP"
+      "name": "Mikey Romero",
+      "pos": "3B"
     },
     {
       "rank": 13,
-      "name": "Tyler Uberstine",
-      "pos": "SP"
+      "name": "John Holobetz",
+      "pos": "RHP"
     },
     {
       "rank": 14,
-      "name": "Hayden Mullins",
-      "pos": "SP"
+      "name": "Tyler Uberstine",
+      "pos": "RHP"
     },
     {
       "rank": 15,
-      "name": "Miguel Bleis",
-      "pos": "OF"
+      "name": "Hayden Mullins",
+      "pos": "LHP"
     },
     {
       "rank": 16,
       "name": "Yoeilin Cespedes",
-      "pos": "2B"
+      "pos": "SS"
     },
     {
       "rank": 17,
-      "name": "Sadbiel Delzine",
-      "pos": "SP"
-    },
-    {
-      "rank": 18,
       "name": "Harold Rivas",
       "pos": "OF"
     },
     {
-      "rank": 19,
+      "rank": 18,
       "name": "Jedixson Paez",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 19,
+      "name": "Blake Wehunt",
+      "pos": "RHP"
     },
     {
       "rank": 20,
       "name": "Gage Ziehl",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 21,
-      "name": "Nelly Taylor",
-      "pos": "OF"
-    },
-    {
-      "rank": 22,
       "name": "Hector Ramos",
       "pos": "SS"
     },
     {
-      "rank": 23,
+      "rank": 22,
       "name": "Dawvris Brito",
       "pos": "SS"
     },
     {
-      "rank": 24,
+      "rank": 23,
       "name": "Allan Castro",
       "pos": "OF"
     },
     {
-      "rank": 25,
+      "rank": 24,
       "name": "Eduardo Rivera",
-      "pos": "SP"
+      "pos": "LHP"
+    },
+    {
+      "rank": 25,
+      "name": "Miguel Bleis",
+      "pos": "OF"
     },
     {
       "rank": 26,
@@ -140,18 +141,27 @@
     {
       "rank": 28,
       "name": "Yordanny Monegro",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 29,
       "name": "Conrad Cason",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 30,
       "name": "Jojo Ingrassia",
+      "pos": "LHP"
+    },
+    {
+      "rank": null,
+      "name": "Jake Bennett",
       "pos": "SP"
+    },
+    {
+      "rank": null,
+      "name": "Nelly Taylor",
+      "pos": "OF"
     }
-  ],
-  "teamId": 111
+  ]
 }

@@ -1,6 +1,7 @@
 {
   "team": "padres",
-  "updated": "2026-07-17",
+  "teamId": 135,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -9,88 +10,88 @@
     },
     {
       "rank": 2,
-      "name": "Kruz Schoolcraft",
-      "pos": "SP"
+      "name": "Kash Mayfield",
+      "pos": "LHP"
     },
     {
       "rank": 3,
-      "name": "Miguel Mendez",
-      "pos": "SP"
+      "name": "Kruz Schoolcraft",
+      "pos": "LHP"
     },
     {
       "rank": 4,
-      "name": "Kash Mayfield",
-      "pos": "SP"
+      "name": "Miguel Mendez",
+      "pos": "RHP"
     },
     {
       "rank": 5,
-      "name": "Jorge Quintana",
-      "pos": "SS"
-    },
-    {
-      "rank": 6,
       "name": "Ty Harvey",
       "pos": "C"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "name": "Ryan Wideman",
       "pos": "OF"
     },
     {
+      "rank": 7,
+      "name": "Bryan Balzer",
+      "pos": "RHP"
+    },
+    {
       "rank": 8,
-      "name": "Kale Fountain",
-      "pos": "OF"
+      "name": "Tucker Musgrove",
+      "pos": "RHP"
     },
     {
       "rank": 9,
-      "name": "Tucker Musgrove",
-      "pos": "SP"
-    },
-    {
-      "rank": 10,
-      "name": "Braedon Karpathios",
-      "pos": "OF"
-    },
-    {
-      "rank": 11,
-      "name": "Michael Salina",
-      "pos": "SP"
-    },
-    {
-      "rank": 12,
-      "name": "Garrett Hawkins",
-      "pos": "SP"
-    },
-    {
-      "rank": 13,
-      "name": "Jagger Haynes",
-      "pos": "SP"
-    },
-    {
-      "rank": 14,
-      "name": "Lamar King Jr.",
-      "pos": "C"
-    },
-    {
-      "rank": 15,
       "name": "Joniel Hernandez",
       "pos": "SS"
     },
     {
-      "rank": 16,
+      "rank": 10,
       "name": "Lan-Hong Su",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 11,
+      "name": "Kale Fountain",
+      "pos": "OF"
+    },
+    {
+      "rank": 12,
+      "name": "Michael Salina",
+      "pos": "RHP"
+    },
+    {
+      "rank": 13,
+      "name": "Jagger Haynes",
+      "pos": "LHP"
+    },
+    {
+      "rank": 14,
+      "name": "Kavares Tears",
+      "pos": "OF"
+    },
+    {
+      "rank": 15,
+      "name": "Lamar King Jr.",
+      "pos": "C"
+    },
+    {
+      "rank": 16,
+      "name": "Kannon Kemp",
+      "pos": "RHP"
     },
     {
       "rank": 17,
-      "name": "Kannon Kemp",
-      "pos": "SP"
+      "name": "Luis Gutierrez",
+      "pos": "LHP"
     },
     {
       "rank": 18,
-      "name": "Luis Gutierrez",
-      "pos": "SP"
+      "name": "Jorge Quintana",
+      "pos": "SS"
     },
     {
       "rank": 19,
@@ -99,59 +100,63 @@
     },
     {
       "rank": 20,
-      "name": "Diego Serna",
-      "pos": "SP"
+      "name": "Braedon Karpathios",
+      "pos": "OF"
     },
     {
       "rank": 21,
+      "name": "Diego Serna",
+      "pos": "LHP"
+    },
+    {
+      "rank": 22,
+      "name": "Jesus A. Castro",
+      "pos": "RHP"
+    },
+    {
+      "rank": 23,
+      "name": "Garrett Hawkins",
+      "pos": "RHP"
+    },
+    {
+      "rank": 24,
       "name": "Jhoan De La Cruz",
       "pos": "SS"
     },
     {
-      "rank": 22,
+      "rank": 25,
       "name": "Truitt Madonna",
       "pos": "C"
     },
     {
-      "rank": 23,
-      "name": "Jase Bowen",
-      "pos": "OF"
-    },
-    {
-      "rank": 24,
+      "rank": 26,
       "name": "Tirso Ornelas",
       "pos": "OF"
     },
     {
-      "rank": 25,
+      "rank": 27,
       "name": "Deivid Coronil",
       "pos": "3B"
     },
     {
-      "rank": 26,
-      "name": "Kavares Tears",
-      "pos": "OF"
-    },
-    {
-      "rank": 27,
+      "rank": 28,
       "name": "Romeo Sanabria",
       "pos": "1B"
     },
     {
-      "rank": 28,
-      "name": "Bryan Balzer",
-      "pos": "SP"
-    },
-    {
       "rank": 29,
       "name": "Jaxon Dalena",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 30,
       "name": "Carson Montgomery",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": null,
+      "name": "Jase Bowen",
+      "pos": "OF"
     }
-  ],
-  "teamId": 135
+  ]
 }

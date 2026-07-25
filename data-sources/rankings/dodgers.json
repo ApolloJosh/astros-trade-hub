@@ -1,6 +1,7 @@
 {
   "team": "dodgers",
-  "updated": "2026-07-17",
+  "teamId": 119,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -14,33 +15,33 @@
     },
     {
       "rank": 3,
-      "name": "Zyhir Hope",
-      "pos": "OF"
-    },
-    {
-      "rank": 4,
       "name": "Eduardo Quintero",
       "pos": "OF"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "name": "Emil Morales",
       "pos": "SS"
     },
     {
-      "rank": 6,
-      "name": "River Ryan",
-      "pos": "SP"
-    },
-    {
-      "rank": 7,
-      "name": "Charles Davalan",
+      "rank": 5,
+      "name": "Zyhir Hope",
       "pos": "OF"
     },
     {
-      "rank": 8,
+      "rank": 6,
       "name": "Christian Zazueta",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 7,
+      "name": "River Ryan",
+      "pos": "RHP"
+    },
+    {
+      "rank": 8,
+      "name": "Charles Davalan",
+      "pos": "OF"
     },
     {
       "rank": 9,
@@ -49,18 +50,18 @@
     },
     {
       "rank": 10,
-      "name": "Jackson Ferris",
-      "pos": "SP"
+      "name": "Zach Root",
+      "pos": "LHP"
     },
     {
       "rank": 11,
-      "name": "Adam Serwinowski",
-      "pos": "SP"
+      "name": "Jackson Ferris",
+      "pos": "LHP"
     },
     {
       "rank": 12,
-      "name": "Zach Root",
-      "pos": "SP"
+      "name": "Adam Serwinowski",
+      "pos": "LHP"
     },
     {
       "rank": 13,
@@ -75,7 +76,7 @@
     {
       "rank": 15,
       "name": "Kellon Lindsey",
-      "pos": "SS"
+      "pos": "2B"
     },
     {
       "rank": 16,
@@ -84,74 +85,78 @@
     },
     {
       "rank": 17,
+      "name": "Brady Smith",
+      "pos": "RHP"
+    },
+    {
+      "rank": 18,
       "name": "Zach Ehrhard",
       "pos": "OF"
     },
     {
-      "rank": 18,
+      "rank": 19,
       "name": "Marlon Nieves",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 19,
+      "rank": 20,
       "name": "Ryan Ward",
       "pos": "OF"
     },
     {
-      "rank": 20,
+      "rank": 21,
       "name": "Joendry Vargas",
       "pos": "SS"
     },
     {
-      "rank": 21,
-      "name": "Cam Leiter",
-      "pos": "SP"
-    },
-    {
       "rank": 22,
-      "name": "Sterling Patick",
-      "pos": "SP"
+      "name": "Cam Leiter",
+      "pos": "RHP"
     },
     {
       "rank": 23,
-      "name": "Payton Martin",
-      "pos": "SP"
+      "name": "Sterling Patick",
+      "pos": "LHP"
     },
     {
       "rank": 24,
+      "name": "Payton Martin",
+      "pos": "RHP"
+    },
+    {
+      "rank": 25,
       "name": "Elijah Hainline",
       "pos": "SS"
     },
     {
-      "rank": 25,
-      "name": "Landyn Vidourek",
-      "pos": "OF"
-    },
-    {
       "rank": 26,
-      "name": "Brendan Tunink",
+      "name": "Jaron Elkins",
       "pos": "OF"
     },
     {
       "rank": 27,
+      "name": "Brendan Tunink",
+      "pos": "OF"
+    },
+    {
+      "rank": 28,
       "name": "Noah Miller",
       "pos": "SS"
     },
     {
-      "rank": 28,
-      "name": "Patrick Copen",
-      "pos": "SP"
-    },
-    {
       "rank": 29,
-      "name": "Brady Smith",
-      "pos": "SP"
+      "name": "Patrick Copen",
+      "pos": "RHP"
     },
     {
       "rank": 30,
       "name": "Peter Heubeck",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": null,
+      "name": "Landyn Vidourek",
+      "pos": "OF"
     }
-  ],
-  "teamId": 119
+  ]
 }

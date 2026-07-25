@@ -1,6 +1,7 @@
 {
   "team": "twins",
-  "updated": "2026-07-17",
+  "teamId": 142,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -14,63 +15,63 @@
     },
     {
       "rank": 3,
-      "name": "Eduardo Tait",
-      "pos": "C"
-    },
-    {
-      "rank": 4,
       "name": "Emmanuel Rodriguez",
       "pos": "OF"
     },
     {
+      "rank": 4,
+      "name": "Eduardo Tait",
+      "pos": "C"
+    },
+    {
       "rank": 5,
-      "name": "Dasan Hill",
-      "pos": "SP"
-    },
-    {
-      "rank": 6,
-      "name": "Gabriel Gonzalez",
-      "pos": "OF"
-    },
-    {
-      "rank": 7,
       "name": "Marek Houston",
       "pos": "SS"
     },
     {
+      "rank": 6,
+      "name": "Kendry Rojas",
+      "pos": "LHP"
+    },
+    {
+      "rank": 7,
+      "name": "Riley Quick",
+      "pos": "RHP"
+    },
+    {
       "rank": 8,
-      "name": "Charlee Soto",
-      "pos": "SP"
+      "name": "Dasan Hill",
+      "pos": "LHP"
     },
     {
       "rank": 9,
-      "name": "Kendry Rojas",
-      "pos": "SP"
+      "name": "Gabriel Gonzalez",
+      "pos": "OF"
     },
     {
       "rank": 10,
-      "name": "Riley Quick",
-      "pos": "SP"
-    },
-    {
-      "rank": 11,
       "name": "Hendry Mendez",
       "pos": "OF"
     },
     {
+      "rank": 11,
+      "name": "Khadim Diaw",
+      "pos": "C"
+    },
+    {
       "rank": 12,
+      "name": "Charlee Soto",
+      "pos": "RHP"
+    },
+    {
+      "rank": 13,
       "name": "Quentin Young",
       "pos": "SS"
     },
     {
-      "rank": 13,
-      "name": "Adrian Bohorquez",
-      "pos": "SP"
-    },
-    {
       "rank": 14,
       "name": "James Ellwanger",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 15,
@@ -80,32 +81,32 @@
     {
       "rank": 16,
       "name": "Marco Raya",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 17,
       "name": "Ryan Gallagher",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 18,
       "name": "John Klein",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 19,
-      "name": "Kyle DeBarge",
-      "pos": "SS"
+      "name": "Yasser Mercedes",
+      "pos": "OF"
     },
     {
       "rank": 20,
-      "name": "C.J. Culpepper",
-      "pos": "SP"
+      "name": "Ben Ross",
+      "pos": "UTIL"
     },
     {
       "rank": 21,
-      "name": "Khadim Diaw",
-      "pos": "C"
+      "name": "C.J. Culpepper",
+      "pos": "RHP"
     },
     {
       "rank": 22,
@@ -114,44 +115,43 @@
     },
     {
       "rank": 23,
-      "name": "Santiago Castellanos",
-      "pos": "SP"
+      "name": "Adrian Bohorquez",
+      "pos": "RHP"
     },
     {
       "rank": 24,
-      "name": "Jose Olivares",
-      "pos": "SP"
+      "name": "Santiago Castellanos",
+      "pos": "RHP"
     },
     {
       "rank": 25,
+      "name": "Jose Olivares",
+      "pos": "RHP"
+    },
+    {
+      "rank": 26,
       "name": "Enrique Jimenez",
       "pos": "C"
     },
     {
-      "rank": 26,
+      "rank": 27,
       "name": "Matt Barr",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 27,
+      "rank": 28,
       "name": "Kala'i Rosario",
       "pos": "OF"
     },
     {
-      "rank": 28,
-      "name": "Bruin Agbayani",
-      "pos": "SS"
-    },
-    {
       "rank": 29,
-      "name": "Yasser Mercedes",
-      "pos": "OF"
+      "name": "Kyle DeBarge",
+      "pos": "SS"
     },
     {
       "rank": 30,
-      "name": "Ben Ross",
+      "name": "Bruin Agbayani",
       "pos": "SS"
     }
-  ],
-  "teamId": 142
+  ]
 }

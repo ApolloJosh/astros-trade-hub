@@ -1,16 +1,17 @@
 {
   "team": "marlins",
-  "updated": "2026-07-17",
+  "teamId": 146,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
       "name": "Thomas White",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 2,
       "name": "Robby Snelling",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
       "rank": 3,
@@ -20,27 +21,27 @@
     {
       "rank": 4,
       "name": "Karson Milbrandt",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 5,
-      "name": "Kevin Defrank",
-      "pos": "SP"
-    },
-    {
-      "rank": 6,
       "name": "Starlyn Caba",
       "pos": "SS"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "name": "Cam Cannarella",
       "pos": "OF"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "name": "Kemp Alderman",
       "pos": "OF"
+    },
+    {
+      "rank": 8,
+      "name": "Kevin Defrank",
+      "pos": "RHP"
     },
     {
       "rank": 9,
@@ -49,12 +50,12 @@
     },
     {
       "rank": 10,
-      "name": "Andrew Salas",
+      "name": "Brandon Compton",
       "pos": "OF"
     },
     {
       "rank": 11,
-      "name": "Brandon Compton",
+      "name": "Andrew Salas",
       "pos": "OF"
     },
     {
@@ -64,68 +65,68 @@
     },
     {
       "rank": 13,
-      "name": "Noble Meyer",
-      "pos": "SP"
-    },
-    {
-      "rank": 14,
       "name": "Cristian Hernández",
       "pos": "SS"
     },
     {
-      "rank": 15,
+      "rank": 14,
       "name": "Luis Cova",
       "pos": "OF"
     },
     {
-      "rank": 16,
+      "rank": 15,
       "name": "Max Williams",
       "pos": "OF"
     },
     {
-      "rank": 17,
+      "rank": 16,
       "name": "Brendan Jones",
       "pos": "OF"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "name": "Fenwick Trimble",
       "pos": "OF"
     },
     {
-      "rank": 19,
+      "rank": 18,
       "name": "Luis Arana",
       "pos": "SS"
     },
     {
-      "rank": 20,
+      "rank": 19,
       "name": "Nate Payne",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
-      "rank": 21,
+      "rank": 20,
       "name": "Juan Matheus",
       "pos": "3B"
     },
     {
-      "rank": 22,
+      "rank": 21,
       "name": "José Castro",
       "pos": "OF"
     },
     {
-      "rank": 23,
+      "rank": 22,
       "name": "Esmil Valencia",
       "pos": "OF"
     },
     {
-      "rank": 24,
+      "rank": 23,
       "name": "Ronny Muñoz",
       "pos": "SS"
     },
     {
-      "rank": 25,
+      "rank": 24,
       "name": "Dillon Head",
       "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Noble Meyer",
+      "pos": "RHP"
     },
     {
       "rank": 26,
@@ -135,23 +136,22 @@
     {
       "rank": 27,
       "name": "Aiden May",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 28,
       "name": "Grant Shepardson",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 29,
       "name": "Yohanfer Santana",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 30,
       "name": "Josh Ekness",
-      "pos": "SP"
+      "pos": "RHP"
     }
-  ],
-  "teamId": 146
+  ]
 }

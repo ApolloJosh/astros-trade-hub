@@ -1,6 +1,7 @@
 {
   "team": "nationals",
-  "updated": "2026-07-17",
+  "teamId": 120,
+  "updated": "2026-07-25",
   "prospects": [
     {
       "rank": 1,
@@ -10,27 +11,27 @@
     {
       "rank": 2,
       "name": "Travis Sykora",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 3,
       "name": "Jarlin Susana",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
       "rank": 4,
-      "name": "Ronny Cruz",
+      "name": "Seaver King",
       "pos": "SS"
     },
     {
       "rank": 5,
-      "name": "Devin Fitz-Gerald",
-      "pos": "SS"
+      "name": "Ronny Cruz",
+      "pos": "INF"
     },
     {
       "rank": 6,
-      "name": "Seaver King",
-      "pos": "SS"
+      "name": "Devin Fitz-Gerald",
+      "pos": "INF"
     },
     {
       "rank": 7,
@@ -40,52 +41,52 @@
     {
       "rank": 8,
       "name": "Gavin Fien",
-      "pos": "3B"
+      "pos": "OF"
     },
     {
       "rank": 9,
-      "name": "Luis Perales",
-      "pos": "SP"
+      "name": "Jackson Kent",
+      "pos": "LHP"
     },
     {
       "rank": 10,
+      "name": "Miguel Sime Jr.",
+      "pos": "RHP"
+    },
+    {
+      "rank": 11,
+      "name": "Luis Perales",
+      "pos": "RHP"
+    },
+    {
+      "rank": 12,
       "name": "Luke Dickerson",
       "pos": "SS"
     },
     {
-      "rank": 11,
-      "name": "Landon Harmon",
-      "pos": "SP"
-    },
-    {
-      "rank": 12,
-      "name": "Alex Clemmey",
-      "pos": "SP"
-    },
-    {
       "rank": 13,
+      "name": "Landon Harmon",
+      "pos": "RHP"
+    },
+    {
+      "rank": 14,
+      "name": "Alex Clemmey",
+      "pos": "LHP"
+    },
+    {
+      "rank": 15,
       "name": "Ethan Petry",
       "pos": "OF"
     },
     {
-      "rank": 14,
-      "name": "Yoel Tejeda Jr.",
-      "pos": "SP"
-    },
-    {
-      "rank": 15,
-      "name": "Jackson Kent",
-      "pos": "SP"
-    },
-    {
       "rank": 16,
-      "name": "Alejandro Rosario",
-      "pos": "SP"
+      "name": "Yoel Tejeda Jr.",
+      "pos": "RHP"
     },
     {
       "rank": 17,
-      "name": "Miguel Sime Jr.",
-      "pos": "SP"
+      "name": "Alejandro Rosario",
+      "pos": "RHP"
     },
     {
       "rank": 18,
@@ -94,64 +95,63 @@
     },
     {
       "rank": 19,
-      "name": "Christian Franklin",
-      "pos": "OF"
-    },
-    {
-      "rank": 20,
-      "name": "Andrew Pinckney",
-      "pos": "OF"
-    },
-    {
-      "rank": 21,
       "name": "Yeremy Cabrera",
       "pos": "OF"
     },
     {
-      "rank": 22,
+      "rank": 20,
       "name": "Marconi German",
       "pos": "2B"
     },
     {
-      "rank": 23,
+      "rank": 21,
       "name": "Sam Petersen",
       "pos": "OF"
     },
     {
-      "rank": 24,
+      "rank": 22,
       "name": "Angel Feliz",
       "pos": "SS"
     },
     {
-      "rank": 25,
+      "rank": 23,
       "name": "Abimelec Ortiz",
       "pos": "1B"
     },
     {
-      "rank": 26,
+      "rank": 24,
       "name": "Eriq Swan",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 27,
+      "rank": 25,
       "name": "Caleb Lomavita",
       "pos": "C"
     },
     {
-      "rank": 28,
+      "rank": 26,
       "name": "Yohandy Morales",
       "pos": "1B"
     },
     {
-      "rank": 29,
+      "rank": 27,
       "name": "Nauris De La Cruz",
       "pos": "OF"
     },
     {
-      "rank": 30,
+      "rank": 28,
       "name": "Samil Serrano",
       "pos": "OF"
+    },
+    {
+      "rank": 29,
+      "name": "Christian Franklin",
+      "pos": "OF"
+    },
+    {
+      "rank": 30,
+      "name": "Andrew Pinckney",
+      "pos": "OF"
     }
-  ],
-  "teamId": 120
+  ]
 }

@@ -1,11 +1,12 @@
 {
   "team": "dbacks",
-  "updated": "2026-07-17",
+  "teamId": 109,
+  "updated": "2026-07-24",
   "prospects": [
     {
       "rank": 1,
-      "name": "Ryan Waldschmidt",
-      "pos": "OF"
+      "name": "Demetrio Crisantes",
+      "pos": "2B"
     },
     {
       "rank": 2,
@@ -14,143 +15,153 @@
     },
     {
       "rank": 3,
-      "name": "Slade Caldwell",
-      "pos": "OF"
+      "name": "David Hagaman",
+      "pos": "RHP"
     },
     {
       "rank": 4,
-      "name": "Demetrio Crisantes",
-      "pos": "2B"
-    },
-    {
-      "rank": 5,
       "name": "JD Dix",
       "pos": "2B"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "name": "Daniel Eagen",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 7,
-      "name": "David Hagaman",
-      "pos": "SP"
-    },
-    {
-      "rank": 8,
-      "name": "Patrick Forbes",
-      "pos": "SP"
-    },
-    {
-      "rank": 9,
+      "rank": 6,
       "name": "LuJames Groover",
       "pos": "3B"
     },
     {
-      "rank": 10,
-      "name": "Cristian Mena",
-      "pos": "SP"
-    },
-    {
-      "rank": 11,
-      "name": "Kohl Drake",
-      "pos": "SP"
-    },
-    {
-      "rank": 12,
+      "rank": 7,
       "name": "Jansel Luis",
-      "pos": "SS"
+      "pos": "INF"
     },
     {
-      "rank": 13,
+      "rank": 8,
+      "name": "Patrick Forbes",
+      "pos": "RHP"
+    },
+    {
+      "rank": 9,
       "name": "Mitch Bratt",
-      "pos": "SP"
+      "pos": "LHP"
     },
     {
-      "rank": 14,
-      "name": "Cristofer Torin",
-      "pos": "SS"
-    },
-    {
-      "rank": 15,
-      "name": "Druw Jones",
-      "pos": "OF"
-    },
-    {
-      "rank": 16,
+      "rank": 10,
       "name": "Carlos Virahonda",
       "pos": "C"
     },
     {
-      "rank": 17,
+      "rank": 11,
+      "name": "Cristofer Torin",
+      "pos": "SS"
+    },
+    {
+      "rank": 12,
       "name": "Ashton Izzi",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 18,
+      "rank": 13,
       "name": "Dean Livingston",
-      "pos": "SP"
+      "pos": "RHP"
     },
     {
-      "rank": 19,
-      "name": "Yassel Soler",
-      "pos": "3B"
-    },
-    {
-      "rank": 20,
-      "name": "Brian Curley",
-      "pos": "SP"
-    },
-    {
-      "rank": 21,
-      "name": "Wellington Aracena",
-      "pos": "SP"
-    },
-    {
-      "rank": 22,
-      "name": "Junior Ciprian",
-      "pos": "SP"
-    },
-    {
-      "rank": 23,
-      "name": "Jose Cabrera",
-      "pos": "SP"
-    },
-    {
-      "rank": 24,
-      "name": "Daury Vasquez",
-      "pos": "SP"
-    },
-    {
-      "rank": 25,
-      "name": "Ivan Luciano",
-      "pos": "C"
-    },
-    {
-      "rank": 26,
-      "name": "Junior Sanchez",
-      "pos": "SP"
-    },
-    {
-      "rank": 27,
+      "rank": 14,
       "name": "Alberto Barriga",
       "pos": "C"
     },
     {
-      "rank": 28,
+      "rank": 15,
+      "name": "Brian Curley",
+      "pos": "RHP"
+    },
+    {
+      "rank": 16,
+      "name": "Wellington Aracena",
+      "pos": "RHP"
+    },
+    {
+      "rank": 17,
+      "name": "Junior Ciprian",
+      "pos": "RHP"
+    },
+    {
+      "rank": 18,
+      "name": "Jose Cabrera",
+      "pos": "RHP"
+    },
+    {
+      "rank": 19,
+      "name": "Slade Caldwell",
+      "pos": "OF"
+    },
+    {
+      "rank": 20,
+      "name": "Jun-Sang Eom",
+      "pos": "SS"
+    },
+    {
+      "rank": 21,
+      "name": "Ivan Luciano",
+      "pos": "C"
+    },
+    {
+      "rank": 22,
+      "name": "Kohl Drake",
+      "pos": "LHP"
+    },
+    {
+      "rank": 23,
+      "name": "Cristian Mena",
+      "pos": "RHP"
+    },
+    {
+      "rank": 24,
+      "name": "Druw Jones",
+      "pos": "OF"
+    },
+    {
+      "rank": 25,
+      "name": "Junior Sanchez",
+      "pos": "RHP"
+    },
+    {
+      "rank": 26,
+      "name": "Sandro Santana",
+      "pos": "LHP"
+    },
+    {
+      "rank": 27,
       "name": "Mason Marriott",
-      "pos": "SP"
+      "pos": "RHP"
+    },
+    {
+      "rank": 28,
+      "name": "Gavin Conticello",
+      "pos": "OF"
     },
     {
       "rank": 29,
-      "name": "Avery Owusu"
+      "name": "Avery Owusu-Asiedu",
+      "pos": "OF"
     },
     {
       "rank": 30,
-      "name": "Gavin Conticello",
+      "name": "Yassel Soler",
+      "pos": "3B"
+    },
+    {
+      "rank": null,
+      "name": "Ryan Waldschmidt",
       "pos": "OF"
+    },
+    {
+      "rank": null,
+      "name": "Daury Vasquez",
+      "pos": "SP"
     }
-  ],
-  "teamId": 109
+  ]
 }
