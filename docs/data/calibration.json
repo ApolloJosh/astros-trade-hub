@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-25T01:15:28.181Z",
+ "updated": "2026-07-25T12:10:36.663Z",
  "tradesAnalyzed": 15,
  "tradesTotal": 15,
  "marketTemp": 1.75,
@@ -7,7 +7,7 @@
   "score": 1.1,
   "label": "Cold",
   "recentTrades": 4,
-  "recentValue": 9.2,
+  "recentValue": 9.3,
   "windowDays": 14
  }
 }

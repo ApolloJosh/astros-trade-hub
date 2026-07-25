@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-25T01:13:37.309Z",
+ "updated": "2026-07-25T12:06:12.529Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1443,8 +1443,8 @@
     "key": "joshwalker",
     "svc": 0.122,
     "control": 5.5,
-    "salaryM": 0.127,
-    "remM": 0.1,
+    "salaryM": 0.357,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -2473,8 +2473,8 @@
     "key": "jamestriantos",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.064,
-    "remM": 0,
+    "salaryM": 0.316,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -3269,8 +3269,8 @@
     "key": "danielschneemann",
     "svc": 1.12,
     "control": 4.5,
-    "salaryM": 0.801,
-    "remM": 0.4,
+    "salaryM": 0.657,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -3413,8 +3413,8 @@
     "key": "willdion",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.422,
-    "remM": 0.2,
+    "salaryM": 0.191,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -5284,7 +5284,7 @@
     "key": "elimorgan",
     "svc": 4.091,
     "control": 1.5,
-    "salaryM": 0.667,
+    "salaryM": 0.56,
     "remM": 0.3,
     "exactFA": false
    },
@@ -7209,8 +7209,8 @@
     "key": "luismorales",
     "svc": 0.059,
     "control": 5.5,
-    "salaryM": 0.179,
-    "remM": 0.1,
+    "salaryM": 0.41,
+    "remM": 0.2,
     "exactFA": false
    },
    {
