@@ -1,0 +1,111 @@
+{
+  "_note": "Staging file for merge-rankings. Order = rank 1..N.",
+  "pirates": [
+    {"name":"Seth Hernandez","pos":"RHP"},{"name":"Edward Florentino","pos":"OF"},{"name":"Murf Gray","pos":"3B"},
+    {"name":"Wyatt Sanford","pos":"SS"},{"name":"Jhostynxon Garcia","pos":"OF"},{"name":"Axiel Plaz","pos":"C"},
+    {"name":"Easton Carmichael","pos":"C"},{"name":"Edgleen Perez","pos":"C"},{"name":"Sammy Stafura","pos":"SS"},
+    {"name":"Hunter Barco","pos":"LHP"},{"name":"Termarr Johnson","pos":"2B"},{"name":"Antwone Kelly","pos":"RHP"},
+    {"name":"Reinold Navarro","pos":"LHP"},{"name":"Rafael Flores Jr.","pos":"C"},{"name":"Wilber Dotel","pos":"RHP"},
+    {"name":"Levi Sterling","pos":"RHP"},{"name":"Omar Alfonzo","pos":"C"},{"name":"Darell Morel","pos":"SS"},
+    {"name":"Johan De Los Santos","pos":"SS"},{"name":"Yordany De Los Santos","pos":"SS"},{"name":"Khristian Curtis","pos":"RHP"},
+    {"name":"Jack Brannigan","pos":"SS"},{"name":"Thomas Harrington","pos":"RHP"},{"name":"Zander Mueth","pos":"RHP"},
+    {"name":"Jeter Martinez","pos":"RHP"},{"name":"Carlos Tejera","pos":"OF"},{"name":"Duce Gourson","pos":"2B"},
+    {"name":"Tony Blanco Jr.","pos":"1B"},{"name":"Callan Moss","pos":"1B"},{"name":"Lonnie White Jr.","pos":"OF"}
+  ],
+  "padres": [
+    {"name":"Ethan Salas","pos":"C"},{"name":"Kash Mayfield","pos":"LHP"},{"name":"Kruz Schoolcraft","pos":"LHP"},
+    {"name":"Miguel Mendez","pos":"RHP"},{"name":"Ty Harvey","pos":"C"},{"name":"Ryan Wideman","pos":"OF"},
+    {"name":"Bryan Balzer","pos":"RHP"},{"name":"Tucker Musgrove","pos":"RHP"},{"name":"Joniel Hernandez","pos":"SS"},
+    {"name":"Lan-Hong Su","pos":"RHP"},{"name":"Kale Fountain","pos":"OF"},{"name":"Michael Salina","pos":"RHP"},
+    {"name":"Jagger Haynes","pos":"LHP"},{"name":"Kavares Tears","pos":"OF"},{"name":"Lamar King Jr.","pos":"C"},
+    {"name":"Kannon Kemp","pos":"RHP"},{"name":"Luis Gutierrez","pos":"LHP"},{"name":"Jorge Quintana","pos":"SS"},
+    {"name":"Alex McCoy","pos":"OF"},{"name":"Braedon Karpathios","pos":"OF"},{"name":"Diego Serna","pos":"LHP"},
+    {"name":"Jesus A. Castro","pos":"RHP"},{"name":"Garrett Hawkins","pos":"RHP"},{"name":"Jhoan De La Cruz","pos":"SS"},
+    {"name":"Truitt Madonna","pos":"C"},{"name":"Tirso Ornelas","pos":"OF"},{"name":"Deivid Coronil","pos":"3B"},
+    {"name":"Romeo Sanabria","pos":"1B"},{"name":"Jaxon Dalena","pos":"RHP"},{"name":"Carson Montgomery","pos":"RHP"}
+  ],
+  "mariners": [
+    {"name":"Kade Anderson","pos":"LHP"},{"name":"Ryan Sloan","pos":"RHP"},{"name":"Felnin Celesten","pos":"SS"},
+    {"name":"Lazaro Montes","pos":"OF"},{"name":"Michael Arroyo","pos":"2B"},{"name":"Jonny Farmelo","pos":"OF"},
+    {"name":"Luke Stevenson","pos":"C"},{"name":"Nick Becker","pos":"SS"},{"name":"Yorger Bautista","pos":"OF"},
+    {"name":"Juan Rijo","pos":"OF"},{"name":"Griffin Hugus","pos":"RHP"},{"name":"Korbyn Dickerson","pos":"OF"},
+    {"name":"Mason Peters","pos":"LHP"},{"name":"Charlie Beilenson","pos":"RHP"},{"name":"Brock Rodden","pos":"2B"},
+    {"name":"Lucas Kelly","pos":"RHP"},{"name":"Colton Shaw","pos":"RHP"},{"name":"Jackson Steensma","pos":"RHP"},
+    {"name":"Gregory Pio","pos":"OF"},{"name":"Marcelo Perez","pos":"RHP"},{"name":"Carlos Jimenez","pos":"OF"},
+    {"name":"Robinson Ortiz","pos":"LHP"},{"name":"Grant Knipp","pos":"RHP"},{"name":"Po-Chun Lin","pos":"RHP"},
+    {"name":"Teddy McGraw","pos":"RHP"},{"name":"Aiden Taurek","pos":"OF"},{"name":"Casey Hintz","pos":"RHP"},
+    {"name":"Chia-Shi Shen","pos":"RHP"},{"name":"Michael Morales","pos":"RHP"},{"name":"Jared Sundstrom","pos":"OF"}
+  ],
+  "giants": [
+    {"name":"Josuar Gonzalez","pos":"SS"},{"name":"Luis Hernández","pos":"SS"},{"name":"Jhonny Level","pos":"SS"},
+    {"name":"Gavin Kilen","pos":"SS"},{"name":"Dakota Jordan","pos":"OF"},{"name":"Bo Davidson","pos":"OF"},
+    {"name":"Jacob Bresnahan","pos":"LHP"},{"name":"Keyner Martinez","pos":"RHP"},{"name":"Trevor Cohen","pos":"OF"},
+    {"name":"Parks Harber","pos":"3B"},{"name":"Blade Tidwell","pos":"RHP"},{"name":"Carson Whisenhunt","pos":"LHP"},
+    {"name":"Argenis Cayama","pos":"RHP"},{"name":"Jonah Cox","pos":"OF"},{"name":"Carlos Gutierrez","pos":"OF"},
+    {"name":"Luis De La Torre","pos":"LHP"},{"name":"Jesus Rodriguez","pos":"C"},{"name":"Drew Cavanaugh","pos":"C"},
+    {"name":"Lorenzo Meola","pos":"SS"},{"name":"Alberto Laroche","pos":"RHP"},{"name":"Trent Harris","pos":"RHP"},
+    {"name":"Josh Bostick","pos":"RHP"},{"name":"Jancel Villarroel","pos":"C"},{"name":"Joe Whitman","pos":"LHP"},
+    {"name":"Yunior Marte","pos":"RHP"},{"name":"Carlos De La Rosa","pos":"LHP"},{"name":"Leandro Rodriguez","pos":"LHP"},
+    {"name":"Gerelmi Maldonado","pos":"RHP"},{"name":"Lisbel Diaz","pos":"OF"},{"name":"Maui Ahuna","pos":"SS"}
+  ],
+  "cardinals": [
+    {"name":"Rainiel Rodriguez","pos":"C"},{"name":"Liam Doyle","pos":"LHP"},{"name":"Joshua Báez","pos":"OF"},
+    {"name":"Tanner Franklin","pos":"RHP"},{"name":"Leo Bernal","pos":"C"},{"name":"Brandon Clarke","pos":"LHP"},
+    {"name":"Quinn Mathews","pos":"LHP"},{"name":"Jurrangelo Cijntje","pos":"RHP"},{"name":"Yhoiker Fajardo","pos":"RHP"},
+    {"name":"Tekoah Roby","pos":"RHP"},{"name":"Jacob Odle","pos":"RHP"},{"name":"Sebastian Dos Santos","pos":"SS"},
+    {"name":"Yairo Padilla","pos":"SS"},{"name":"Cooper Hjerpe","pos":"LHP"},{"name":"Mason Molina","pos":"LHP"},
+    {"name":"Tai Peete","pos":"OF"},{"name":"Emanuel Luna","pos":"OF"},{"name":"Jesús Báez","pos":"INF"},
+    {"name":"Brycen Mautz","pos":"LHP"},{"name":"Ryan Mitchell","pos":"OF"},{"name":"Luis Gastelum","pos":"RHP"},
+    {"name":"Ixan Henderson","pos":"LHP"},{"name":"Deniel Ortiz","pos":"3B"},{"name":"Cade Crossland","pos":"LHP"},
+    {"name":"Chen-Wei Lin","pos":"RHP"},{"name":"Jack Gurevitch","pos":"1B"},{"name":"Blaze Jordan","pos":"1B"},
+    {"name":"Tink Hence","pos":"RHP"},{"name":"Braden Davis","pos":"LHP"},{"name":"Hancel Rincon","pos":"RHP"}
+  ],
+  "rays": [
+    {"name":"Theo Gillen","pos":"OF"},{"name":"Nathan Flewelling","pos":"C"},{"name":"Caden Bodine","pos":"C"},
+    {"name":"Cooper Flemming","pos":"INF"},{"name":"Brody Hopkins","pos":"RHP"},{"name":"Jacob Melton","pos":"OF"},
+    {"name":"Taitn Gray","pos":"1B"},{"name":"Michael Forret","pos":"RHP"},{"name":"Austin Overn","pos":"OF"},
+    {"name":"Ty Johnson","pos":"RHP"},{"name":"Daniel Pierce","pos":"SS"},{"name":"Anderson Brito","pos":"RHP"},
+    {"name":"Santiago Suarez","pos":"RHP"},{"name":"Slater de Brun","pos":"OF"},{"name":"Aidan Smith","pos":"OF"},
+    {"name":"Xavier Isaac","pos":"1B"},{"name":"Brayden Taylor","pos":"3B"},{"name":"Jadher Areinamo","pos":"INF"},
+    {"name":"TJ Nichols","pos":"RHP"},{"name":"Andreimi Antunez","pos":"SS"},{"name":"Trevor Harrison","pos":"RHP"},
+    {"name":"Jose Urbina","pos":"RHP"},{"name":"Brendan Summerhill","pos":"OF"},{"name":"Victor Valdez","pos":"SS"},
+    {"name":"Fabricio Blanco","pos":"SS"},{"name":"Gary Gill Hill","pos":"RHP"},{"name":"Émilien Pitre","pos":"2B"},
+    {"name":"Jackson Baumeister","pos":"RHP"},{"name":"Tre' Morgan","pos":"1B"},{"name":"Homer Bush Jr.","pos":"OF"}
+  ],
+  "rangers": [
+    {"name":"Sebastian Walcott","pos":"SS"},{"name":"Caden Scarborough","pos":"RHP"},{"name":"AJ Russell","pos":"RHP"},
+    {"name":"Malcolm Moore","pos":"C"},{"name":"Yolfran Castillo","pos":"SS"},{"name":"Seong-Jun Kim","pos":"SS"},
+    {"name":"Josh Owens","pos":"SS"},{"name":"Dalton Pence","pos":"LHP"},{"name":"Elian Rosario","pos":"3B"},
+    {"name":"Dylan Dreiling","pos":"OF"},{"name":"Winston Santos","pos":"RHP"},{"name":"David Davalillo","pos":"RHP"},
+    {"name":"Cam Cauley","pos":"INF"},{"name":"Jacob Johnson","pos":"RHP"},{"name":"Daniel Rodriguez","pos":"SS"},
+    {"name":"Hector Osorio","pos":"OF"},{"name":"Emiliano Teodo","pos":"RHP"},{"name":"Jack Wheeler","pos":"3B"},
+    {"name":"Rafe Perich","pos":"3B"},{"name":"Mason McConnaughey","pos":"RHP"},{"name":"Paxton Kling","pos":"OF"},
+    {"name":"Jose Corniell","pos":"RHP"},{"name":"Izack Tiger","pos":"RHP"},{"name":"Paulino Santana","pos":"OF"},
+    {"name":"Leandro Lopez","pos":"RHP"},{"name":"Elorky Rodriguez","pos":"2B"},{"name":"Maxton Martin","pos":"OF"},
+    {"name":"Carter Baumler","pos":"RHP"},{"name":"Ben Abeldt","pos":"LHP"},{"name":"Ismael Agreda","pos":"RHP"}
+  ],
+  "bluejays": [
+    {"name":"JoJo Parker","pos":"SS"},{"name":"Arjun Nimmala","pos":"SS"},{"name":"Nolan Perry","pos":"RHP"},
+    {"name":"Johnny King","pos":"LHP"},{"name":"Juan Sanchez","pos":"3B"},{"name":"Sean Keys","pos":"INF"},
+    {"name":"Gage Stanifer","pos":"RHP"},{"name":"Blaine Bullard","pos":"OF"},{"name":"RJ Schreck","pos":"OF"},
+    {"name":"Ricky Tiedemann","pos":"LHP"},{"name":"Jake Bloss","pos":"RHP"},{"name":"Charles McAdoo","pos":"3B"},
+    {"name":"Victor Arias","pos":"OF"},{"name":"Josh Kasevich","pos":"SS"},{"name":"Danny Thompson Jr.","pos":"RHP"},
+    {"name":"Daniel Guerra","pos":"RHP"},{"name":"Silvano Hechavarria","pos":"RHP"},{"name":"Juan Caricote","pos":"C"},
+    {"name":"Jay Harry","pos":"SS"},{"name":"Jake Cook","pos":"OF"},{"name":"Javen Coleman","pos":"LHP"},
+    {"name":"Cutter Coffey","pos":"3B"},{"name":"Jared Spencer","pos":"LHP"},{"name":"Carson Messina","pos":"RHP"},
+    {"name":"Fernando Perez","pos":"RHP"},{"name":"Micah Bucknam","pos":"RHP"},{"name":"Edward Duran","pos":"C"},
+    {"name":"Tim Piasentin","pos":"3B"},{"name":"Adrian Pinto","pos":"UTIL"},{"name":"Brandon Barriera","pos":"LHP"}
+  ],
+  "nationals": [
+    {"name":"Eli Willits","pos":"SS"},{"name":"Travis Sykora","pos":"RHP"},{"name":"Jarlin Susana","pos":"RHP"},
+    {"name":"Seaver King","pos":"SS"},{"name":"Ronny Cruz","pos":"INF"},{"name":"Devin Fitz-Gerald","pos":"INF"},
+    {"name":"Harry Ford","pos":"C"},{"name":"Gavin Fien","pos":"OF"},{"name":"Jackson Kent","pos":"LHP"},
+    {"name":"Miguel Sime Jr.","pos":"RHP"},{"name":"Luis Perales","pos":"RHP"},{"name":"Luke Dickerson","pos":"SS"},
+    {"name":"Landon Harmon","pos":"RHP"},{"name":"Alex Clemmey","pos":"LHP"},{"name":"Ethan Petry","pos":"OF"},
+    {"name":"Yoel Tejeda Jr.","pos":"RHP"},{"name":"Alejandro Rosario","pos":"RHP"},{"name":"Coy James","pos":"SS"},
+    {"name":"Yeremy Cabrera","pos":"OF"},{"name":"Marconi German","pos":"2B"},{"name":"Sam Petersen","pos":"OF"},
+    {"name":"Angel Feliz","pos":"SS"},{"name":"Abimelec Ortiz","pos":"1B"},{"name":"Eriq Swan","pos":"RHP"},
+    {"name":"Caleb Lomavita","pos":"C"},{"name":"Yohandy Morales","pos":"1B"},{"name":"Nauris De La Cruz","pos":"OF"},
+    {"name":"Samil Serrano","pos":"OF"},{"name":"Christian Franklin","pos":"OF"},{"name":"Andrew Pinckney","pos":"OF"}
+  ]
+}
