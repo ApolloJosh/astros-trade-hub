@@ -14,6 +14,7 @@
     "calibrate": "node src/calibrate.js",
     "calibrate:trades": "node src/calibrate-trades.js",
     "rankings": "node src/parse-rankings.js",
+    "merge-rankings": "node src/merge-rankings.js",
     "test": "node test/parity.test.js && node test/transactions.test.js && node test/salaries.test.js"
   },
   "engines": {
