@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-26T12:10:20.983Z",
+ "updated": "2026-07-26T15:12:24.602Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -7594,15 +7594,6 @@
     "exactFA": false
    },
    {
-    "name": "José Urquidy",
-    "key": "joseurquidy",
-    "svc": 6.049,
-    "control": 0.5,
-    "salaryM": 1.5,
-    "remM": 0.8,
-    "exactFA": true
-   },
-   {
     "name": "Paul Skenes",
     "key": "paulskenes",
     "svc": 2,
@@ -7891,6 +7882,15 @@
     "exactFA": false
    },
    {
+    "name": "Shawn Ross",
+    "key": "shawnross",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.275,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Evan Sisk",
     "key": "evansisk",
     "svc": 0.06,
@@ -7915,6 +7915,15 @@
     "control": 5.5,
     "salaryM": 0.507,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "José Urquidy",
+    "key": "joseurquidy",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 1.5,
+    "remM": 0.8,
     "exactFA": false
    },
    {
@@ -11977,6 +11986,15 @@
     "exactFA": false
    },
    {
+    "name": "Payton Henry",
+    "key": "paytonhenry",
+    "svc": 0.066,
+    "control": 5.5,
+    "salaryM": 0.275,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Derek Hill",
     "key": "derekhill",
     "svc": 3.04,
@@ -14252,6 +14270,15 @@
     "control": 1.5,
     "salaryM": 0.452,
     "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Braden Shewmake",
+    "key": "bradenshewmake",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.05,
+    "remM": 0,
     "exactFA": false
    },
    {
