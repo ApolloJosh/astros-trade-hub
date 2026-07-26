@@ -303,17 +303,21 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
       const s = (statTV == null) ? anchor : Math.min(statTV, t.prospectCapMult * anchor);
       return r1(clamp(t.prospectBlend * anchor + (1 - t.prospectBlend) * s, 1, t.max));
     }
-    // UNRANKED prospect: nobody's top-30 list has him, so his ceiling depends
-    // on how far he's actually climbed and how well he's playing there. A
-    // 9.00-ERA A-ball arm and a dominant AAA arm must not both cap out.
-    const caps = t.unrankedCapByLevel || {};
+    // UNRANKED prospect. If his dominant level is the majors, he has already
+    // arrived — value him off his actual MLB stats like any young big leaguer
+    // (bust-risk + the small-sample cap handle the uncertainty). The level cap
+    // only exists to stop MINOR leaguers from being overvalued.
     const lvl = String(sv && sv.level || '').toUpperCase();
-    let cap = t.unrankedProspectCap || 12;
-    Object.keys(caps).forEach(k => { if (k.toUpperCase() === lvl) cap = caps[k]; });
-    const fl = t.unrankedFloorFrac != null ? t.unrankedFloorFrac : 0.18;
-    const perf = clamp((sv && sv.proj || 0) / (t.unrankedRefWar || 2), 0, 1);
-    const ceiling = cap * (fl + (1 - fl) * perf);
-    return statTV == null ? r1(ceiling) : r1(clamp(Math.min(statTV, ceiling), 0.5, t.max));
+    if (lvl !== 'MLB') {
+      const caps = t.unrankedCapByLevel || {};
+      let cap = t.unrankedProspectCap || 12;
+      Object.keys(caps).forEach(k => { if (k.toUpperCase() === lvl) cap = caps[k]; });
+      const fl = t.unrankedFloorFrac != null ? t.unrankedFloorFrac : 0.18;
+      const perf = clamp((sv && sv.proj || 0) / (t.unrankedRefWar || 2), 0, 1);
+      const ceiling = cap * (fl + (1 - fl) * perf);
+      return statTV == null ? r1(ceiling) : r1(clamp(Math.min(statTV, ceiling), 0.5, t.max));
+    }
+    // MLB-level unranked prospect falls through to the normal big-league tail.
   }
   // A player is only a LIABILITY if he's bad AND owed real money — that's the
   // McCullers case. A cheap struggling or injured big leaguer is simply worth
