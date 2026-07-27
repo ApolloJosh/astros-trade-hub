@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-26T15:12:24.602Z",
+ "updated": "2026-07-27T13:42:18.536Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -7164,8 +7164,8 @@
     "key": "maxmuncy",
     "svc": 0.144,
     "control": 5.5,
-    "salaryM": 0.747,
-    "remM": 0.4,
+    "salaryM": 0.583,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -7247,6 +7247,15 @@
     "control": 4.5,
     "salaryM": 0.558,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Scott Blewett",
+    "key": "scottblewett",
+    "svc": 0.102,
+    "control": 5.5,
+    "salaryM": 0.27,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -7362,8 +7371,8 @@
     "key": "brianserven",
     "svc": 1.089,
     "control": 4.5,
-    "salaryM": 0.11,
-    "remM": 0.1,
+    "salaryM": 0.315,
+    "remM": 0.2,
     "exactFA": false
    },
    {
