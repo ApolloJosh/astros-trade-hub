@@ -16,9 +16,9 @@ Windows examined: 2023, 2024, 2025 (June 25 – Aug 6). **7 trades.**
 - **2023-08-01** vs New York Mets — got Justin Verlander 40.1 (**40.1**) · gave Ryan Clifford 20.4 (prospect A+), Drew Gilbert ? (**20.4**)
 - **2024-07-29** vs Toronto Blue Jays — got Yusei Kikuchi 24.2 (**24.2**) · gave Will Wagner 36.7, Jake Bloss 19.7 (prospect), Joey Loperfido 3.9 (**60.3**)
 - **2024-07-30** vs New York Yankees — got Caleb Ferguson 15.5 (**15.5**) · gave Kelly Austin 12 (prospect A+) (**12**)
-- **2025-07-31** vs Minnesota Twins — got Carlos Correa 61.7 (**61.7**) · gave Matt Mikulski 3.3 (prospect A+) (**3.3**)
 - **2025-07-31** vs Baltimore Orioles — got Ramón Urías 17.9 (**17.9**) · gave Twine Palmer 12 (prospect A) (**12**)
 - **2025-07-31** vs Miami Marlins — got Jesús Sánchez 13.2 (**13.2**) · gave Esmil Valencia 9.6 (prospect A), Chase Jaworsky 12 (prospect A+), Ryan Gusto 11.9 (**33.5**)
+- **2025-07-31** vs Minnesota Twins — got Carlos Correa 61.7 (**61.7**) · gave Matt Mikulski 3.3 (prospect A+) (**3.3**)
 
 ## The market right now
 Sellers (>4 out of a wild card, excluding division leaders): **9** — Jays, Tigers, Royals, Athletics, Angels, Mets, Reds, Giants, Rockies
