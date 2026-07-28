@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-28T06:03:39.961Z",
+ "updated": "2026-07-28T06:25:25.176Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1398,7 +1398,7 @@
     "key": "yohelpozo",
     "svc": 1.052,
     "control": 4.5,
-    "salaryM": 0.126,
+    "salaryM": 0.275,
     "remM": 0.1,
     "exactFA": false
    },
@@ -8682,8 +8682,8 @@
     "key": "nickdavila",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.571,
-    "remM": 0.3,
+    "salaryM": 0.484,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -8700,8 +8700,8 @@
     "key": "alexhoppe",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.322,
-    "remM": 0.2,
+    "salaryM": 0.568,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -9161,8 +9161,8 @@
     "key": "tristanbeck",
     "svc": 2.067,
     "control": 3.5,
-    "salaryM": 0.535,
-    "remM": 0.3,
+    "salaryM": 0.353,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -9278,8 +9278,8 @@
     "key": "carsonwhisenhunt",
     "svc": 0.054,
     "control": 5.5,
-    "salaryM": 0.134,
-    "remM": 0.1,
+    "salaryM": 0.358,
+    "remM": 0.2,
     "exactFA": false
    },
    {
