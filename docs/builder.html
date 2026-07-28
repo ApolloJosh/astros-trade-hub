@@ -182,8 +182,9 @@ BTD.nav('builder');
 
   const SORTS = [['tv', 'Trade value'], ['hit', 'Hitters first'], ['pit', 'Pitchers first'], ['pos', 'Position'],
     ['hand', 'Handedness'], ['ops', 'OPS'], ['era', 'ERA'], ['ctrl', 'Most control'], ['age', 'Youngest']];
-  ['gsort', 'rsort', 'tsort'].forEach(id => {
+  ['gsort', 'rsort'].forEach(id => {
     const sel = document.getElementById(id);
+    if (!sel) return;
     SORTS.forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = 'Sort: ' + t; sel.appendChild(o); });
   });
   const byTv = (a, b) => (b.tv || 0) - (a.tv || 0);
@@ -264,8 +265,8 @@ BTD.nav('builder');
     } else note.style.display = 'none';
   }
   function renderPicked() {
-    [['gpicked', S.give, 'away', 'gcash'], ['rpicked', S.recv, '', 'rcash'], ['tpicked', S.third, 'away', null]].forEach(([id, list, cls, ck]) => {
-      const el = document.getElementById(id); el.innerHTML = '';
+    [['gpicked', S.give, 'away', 'gcash'], ['rpicked', S.recv, '', 'rcash']].forEach(([id, list, cls, ck]) => {
+      const el = document.getElementById(id); if (!el) return; el.innerHTML = '';
       list.forEach((p, i) => {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
         const owed = p.rem != null ? ' · ~$' + p.rem.toFixed(1) + 'M owed' : '';
@@ -970,6 +971,11 @@ BTD.nav('builder');
     S.rcash = parseFloat(q.get('rc')) || 0;
   })();
   renderAll();
-})().catch(e => { document.getElementById('vmain').textContent = 'No data yet — run the pipeline (npm run build).'; });
+})().catch(e => {
+  console.error('Builder failed:', e);
+  const m = document.getElementById('vmain'), s2 = document.getElementById('vsub');
+  if (m) m.textContent = 'Something broke loading the builder';
+  if (s2) s2.textContent = String(e && e.message || e) + ' — details in the browser console.';
+});
 </script>
 </div></body></html>
