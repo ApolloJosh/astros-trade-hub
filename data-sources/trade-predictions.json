@@ -1,0 +1,45 @@
+{
+  "_readme": [
+    "Your edits to the Dana Brown Predictor. The model proposes, this file overrules.",
+    "Edit it, commit it, re-run the Deadline outlook workflow. Anything you leave empty keeps the model's answer.",
+    "Player names are matched loosely — accents, punctuation and capitalization don't matter. 'jesus sanchez' finds Jesús Sánchez.",
+    "If a name doesn't match anyone, the run does NOT fail. It skips that line and lists it under 'Override warnings' in reports/deadline-outlook.md.",
+    "Values and the balance bar always recalculate themselves — never type a number.",
+    "",
+    "hide  — kill a prediction. Use the TARGET's name (the player coming to Houston).",
+    "edit  — keyed by target name. 'pkg' replaces the whole return; 'note' writes the italic line under the card.",
+    "add   — a trade the model never proposed. 'target' is who Houston gets, 'pkg' is what Houston sends.",
+    "        If the target is already predicted, your version replaces it.",
+    "order — the running order. Names listed here lead in that order; everything else follows behind."
+  ],
+
+  "hide": [],
+
+  "edit": {},
+
+  "add": [],
+
+  "order": [],
+
+  "_examples": {
+    "_comment": "Delete the leading underscore on any key below to switch it on. Kept here as a copy-paste reference.",
+    "hide": ["Daulton Varsho", "Nathaniel Lowe"],
+    "edit": {
+      "Mickey Moniak": {
+        "pkg": ["Bryan King", "Zach Cole"],
+        "note": "Colorado wants the bullpen arm more than the outfielder."
+      },
+      "Luis Arraez": {
+        "note": "Only works if Houston eats the rest of the deal."
+      }
+    },
+    "add": [
+      {
+        "target": "Steven Kwan",
+        "pkg": ["Jacob Melton", "Miguel Ullola", "Zach Cole"],
+        "note": "My call — the lefty bat they've wanted since March."
+      }
+    ],
+    "order": ["Jake McCarthy", "Mickey Moniak"]
+  }
+}
