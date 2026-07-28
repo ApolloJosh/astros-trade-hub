@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-28T07:49:54.307Z",
+ "updated": "2026-07-28T12:57:48.235Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1471,6 +1471,15 @@
     "svc": null,
     "control": 0.5,
     "salaryM": 0.182,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Johnathan Rodriguez",
+    "key": "johnathanrodriguez",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.164,
     "remM": 0.1,
     "exactFA": false
    },
@@ -7295,15 +7304,6 @@
     "exactFA": false
    },
    {
-    "name": "Geoff Hartlieb",
-    "key": "geoffhartlieb",
-    "svc": 2.003,
-    "control": 3.5,
-    "salaryM": 0.372,
-    "remM": 0.2,
-    "exactFA": false
-   },
-   {
     "name": "Jonah Heim",
     "key": "jonahheim",
     "svc": 5.097,
@@ -7436,6 +7436,24 @@
     "control": 5.5,
     "salaryM": 0.064,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Geoff Hartlieb",
+    "key": "geoffhartlieb",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.107,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Scott Blewett",
+    "key": "scottblewett",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -7900,12 +7918,12 @@
     "exactFA": false
    },
    {
-    "name": "Shawn Ross",
-    "key": "shawnross",
-    "svc": 0,
+    "name": "Johnathan Rodriguez",
+    "key": "johnathanrodriguez",
+    "svc": 0.097,
     "control": 5.5,
-    "salaryM": 0.275,
-    "remM": 0.1,
+    "salaryM": 0.062,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -7936,12 +7954,30 @@
     "exactFA": false
    },
    {
+    "name": "Shawn Ross",
+    "key": "shawnross",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.017,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Johnathan Rodriguez",
+    "key": "johnathanrodriguez",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "José Urquidy",
     "key": "joseurquidy",
     "svc": null,
     "control": 0.5,
-    "salaryM": 1.5,
-    "remM": 0.8,
+    "salaryM": 0.995,
+    "remM": 0.5,
     "exactFA": false
    },
    {
@@ -13209,8 +13245,8 @@
     "key": "juniorperez",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.508,
-    "remM": 0.3,
+    "salaryM": 0.265,
+    "remM": 0.1,
     "exactFA": false
    },
    {
