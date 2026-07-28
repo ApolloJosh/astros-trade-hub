@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-28T05:42:15.657Z",
+ "updated": "2026-07-28T05:59:51.927Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -2988,8 +2988,8 @@
     "key": "ivanjohnson",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.096,
-    "remM": 0,
+    "salaryM": 0.339,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -4542,8 +4542,8 @@
     "key": "eduardovalencia",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.106,
-    "remM": 0.1,
+    "salaryM": 0.347,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -13915,8 +13915,8 @@
     "key": "spencerjones",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.232,
-    "remM": 0.1,
+    "salaryM": 0.477,
+    "remM": 0.2,
     "exactFA": false
    },
    {
