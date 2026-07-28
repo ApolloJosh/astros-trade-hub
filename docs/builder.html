@@ -248,14 +248,6 @@ BTD.nav('builder');
     else r.sort(cmp(S.rsort));
     renderList(document.getElementById('rlist'), r, p => { S.recv.push(p); renderAll(); });
 
-    // third team's outgoing list
-    const tl = document.getElementById('tlist');
-    if (tl) {
-      let t3 = !S.tteam ? [] : all.filter(p => p.team === S.tteam && !inTrade(p) &&
-        (!S.tq || p.name.toLowerCase().includes(S.tq)));
-      t3.sort(cmp(S.tsort));
-      renderList(tl, t3, p => { S.third.push(p); renderAll(); });
-    }
     const note = document.getElementById('rnote');
     if (lockedTeam && S.mode === 2) {
       note.style.display = 'block';
@@ -558,7 +550,6 @@ BTD.nav('builder');
     const partner = partnerTeams.length === 1 ? partnerTeams[0]
       : (S.team && S.team !== 'all' ? S.team : null);
     const needs = partner ? (NEEDS[partner] || []) : [];
-    document.getElementById('tgive').textContent = sum(S.third, 0).toFixed(1);
     const nl = document.getElementById('needsline');
     if (partner && needs.length) {
       nl.style.display = 'block';
