@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-28T07:37:09.202Z",
+ "updated": "2026-07-28T07:49:54.307Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -2115,15 +2115,6 @@
     "control": 0.5,
     "salaryM": 19,
     "remM": 9.5,
-    "exactFA": true
-   },
-   {
-    "name": "Jameson Taillon",
-    "key": "jamesontaillon",
-    "svc": 9.11,
-    "control": 0.5,
-    "salaryM": 18,
-    "remM": 9,
     "exactFA": true
    },
    {
