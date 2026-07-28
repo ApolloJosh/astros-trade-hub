@@ -20,6 +20,19 @@ const cotsPath = path.join(__dirname, '..', 'data-sources', 'salaries-cots.json'
 const COTS = fs.existsSync(cotsPath) ? JSON.parse(fs.readFileSync(cotsPath, 'utf8')) : { teams: {} };
 
 // Statcast Fielding Run Value (id -> [current, previous]) + award data.
+// Farm system strength + published prospect tiers.
+const farmPath = path.join(__dirname, '..', 'data-sources', 'farm-systems.json');
+const FARM = fs.existsSync(farmPath) ? JSON.parse(fs.readFileSync(farmPath, 'utf8')) : { rank: {}, tiers: {} };
+let _farmTier = null;           // built lazily (normName is defined below)
+const farmTier = name => {
+  if (!_farmTier) {
+    _farmTier = new Map();
+    Object.entries(FARM.tiers || {}).forEach(([n, t]) => _farmTier.set(normName(n), t));
+  }
+  return _farmTier.get(normName(name)) || null;
+};
+const FARM_RANK_BY_TEAM = {};   // teamId -> farm rank (1 best .. 30 worst)
+
 const scPath = path.join(__dirname, '..', 'data-sources', 'statcast.json');
 const SC = (fs.existsSync(scPath) ? JSON.parse(fs.readFileSync(scPath, 'utf8')) : { players: {} }).players || {};
 
@@ -191,6 +204,10 @@ async function valuePlayer(p, lg) {
     if (pitcher && base && base.sp === false && display) sv.closerSv = E.toNum(display.saves, 0);
     sv.ctrl = control;   // rentals lose more value when they're slumping
     sv.level = topLevel; // unranked prospects are capped by how high they've climbed
+    if (prospect) {      // farm-system context for prospect anchors
+      sv.farmRank = FARM_RANK_BY_TEAM[p.teamId] || null;
+      sv.tier = farmTier(p.name);
+    }
   }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
 
@@ -203,6 +220,7 @@ async function valuePlayer(p, lg) {
     bt: (p.bats || '?') + '/' + (p.throws || '?'), age: p.age,
     ctrl: control, salM: salM, salEst: salSource === 'est', salSource,
     prospect, orgRank: p.orgRank || null, top100: p.top100 || null, topLevel, il: p.il || null,
+    tier: prospect ? farmTier(p.name) : null, farmRank: prospect ? (FARM_RANK_BY_TEAM[p.teamId] || null) : null,
     war: base && !base.histOnly ? E.r1(base.war) : null,
     proj: sv ? E.r1(sv.proj) : null,
     sur: sv && sv.surplus != null ? E.r1(sv.surplus) : null,
@@ -275,6 +293,16 @@ async function main() {
   console.log('  ', JSON.stringify(lg));
 
   const { teams: rankTeams, top100 } = R.loadAll();
+  // Map farm-system ranks (keyed by team slug) onto teamIds via the ranking files.
+  try {
+    for (const f of fs.readdirSync(R.DIR)) {
+      if (!f.endsWith('.json') || f === 'top100.json') continue;
+      const doc = JSON.parse(fs.readFileSync(path.join(R.DIR, f), 'utf8'));
+      const slug = doc.team || f.replace('.json', '');
+      if (doc.teamId && FARM.rank && FARM.rank[slug]) FARM_RANK_BY_TEAM[doc.teamId] = FARM.rank[slug];
+    }
+    console.log(`Farm ranks on file for ${Object.keys(FARM_RANK_BY_TEAM).length} teams; ${Object.keys(FARM.tiers || {}).length} tiered prospects.`);
+  } catch (e) { console.warn('farm-systems mapping failed:', e.message); }
   const teamsD = await api.teams();
   const teams = (teamsD.teams || []).map(t => ({ id: t.id, name: t.teamName || t.name }));
   console.log(`Teams: ${teams.length}. Rankings on file for ${Object.keys(rankTeams).length} team(s).`);

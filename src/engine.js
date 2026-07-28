@@ -295,6 +295,19 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
   if (prospect) {
     let anchor = null;
     if (rank) { anchor = t.prospectAnchors[0][1]; t.prospectAnchors.forEach(x => { if (rank >= x[0]) anchor = x[1]; }); }
+    // Org rank alone is blind to system quality: the #5 prospect in the best
+    // farm is a far better asset than the #5 in the worst. Scale by farm rank.
+    if (anchor != null && sv && sv.farmRank) {
+      const fa = t.farmAdj || {};
+      const best = fa.best != null ? fa.best : 1.25, worst = fa.worst != null ? fa.worst : 0.72;
+      anchor *= best + (worst - best) * clamp((toNum(sv.farmRank, 15) - 1) / 29, 0, 1);
+    }
+    // A published tier is a stronger signal than either — it's a direct read on
+    // where the player sits leaguewide, not just within his own system.
+    // A published tier REPLACES the org anchor (in both directions) — it's a
+    // leaguewide read, where org rank only says "best of what this team has."
+    const tier = sv && sv.tier;
+    if (tier && t.tierAnchors && t.tierAnchors[String(tier)] != null) anchor = t.tierAnchors[String(tier)];
     if (top100) {
       const a100 = interp(t.top100Anchors, top100);
       anchor = anchor == null ? a100 : Math.max(anchor, a100);
