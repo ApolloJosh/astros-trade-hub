@@ -1,0 +1,28 @@
+name: Deadline outlook
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  outlook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Dana Brown profile + predictions
+        run: node src/gm-profile.js --years=2023,2024,2025
+      - name: Save report
+        if: always()
+        continue-on-error: true
+        run: |
+          git config user.name trade-hub-bot
+          git config user.email actions@github.com
+          git add reports data-sources/trade-calibration-cache.json || true
+          git commit -m 'deadline outlook' || echo 'nothing to commit'
+          git push || echo 'push skipped'
