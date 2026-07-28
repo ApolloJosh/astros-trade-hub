@@ -230,3 +230,11 @@ a{color:var(--accent)}
 .modebar .note{margin-left:6px}
 .panel.tri{margin-top:14px;border-color:var(--accent)}
 .panel.tri .panel-hd{color:var(--accent)}
+
+/* ---------- 3-team balance triangle ---------- */
+#triwrap{max-width:340px;margin:10px auto 0;text-align:center}
+.tridial{width:100%;height:auto}
+.tridial .trilbl{font-size:11px;font-weight:800;fill:var(--ink);font-family:var(--hd2);letter-spacing:.04em}
+.tridial .trival{font-size:13px;font-weight:800}
+.trinote{font-size:12px;color:var(--muted);margin-top:2px}
+.pick .dest{font-size:11px;padding:2px 4px;border:1px solid var(--row-line);border-radius:4px;background:var(--input-bg);color:var(--ink);max-width:130px}
