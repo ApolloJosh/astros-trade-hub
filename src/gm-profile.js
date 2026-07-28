@@ -213,6 +213,47 @@ function swaps(players, sellers, needs) {
   return out.slice(0, 3);
 }
 
+// ---------- 5. Public payload ----------
+// The site gets the trades and the values; the tuning notes stay in the report.
+const slim = p => p && {
+  id: p.id || null, name: p.name, team: p.team || null, teamId: p.teamId || null,
+  pos: p.pos || '', bt: p.bt || null, type: p.type || null,
+  age: p.age ?? null, ctrl: p.ctrl ?? null, rem: p.rem ?? null, tv: p.tv ?? null,
+  prospect: !!p.prospect, orgRank: p.orgRank || null, top100: p.top100 || null,
+  level: p.level || p.topLevel || null,
+};
+
+function payload(all, prof, mkt, needs, preds, swapList) {
+  return {
+    updated: new Date().toISOString(),
+    years,
+    profile: {
+      trades: prof.trades, inValue: prof.inValue, outValue: prof.outValue,
+      netValue: prof.netValue, buyer: prof.buyer,
+      playersIn: prof.playersIn, playersOut: prof.playersOut, avgGet: prof.avgGet,
+      biggestGet: slim(prof.biggestGet), biggestGive: slim(prof.biggestGive),
+      paidProspects: prof.paidProspects, paidRanked: prof.paidRanked, paidTopValue: prof.paidTopValue,
+      boughtPitching: prof.boughtPitching, boughtRentals: prof.boughtRentals,
+      boughtControlled: prof.boughtControlled, bigGets: prof.bigGets,
+    },
+    history: all.map(t => ({
+      date: t.date, year: t.year,
+      partner: t.gave.team, partnerId: t.gave.teamId,
+      got: { total: t.got.total, players: t.got.vals.map(slim) },
+      gave: { total: t.gave.total, players: t.gave.vals.map(slim) },
+    })).sort((a, b) => String(b.date).localeCompare(String(a.date))),
+    market: { sellerCount: mkt.sellers.length, sellers: mkt.sellers.map(s => s.name) },
+    needs,
+    protected: BLOCK.protected || [],
+    predictions: preds.map(m => ({
+      target: slim(m.target),
+      pkg: m.pkg.map(slim),
+      give: m.give, want: m.target.tv, gap: m.gap, caveats: m.caveats,
+    })),
+    swaps: swapList.map(sw => ({ ours: slim(sw.ours), theirs: slim(sw.theirs), gap: sw.gap })),
+  };
+}
+
 async function main() {
   const lg = E.defaultBaselines();
   console.log(`Pulling Astros deadline trades for ${years.join(', ')}…`);
@@ -289,6 +330,14 @@ async function main() {
   }
   L.push('---');
   L.push('_Values are model estimates at time of trade. Prospect ranks are current-day. Backend only._');
+
+  // publish to the site
+  try {
+    fs.mkdirSync(OUT, { recursive: true });
+    fs.writeFileSync(path.join(OUT, 'dana-brown.json'),
+      JSON.stringify(payload(all, prof, mkt, needs, preds, swapList)) + '\n');
+    console.log(`Wrote docs/data/dana-brown.json (${all.length} past trades, ${preds.length} predictions)`);
+  } catch (e) { console.warn('could not write dana-brown.json:', e.message); }
 
   const report = L.join('\n');
   fs.mkdirSync(REPORTS, { recursive: true });
