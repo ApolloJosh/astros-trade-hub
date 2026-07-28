@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-28T05:59:51.927Z",
+ "updated": "2026-07-28T06:03:39.961Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -12577,8 +12577,8 @@
     "key": "brewerhicklen",
     "svc": 0.038,
     "control": 5.5,
-    "salaryM": 0.347,
-    "remM": 0.2,
+    "salaryM": 0.127,
+    "remM": 0.1,
     "exactFA": false
    },
    {
