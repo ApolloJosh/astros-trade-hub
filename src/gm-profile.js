@@ -85,14 +85,28 @@ function profile(trades) {
 }
 
 // ---------- 3. Current market ----------
+// MLB reports games-back as "-" (leading), "-6.5" (AHEAD by 6.5) or "6.5"
+// (behind). Naive parsing turned "ahead by 6.5" into "6.5 back" and filed the
+// Yankees as sellers, so parse the sign explicitly.
+function gamesBack(raw) {
+  const v = String(raw == null ? '-' : raw).trim();
+  if (v === '-' || v === '' || v === '+') return 0;      // in position
+  if (v.startsWith('-')) return 0;                        // ahead of the cut
+  const n = parseFloat(v.replace('+', ''));
+  return isNaN(n) ? 0 : n;
+}
+const SELL_GB = 4;   // more than this many games out of a WC spot = seller
+
 async function market() {
   const st = await api.standings();
   const sellers = [], buyers = [];
   ((st && st.records) || []).forEach(div => (div.teamRecords || []).forEach(t => {
-    const gb = parseFloat(String(t.wildCardGamesBack ?? t.gamesBack ?? '0').replace('-', '0')) || 0;
+    const gb = gamesBack(t.wildCardGamesBack != null ? t.wildCardGamesBack : t.gamesBack);
+    const leadsDiv = String(t.divisionRank || '') === '1';
+    const inWC = String(t.wildCardRank || '') !== '' && +t.wildCardRank <= 3;
     const rec = { id: t.team.id, name: t.team.name, w: t.wins, l: t.losses, gb };
-    // more than 6 back of a wild card at the deadline = seller
-    (gb > 6 ? sellers : buyers).push(rec);
+    // A division leader or a club holding a wild card is never a seller.
+    (!leadsDiv && !inWC && gb > SELL_GB ? sellers : buyers).push(rec);
   }));
   return { sellers, buyers };
 }
@@ -121,10 +135,14 @@ function mocks(players, prof, sellers, needs) {
 
   // TARGETS: real major-league help only. Brown has never bought another club's
   // farmhands at the deadline — every one of his adds was an MLB contributor.
+  // And a seller moves players it is about to LOSE: rentals and short-control
+  // veterans. Nobody sells a 21-year-old with 5.5 years of control.
+  const SELLABLE_CTRL = 3.0;
   const targets = players
     .filter(p => p.teamId !== HOU && p.tv != null && !p.traded && !p.unt &&
       !p.prospect && sellerNames.has(p.team) &&
-      (p.topLevel == null || p.topLevel === 'MLB'))
+      (p.topLevel == null || p.topLevel === 'MLB') &&
+      (p.ctrl == null || p.ctrl <= SELLABLE_CTRL))
     .map(p => ({ p, fit: fits(p) }))
     .filter(x => x.fit > 0 && x.p.tv >= 10)
     .sort((a, b) => (b.fit - a.fit) || (b.p.tv - a.p.tv))
@@ -149,14 +167,24 @@ function mocks(players, prof, sellers, needs) {
     const want = p.tv, pkg = [];
     let acc = 0;
     // build from the preferred pool first, largest piece that still fits
-    for (const c of chips) {
+    // A seller wants youth and control back — never an older player with less
+    // team control than the man they're giving up.
+    const sellerWants = c => {
+      const x = c.p;
+      if (x.prospect) return true;
+      const younger = (x.age ?? 99) <= (p.age ?? 0);
+      const moreCtrl = (x.ctrl ?? 0) >= (p.ctrl ?? 0);
+      return younger || moreCtrl;
+    };
+    const pool = chips.filter(sellerWants);
+    for (const c of pool) {
       if (pkg.length >= 3 || acc >= want - 5) break;
       if (used.has(c.p.name)) continue;
       if (acc + (c.p.tv || 0) <= want + 9) { pkg.push(c); acc = r1(acc + (c.p.tv || 0)); }
     }
     if (acc < want - 12) {
       const gap = want - acc;
-      const best = chips.filter(c => !pkg.includes(c) && !used.has(c.p.name))
+      const best = pool.filter(c => !pkg.includes(c) && !used.has(c.p.name))
         .sort((a, b) => Math.abs((a.p.tv || 0) - gap) - Math.abs((b.p.tv || 0) - gap))[0];
       if (best) { pkg.push(best); acc = r1(acc + (best.p.tv || 0)); }
     }
@@ -232,7 +260,7 @@ async function main() {
   });
   L.push('');
   L.push('## The market right now');
-  L.push(`Sellers (>6 back of a wild card): **${mkt.sellers.length}** — ${mkt.sellers.slice(0, 12).map(s => s.name.replace(/^.* /, '')).join(', ')}${mkt.sellers.length > 12 ? '…' : ''}`);
+  L.push(`Sellers (>${SELL_GB} out of a wild card, excluding division leaders): **${mkt.sellers.length}** — ${mkt.sellers.slice(0, 12).map(s => s.name.replace(/^.* /, '')).join(', ')}${mkt.sellers.length > 12 ? '…' : ''}`);
   L.push(`Houston's stated needs: **${needs.length ? needs.join(', ') : 'none on file'}**`);
   L.push('');
   L.push('## Predicted moves');
