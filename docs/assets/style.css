@@ -224,3 +224,9 @@ a{color:var(--accent)}
 @media(max-width:760px){.dial-grid{grid-template-columns:1fr}}
 .dial-grid .stove{gap:16px}
 .dial-grid .stove .dial{width:200px}
+
+/* ---------- Builder: 2-team / 3-team mode ---------- */
+.modebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 12px}
+.modebar .note{margin-left:6px}
+.panel.tri{margin-top:14px;border-color:var(--accent)}
+.panel.tri .panel-hd{color:var(--accent)}
