@@ -98,12 +98,18 @@ async function market() {
 }
 
 // ---------- 4. Named mock trades ----------
+const BLOCK = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data-sources', 'trade-block.json'), 'utf8')); }
+  catch (e) { console.warn('trade-block.json missing — every Astro is assumed available.'); return {}; }
+})();
+const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]/g, '');
+const inList = (list, name) => (list || []).some(n => norm(n) === norm(name));
+
 function mocks(players, prof, sellers, needs) {
   const sellerNames = new Set(sellers.map(s => s.name));
-  const hou = players.filter(p => p.teamId === HOU && p.tv != null && !p.traded);
   const OF_POS = ['LF', 'CF', 'RF', 'OF'];
   const fits = p => {
-    if (!needs.length) return 0;
+    if (!needs.length) return 0.5;
     let sc = 0;
     if (needs.includes('OF') && OF_POS.includes(p.pos)) sc += 2;
     if (needs.includes('LHH') && p.type === 'H' && String(p.bt || '').startsWith('L')) sc += 2;
@@ -112,36 +118,71 @@ function mocks(players, prof, sellers, needs) {
     if (needs.includes(p.pos)) sc += 2;
     return sc;
   };
-  // Targets: on a seller, fills a need, and inside the value band Brown works in
-  const band = [Math.max(8, prof.avgGet * 0.5), Math.max(45, (prof.biggestGet?.tv || 40) * 1.35)];
+
+  // TARGETS: real major-league help only. Brown has never bought another club's
+  // farmhands at the deadline — every one of his adds was an MLB contributor.
   const targets = players
-    .filter(p => p.teamId !== HOU && p.tv != null && !p.traded && sellerNames.has(p.team))
+    .filter(p => p.teamId !== HOU && p.tv != null && !p.traded && !p.unt &&
+      !p.prospect && sellerNames.has(p.team) &&
+      (p.topLevel == null || p.topLevel === 'MLB'))
     .map(p => ({ p, fit: fits(p) }))
-    .filter(x => x.fit > 0 && x.p.tv >= band[0] && x.p.tv <= band[1])
+    .filter(x => x.fit > 0 && x.p.tv >= 10)
     .sort((a, b) => (b.fit - a.fit) || (b.p.tv - a.p.tv))
-    .slice(0, 6);
+    .slice(0, 8);
 
-  // Currency: prospects first (that's how he pays), never the untouchables
-  const chips = hou.filter(p => !p.unt && (p.prospect || (p.age || 30) <= 25))
-    .sort((a, b) => (b.tv || 0) - (a.tv || 0));
+  // CURRENCY: the trade block decides. Protected names are never offered;
+  // listed-available names are preferred; otherwise mid-tier prospects only.
+  const hou = players.filter(p => p.teamId === HOU && p.tv != null && !p.traded);
+  const chips = hou
+    .filter(p => !p.unt && !inList(BLOCK.protected, p.name))
+    .map(p => ({
+      p,
+      pref: inList(BLOCK.available, p.name) ? 2
+        : (BLOCK.conditional && Object.keys(BLOCK.conditional).some(n => norm(n) === norm(p.name))) ? 0
+        : 1,
+    }))
+    .filter(c => c.pref > 0 || true)
+    .sort((a, b) => (b.pref - a.pref) || ((b.p.tv || 0) - (a.p.tv || 0)));
 
+  const used = new Set();
   return targets.map(({ p, fit }) => {
     const want = p.tv, pkg = [];
     let acc = 0;
+    // build from the preferred pool first, largest piece that still fits
     for (const c of chips) {
-      if (pkg.length >= 3 || acc >= want - 6) break;
-      if (pkg.includes(c)) continue;
-      if (acc + c.tv <= want + 10) { pkg.push(c); acc = r1(acc + c.tv); }
+      if (pkg.length >= 3 || acc >= want - 5) break;
+      if (used.has(c.p.name)) continue;
+      if (acc + (c.p.tv || 0) <= want + 9) { pkg.push(c); acc = r1(acc + (c.p.tv || 0)); }
     }
-    // top up with the closest single chip if we're still light
     if (acc < want - 12) {
       const gap = want - acc;
-      const best = chips.filter(c => !pkg.includes(c))
-        .sort((a, b) => Math.abs(a.tv - gap) - Math.abs(b.tv - gap))[0];
-      if (best) { pkg.push(best); acc = r1(acc + best.tv); }
+      const best = chips.filter(c => !pkg.includes(c) && !used.has(c.p.name))
+        .sort((a, b) => Math.abs((a.p.tv || 0) - gap) - Math.abs((b.p.tv || 0) - gap))[0];
+      if (best) { pkg.push(best); acc = r1(acc + (best.p.tv || 0)); }
     }
-    return { target: p, fit, pkg, give: acc, gap: r1(acc - want) };
+    pkg.forEach(c => used.add(c.p.name));   // don't sell the same player twice
+    const caveats = pkg.filter(c => BLOCK.conditional && Object.keys(BLOCK.conditional).find(n => norm(n) === norm(c.p.name)))
+      .map(c => { const k = Object.keys(BLOCK.conditional).find(n => norm(n) === norm(c.p.name)); return `${k}: ${BLOCK.conditional[k]}`; });
+    return { target: p, fit, pkg: pkg.map(c => c.p), give: acc, gap: r1(acc - want), caveats };
   }).filter(m => m.pkg.length);
+}
+
+// Contract-for-contract swaps: Houston's big money out, a needed bat back.
+function swaps(players, sellers, needs) {
+  const sellerNames = new Set(sellers.map(s => s.name));
+  const OF_POS = ['LF', 'CF', 'RF', 'OF'];
+  const ours = players.filter(p => p.teamId === HOU && inList(BLOCK.bigMoney, p.name) && p.tv != null);
+  const theirs = players.filter(p => p.teamId !== HOU && !p.prospect && p.tv != null && !p.traded &&
+    (p.rem || 0) >= 12 && sellerNames.has(p.team) &&
+    (OF_POS.includes(p.pos) || (needs.includes('LHH') && String(p.bt || '').startsWith('L'))));
+  const out = [];
+  ours.forEach(o => {
+    const m = theirs
+      .map(t => ({ t, d: Math.abs((t.tv || 0) - (o.tv || 0)) }))
+      .sort((a, b) => a.d - b.d)[0];
+    if (m) out.push({ ours: o, theirs: m.t, gap: r1((m.t.tv || 0) - (o.tv || 0)) });
+  });
+  return out.slice(0, 3);
 }
 
 async function main() {
@@ -166,6 +207,7 @@ async function main() {
     needs = (nd.teams || {})['Houston Astros'] || [];
   } catch (e) {}
   const preds = mocks(players, prof, mkt.sellers, needs);
+  const swapList = swaps(players, mkt.sellers, needs);
 
   // ---------- report ----------
   const L = [];
@@ -196,13 +238,27 @@ async function main() {
   L.push('## Predicted moves');
   L.push('Built from his revealed tendencies (value band, prospect currency, need fit) against sellers only.');
   L.push('');
+  L.push(`Protected (never offered): ${(BLOCK.protected || []).join(', ') || 'none set'}`);
+  L.push('');
   if (!preds.length) L.push('_No matches — run the daily build first so player values and needs are present._');
   preds.forEach((m, i) => {
-    L.push(`### ${i + 1}. ${m.target.name} — ${m.target.team} (${m.target.pos}, value ${m.target.tv})`);
+    const t = m.target;
+    L.push(`### ${i + 1}. ${t.name} — ${t.team} (${t.pos}${t.bt ? ', ' + t.bt : ''}, age ${t.age ?? '?'}, value ${t.tv})`);
+    L.push(`${t.ctrl ? t.ctrl + 'y control' : ''}${t.rem != null ? ' · ~$' + t.rem + 'M owed' : ''}`);
     L.push(`Astros send: ${m.pkg.map(p => `**${p.name}** ${p.tv}${p.orgRank ? ' (Org #' + p.orgRank + ')' : ''}`).join(' + ')} — total **${m.give}**`);
     L.push(`Balance: ${m.gap > 0 ? '+' : ''}${m.gap} ${Math.abs(m.gap) <= 12 ? '(inside the fair band)' : '(needs adjusting)'}`);
+    m.caveats.forEach(c => L.push(`> ${c}`));
     L.push('');
   });
+  if (swapList.length) {
+    L.push('## Contract-for-contract swaps');
+    L.push('Money out, need filled — the Walker-for-Gurriel shape.');
+    L.push('');
+    swapList.forEach(sw => {
+      L.push(`- **${sw.ours.name}** (${sw.ours.tv}${sw.ours.rem != null ? ', ~$' + sw.ours.rem + 'M owed' : ''}) ⇄ **${sw.theirs.name}** — ${sw.theirs.team} (${sw.theirs.pos}, ${sw.theirs.tv}${sw.theirs.rem != null ? ', ~$' + sw.theirs.rem + 'M owed' : ''}) · gap ${sw.gap > 0 ? '+' : ''}${sw.gap}`);
+    });
+    L.push('');
+  }
   L.push('---');
   L.push('_Values are model estimates at time of trade. Prospect ranks are current-day. Backend only._');
 
