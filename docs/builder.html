@@ -51,6 +51,8 @@
   <div class="blbl"><span>🚀 Send <b id="bgive">0</b></span><span><b id="bget">0</b> Receive 🎯</span></div>
   <div class="bbar"><div class="bfill" id="bfill"></div><div class="btick"></div></div>
 </div>
+<div id="triwrap" style="display:none"><svg id="tri" viewBox="0 0 300 200" class="tridial"></svg>
+  <div class="trinote" id="trinote"></div></div>
 <div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button>
 <button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div>
 <div class="note" id="fanNote" style="display:none;margin-top:8px">Only trades the other GM would actually accept can be posted to Fan Trades.</div></div>
@@ -242,9 +244,22 @@ BTD.nav('builder');
       list.forEach((p, i) => {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
         const owed = p.rem != null ? ' · ~$' + p.rem.toFixed(1) + 'M owed' : '';
+        // In a 3-team deal every player needs a destination.
+        let destSel = '';
+        if (S.mode === 3) {
+          const from = id === 'gpicked' ? 'hou' : id === 'rpicked' ? 'partner' : 'third';
+          const opts = [ASTROS, partnerName(), S.tteam || 'Third Team']
+            .filter((t, ix, arr) => t && arr.indexOf(t) === ix && t !== p.team);
+          const cur = destOf(p, from);
+          destSel = `<select class="dest" data-idx="${i}" data-from="${from}" title="Where does he go?">` +
+            opts.map(o => `<option value="${BTD.esc(o)}"${o === cur ? ' selected' : ''}>→ ${BTD.esc(o)}</option>`).join('') +
+            `</select>`;
+        }
         d.innerHTML = `<span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="rmeta">${BTD.esc(p.pos)}${p.teamId === HOU ? '' : ' · ' + BTD.esc(p.team)}${owed}</span></span>` +
-          `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span><span class="x">×</span>`;
+          destSel + `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span><span class="x">×</span>`;
         d.querySelector('.x').addEventListener('click', () => { list.splice(i, 1); renderAll(); });
+        const ds = d.querySelector('.dest');
+        if (ds) ds.addEventListener('change', e => { p._to = e.target.value; renderAll(); });
         el.appendChild(d);
       });
       if (ck && S[ck] > 0) {
@@ -326,6 +341,37 @@ BTD.nav('builder');
   // Returns each player's list value AND what he's actually worth in THIS deal
   // after stacking discounts, need bonuses and the untouchable premium — so the
   // card can show the real math instead of a bare sum.
+  // ---- Destination model ----
+  // Roster crunch is about what a club ABSORBS, so the stacking discount is
+  // applied per RECEIVING bundle, not per sending side. In a 2-team deal these
+  // are the same thing; in a 3-team deal they are very different.
+  const ASTROS = 'Astros';
+  const partnerName = () => (S.recv.length ? S.recv[0].team : (S.team !== 'all' ? S.team : 'Trade Partner'));
+  function destOf(p, from) {
+    if (p._to) return p._to;                       // user-assigned in 3-team mode
+    if (from === 'hou') return partnerName();      // default: Houston's go to the partner
+    return ASTROS;                                 // everyone else's default to Houston
+  }
+  // Build { team: [players it receives] } across the whole deal.
+  function bundles() {
+    const b = {};
+    const push = (team, p) => { (b[team] = b[team] || []).push(p); };
+    S.give.forEach(p => push(destOf(p, 'hou'), p));
+    S.recv.forEach(p => push(destOf(p, 'partner'), p));
+    if (S.mode === 3) S.third.forEach(p => push(destOf(p, 'third'), p));
+    return b;
+  }
+  // Value each bundle with stacking + need bonuses for the RECEIVING club.
+  function valueBundles() {
+    const b = bundles(), out = {}, perPlayer = new Map();
+    Object.entries(b).forEach(([team, list]) => {
+      const needs = team === ASTROS ? (NEEDS['Houston Astros'] || []) : (NEEDS[team] || []);
+      const r = effList(list, 0, needs, team !== ASTROS);
+      out[team] = r.total;
+      r.rows.forEach(row => perPlayer.set(row.p, row));
+    });
+    return { totals: out, perPlayer };
+  }
   function effList(list, cash, needs, untouchable) {
     const pos = list.filter(p => (p.tv || 0) > 0).sort((a, b) => (b.tv || 0) - (a.tv || 0));
     const neg = list.filter(p => (p.tv || 0) <= 0);
@@ -356,24 +402,54 @@ BTD.nav('builder');
     const main = document.getElementById('vmain'), sub = document.getElementById('vsub');
     document.getElementById('share').style.display = (S.give.length && S.recv.length) ? 'inline-block' : 'none';
 
-    // Partner needs (only when everything coming back is from one team)
+    // Partner needs — visible as soon as a partner is known, from either the
+    // locked receive side OR the team dropdown (so you can shop by need).
     const partnerTeams = [...new Set(S.recv.map(p => p.team))];
-    const needs = partnerTeams.length === 1 ? (NEEDS[partnerTeams[0]] || []) : [];
+    const partner = partnerTeams.length === 1 ? partnerTeams[0]
+      : (S.team && S.team !== 'all' ? S.team : null);
+    const needs = partner ? (NEEDS[partner] || []) : [];
     document.getElementById('tgive').textContent = sum(S.third, 0).toFixed(1);
     const nl = document.getElementById('needsline');
-    if (partnerTeams.length === 1 && needs.length) {
+    if (partner && needs.length) {
       nl.style.display = 'block';
-      nl.textContent = `🎯 ${partnerTeams[0]} needs: ${needs.join(' · ')} — Astros players filling a need count extra with them.`;
-    } else nl.style.display = 'none';
+      nl.innerHTML = `🎯 <b>${BTD.esc(partner)}</b> needs: ${BTD.esc(needs.join(' · '))} — Astros players filling a need count extra with them.`;
+    } else if (partner) {
+      nl.style.display = 'block';
+      nl.innerHTML = `🎯 No stated needs on file for the <b>${BTD.esc(partner)}</b>.`;
+    } else {
+      nl.style.display = 'block';
+      nl.innerHTML = '🎯 Pick a team (or a player) to see what they\'re shopping for.';
+    }
 
     // Package-adjusted values + special rules
-    const gList = effList(S.give, S.gcash, needs, false);
-    const rList = effList(S.recv, S.rcash, null, true);
-    // In a 3-team deal the third club also ships talent. That value joins the
-    // "given" side of the ledger — Houston needs to send less to balance it.
-    const tList = (S.mode === 3) ? effList(S.third, 0, null, false) : { rows: [], total: 0 };
-    const effGive = Math.round((gList.total + tList.total) * 10) / 10, effGet = rList.total;
-    S.effGive = effGive; S.effGet = effGet; S.gRows = gList.rows; S.rRows = rList.rows; S.tRows = tList.rows;
+    // Value every receiving bundle, then read each club's ledger from it.
+    const vb = valueBundles();
+    const val = p => { const r = vb.perPlayer.get(p); return r ? r.eff : (p.tv || 0); };
+    const sumEff = l => Math.round(l.reduce((a, p) => a + val(p), 0) * 10) / 10;
+
+    const pName = partnerName(), tName = S.tteam || 'Third Team';
+    // What Houston gives up (incl. cash) and takes back.
+    const effGive = Math.round((sumEff(S.give) + S.gcash * CASH_PTS +
+      (S.mode === 3 ? sumEff(S.third.filter(p => destOf(p, 'third') !== ASTROS)) * 0 : 0)) * 10) / 10;
+    const effGet = Math.round((sumEff(S.recv.filter(p => destOf(p, 'partner') === ASTROS)) +
+      (S.mode === 3 ? sumEff(S.third.filter(p => destOf(p, 'third') === ASTROS)) : 0) + S.rcash * CASH_PTS) * 10) / 10;
+
+    // Per-club net (what they get minus what they ship) — a fair 3-way has all
+    // three nets near zero.
+    const nets = {};
+    nets[ASTROS] = Math.round((effGet - effGive) * 10) / 10;
+    nets[pName] = Math.round((sumEff(S.give.filter(p => destOf(p, 'hou') === pName)) +
+      (S.mode === 3 ? sumEff(S.third.filter(p => destOf(p, 'third') === pName)) : 0) + S.gcash * CASH_PTS -
+      sumEff(S.recv) - S.rcash * CASH_PTS) * 10) / 10;
+    if (S.mode === 3) {
+      nets[tName] = Math.round((sumEff(S.give.filter(p => destOf(p, 'hou') === tName)) +
+        sumEff(S.recv.filter(p => destOf(p, 'partner') === tName)) - sumEff(S.third)) * 10) / 10;
+    }
+    S.nets = nets; S.pName = pName; S.tName = tName;
+    S.effGive = effGive; S.effGet = effGet;
+    S.gRows = S.give.map(p => vb.perPlayer.get(p)).filter(Boolean);
+    S.rRows = S.recv.map(p => vb.perPlayer.get(p)).filter(Boolean);
+    S.tRows = S.third.map(p => vb.perPlayer.get(p)).filter(Boolean);
     const unt = S.recv.filter(p => p.unt);
     const bestG = Math.max(0, ...S.give.map(p => p.tv || 0)), bestR = Math.max(0, ...S.recv.map(p => p.tv || 0));
     const needHead = bestR >= HL_TV && bestG < HL_FRAC * bestR;
@@ -382,6 +458,40 @@ BTD.nav('builder');
     // ratio math breaks down, so treat it as a salary dump.
     const dump = effGet <= 0;
     const r = (dump ? (effGive <= 0 ? 1 : 3) : effGive / effGet) / req;
+
+    // ---- 3-team balance triangle ----
+    const tw = document.getElementById('triwrap');
+    if (S.mode === 3) {
+      tw.style.display = 'block';
+      const names = [ASTROS, pName, tName];
+      // corners of an equilateral-ish triangle
+      const C = [[150, 26], [40, 168], [260, 168]];
+      const scale = Math.max(18, ...names.map(n => Math.abs(nets[n] || 0)));
+      // pull the centre dot toward whoever is gaining
+      let dx = 0, dy = 0;
+      names.forEach((n, i) => {
+        const w = (nets[n] || 0) / scale;              // −1 … +1
+        dx += (C[i][0] - 150) * w * 0.75;
+        dy += (C[i][1] - 121) * w * 0.75;
+      });
+      const worst = Math.max(...names.map(n => Math.abs(nets[n] || 0)));
+      const col = worst <= 12 ? 'var(--good)' : worst <= 25 ? 'var(--warn)' : 'var(--bad)';
+      const label = (n, i) => {
+        const v = nets[n] || 0, sign = v > 0 ? '+' : '';
+        return `<text x="${C[i][0]}" y="${C[i][1] + (i === 0 ? -10 : 22)}" text-anchor="middle" class="trilbl">${BTD.esc(n.length > 14 ? n.slice(0, 13) + '…' : n)}</text>` +
+          `<text x="${C[i][0]}" y="${C[i][1] + (i === 0 ? -26 : 38)}" text-anchor="middle" class="trival" fill="${v > 0 ? 'var(--good)' : v < 0 ? 'var(--bad)' : 'var(--muted)'}">${sign}${v.toFixed(1)}</text>`;
+      };
+      document.getElementById('tri').innerHTML =
+        `<polygon points="${C.map(c => c.join(',')).join(' ')}" fill="none" stroke="var(--row-line)" stroke-width="2"/>` +
+        C.map(c => `<line x1="150" y1="121" x2="${c[0]}" y2="${c[1]}" stroke="var(--row-line)" stroke-width="1" stroke-dasharray="3 3"/>`).join('') +
+        `<circle cx="150" cy="121" r="4" fill="var(--row-line)"/>` +
+        C.map((c, i) => `<circle cx="${c[0]}" cy="${c[1]}" r="6" fill="var(--card)" stroke="var(--card-line)" stroke-width="2"/>`).join('') +
+        names.map(label).join('') +
+        `<circle cx="${(150 + dx).toFixed(1)}" cy="${(121 + dy).toFixed(1)}" r="9" fill="${col}" stroke="var(--card)" stroke-width="2"/>`;
+      document.getElementById('trinote').innerHTML = worst <= 12
+        ? '✅ All three clubs land within the fair band — the dot sits near centre.'
+        : `The dot is pulled toward <b>${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))}</b> — that side is ${worst.toFixed(1)} points ahead. Even it out to get the deal done.`;
+    } else tw.style.display = 'none';
 
     const bw = document.getElementById('bwrap');
     if (effGive > 0 || effGet > 0) {
@@ -397,7 +507,9 @@ BTD.nav('builder');
       sub.textContent = 'Astros send → Astros receive';
       S.vCard = null;
     } else {
-      const gap = Math.abs(effGive - effGet * req);
+      const gap = (S.mode === 3)
+        ? Math.max(...Object.values(nets).map(v => Math.abs(v)))
+        : Math.abs(effGive - effGet * req);
       let tier = needHead ? NO_HEADLINER : (TIERS.find(x => r < x.max) || TIERS[TIERS.length - 1]);
       // Absolute gap trumps the ratio: 124 for 64 is not a trade, it's a gift.
       if (!needHead && gap > MAX_GAP) tier = effGive > effGet * req ? TOO_FAR_OVER : TOO_FAR_LIGHT;
@@ -583,13 +695,14 @@ BTD.nav('builder');
       x.restore(); x.textAlign = 'left';
       x.strokeStyle = NAVY; x.lineWidth = 2; x.beginPath(); x.arc(px, py, r, 0, 7); x.stroke();
     };
-    const col = (title, logo, rows, shots, cash, cx, total) => {
+    const col = (title, logo, rows, shots, cash, cx, total, W2) => {
+      const CW = W2 || 450;   // column width
       // team header
       circle(logo, cx + 22, 392, 22, title);
       x.fillStyle = NAVY; x.font = '800 27px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
       x.fillText(title.toUpperCase(), cx + 56, 401);
       x.strokeStyle = NAVY; x.lineWidth = 2;
-      x.beginPath(); x.moveTo(cx, 420); x.lineTo(cx + 450, 420); x.stroke();
+      x.beginPath(); x.moveTo(cx, 420); x.lineTo(cx + CW, 420); x.stroke();
       let cy = 468;
       rows.slice(0, 6).forEach((row, i) => {
         const p = row.p, changed = Math.abs(row.eff - row.base) > 0.05;
@@ -603,12 +716,12 @@ BTD.nav('builder');
         // exchange value on the right; the list value struck through beside it
         x.textAlign = 'right';
         x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
-        x.fillText(BTD.pts(row.eff), cx + 450, cy);
+        x.fillText(BTD.pts(row.eff), cx + CW, cy);
         if (changed) {
           const base = BTD.pts(row.base);
           x.font = '600 19px Inter, sans-serif'; x.fillStyle = MUTED;
           const effW = x.measureText(BTD.pts(row.eff)).width;
-          const bx2 = cx + 450 - 62, bw2 = x.measureText(base).width;
+          const bx2 = cx + CW - 62, bw2 = x.measureText(base).width;
           x.fillText(base, bx2, cy - 1);
           x.strokeStyle = MUTED; x.lineWidth = 2;
           x.beginPath(); x.moveTo(bx2 - bw2 - 2, cy - 7); x.lineTo(bx2 + 2, cy - 7); x.stroke();
@@ -620,19 +733,26 @@ BTD.nav('builder');
       if (cash > 0) {
         x.fillStyle = NAVY; x.font = '700 23px Inter, sans-serif'; x.fillText('💵 Cash $' + cash.toFixed(1) + 'M', cx + 64, cy - 6);
         x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
-        x.fillText((cash * CASH_PTS).toFixed(1), cx + 450, cy - 6); x.textAlign = 'left';
+        x.fillText((cash * CASH_PTS).toFixed(1), cx + CW, cy - 6); x.textAlign = 'left';
         cy += 46;
       }
       // side total (this is the number the verdict actually uses)
       x.strokeStyle = NAVY; x.lineWidth = 2;
-      x.beginPath(); x.moveTo(cx + 250, cy - 34); x.lineTo(cx + 450, cy - 34); x.stroke();
+      x.beginPath(); x.moveTo(cx + 250, cy - 34); x.lineTo(cx + CW, cy - 34); x.stroke();
       x.fillStyle = NAVY; x.font = '800 20px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
       x.fillText('TRADE VALUE', cx + 250, cy - 8);
       x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '900 28px Inter, sans-serif';
-      x.fillText(BTD.pts(total), cx + 450, cy - 6); x.textAlign = 'left';
+      x.fillText(BTD.pts(total), cx + CW, cy - 6); x.textAlign = 'left';
     };
-    col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 60, give);
-    col(rName, rLogo, S.rRows || [], rShots, S.rcash, 570, get);
+    if (S.mode === 3 && (S.tRows || []).length) {
+      // three narrower columns
+      col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 40, give, 300);
+      col(rName, rLogo, S.rRows || [], rShots, S.rcash, 390, get, 300);
+      col(S.tName || 'Third Team', null, S.tRows || [], [], 0, 740, sum(S.third, 0), 300);
+    } else {
+      col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 60, give);
+      col(rName, rLogo, S.rRows || [], rShots, S.rcash, 570, get);
+    }
     // footer
     x.fillStyle = NAVY; x.fillRect(0, H - 100, W, 100);
     x.textAlign = 'center';
