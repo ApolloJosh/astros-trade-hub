@@ -55,6 +55,12 @@
 <button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div>
 <div class="note" id="fanNote" style="display:none;margin-top:8px">Only trades the other GM would actually accept can be posted to Fan Trades.</div></div>
 
+<div class="modebar">
+  <button id="mode2" class="on">2-Team Trade</button>
+  <button id="mode3">3-Team Trade</button>
+  <span class="note" id="modenote">Everything you receive must come from one trade partner.</span>
+</div>
+
 <div class="cols">
   <div class="panel">
     <div class="panel-hd">🚀 Astros Send</div>
@@ -88,6 +94,20 @@
     <div class="note" id="rnote" style="margin-top:6px;display:none"></div>
     <div class="note" id="needsline" style="margin-top:6px;display:none"></div>
   </div>
+</div>
+
+<div class="panel tri" id="tripanel" style="display:none">
+  <div class="panel-hd">🔀 Third Team — what they send out</div>
+  <div class="note">In a 3-team deal the third club ships talent too. Pick which team, then the players they give up (to either of the other two).</div>
+  <div class="total"><span>Third team sends</span><b id="tgive">0.0</b></div>
+  <div class="picked" id="tpicked"></div>
+  <div class="controls">
+    <select id="tteam"><option value="">Choose the third team…</option></select>
+    <input id="tsearch" placeholder="Search their players…">
+    <select id="tsort"></select>
+  </div>
+  <div class="list" id="tlist"></div>
+  <div class="note" id="tneeds" style="margin-top:6px;display:none"></div>
 </div>
 
 <div class="panel cbt" id="cbt" style="display:none">
@@ -128,11 +148,12 @@ BTD.nav('builder');
 
   const all = doc.players.filter(p => p.tv != null && !p.traded);
   const CASH_PTS = 0.5; // TV points per $M of cash (mirrors config sv.tv.cashPtsPerM)
-  const S = { give: [], recv: [], gcash: 0, rcash: 0, gq: '', rq: '', gf: 'all', team: 'all', gsort: 'tv', rsort: 'tv', view: 'all' };
+  const S = { give: [], recv: [], third: [], gcash: 0, rcash: 0, gq: '', rq: '', tq: '',
+    gf: 'all', team: 'all', gsort: 'tv', rsort: 'tv', tsort: 'tv', view: 'all', mode: 2, tteam: '' };
 
   const SORTS = [['tv', 'Trade value'], ['hit', 'Hitters first'], ['pit', 'Pitchers first'], ['pos', 'Position'],
     ['hand', 'Handedness'], ['ops', 'OPS'], ['era', 'ERA'], ['ctrl', 'Most control'], ['age', 'Youngest']];
-  ['gsort', 'rsort'].forEach(id => {
+  ['gsort', 'rsort', 'tsort'].forEach(id => {
     const sel = document.getElementById(id);
     SORTS.forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = 'Sort: ' + t; sel.appendChild(o); });
   });
@@ -181,8 +202,13 @@ BTD.nav('builder');
     g.sort(S.gf === 't30' ? byRank('orgRank') : cmp(S.gsort));
     renderList(document.getElementById('glist'), g, p => { S.give.push(p); renderAll(); });
 
+    // GUARDRAIL: in a 2-team deal everything you receive comes from ONE club.
+    // Once a player is picked, only his team stays selectable.
+    const lockedTeam = S.recv.length ? S.recv[0].team : null;
     let r = all.filter(p => p.teamId !== HOU && !inTrade(p) &&
       (S.team === 'all' || p.team === S.team) &&
+      (S.mode === 3 || !lockedTeam || p.team === lockedTeam) &&
+      (S.mode !== 3 || !S.tteam || p.team !== S.tteam) &&
       (!S.rq || p.name.toLowerCase().includes(S.rq)));
     if (S.view === 't100') { r = r.filter(p => p.top100 != null); r.sort(byRank('top100')); }
     else if (S.view === 't30') { r = r.filter(p => p.orgRank != null); r.sort(S.team === 'all' ? ((a, b) => a.team.localeCompare(b.team) || byRank('orgRank')(a, b)) : byRank('orgRank')); }
@@ -190,8 +216,19 @@ BTD.nav('builder');
     else r.sort(cmp(S.rsort));
     renderList(document.getElementById('rlist'), r, p => { S.recv.push(p); renderAll(); });
 
+    // third team's outgoing list
+    const tl = document.getElementById('tlist');
+    if (tl) {
+      let t3 = !S.tteam ? [] : all.filter(p => p.team === S.tteam && !inTrade(p) &&
+        (!S.tq || p.name.toLowerCase().includes(S.tq)));
+      t3.sort(cmp(S.tsort));
+      renderList(tl, t3, p => { S.third.push(p); renderAll(); });
+    }
     const note = document.getElementById('rnote');
-    if (S.view !== 'all' && !r.length) {
+    if (lockedTeam && S.mode === 2) {
+      note.style.display = 'block';
+      note.innerHTML = `🔒 Trading with the <b>${BTD.esc(lockedTeam)}</b>. Clear the receive side to switch partners, or use a 3-team trade.`;
+    } else if (S.view !== 'all' && !r.length) {
       note.style.display = 'block';
       note.textContent = S.view === 't100' ? 'Top 100 rankings are loading with the next data refresh.'
         : S.view === 'fits' ? 'No Astros Fits players match the current filters.'
@@ -200,7 +237,7 @@ BTD.nav('builder');
     } else note.style.display = 'none';
   }
   function renderPicked() {
-    [['gpicked', S.give, 'away', 'gcash'], ['rpicked', S.recv, '', 'rcash']].forEach(([id, list, cls, ck]) => {
+    [['gpicked', S.give, 'away', 'gcash'], ['rpicked', S.recv, '', 'rcash'], ['tpicked', S.third, 'away', null]].forEach(([id, list, cls, ck]) => {
       const el = document.getElementById(id); el.innerHTML = '';
       list.forEach((p, i) => {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
@@ -210,7 +247,7 @@ BTD.nav('builder');
         d.querySelector('.x').addEventListener('click', () => { list.splice(i, 1); renderAll(); });
         el.appendChild(d);
       });
-      if (S[ck] > 0) {
+      if (ck && S[ck] > 0) {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
         d.innerHTML = `<span>💵 Cash <span class="rmeta">$${S[ck].toFixed(1)}M</span></span>` +
           `<span class="tv mid">${(S[ck] * CASH_PTS).toFixed(1)}</span><span class="x">×</span>`;
@@ -322,6 +359,7 @@ BTD.nav('builder');
     // Partner needs (only when everything coming back is from one team)
     const partnerTeams = [...new Set(S.recv.map(p => p.team))];
     const needs = partnerTeams.length === 1 ? (NEEDS[partnerTeams[0]] || []) : [];
+    document.getElementById('tgive').textContent = sum(S.third, 0).toFixed(1);
     const nl = document.getElementById('needsline');
     if (partnerTeams.length === 1 && needs.length) {
       nl.style.display = 'block';
@@ -331,8 +369,11 @@ BTD.nav('builder');
     // Package-adjusted values + special rules
     const gList = effList(S.give, S.gcash, needs, false);
     const rList = effList(S.recv, S.rcash, null, true);
-    const effGive = gList.total, effGet = rList.total;
-    S.effGive = effGive; S.effGet = effGet; S.gRows = gList.rows; S.rRows = rList.rows;
+    // In a 3-team deal the third club also ships talent. That value joins the
+    // "given" side of the ledger — Houston needs to send less to balance it.
+    const tList = (S.mode === 3) ? effList(S.third, 0, null, false) : { rows: [], total: 0 };
+    const effGive = Math.round((gList.total + tList.total) * 10) / 10, effGet = rList.total;
+    S.effGive = effGive; S.effGet = effGet; S.gRows = gList.rows; S.rRows = rList.rows; S.tRows = tList.rows;
     const unt = S.recv.filter(p => p.unt);
     const bestG = Math.max(0, ...S.give.map(p => p.tv || 0)), bestR = Math.max(0, ...S.recv.map(p => p.tv || 0));
     const needHead = bestR >= HL_TV && bestG < HL_FRAC * bestR;
@@ -412,6 +453,39 @@ BTD.nav('builder');
     document.querySelectorAll('button[data-view]').forEach(x => x.classList.remove('on'));
     b.classList.add('on'); S.view = b.dataset.view; renderLists();
   }));
+  // ---- 2-team / 3-team mode ----
+  function setMode(m) {
+    S.mode = m;
+    document.getElementById('mode2').classList.toggle('on', m === 2);
+    document.getElementById('mode3').classList.toggle('on', m === 3);
+    document.getElementById('tripanel').style.display = m === 3 ? 'block' : 'none';
+    document.getElementById('modenote').textContent = m === 3
+      ? 'Three clubs, one deal — the third team ships talent too, so the sides can balance where a 1-for-1 never would.'
+      : 'Everything you receive must come from one trade partner.';
+    if (m === 2 && S.third.length) S.third = [];
+    if (m === 2 && S.recv.length > 1) {
+      // collapse back to a single partner
+      const keep = S.recv[0].team;
+      S.recv = S.recv.filter(p => p.team === keep);
+    }
+    renderAll();
+  }
+  document.getElementById('mode2').addEventListener('click', () => setMode(2));
+  document.getElementById('mode3').addEventListener('click', () => setMode(3));
+  const tteamSel = document.getElementById('tteam');
+  teams.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; tteamSel.appendChild(o); });
+  tteamSel.addEventListener('change', e => {
+    S.tteam = e.target.value;
+    S.third = S.third.filter(p => p.team === S.tteam);   // drop players from the old third team
+    const tn = document.getElementById('tneeds');
+    const nd = NEEDS[S.tteam] || [];
+    if (S.tteam && nd.length) { tn.style.display = 'block'; tn.textContent = `🎯 ${S.tteam} needs: ${nd.join(' · ')}`; }
+    else tn.style.display = 'none';
+    renderAll();
+  });
+  document.getElementById('tsearch').addEventListener('input', e => { S.tq = e.target.value.toLowerCase(); renderLists(); });
+  document.getElementById('tsort').addEventListener('change', e => { S.tsort = e.target.value; renderLists(); });
+
   const askCash = k => { const v = parseFloat(prompt('Cash amount ($ millions):', '2')); if (v > 0) { S[k] = Math.round(v * 10) / 10; renderAll(); } };
   document.getElementById('gcash').addEventListener('click', () => askCash('gcash'));
   document.getElementById('rcash').addEventListener('click', () => askCash('rcash'));
