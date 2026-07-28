@@ -238,3 +238,12 @@ a{color:var(--accent)}
 .tridial .trival{font-size:17px;font-weight:800;font-family:var(--hd2)}
 .trinote{font-size:12px;color:var(--muted);margin-top:2px}
 .pick .dest{font-size:11px;padding:2px 4px;border:1px solid var(--row-line);border-radius:4px;background:var(--input-bg);color:var(--ink);max-width:130px}
+
+/* ---------- 3-team: three send columns ---------- */
+.cols3grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cols3grid .panel,.cols3grid .list{min-width:0}
+@media(max-width:900px){.cols3grid{grid-template-columns:1fr}}
+.leg .panel-hd{display:flex;align-items:center;gap:8px}
+.legdot{width:14px;height:14px;border-radius:50%;border:2px solid var(--card-line);flex:0 0 auto}
+.legneeds{margin-top:6px;min-height:16px}
+.leg .pick .dest{font-size:11px;padding:2px 4px;border:1px solid var(--row-line);border-radius:4px;background:var(--input-bg);color:var(--ink);max-width:120px}
