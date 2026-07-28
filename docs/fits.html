@@ -10,6 +10,57 @@
 .pcard .meta{font-size:11.5px;color:var(--muted)}
 .pcard .stats{font-size:12px;background:var(--row-hover);border:1px solid var(--row-line);border-radius:6px;padding:6px 8px;margin:8px 0}
 .pcard .vals{display:flex;justify-content:space-between;font-size:12.5px}
+
+/* ---- The Dana Brown Predictor ---- */
+.secbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 4px}
+.secbar .note{margin-left:4px}
+.dbhd{font-family:var(--hd);font-size:clamp(17px,2.4vw,22px);text-transform:uppercase;
+  letter-spacing:.03em;margin:22px 0 4px;border-bottom:2px solid var(--card-line);padding-bottom:6px}
+.dbsub{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin:12px 0 4px}
+.pbox{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:10px 12px;text-align:center}
+.pbox span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pbox b{display:block;font-family:var(--hd2);font-size:21px;font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums}
+.pbox b.buy{color:var(--tvhi)} .pbox b.sell{color:var(--accent)}
+
+.tcard{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px;margin-bottom:14px}
+.tchd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;
+  border-bottom:1px solid var(--row-line);padding-bottom:8px}
+.tchd .tcnum{font-family:var(--hd2);font-weight:800;font-size:13px;color:var(--accent);
+  border:2px solid var(--accent);border-radius:50%;width:24px;height:24px;display:grid;place-items:center;flex:0 0 auto}
+.tchd .tctitle{font-family:var(--hd2);font-weight:800;font-size:14.5px;letter-spacing:.05em;text-transform:uppercase}
+.tchd .tcdate{margin-left:auto;font-size:11.5px;color:var(--muted)}
+.tcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(max-width:700px){.tcols{grid-template-columns:1fr}}
+.tside{min-width:0}
+.tshd{display:flex;align-items:center;gap:7px;font-family:var(--hd2);font-weight:800;font-size:12px;
+  letter-spacing:.09em;text-transform:uppercase;margin-bottom:7px}
+.tshd img{width:22px;height:22px;object-fit:contain;flex:0 0 auto}
+.tside.hou .tshd{color:var(--accent)}
+.pick{display:flex;align-items:center;gap:8px;background:var(--row-hover);border:1px solid var(--card-line);
+  border-radius:6px;padding:6px 9px;font-size:12.5px;margin-bottom:6px;min-width:0}
+.pick img.face{width:28px;height:28px;border-radius:50%;background:var(--navy);object-fit:cover;flex:0 0 auto}
+.pick .pkn{flex:1;min-width:0}
+.pick .pkn .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+.pick .pkn .m{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick .pkv{font-weight:800;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.ttot{display:flex;justify-content:space-between;font-size:12.5px;padding:6px 9px;margin-top:2px;
+  background:var(--row-hover);border:1px solid var(--row-line);border-radius:6px}
+.ttot b{font-variant-numeric:tabular-nums}
+.tbal{max-width:460px;margin:12px auto 0}
+.tbal .blbl{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px;color:var(--muted)}
+.tbal .bbar{position:relative;height:13px;border:2px solid var(--card-line);border-radius:7px;
+  background:var(--navy);overflow:hidden}
+.tbal .bfill{height:100%;background:var(--accent)}
+.tbal .btick{position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.55}
+.tverd{text-align:center;font-size:11.5px;margin-top:6px;font-weight:700;letter-spacing:.04em}
+.tverd.fair{color:var(--tvhi)} .tverd.off{color:var(--warn)}
+.tcav{font-size:11.5px;font-style:italic;color:var(--muted);border-left:3px solid var(--warn);
+  padding:4px 0 4px 9px;margin-top:9px}
+.tprot{font-size:11.5px;color:var(--muted);margin:6px 0 14px}
+.tprot b{color:var(--ink)}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -17,12 +68,22 @@
 <div class="hero"><div class="kicker">The Shopping List</div>
 <h1>Astros Possible Fits</h1>
 <p class="sub">The curated target board from the podcast's tracking sheet — lefty bats and bullpen arms that fit Houston, with model values.</p></div>
+<div class="secbar">
+  <button id="secBoard" class="on">Target Board</button>
+  <button id="secDB">The Dana Brown Predictor</button>
+</div>
+
+<div id="board">
 <div class="controls">
   <button data-f="all" class="on">All</button><button data-f="H">Hitters</button><button data-f="P">Pitchers</button>
   <input id="q" placeholder="Search…">
   <select id="sort"><option value="tv">Sort: Trade value</option><option value="tl">Sort: Trade likelihood</option><option value="name">Sort: Name</option></select>
 </div>
 <div class="grid" id="cards"></div>
+</div>
+
+<div id="db" style="display:none"></div>
+
 <p class="foot">Curated in Google Sheets · valued by the BTD model · Beyond the Diamond</p>
 <script src="assets/app.js"></script>
 <script>
@@ -61,5 +122,151 @@ BTD.nav('fits');
   document.getElementById('sort').addEventListener('change', e => { S.sort = e.target.value; render(); });
   render();
 })().catch(e => { document.getElementById('cards').innerHTML = '<div class="card">No fits data yet — run the pipeline.</div>'; });
+
+// ---------- The Dana Brown Predictor ----------
+(async () => {
+  const el = document.getElementById('db');
+  const esc = BTD.esc, pts = BTD.pts;
+  let D;
+  try { D = await BTD.data('dana-brown'); } catch (e) {
+    el.innerHTML = '<div class="card">The predictor is warming up — check back shortly.</div>'; return;
+  }
+  const HOU = 117;
+  const nick = t => String(t || '').replace(/^(Los Angeles|New York|San Francisco|San Diego|St\. Louis|Kansas City|Tampa Bay|Chicago|Washington|Baltimore|Philadelphia|Pittsburgh|Cincinnati|Cleveland|Milwaukee|Minnesota|Colorado|Arizona|Toronto|Boston|Detroit|Houston|Seattle|Texas|Miami|Atlanta|Oakland|Athletics)\s*/, '') || t;
+
+  function chips(p) {
+    let b = '';
+    if (p.top100) b += ` <span class="chip t100">MLB #${p.top100}</span>`;
+    else if (p.orgRank) b += ` <span class="chip pr">Org #${p.orgRank}</span>`;
+    else if (p.prospect) b += ' <span class="chip pr">PROSPECT</span>';
+    return b;
+  }
+  const meta = p => [p.pos, p.bt, p.age != null ? 'age ' + p.age : '',
+    p.ctrl != null ? p.ctrl + 'y ctrl' : '', p.rem != null ? '~$' + (+p.rem).toFixed(1) + 'M owed' : '',
+    p.prospect && p.level && p.level !== 'MLB' ? p.level : ''].filter(Boolean).join(' · ');
+
+  const row = p => `<div class="pick">
+    <img class="face" loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">
+    <div class="pkn"><div class="n">${p.id ? `<span class="pn" data-pid="${p.id}">${esc(p.name)}</span>` : esc(p.name)}${chips(p)}</div>
+    <div class="m">${esc(meta(p))}</div></div>
+    <b class="pkv tv ${BTD.tvCls(p.tv)}">${pts(p.tv)}</b></div>`;
+
+  const side = (label, teamId, players, total, isHou) => `<div class="tside${isHou ? ' hou' : ''}">
+    <div class="tshd"><img src="${BTD.logo(teamId)}" alt="" onerror="this.style.display='none'"><span>${esc(label)} receives</span></div>
+    ${players.map(row).join('') || '<div class="pick"><div class="pkn"><div class="m">—</div></div></div>'}
+    <div class="ttot"><span>Total value</span><b class="tv ${BTD.tvCls(total)}">${pts(total)}</b></div></div>`;
+
+  // Orange = what Houston gives up, navy = what comes back. Tick marks even.
+  function bar(send, get) {
+    const t = (send || 0) + (get || 0);
+    const w = t > 0 ? Math.max(2, Math.min(98, 100 * send / t)) : 50;
+    const gap = (get || 0) - (send || 0);
+    const fair = Math.abs(gap) <= 12;
+    const verdict = Math.abs(gap) < 2 ? 'Dead even'
+      : gap > 0 ? `Astros come out ahead by ${pts(Math.abs(gap))}`
+      : `Astros pay a premium of ${pts(Math.abs(gap))}`;
+    return `<div class="tbal"><div class="blbl"><span>Astros send <b>${pts(send)}</b></span><span><b>${pts(get)}</b> Astros receive</span></div>
+      <div class="bbar"><div class="bfill" style="width:${w}%"></div><div class="btick"></div></div>
+      <div class="tverd ${fair ? 'fair' : 'off'}">${verdict}${fair ? ' · inside the fair band' : ''}</div></div>`;
+  }
+
+  const P = D.profile || {};
+  // Guard on the raw value, not the formatted one — otherwise a missing stat
+  // renders as "undefined%".
+  const box = (l, v, fmt, cls) => (v == null || v === '') ? ''
+    : `<div class="pbox"><span>${l}</span><b class="${cls || ''}">${fmt ? fmt(v) : v}</b></div>`;
+  const pct = v => v + '%';
+  const yrs = (D.years || []).join(' · ');
+
+  const H = [];
+  H.push(`<div class="dbhd">The Dana Brown Predictor</div>`);
+  H.push(`<p class="dbsub">What Houston's GM has actually done at the deadline — every trade, with what each side gave up — and the deals that same pattern points to this year.</p>`);
+
+  H.push(`<div class="pgrid">
+    ${box('Deadline verdict', P.trades ? (P.buyer ? 'BUYER' : 'SELLER') : null, null, P.buyer ? 'buy' : 'sell')}
+    ${box('Net value', P.netValue, v => (v > 0 ? '+' : '') + pts(v))}
+    ${box('Deadline trades', P.trades)}
+    ${box('Avg piece added', P.avgGet, pts)}
+    ${box('Buys pitching', P.boughtPitching, pct)}
+    ${box('Buys rentals', P.boughtRentals, pct)}
+    ${box('Pays w/ prospects', P.paidProspects, pct)}
+  </div>`);
+  const big = [];
+  if (P.biggestGet) big.push(`Biggest add: <b>${esc(P.biggestGet.name)}</b> (${pts(P.biggestGet.tv)})`);
+  if (P.biggestGive) big.push(`Biggest cost: <b>${esc(P.biggestGive.name)}</b> (${pts(P.biggestGive.tv)})`);
+  if (big.length) H.push(`<p class="tprot">${big.join(' &nbsp;·&nbsp; ')}</p>`);
+
+  // ---- history ----
+  H.push(`<div class="dbhd">Every Deadline Trade</div>`);
+  H.push(`<p class="dbsub">${yrs ? yrs + ' · ' : ''}values are what each player was worth at the time of the deal.</p>`);
+  if (!(D.history || []).length) H.push('<div class="card">No deadline trades on file yet.</div>');
+  (D.history || []).forEach(t => {
+    H.push(`<div class="tcard">
+      <div class="tchd"><span class="tctitle">Astros ⇄ ${esc(nick(t.partner))}</span><span class="tcdate">${esc(t.date || '')}</span></div>
+      <div class="tcols">
+        ${side('Astros', HOU, t.got.players, t.got.total, true)}
+        ${side(nick(t.partner), t.partnerId, t.gave.players, t.gave.total, false)}
+      </div>
+      ${bar(t.gave.total, t.got.total)}
+    </div>`);
+  });
+
+  // ---- predictions ----
+  H.push(`<div class="dbhd">Deals He'd Make This Year</div>`);
+  H.push(`<p class="dbsub">Built off that same pattern — his value band, the prospects he actually spends, and what Houston needs${D.needs && D.needs.length ? ' (' + esc(D.needs.join(', ')) + ')' : ''} — matched against clubs that are selling${D.market && D.market.sellerCount ? ' (' + D.market.sellerCount + ' of them right now)' : ''}.</p>`);
+  if ((D.protected || []).length) H.push(`<p class="tprot">Off the table: <b>${esc(D.protected.join(' · '))}</b></p>`);
+  if (!(D.predictions || []).length) H.push('<div class="card">No matches on the board right now.</div>');
+  (D.predictions || []).forEach((m, i) => {
+    const t = m.target;
+    H.push(`<div class="tcard">
+      <div class="tchd"><span class="tcnum">${i + 1}</span><span class="tctitle">${esc(t.name)} to Houston</span>
+        <span class="tcdate">${esc(nick(t.team))}</span></div>
+      <div class="tcols">
+        ${side('Astros', HOU, [t], t.tv, true)}
+        ${side(nick(t.team), t.teamId, m.pkg, m.give, false)}
+      </div>
+      ${bar(m.give, t.tv)}
+      ${(m.caveats || []).map(c => `<div class="tcav">${esc(c)}</div>`).join('')}
+    </div>`);
+  });
+
+  // ---- contract swaps ----
+  if ((D.swaps || []).length) {
+    H.push(`<div class="dbhd">Contract-for-Contract Swaps</div>`);
+    H.push(`<p class="dbsub">Money out, a need filled — one bad deal traded for another that fits better.</p>`);
+    D.swaps.forEach(sw => {
+      H.push(`<div class="tcard">
+        <div class="tchd"><span class="tctitle">${esc(sw.ours.name)} ⇄ ${esc(sw.theirs.name)}</span>
+          <span class="tcdate">${esc(nick(sw.theirs.team))}</span></div>
+        <div class="tcols">
+          ${side('Astros', HOU, [sw.theirs], sw.theirs.tv, true)}
+          ${side(nick(sw.theirs.team), sw.theirs.teamId, [sw.ours], sw.ours.tv, false)}
+        </div>
+        ${bar(sw.ours.tv, sw.theirs.tv)}
+      </div>`);
+    });
+  }
+
+  H.push(`<p class="foot">Trade history via MLB transactions · values from the BTD model · updated ${D.updated ? new Date(D.updated).toLocaleDateString() : '—'}</p>`);
+  el.innerHTML = H.join('');
+})().catch(e => {
+  document.getElementById('db').innerHTML = '<div class="card">The predictor hit a snag: ' + BTD.esc(e && e.message || e) + '</div>';
+});
+
+// section switcher
+(function () {
+  const b = document.getElementById('secBoard'), d = document.getElementById('secDB');
+  const board = document.getElementById('board'), db = document.getElementById('db');
+  function show(which) {
+    const isDB = which === 'db';
+    db.style.display = isDB ? '' : 'none';
+    board.style.display = isDB ? 'none' : '';
+    d.classList.toggle('on', isDB); b.classList.toggle('on', !isDB);
+    history.replaceState(null, '', isDB ? '#predictor' : location.pathname);
+  }
+  b.addEventListener('click', () => show('board'));
+  d.addEventListener('click', () => show('db'));
+  if (location.hash === '#predictor') show('db');
+})();
 </script>
 </div></body></html>
