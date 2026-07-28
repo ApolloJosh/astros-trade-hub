@@ -23,6 +23,6 @@ jobs:
         run: |
           git config user.name trade-hub-bot
           git config user.email actions@github.com
-          git add reports data-sources/trade-calibration-cache.json || true
+          git add reports docs/data/dana-brown.json data-sources/trade-calibration-cache.json || true
           git commit -m 'deadline outlook' || echo 'nothing to commit'
           git push || echo 'push skipped'
