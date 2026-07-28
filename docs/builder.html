@@ -371,6 +371,7 @@ BTD.nav('builder');
   // inside 25 in either direction stays within the shape (3-way deals are hard
   // to balance). The inner guide marks the acceptance band.
   const TRI_SCALE = 25;
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   function drawTriangle(names, nets, worst) {
     const tw = document.getElementById('triwrap');
     if (names.length < 2) { tw.style.display = 'none'; return; }
