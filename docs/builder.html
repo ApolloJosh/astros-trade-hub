@@ -48,13 +48,13 @@
 <div class="verdict"><div class="vmain" id="vmain">Add players to both sides</div>
 <div class="vsub" id="vsub">Astros send → Astros receive</div>
 <div class="bwrap" id="bwrap" style="display:none">
-  <div class="blbl"><span>🚀 Send <b id="bgive">0</b></span><span><b id="bget">0</b> Receive 🎯</span></div>
+  <div class="blbl"><span><img class="barlogo" id="barlogoG" alt="">Send <b id="bgive">0</b></span><span><b id="bget">0</b> Receive<img class="barlogo" id="barlogoR" alt=""></span></div>
   <div class="bbar"><div class="bfill" id="bfill"></div><div class="btick"></div></div>
 </div>
-<div id="triwrap" style="display:none"><svg id="tri" viewBox="0 0 340 262" class="tridial"></svg>
+<div id="triwrap" style="display:none"><svg id="tri" viewBox="0 0 340 286" class="tridial"></svg>
   <div class="trinote" id="trinote"></div></div>
 <div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button>
-<button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div>
+<button id="submitFan" style="display:none">Submit to Fan Trades</button></div>
 <div class="note" id="fanNote" style="display:none;margin-top:8px">Only trades the other GM would actually accept can be posted to Fan Trades.</div></div>
 
 <div class="modebar">
@@ -65,7 +65,7 @@
 
 <div class="cols" id="cols2">
   <div class="panel">
-    <div class="panel-hd">🚀 Astros Send</div>
+    <div class="panel-hd"><img class="hdlogo" id="hdlogoG" alt=""><span>Astros Send</span></div>
     <div class="total"><span>Value going out</span><b id="give">0.0</b></div>
     <div class="picked" id="gpicked"></div>
     <div class="controls">
@@ -77,7 +77,7 @@
     <div class="list" id="glist"></div>
   </div>
   <div class="panel">
-    <div class="panel-hd">🎯 Astros Receive</div>
+    <div class="panel-hd"><img class="hdlogo" id="hdlogoR" alt=""><span id="hdnameR">Astros Receive</span></div>
     <div class="total"><span>Value coming in</span><b id="get">0.0</b></div>
     <div class="picked" id="rpicked"></div>
     <div class="controls">
@@ -139,7 +139,7 @@
 </div>
 
 <div class="panel cbt" id="cbt" style="display:none">
-  <div class="panel-hd">💰 Luxury Tax Impact</div>
+  <div class="panel-hd">Luxury Tax Impact</div>
   <div id="cbtrows"></div>
   <div class="note" style="margin-top:6px">Salaries marked (est.) are service-time estimates — exact figures via data-sources/salaries-manual.json.</div>
 </div>
@@ -252,10 +252,10 @@ BTD.nav('builder');
     const note = document.getElementById('rnote');
     if (lockedTeam && S.mode === 2) {
       note.style.display = 'block';
-      note.innerHTML = `🔒 Trading with the <b>${BTD.esc(lockedTeam)}</b>. Clear the receive side to switch partners, or use a 3-team trade.`;
+      note.innerHTML = `Trading with the <b>${BTD.esc(lockedTeam)}</b>. Clear the receive side to switch partners, or use a 3-team trade.`;
     } else if (S.mode === 3 && inDeal.length >= 2) {
       note.style.display = 'block';
-      note.innerHTML = `🔒 Three clubs in: <b>Astros</b>, <b>${BTD.esc(inDeal[0])}</b>, <b>${BTD.esc(inDeal[1])}</b>.`;
+      note.innerHTML = `Three clubs in: <b>Astros</b>, <b>${BTD.esc(inDeal[0])}</b>, <b>${BTD.esc(inDeal[1])}</b>.`;
     } else if (S.view !== 'all' && !r.length) {
       note.style.display = 'block';
       note.textContent = S.view === 't100' ? 'Top 100 rankings are loading with the next data refresh.'
@@ -290,7 +290,7 @@ BTD.nav('builder');
       });
       if (ck && S[ck] > 0) {
         const d = document.createElement('div'); d.className = 'pick ' + cls;
-        d.innerHTML = `<span>💵 Cash <span class="rmeta">$${S[ck].toFixed(1)}M</span></span>` +
+        d.innerHTML = `<span>Cash <span class="rmeta">$${S[ck].toFixed(1)}M</span></span>` +
           `<span class="tv mid">${(S[ck] * CASH_PTS).toFixed(1)}</span><span class="x">×</span>`;
         d.querySelector('.x').addEventListener('click', () => { S[ck] = 0; renderAll(); });
         el.appendChild(d);
@@ -306,44 +306,44 @@ BTD.nav('builder');
   // blurbs — one is picked deterministically from the trade itself so the
   // card and the page always say the same thing.
   const TIERS = [
-    { max: 0.45, ok: false, title: '☎️ They hung up', stamp: 'NO DEAL', blurbs: [
+    { max: 0.45, ok: false, title: 'They hung up', stamp: 'NO DEAL', blurbs: [
       'Their GM is worried you\'re drunk on the job.',
       'They blocked your number and changed the locks.',
       'The call ended before you finished the sentence.',
       'They forwarded this to the league office as a prank.' ] },
-    { max: 0.6, ok: false, title: '🚫 Not close', stamp: 'NO DEAL', blurbs: [
+    { max: 0.6, ok: false, title: 'Not close', stamp: 'NO DEAL', blurbs: [
       'They laughed, then realized you were serious.',
       'That\'s not a trade offer, that\'s a wish list.',
       'Their intern turned this one down.' ] },
-    { max: 0.9, ok: false, title: '🤏 Close — sweeten it', stamp: 'NOT YET', blurbs: [
+    { max: 0.9, ok: false, title: 'Close — sweeten it', stamp: 'NOT YET', blurbs: [
       'They\'re listening. Add a real piece and call back.',
       'Almost. Their GM asked "who else you got?"',
       'Keep talking — this one\'s in the neighborhood.' ] },
-    { max: 1.25, ok: true, title: '✅ Fair trade — this gets done', stamp: 'ACCEPTED', blurbs: [
+    { max: 1.25, ok: true, title: 'Fair trade — this gets done', stamp: 'ACCEPTED', blurbs: [
       'Both GMs hang up happy. Deal.',
       'Right in the negotiation band — pending physicals.',
       'Nobody wins the press conference. That\'s a fair trade.' ] },
-    { max: 1.6, ok: true, title: '💸 Overpay — instant yes', stamp: 'ACCEPTED', blurbs: [
+    { max: 1.6, ok: true, title: 'Overpay — instant yes', stamp: 'ACCEPTED', blurbs: [
       'They said yes before you finished the sentence.',
       'Their GM is buying a round for the whole office.',
       'Accepted so fast the fax machine caught fire.' ] },
-    { max: Infinity, ok: true, title: '🚨 Fleeced', stamp: 'ACCEPTED', blurbs: [
+    { max: Infinity, ok: true, title: 'Fleeced', stamp: 'ACCEPTED', blurbs: [
       'This is how you end up in a "worst trades" listicle.',
       'Their GM just got a contract extension for this.',
       'Somewhere, a rival front office is framing this offer.' ] },
   ];
-  const NO_HEADLINER = { ok: false, title: '☎️ No headliner, no call back', stamp: 'NO DEAL', blurbs: [
+  const NO_HEADLINER = { ok: false, title: 'No headliner, no call back', stamp: 'NO DEAL', blurbs: [
     'Quantity isn\'t a headliner. They want a real player.',
     'You can\'t buy a star with a pile of spare parts.' ] };
   // Real trades stay close. Nothing on the live feed has come in more than
   // ~12 points apart, so anything wider isn't a deal — in either direction.
   const MAX_GAP = 12;
-  const TOO_FAR_OVER = { ok: false, title: '🔥 Your GM would be fired', stamp: 'NO DEAL', blurbs: [
+  const TOO_FAR_OVER = { ok: false, title: 'Your GM would be fired', stamp: 'NO DEAL', blurbs: [
     'They\'d accept in a heartbeat. That\'s the problem.',
     'Their GM is trying not to laugh on the call.',
     'This gets you run out of Houston by sundown.',
     'Great trade! For them.' ] };
-  const TOO_FAR_LIGHT = { ok: false, title: '📏 Not in the same ballpark', stamp: 'NO DEAL', blurbs: [
+  const TOO_FAR_LIGHT = { ok: false, title: 'Not in the same ballpark', stamp: 'NO DEAL', blurbs: [
     'That gap is wider than any real trade all season.',
     'Front offices don\'t hand out gifts that size.',
     'You\'re not negotiating, you\'re daydreaming.' ] };
@@ -376,8 +376,8 @@ BTD.nav('builder');
     const tw = document.getElementById('triwrap');
     if (names.length < 2) { tw.style.display = 'none'; return; }
     tw.style.display = 'block';
-    const CX = 170, CY = 148;
-    const C = [[CX, 52], [56, 196], [284, 196]];       // Astros always the apex
+    const CX = 170, CY = 172;
+    const C = [[CX, 76], [56, 220], [284, 220]];       // Astros always the apex
     // Barycentric placement: direction from who's gaining, distance from how
     // lopsided it is. A convex combination of the corners can never fall
     // outside the triangle, and ±TRI_SCALE reaches the edge.
@@ -447,13 +447,19 @@ BTD.nav('builder');
     S.legs.forEach((leg, i) => {
       document.getElementById('legname' + i).textContent = leg.team || (i === 1 ? 'Team 2' : 'Team 3');
       const dot = document.getElementById('dot' + i);
-      dot.style.background = leg.team ? teamColor(leg.team) : 'var(--row-line)';
+      const lid = leg.team ? teamIdOf(leg.team) : null;
+      if (lid) {
+        dot.style.background = 'transparent'; dot.style.border = 'none';
+        dot.innerHTML = `<img class="hdlogo" src="https://www.mlbstatic.com/team-logos/${lid}.svg" alt="">`;
+      } else {
+        dot.innerHTML = ''; dot.style.background = 'var(--row-line)'; dot.style.border = '2px solid var(--card-line)';
+      }
       document.getElementById('legout' + i).textContent =
         leg.out.reduce((a, p) => a + (p.tv || 0), 0).toFixed(1);
       // needs
       const nd = leg.team ? (NEEDS[leg.team === 'Astros' ? 'Houston Astros' : leg.team] || []) : [];
       const ne = document.getElementById('legneeds' + i);
-      ne.innerHTML = leg.team ? (nd.length ? `🎯 Needs: ${BTD.esc(nd.join(' · '))}` : '🎯 No stated needs.') : '';
+      ne.innerHTML = leg.team ? (nd.length ? `Needs: ${BTD.esc(nd.join(' · '))}` : 'No stated needs.') : '';
       // picked chips with a destination selector
       const pk = document.getElementById('legpick' + i); pk.innerHTML = '';
       leg.out.forEach((p, idx) => {
@@ -594,16 +600,30 @@ BTD.nav('builder');
     const partner = partnerTeams.length === 1 ? partnerTeams[0]
       : (S.team && S.team !== 'all' ? S.team : null);
     const needs = partner ? (NEEDS[partner] || []) : [];
+    // team logos: Astros always on the left, partner on the right once known
+    const logoURL = t => { const id = teamIdOf(t); return id ? `https://www.mlbstatic.com/team-logos/${id}.svg` : ''; };
+    const setLogo = (el, team) => {
+      if (!el) return;
+      const u = team ? logoURL(team) : '';
+      if (u) { el.src = u; el.style.display = 'inline-block'; } else { el.removeAttribute('src'); el.style.display = 'none'; }
+    };
+    setLogo(document.getElementById('hdlogoG'), 'Astros');
+    setLogo(document.getElementById('barlogoG'), 'Astros');
+    setLogo(document.getElementById('hdlogoR'), partner);
+    setLogo(document.getElementById('barlogoR'), partner);
+    const hdR = document.getElementById('hdnameR');
+    if (hdR) hdR.textContent = partner ? `${partner} Send` : 'Astros Receive';
+
     const nl = document.getElementById('needsline');
     if (partner && needs.length) {
       nl.style.display = 'block';
-      nl.innerHTML = `🎯 <b>${BTD.esc(partner)}</b> needs: ${BTD.esc(needs.join(' · '))} — Astros players filling a need count extra with them.`;
+      nl.innerHTML = `<b>${BTD.esc(partner)}</b> needs: ${BTD.esc(needs.join(' · '))} — Astros players filling a need count extra with them.`;
     } else if (partner) {
       nl.style.display = 'block';
-      nl.innerHTML = `🎯 No stated needs on file for the <b>${BTD.esc(partner)}</b>.`;
+      nl.innerHTML = `No stated needs on file for the <b>${BTD.esc(partner)}</b>.`;
     } else {
       nl.style.display = 'block';
-      nl.innerHTML = '🎯 Pick a team (or a player) to see what they\'re shopping for.';
+      nl.innerHTML = 'Pick a team (or a player) to see what they\'re shopping for.';
     }
 
     // Package-adjusted values + special rules
@@ -834,7 +854,10 @@ BTD.nav('builder');
     if (!noImgs) {
       await Promise.all([
         ...Object.values(recv).flat().slice(0, 18).map(async r => { shots[r.p.id] = await loadImg(BTD.shot(r.p.id)); }),
-        ...names.map(async n => { const id = teamIdOf(n); if (id) logos[n] = await loadImg(`https://www.mlbstatic.com/team-logos/${id}.svg`); }),
+        ...names.map(async n => {
+          const id = teamIdOf(n); if (!id) return;
+          try { logos[n] = await loadImg(`https://www.mlbstatic.com/team-logos/${id}.svg`); } catch (e) { logos[n] = null; }
+        }),
       ]);
     }
 
@@ -870,12 +893,16 @@ BTD.nav('builder');
       x.fillStyle = col; 
       if (x.roundRect) { x.beginPath(); x.roundRect(50, y0, W - 100, 60, 8); x.fill(); }
       else x.fillRect(50, y0, W - 100, 60);
+      // white puck + abbreviation always, logo layered on top when it loads
+      x.fillStyle = '#fff'; x.beginPath(); x.arc(96, y0 + 30, 22, 0, 7); x.fill();
       const lg = logos[team];
-      if (lg) { x.save(); x.beginPath(); x.arc(96, y0 + 30, 22, 0, 7); x.clip(); x.drawImage(lg, 74, y0 + 8, 44, 44); x.restore(); }
-      else {
-        x.fillStyle = 'rgba(255,255,255,.22)'; x.beginPath(); x.arc(96, y0 + 30, 22, 0, 7); x.fill();
-        x.fillStyle = '#fff'; x.font = '800 17px "Barlow Condensed", sans-serif'; x.textAlign = 'center';
-        x.fillText(teamAbbr(team), 96, y0 + 37);
+      if (lg) {
+        x.save(); x.beginPath(); x.arc(96, y0 + 30, 20, 0, 7); x.clip();
+        try { x.drawImage(lg, 76, y0 + 10, 40, 40); } catch (e) {}
+        x.restore();
+      } else {
+        x.fillStyle = col; x.font = '800 16px "Barlow Condensed", sans-serif'; x.textAlign = 'center';
+        x.fillText(teamAbbr(team), 96, y0 + 36); x.textAlign = 'left';
       }
       x.textAlign = 'left';
       x.fillStyle = '#fff'; x.font = '800 30px "Barlow Condensed", sans-serif';
@@ -1041,7 +1068,7 @@ BTD.nav('builder');
       });
       if (rows.length > 6) { x.fillStyle = MUTED; x.font = 'italic 17px Inter'; x.fillText('+ ' + (rows.length - 6) + ' more', cx + 64, cy - 8); cy += 50; }
       if (cash > 0) {
-        x.fillStyle = NAVY; x.font = '700 23px Inter, sans-serif'; x.fillText('💵 Cash $' + cash.toFixed(1) + 'M', cx + 64, cy - 6);
+        x.fillStyle = NAVY; x.font = '700 23px Inter, sans-serif'; x.fillText('Cash $' + cash.toFixed(1) + 'M', cx + 64, cy - 6);
         x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 26px Inter, sans-serif';
         x.fillText((cash * CASH_PTS).toFixed(1), cx + CW, cy - 6); x.textAlign = 'left';
         cy += 46;
@@ -1085,7 +1112,7 @@ BTD.nav('builder');
     // Hard gate — the button is hidden for rejected trades, but never trust the DOM.
     if (!S.accepted || !S.give.length || !S.recv.length) {
       btn.textContent = '✗ Only accepted trades can be posted';
-      setTimeout(() => btn.textContent = '🏆 Submit to Fan Trades', 2500);
+      setTimeout(() => btn.textContent = 'Submit to Fan Trades', 2500);
       return;
     }
     const name = prompt('Add your name to the trade (optional):', '');
@@ -1099,7 +1126,7 @@ BTD.nav('builder');
       if (d.ok) { btn.textContent = '✓ Submitted — see Fan Trades!'; }
       else throw new Error(d.error || 'rejected');
     } catch (e) { btn.textContent = '✗ Could not submit — try again'; btn.disabled = false; }
-    setTimeout(() => { btn.textContent = '🏆 Submit to Fan Trades'; btn.disabled = false; }, 4000);
+    setTimeout(() => { btn.textContent = 'Submit to Fan Trades'; btn.disabled = false; }, 4000);
   });
   document.getElementById('sclose').addEventListener('click', () => modal.style.display = 'none');
   modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
