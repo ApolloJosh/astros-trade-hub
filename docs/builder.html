@@ -367,35 +367,58 @@ BTD.nav('builder');
   // Returns each player's list value AND what he's actually worth in THIS deal
   // after stacking discounts, need bonuses and the untouchable premium — so the
   // card can show the real math instead of a bare sum.
+  // Triangle scale: a club ±TRI_SCALE points off is at the corner, so anything
+  // inside 25 in either direction stays within the shape (3-way deals are hard
+  // to balance). The inner guide marks the acceptance band.
+  const TRI_SCALE = 25;
   function drawTriangle(names, nets, worst) {
     const tw = document.getElementById('triwrap');
     if (names.length < 2) { tw.style.display = 'none'; return; }
     tw.style.display = 'block';
-    const C = [[170, 52], [56, 196], [284, 196]];      // Astros always the apex
-    const scale = Math.max(18, ...names.map(n => Math.abs(nets[n] || 0)));
-    let dx = 0, dy = 0;
-    names.forEach((n, i) => {
-      const w = (nets[n] || 0) / scale;
-      dx += (C[i][0] - 170) * w * 0.75; dy += (C[i][1] - 148) * w * 0.75;
-    });
-    const dotCol = worst <= MAX_GAP ? '#1d7a4f' : worst <= 25 ? '#b8860b' : '#c0392b';
+    const CX = 170, CY = 148;
+    const C = [[CX, 52], [56, 196], [284, 196]];       // Astros always the apex
+    // Barycentric placement: direction from who's gaining, distance from how
+    // lopsided it is. A convex combination of the corners can never fall
+    // outside the triangle, and ±TRI_SCALE reaches the edge.
+    const vals = names.map(n => nets[n] || 0);
+    const lo = Math.min(...vals);
+    let wts = vals.map(v => v - lo);
+    const wsum = wts.reduce((a, b) => a + b, 0);
+    let tx = CX, ty = CY;
+    if (wsum > 0.001) {
+      wts = wts.map(w => w / wsum);
+      tx = wts.reduce((a, w, i) => a + w * C[i][0], 0);
+      ty = wts.reduce((a, w, i) => a + w * C[i][1], 0);
+    }
+    const t = clamp(worst / TRI_SCALE, 0, 1);
+    const dx = (tx - CX) * t, dy = (ty - CY) * t;
+    const band = worst <= MAX_GAP ? '#1d7a4f' : worst <= TRI_SCALE ? '#b8860b' : '#c0392b';
     const short = n => (n && n.length > 12) ? n.slice(0, 11) + '…' : (n || '');
+    // inner guide = the fair band, scaled from the corners
+    const f = MAX_GAP / TRI_SCALE;
+    const inner = C.map(c => [CX + (c[0] - CX) * f, CY + (c[1] - CY) * f]);
     const node = (n, i) => {
       const col = teamColor(n), v = nets[n] || 0, sign = v > 0 ? '+' : '';
-      const apex = i === 0, ty = apex ? C[i][1] - 22 : C[i][1] + 30, vy = apex ? C[i][1] - 40 : C[i][1] + 50;
-      return `<circle cx="${C[i][0]}" cy="${C[i][1]}" r="11" fill="${col}" stroke="var(--card)" stroke-width="3"/>` +
+      const apex = i === 0, ty = apex ? C[i][1] - 26 : C[i][1] + 34, vy = apex ? C[i][1] - 44 : C[i][1] + 54;
+      const id = teamIdOf(n);
+      const logo = id
+        ? `<clipPath id="clip${i}"><circle cx="${C[i][0]}" cy="${C[i][1]}" r="15"/></clipPath>` +
+          `<circle cx="${C[i][0]}" cy="${C[i][1]}" r="16" fill="var(--card)" stroke="${col}" stroke-width="3"/>` +
+          `<image href="https://www.mlbstatic.com/team-logos/${id}.svg" x="${C[i][0] - 14}" y="${C[i][1] - 14}" width="28" height="28" clip-path="url(#clip${i})"/>`
+        : `<circle cx="${C[i][0]}" cy="${C[i][1]}" r="14" fill="${col}" stroke="var(--card)" stroke-width="3"/>`;
+      return logo +
         `<text x="${C[i][0]}" y="${ty}" text-anchor="middle" class="trilbl" fill="${col}">${BTD.esc(short(n))}</text>` +
         `<text x="${C[i][0]}" y="${vy}" text-anchor="middle" class="trival" fill="${v > 0 ? '#1d7a4f' : v < 0 ? '#c0392b' : 'var(--muted)'}">${sign}${v.toFixed(1)}</text>`;
     };
     document.getElementById('tri').innerHTML =
       `<polygon points="${C.map(c => c.join(',')).join(' ')}" fill="none" stroke="var(--card-line)" stroke-width="5" stroke-linejoin="round"/>` +
-      C.map(c => `<line x1="170" y1="148" x2="${c[0]}" y2="${c[1]}" stroke="var(--row-line)" stroke-width="2" stroke-dasharray="4 4"/>`).join('') +
-      `<circle cx="170" cy="148" r="4" fill="var(--row-line)"/>` +
+      `<polygon points="${inner.map(c => c.map(v => v.toFixed(1)).join(',')).join(' ')}" fill="rgba(29,122,79,.10)" stroke="#1d7a4f" stroke-width="1.5" stroke-dasharray="4 4"/>` +
+      `<circle cx="${CX}" cy="${CY}" r="3" fill="var(--row-line)"/>` +
       names.map(node).join('') +
-      `<circle cx="${(170 + dx).toFixed(1)}" cy="${(148 + dy).toFixed(1)}" r="11" fill="${dotCol}" stroke="var(--card)" stroke-width="3"/>`;
+      `<circle cx="${(CX + dx).toFixed(1)}" cy="${(CY + dy).toFixed(1)}" r="5.5" fill="${band}" stroke="var(--card)" stroke-width="2"/>`;
     document.getElementById('trinote').innerHTML = worst <= MAX_GAP
-      ? '✅ Every club lands within the fair band.'
-      : `Tilted toward <b>${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))}</b> by ${worst.toFixed(1)} points.`;
+      ? `<span style="color:#1d7a4f;font-weight:800">Every club lands within the fair band.</span>`
+      : `<span style="color:${band};font-weight:800">Tilted toward ${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))} by ${worst.toFixed(1)} points.</span>`;
   }
 
   // ================= 3-TEAM MODE =================
@@ -471,6 +494,25 @@ BTD.nav('builder');
     'Phillies': '#e81828', 'Pirates': '#fdb827', 'Padres': '#2f241d', 'Giants': '#fd5a1e',
     'Mariners': '#0c2c56', 'Cardinals': '#c41e3a', 'Rays': '#092c5c', 'Rangers': '#003278',
     'Blue Jays': '#134a8e', 'Nationals': '#ab0003',
+  };
+  const TEAM_ABBR = {
+    'Astros': 'HOU', 'Diamondbacks': 'AZ', 'Athletics': 'ATH', 'Braves': 'ATL', 'Orioles': 'BAL',
+    'Red Sox': 'BOS', 'Cubs': 'CHC', 'White Sox': 'CWS', 'Reds': 'CIN', 'Guardians': 'CLE',
+    'Rockies': 'COL', 'Tigers': 'DET', 'Royals': 'KC', 'Angels': 'LAA', 'Dodgers': 'LAD',
+    'Marlins': 'MIA', 'Brewers': 'MIL', 'Twins': 'MIN', 'Mets': 'NYM', 'Yankees': 'NYY',
+    'Phillies': 'PHI', 'Pirates': 'PIT', 'Padres': 'SD', 'Giants': 'SF', 'Mariners': 'SEA',
+    'Cardinals': 'STL', 'Rays': 'TB', 'Rangers': 'TEX', 'Blue Jays': 'TOR', 'Nationals': 'WSH',
+  };
+  const teamAbbr = n => {
+    if (!n) return '?';
+    if (TEAM_ABBR[n]) return TEAM_ABBR[n];
+    const hit = Object.keys(TEAM_ABBR).find(k => String(n).includes(k));
+    return hit ? TEAM_ABBR[hit] : String(n).slice(0, 3).toUpperCase();
+  };
+  const teamIdOf = n => {
+    if (n === 'Astros') return HOU;
+    const p = all.find(x => x.team === n);
+    return p ? p.teamId : null;
   };
   const teamColor = n => {
     if (!n) return '#8a8578';
@@ -585,12 +627,13 @@ BTD.nav('builder');
         const tier3 = worst3 <= MAX_GAP ? TIERS[3] : (TIERS.find(x => x.max === Infinity) || TIERS[TIERS.length - 1]);
         const ok3 = worst3 <= MAX_GAP;
         S.accepted = ok3;
-        main3.textContent = ok3 ? '✅ Three-way works — everyone says yes' : '🚨 One club is getting fleeced';
+        main3.textContent = ok3 ? 'Three-way works — everyone says yes' : 'One club is getting fleeced';
         main3.style.color = ok3 ? 'var(--good)' : 'var(--bad)';
         const lead = names3.reduce((a, n) => Math.abs(nets3[n] || 0) > Math.abs(nets3[a] || 0) ? n : a, names3[0]);
         sub3.textContent = ok3
           ? `All three clubs land within ${MAX_GAP} points. ${moved} player${moved === 1 ? '' : 's'} on the move.`
           : `${lead} is ${worst3.toFixed(1)} points off. Real deals land inside ${MAX_GAP}.`;
+        main3.style.color = ok3 ? 'var(--good)' : (worst3 <= TRI_SCALE ? 'var(--warn)' : 'var(--bad)');
         S.vCard = { txt: ok3 ? 'THREE-TEAM DEAL' : 'LOPSIDED THREE-WAY',
           col: ok3 ? '#1d7a4f' : '#c0392b', ok: ok3, stamp: ok3 ? 'ACCEPTED' : 'NO DEAL',
           blurb: ok3 ? 'Three clubs, one deal, nobody walks away sore.' : `${lead} is doing far too well here.` };
@@ -774,7 +817,121 @@ BTD.nav('builder');
     im.src = url;
   });
   const teamSpot = id => id ? `https://midfield.mlbstatic.com/v1/team/${id}/spots/72` : '';
+  // ---- 3-team card: tall portrait, one band per club, organised by RECEIVES ----
+  async function draw3Card(noImgs) {
+    const W = 1080, H = 1620, cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const x = cv.getContext('2d');
+    const NAVY = '#16294f', CREAM = '#f5efdf', ORANGE = '#e8590c', MUTED = '#5d6a85';
+    const names = S.legs.map(l => l.team).filter(Boolean);
+    const nets = S.nets || {};
+    // who receives what
+    const recv = {}; names.forEach(n => recv[n] = []);
+    S.legs.forEach(l => l.out.forEach(p => { if (p._to && recv[p._to]) recv[p._to].push({ p, from: l.team }); }));
+
+    const shots = {}, logos = {};
+    if (!noImgs) {
+      await Promise.all([
+        ...Object.values(recv).flat().slice(0, 18).map(async r => { shots[r.p.id] = await loadImg(BTD.shot(r.p.id)); }),
+        ...names.map(async n => { const id = teamIdOf(n); if (id) logos[n] = await loadImg(`https://www.mlbstatic.com/team-logos/${id}.svg`); }),
+      ]);
+    }
+
+    x.fillStyle = '#efe7d4'; x.fillRect(0, 0, W, H);
+    x.fillStyle = NAVY; x.fillRect(0, 0, W, 150);
+    x.fillStyle = ORANGE; x.fillRect(0, 0, W, 8);
+    x.textAlign = 'center';
+    x.fillStyle = '#f2a33c'; x.font = '700 20px "Barlow Condensed", sans-serif';
+    x.fillText('B E Y O N D   T H E   D I A M O N D   P O D C A S T', W / 2, 52);
+    x.fillStyle = CREAM; x.font = '900 50px "Archivo Black", sans-serif';
+    x.fillText('THREE-TEAM TRADE', W / 2, 115);
+
+    // verdict stamp (no balance bar for 3-team deals)
+    const v = S.vCard || { ok: true, stamp: 'ACCEPTED', blurb: '' };
+    const badge = v.ok ? '#1d7a4f' : '#c0392b';
+    const label = (v.ok ? '✔  ' : '✘  ') + v.stamp;
+    x.font = '900 30px "Archivo Black", sans-serif';
+    const tw2 = x.measureText(label).width, pw = tw2 + 56;
+    x.fillStyle = badge;
+    if (x.roundRect) { x.beginPath(); x.roundRect((W - pw) / 2, 176, pw, 50, 25); x.fill(); }
+    else x.fillRect((W - pw) / 2, 176, pw, 50);
+    x.fillStyle = '#fff'; x.fillText(label, W / 2, 210);
+    if (v.blurb) {
+      x.fillStyle = MUTED; x.font = 'italic 20px Inter, sans-serif';
+      x.fillText(v.blurb, W / 2, 248);
+    }
+
+    // three bands
+    const bandH = 420, top0 = 276;
+    names.forEach((team, bi) => {
+      const y0 = top0 + bi * bandH, col = teamColor(team);
+      // header
+      x.fillStyle = col; 
+      if (x.roundRect) { x.beginPath(); x.roundRect(50, y0, W - 100, 60, 8); x.fill(); }
+      else x.fillRect(50, y0, W - 100, 60);
+      const lg = logos[team];
+      if (lg) { x.save(); x.beginPath(); x.arc(96, y0 + 30, 22, 0, 7); x.clip(); x.drawImage(lg, 74, y0 + 8, 44, 44); x.restore(); }
+      else {
+        x.fillStyle = 'rgba(255,255,255,.22)'; x.beginPath(); x.arc(96, y0 + 30, 22, 0, 7); x.fill();
+        x.fillStyle = '#fff'; x.font = '800 17px "Barlow Condensed", sans-serif'; x.textAlign = 'center';
+        x.fillText(teamAbbr(team), 96, y0 + 37);
+      }
+      x.textAlign = 'left';
+      x.fillStyle = '#fff'; x.font = '800 30px "Barlow Condensed", sans-serif';
+      x.fillText(teamAbbr(team) + ' — ' + team.toUpperCase() + ' RECEIVE', 132, y0 + 41);
+      const net = nets[team] || 0;
+      x.textAlign = 'right'; x.font = '900 26px Inter, sans-serif';
+      x.fillStyle = net > 0 ? '#c9f5d8' : net < 0 ? '#ffd4cd' : '#fff';
+      x.fillText((net > 0 ? '+' : '') + net.toFixed(1), W - 72, y0 + 41);
+      x.textAlign = 'left';
+
+      // players received — full width, so names never collide with values
+      let ry = y0 + 106;
+      const list = recv[team] || [];
+      if (!list.length) {
+        x.fillStyle = MUTED; x.font = 'italic 22px Inter, sans-serif';
+        x.fillText('— nothing incoming —', 92, ry);
+      }
+      list.slice(0, 4).forEach(({ p, from }) => {
+        const im = shots[p.id];
+        x.save(); x.beginPath(); x.arc(92, ry - 10, 30, 0, 7); x.clip();
+        if (im) x.drawImage(im, 62, ry - 40, 60, 60);
+        else { x.fillStyle = NAVY; x.fillRect(62, ry - 40, 60, 60);
+          x.fillStyle = CREAM; x.font = '700 22px Inter, sans-serif'; x.textAlign = 'center';
+          x.fillText(p.name.split(' ').map(w => w[0]).slice(0, 2).join(''), 92, ry - 2); x.textAlign = 'left'; }
+        x.restore();
+        x.strokeStyle = NAVY; x.lineWidth = 2; x.beginPath(); x.arc(92, ry - 10, 30, 0, 7); x.stroke();
+        // name (clipped well clear of the value column)
+        x.fillStyle = NAVY; x.font = '700 27px Inter, sans-serif';
+        let nm = p.name; while (x.measureText(nm).width > 560 && nm.length > 6) nm = nm.slice(0, -2);
+        if (nm !== p.name) nm += '…';
+        x.fillText(nm, 140, ry - 6);
+        x.fillStyle = MUTED; x.font = '400 18px Inter, sans-serif';
+        const tags = [p.pos, p.orgRank ? 'Org #' + p.orgRank : '', p.top100 ? 'MLB #' + p.top100 : '', 'from ' + teamAbbr(from)]
+          .filter(Boolean).join(' · ');
+        x.fillText(tags, 140, ry + 18);
+        x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '800 30px Inter, sans-serif';
+        x.fillText(BTD.pts(p.tv), W - 72, ry + 2); x.textAlign = 'left';
+        ry += 74;
+      });
+      if (list.length > 4) {
+        x.fillStyle = MUTED; x.font = 'italic 19px Inter, sans-serif';
+        x.fillText('+ ' + (list.length - 4) + ' more', 140, ry - 8);
+      }
+    });
+
+    // footer
+    x.fillStyle = NAVY; x.fillRect(0, H - 100, W, 100);
+    x.textAlign = 'center';
+    x.fillStyle = CREAM; x.font = '700 21px "Barlow Condensed", sans-serif';
+    x.fillText(location.host + location.pathname.replace(/\.html$/, ''), W / 2, H - 58);
+    x.fillStyle = '#f2a33c'; x.font = '700 20px "Barlow Condensed", sans-serif';
+    x.fillText('Watch the Beyond The Diamond Astros Podcast @ ApolloHOU on YouTube!', W / 2, H - 26);
+    return cv;
+  }
+
   async function drawCard(noImgs) {
+    if (S.mode === 3) return draw3Card(noImgs);
     const W = 1080, H = 1080, cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
     const x = cv.getContext('2d');
@@ -783,8 +940,8 @@ BTD.nav('builder');
     const get = S.effGet != null ? S.effGet : sum(S.recv, S.rcash);
     // preload art
     const [gShots, rShots, houLogo, rLogo] = noImgs ? [[], [], null, null] : await Promise.all([
-      Promise.all((S.mode === 3 ? [] : (S.gRows || [])).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
-      Promise.all((S.mode === 3 ? [] : (S.rRows || [])).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
+      Promise.all((S.gRows || []).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
+      Promise.all((S.rRows || []).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
       loadImg(teamSpot(HOU)),
       (() => { const ids = [...new Set(S.recv.map(p => p.teamId))]; return ids.length === 1 ? loadImg(teamSpot(ids[0])) : Promise.resolve(null); })(),
     ]);
@@ -892,22 +1049,12 @@ BTD.nav('builder');
       x.strokeStyle = NAVY; x.lineWidth = 2;
       x.beginPath(); x.moveTo(cx + 250, cy - 34); x.lineTo(cx + CW, cy - 34); x.stroke();
       x.fillStyle = NAVY; x.font = '800 20px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
-      x.fillText(S.mode === 3 ? 'NET' : 'TRADE VALUE', cx + (S.mode === 3 ? 150 : 250), cy - 8);
+      x.fillText('TRADE VALUE', cx + 250, cy - 8);
       x.textAlign = 'right';
-      x.fillStyle = (S.mode === 3 && total < 0) ? '#c0392b' : (S.mode === 3 && total > 0) ? '#1d7a4f' : ORANGE;
-      x.font = '900 28px Inter, sans-serif';
-      x.fillText((S.mode === 3 && total > 0 ? '+' : '') + BTD.pts(total), cx + CW, cy - 6); x.textAlign = 'left';
+      x.fillStyle = ORANGE; x.font = '900 28px Inter, sans-serif';
+      x.fillText(BTD.pts(total), cx + CW, cy - 6); x.textAlign = 'left';
     };
-    if (S.mode === 3) {
-      // One column per club: what they ship, and where each player lands.
-      const nets3 = S.nets || {};
-      S.legs.forEach((leg, i) => {
-        if (!leg.team) return;
-        const rows = leg.out.map(p => ({ p, base: p.tv || 0, eff: p.tv || 0,
-          why: p._to ? ['→ ' + p._to] : [] }));
-        col(leg.team + ' send', null, rows, [], 0, 40 + i * 350, nets3[leg.team] || 0, 300);
-      });
-    } else if (false) {
+    {
       col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 60, give);
       col(rName, rLogo, S.rRows || [], rShots, S.rcash, 570, get);
     }
