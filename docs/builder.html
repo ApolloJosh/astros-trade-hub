@@ -51,7 +51,7 @@
   <div class="blbl"><span>🚀 Send <b id="bgive">0</b></span><span><b id="bget">0</b> Receive 🎯</span></div>
   <div class="bbar"><div class="bfill" id="bfill"></div><div class="btick"></div></div>
 </div>
-<div id="triwrap" style="display:none"><svg id="tri" viewBox="0 0 300 200" class="tridial"></svg>
+<div id="triwrap" style="display:none"><svg id="tri" viewBox="0 0 340 262" class="tridial"></svg>
   <div class="trinote" id="trinote"></div></div>
 <div style="margin-top:12px"><button id="share" style="display:none">📸 Share This Trade</button>
 <button id="submitFan" style="display:none">🏆 Submit to Fan Trades</button></div>
@@ -207,10 +207,13 @@ BTD.nav('builder');
     // GUARDRAIL: in a 2-team deal everything you receive comes from ONE club.
     // Once a player is picked, only his team stays selectable.
     const lockedTeam = S.recv.length ? S.recv[0].team : null;
+    const inDeal = clubs();
+    // 2-team: one partner only. 3-team: at most two non-Astros clubs.
+    const allowTeam = t => S.mode === 2 ? (!lockedTeam || t === lockedTeam)
+      : (inDeal.length < 2 || inDeal.includes(t));
     let r = all.filter(p => p.teamId !== HOU && !inTrade(p) &&
       (S.team === 'all' || p.team === S.team) &&
-      (S.mode === 3 || !lockedTeam || p.team === lockedTeam) &&
-      (S.mode !== 3 || !S.tteam || p.team !== S.tteam) &&
+      allowTeam(p.team) &&
       (!S.rq || p.name.toLowerCase().includes(S.rq)));
     if (S.view === 't100') { r = r.filter(p => p.top100 != null); r.sort(byRank('top100')); }
     else if (S.view === 't30') { r = r.filter(p => p.orgRank != null); r.sort(S.team === 'all' ? ((a, b) => a.team.localeCompare(b.team) || byRank('orgRank')(a, b)) : byRank('orgRank')); }
@@ -230,6 +233,9 @@ BTD.nav('builder');
     if (lockedTeam && S.mode === 2) {
       note.style.display = 'block';
       note.innerHTML = `🔒 Trading with the <b>${BTD.esc(lockedTeam)}</b>. Clear the receive side to switch partners, or use a 3-team trade.`;
+    } else if (S.mode === 3 && inDeal.length >= 2) {
+      note.style.display = 'block';
+      note.innerHTML = `🔒 Three clubs in: <b>Astros</b>, <b>${BTD.esc(inDeal[0])}</b>, <b>${BTD.esc(inDeal[1])}</b>.`;
     } else if (S.view !== 'all' && !r.length) {
       note.style.display = 'block';
       note.textContent = S.view === 't100' ? 'Top 100 rankings are loading with the next data refresh.'
@@ -248,7 +254,7 @@ BTD.nav('builder');
         let destSel = '';
         if (S.mode === 3) {
           const from = id === 'gpicked' ? 'hou' : id === 'rpicked' ? 'partner' : 'third';
-          const opts = [ASTROS, partnerName(), S.tteam || 'Third Team']
+          const opts = [ASTROS, ...clubs()]
             .filter((t, ix, arr) => t && arr.indexOf(t) === ix && t !== p.team);
           const cur = destOf(p, from);
           destSel = `<select class="dest" data-idx="${i}" data-from="${from}" title="Where does he go?">` +
@@ -346,7 +352,35 @@ BTD.nav('builder');
   // applied per RECEIVING bundle, not per sending side. In a 2-team deal these
   // are the same thing; in a 3-team deal they are very different.
   const ASTROS = 'Astros';
-  const partnerName = () => (S.recv.length ? S.recv[0].team : (S.team !== 'all' ? S.team : 'Trade Partner'));
+  // Primary club colours for the balance triangle.
+  const TEAM_COLOR = {
+    'Astros': '#eb6e1f', 'Diamondbacks': '#a71930', 'Athletics': '#003831', 'Braves': '#ce1141',
+    'Orioles': '#df4601', 'Red Sox': '#bd3039', 'Cubs': '#0e3386', 'White Sox': '#27251f',
+    'Reds': '#c6011f', 'Guardians': '#e31937', 'Rockies': '#333366', 'Tigers': '#0c2340',
+    'Royals': '#004687', 'Angels': '#ba0021', 'Dodgers': '#005a9c', 'Marlins': '#00a3e0',
+    'Brewers': '#12284b', 'Twins': '#002b5c', 'Mets': '#ff5910', 'Yankees': '#0c2340',
+    'Phillies': '#e81828', 'Pirates': '#fdb827', 'Padres': '#2f241d', 'Giants': '#fd5a1e',
+    'Mariners': '#0c2c56', 'Cardinals': '#c41e3a', 'Rays': '#092c5c', 'Rangers': '#003278',
+    'Blue Jays': '#134a8e', 'Nationals': '#ab0003',
+  };
+  const teamColor = n => {
+    if (!n) return '#8a8578';
+    if (TEAM_COLOR[n]) return TEAM_COLOR[n];
+    const hit = Object.keys(TEAM_COLOR).find(k => String(n).includes(k));
+    return hit ? TEAM_COLOR[hit] : '#8a8578';
+  };
+  // Every non-Astros club with a player in the deal, in the order they appeared.
+  // The third team is whoever you actually added — no separate dropdown needed.
+  function clubs() {
+    const seen = [];
+    S.recv.forEach(p => { if (p.team && !seen.includes(p.team)) seen.push(p.team); });
+    S.third.forEach(p => { if (p.team && !seen.includes(p.team)) seen.push(p.team); });
+    if (S.tteam && !seen.includes(S.tteam)) seen.push(S.tteam);
+    if (!seen.length && S.team !== 'all') seen.push(S.team);
+    return seen;
+  }
+  const partnerName = () => clubs()[0] || 'Trade Partner';
+  const thirdName = () => clubs()[1] || (S.mode === 3 ? 'Third Team' : null);
   function destOf(p, from) {
     if (p._to) return p._to;                       // user-assigned in 3-team mode
     if (from === 'hou') return partnerName();      // default: Houston's go to the partner
@@ -427,7 +461,7 @@ BTD.nav('builder');
     const val = p => { const r = vb.perPlayer.get(p); return r ? r.eff : (p.tv || 0); };
     const sumEff = l => Math.round(l.reduce((a, p) => a + val(p), 0) * 10) / 10;
 
-    const pName = partnerName(), tName = S.tteam || 'Third Team';
+    const pName = partnerName(), tName = thirdName() || 'Third Team';
     // What Houston gives up (incl. cash) and takes back.
     const effGive = Math.round((sumEff(S.give) + S.gcash * CASH_PTS +
       (S.mode === 3 ? sumEff(S.third.filter(p => destOf(p, 'third') !== ASTROS)) * 0 : 0)) * 10) / 10;
@@ -463,34 +497,36 @@ BTD.nav('builder');
     const tw = document.getElementById('triwrap');
     if (S.mode === 3) {
       tw.style.display = 'block';
-      const names = [ASTROS, pName, tName];
-      // corners of an equilateral-ish triangle
-      const C = [[150, 26], [40, 168], [260, 168]];
+      const names = [ASTROS, pName, tName];          // Astros always the apex
+      const C = [[170, 52], [56, 196], [284, 196]];  // apex, bottom-left, bottom-right
       const scale = Math.max(18, ...names.map(n => Math.abs(nets[n] || 0)));
-      // pull the centre dot toward whoever is gaining
       let dx = 0, dy = 0;
       names.forEach((n, i) => {
-        const w = (nets[n] || 0) / scale;              // −1 … +1
-        dx += (C[i][0] - 150) * w * 0.75;
-        dy += (C[i][1] - 121) * w * 0.75;
+        const w = (nets[n] || 0) / scale;
+        dx += (C[i][0] - 170) * w * 0.75;
+        dy += (C[i][1] - 148) * w * 0.75;
       });
       const worst = Math.max(...names.map(n => Math.abs(nets[n] || 0)));
-      const col = worst <= 12 ? 'var(--good)' : worst <= 25 ? 'var(--warn)' : 'var(--bad)';
-      const label = (n, i) => {
-        const v = nets[n] || 0, sign = v > 0 ? '+' : '';
-        return `<text x="${C[i][0]}" y="${C[i][1] + (i === 0 ? -10 : 22)}" text-anchor="middle" class="trilbl">${BTD.esc(n.length > 14 ? n.slice(0, 13) + '…' : n)}</text>` +
-          `<text x="${C[i][0]}" y="${C[i][1] + (i === 0 ? -26 : 38)}" text-anchor="middle" class="trival" fill="${v > 0 ? 'var(--good)' : v < 0 ? 'var(--bad)' : 'var(--muted)'}">${sign}${v.toFixed(1)}</text>`;
+      const dotCol = worst <= 12 ? '#1d7a4f' : worst <= 25 ? '#b8860b' : '#c0392b';
+      const short = n => (n && n.length > 12) ? n.slice(0, 11) + '…' : (n || '');
+      const node = (n, i) => {
+        const col = teamColor(n), v = nets[n] || 0, sign = v > 0 ? '+' : '';
+        const apex = i === 0;
+        const ty = apex ? C[i][1] - 22 : C[i][1] + 30;   // label
+        const vy = apex ? C[i][1] - 40 : C[i][1] + 50;   // value
+        return `<circle cx="${C[i][0]}" cy="${C[i][1]}" r="11" fill="${col}" stroke="var(--card)" stroke-width="3"/>` +
+          `<text x="${C[i][0]}" y="${ty}" text-anchor="middle" class="trilbl" fill="${col}">${BTD.esc(short(n))}</text>` +
+          `<text x="${C[i][0]}" y="${vy}" text-anchor="middle" class="trival" fill="${v > 0 ? '#1d7a4f' : v < 0 ? '#c0392b' : 'var(--muted)'}">${sign}${v.toFixed(1)}</text>`;
       };
       document.getElementById('tri').innerHTML =
-        `<polygon points="${C.map(c => c.join(',')).join(' ')}" fill="none" stroke="var(--row-line)" stroke-width="2"/>` +
-        C.map(c => `<line x1="150" y1="121" x2="${c[0]}" y2="${c[1]}" stroke="var(--row-line)" stroke-width="1" stroke-dasharray="3 3"/>`).join('') +
-        `<circle cx="150" cy="121" r="4" fill="var(--row-line)"/>` +
-        C.map((c, i) => `<circle cx="${c[0]}" cy="${c[1]}" r="6" fill="var(--card)" stroke="var(--card-line)" stroke-width="2"/>`).join('') +
-        names.map(label).join('') +
-        `<circle cx="${(150 + dx).toFixed(1)}" cy="${(121 + dy).toFixed(1)}" r="9" fill="${col}" stroke="var(--card)" stroke-width="2"/>`;
+        `<polygon points="${C.map(c => c.join(',')).join(' ')}" fill="none" stroke="var(--card-line)" stroke-width="5" stroke-linejoin="round"/>` +
+        C.map(c => `<line x1="170" y1="148" x2="${c[0]}" y2="${c[1]}" stroke="var(--row-line)" stroke-width="2" stroke-dasharray="4 4"/>`).join('') +
+        `<circle cx="170" cy="148" r="4" fill="var(--row-line)"/>` +
+        names.map(node).join('') +
+        `<circle cx="${(170 + dx).toFixed(1)}" cy="${(148 + dy).toFixed(1)}" r="11" fill="${dotCol}" stroke="var(--card)" stroke-width="3"/>`;
       document.getElementById('trinote').innerHTML = worst <= 12
-        ? '✅ All three clubs land within the fair band — the dot sits near centre.'
-        : `The dot is pulled toward <b>${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))}</b> — that side is ${worst.toFixed(1)} points ahead. Even it out to get the deal done.`;
+        ? '✅ All three clubs land within the fair band.'
+        : `Tilted toward <b>${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))}</b> by ${worst.toFixed(1)} points.`;
     } else tw.style.display = 'none';
 
     const bw = document.getElementById('bwrap');
