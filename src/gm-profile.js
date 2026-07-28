@@ -213,6 +213,70 @@ function swaps(players, sellers, needs) {
   return out.slice(0, 3);
 }
 
+// ---------- 4b. Manual overrides ----------
+// data-sources/trade-predictions.json is the editing surface: remove a trade,
+// swap the package, write your own note, add a deal the model never proposed,
+// and set the running order. Anything not mentioned keeps the model's answer.
+const OVR = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data-sources', 'trade-predictions.json'), 'utf8')); }
+  catch (e) { return {}; }
+})();
+
+function applyOverrides(preds, players, notes) {
+  const byName = new Map();
+  players.forEach(p => { if (p.tv != null && !p.traded) byName.set(norm(p.name), p); });
+  const find = (n, where) => {
+    const p = byName.get(norm(n));
+    if (!p) notes.push(`"${n}" (${where}) — no such player on file, skipped`);
+    return p;
+  };
+  const rebuild = (target, pkg, caveats) => ({
+    target, pkg, fit: 0, caveats: caveats || [],
+    give: r1(pkg.reduce((a, p) => a + (p.tv || 0), 0)),
+    gap: r1(pkg.reduce((a, p) => a + (p.tv || 0), 0) - (target.tv || 0)),
+  });
+  let out = preds.slice();
+
+  // 1. remove
+  (OVR.hide || []).forEach(n => {
+    const before = out.length;
+    out = out.filter(m => norm(m.target.name) !== norm(n));
+    if (out.length === before) notes.push(`"${n}" (hide) — wasn't in the predictions, nothing removed`);
+  });
+
+  // 2. swap the package / rewrite the note
+  Object.entries(OVR.edit || {}).forEach(([name, e]) => {
+    const m = out.find(x => norm(x.target.name) === norm(name));
+    if (!m) { notes.push(`"${name}" (edit) — not in the predictions, nothing changed`); return; }
+    if (Array.isArray(e.pkg)) {
+      const pkg = e.pkg.map(n => find(n, `package for ${name}`)).filter(Boolean);
+      if (pkg.length) Object.assign(m, rebuild(m.target, pkg, m.caveats));
+      else notes.push(`"${name}" (edit) — none of the listed players resolved, package left alone`);
+    }
+    if (e.note) m.caveats = [e.note];
+  });
+
+  // 3. add a trade the model never proposed
+  (OVR.add || []).forEach((a, i) => {
+    const t = find(a.target, `add #${i + 1} target`);
+    if (!t) return;
+    const pkg = (a.pkg || []).map(n => find(n, `add #${i + 1} package`)).filter(Boolean);
+    if (!pkg.length) { notes.push(`"${a.target}" (add) — no package resolved, skipped`); return; }
+    out = out.filter(m => norm(m.target.name) !== norm(a.target));   // manual wins
+    out.push(rebuild(t, pkg, a.note ? [a.note] : []));
+  });
+
+  // 4. running order — listed names lead, in that order; the rest follow
+  if (Array.isArray(OVR.order) && OVR.order.length) {
+    const rank = new Map(OVR.order.map((n, i) => [norm(n), i]));
+    OVR.order.forEach(n => { if (!out.some(m => norm(m.target.name) === norm(n)))
+      notes.push(`"${n}" (order) — not in the predictions, ignored`); });
+    out.sort((a, b) => (rank.has(norm(a.target.name)) ? rank.get(norm(a.target.name)) : 999) -
+                       (rank.has(norm(b.target.name)) ? rank.get(norm(b.target.name)) : 999));
+  }
+  return out;
+}
+
 // ---------- 5. Public payload ----------
 // The site gets the trades and the values; the tuning notes stay in the report.
 const slim = p => p && {
@@ -275,7 +339,13 @@ async function main() {
     const nd = JSON.parse(fs.readFileSync(path.join(OUT, 'team-needs.json'), 'utf8'));
     needs = (nd.teams || {})['Houston Astros'] || [];
   } catch (e) {}
-  const preds = mocks(players, prof, mkt.sellers, needs);
+  const ovrNotes = [];
+  let preds = mocks(players, prof, mkt.sellers, needs);
+  const modelCount = preds.length;
+  preds = applyOverrides(preds, players, ovrNotes);
+  if (modelCount !== preds.length || ovrNotes.length)
+    console.log(`Overrides: ${modelCount} from the model -> ${preds.length} published`);
+  ovrNotes.forEach(n => console.warn('  ! ' + n));
   const swapList = swaps(players, mkt.sellers, needs);
 
   // ---------- report ----------
@@ -306,6 +376,8 @@ async function main() {
   L.push('');
   L.push('## Predicted moves');
   L.push('Built from his revealed tendencies (value band, prospect currency, need fit) against sellers only.');
+  { const edits = (OVR.hide || []).length + Object.keys(OVR.edit || {}).length + (OVR.add || []).length;
+    if (edits) L.push(`_${edits} manual override(s) applied from trade-predictions.json._`); }
   L.push('');
   L.push(`Protected (never offered): ${(BLOCK.protected || []).join(', ') || 'none set'}`);
   L.push('');
@@ -319,6 +391,13 @@ async function main() {
     m.caveats.forEach(c => L.push(`> ${c}`));
     L.push('');
   });
+  if (ovrNotes.length) {
+    L.push('## Override warnings');
+    L.push('_From data-sources/trade-predictions.json — these lines did nothing:_');
+    L.push('');
+    ovrNotes.forEach(n => L.push(`- ${n}`));
+    L.push('');
+  }
   if (swapList.length) {
     L.push('## Contract-for-contract swaps');
     L.push('Money out, need filled — the Walker-for-Gurriel shape.');
