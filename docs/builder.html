@@ -63,7 +63,7 @@
   <span class="note" id="modenote">Everything you receive must come from one trade partner.</span>
 </div>
 
-<div class="cols">
+<div class="cols" id="cols2">
   <div class="panel">
     <div class="panel-hd">🚀 Astros Send</div>
     <div class="total"><span>Value going out</span><b id="give">0.0</b></div>
@@ -98,18 +98,44 @@
   </div>
 </div>
 
-<div class="panel tri" id="tripanel" style="display:none">
-  <div class="panel-hd">🔀 Third Team — what they send out</div>
-  <div class="note">In a 3-team deal the third club ships talent too. Pick which team, then the players they give up (to either of the other two).</div>
-  <div class="total"><span>Third team sends</span><b id="tgive">0.0</b></div>
-  <div class="picked" id="tpicked"></div>
-  <div class="controls">
-    <select id="tteam"><option value="">Choose the third team…</option></select>
-    <input id="tsearch" placeholder="Search their players…">
-    <select id="tsort"></select>
+<div id="cols3" style="display:none">
+  <div class="cols3grid">
+    <div class="panel leg" id="leg0">
+      <div class="panel-hd"><span class="legdot" id="dot0"></span><span id="legname0">Astros</span> send</div>
+      <div class="total"><span>Ships out</span><b id="legout0">0.0</b></div>
+      <div class="picked" id="legpick0"></div>
+      <div class="controls">
+        <input id="legq0" placeholder="Search Astros…">
+        <select id="legsort0"></select>
+      </div>
+      <div class="list" id="leglist0"></div>
+      <div class="note legneeds" id="legneeds0"></div>
+    </div>
+    <div class="panel leg" id="leg1">
+      <div class="panel-hd"><span class="legdot" id="dot1"></span><span id="legname1">Team 2</span> send</div>
+      <div class="total"><span>Ships out</span><b id="legout1">0.0</b></div>
+      <div class="picked" id="legpick1"></div>
+      <div class="controls">
+        <select id="legteam1"><option value="">Choose team…</option></select>
+        <input id="legq1" placeholder="Search…">
+        <select id="legsort1"></select>
+      </div>
+      <div class="list" id="leglist1"></div>
+      <div class="note legneeds" id="legneeds1"></div>
+    </div>
+    <div class="panel leg" id="leg2">
+      <div class="panel-hd"><span class="legdot" id="dot2"></span><span id="legname2">Team 3</span> send</div>
+      <div class="total"><span>Ships out</span><b id="legout2">0.0</b></div>
+      <div class="picked" id="legpick2"></div>
+      <div class="controls">
+        <select id="legteam2"><option value="">Choose team…</option></select>
+        <input id="legq2" placeholder="Search…">
+        <select id="legsort2"></select>
+      </div>
+      <div class="list" id="leglist2"></div>
+      <div class="note legneeds" id="legneeds2"></div>
+    </div>
   </div>
-  <div class="list" id="tlist"></div>
-  <div class="note" id="tneeds" style="margin-top:6px;display:none"></div>
 </div>
 
 <div class="panel cbt" id="cbt" style="display:none">
@@ -151,6 +177,7 @@ BTD.nav('builder');
   const all = doc.players.filter(p => p.tv != null && !p.traded);
   const CASH_PTS = 0.5; // TV points per $M of cash (mirrors config sv.tv.cashPtsPerM)
   const S = { give: [], recv: [], third: [], gcash: 0, rcash: 0, gq: '', rq: '', tq: '',
+    legs: [{ team: 'Astros', out: [], q: '', sort: 'tv' }, { team: '', out: [], q: '', sort: 'tv' }, { team: '', out: [], q: '', sort: 'tv' }],
     gf: 'all', team: 'all', gsort: 'tv', rsort: 'tv', tsort: 'tv', view: 'all', mode: 2, tteam: '' };
 
   const SORTS = [['tv', 'Trade value'], ['hit', 'Hitters first'], ['pit', 'Pitchers first'], ['pos', 'Position'],
@@ -347,6 +374,95 @@ BTD.nav('builder');
   // Returns each player's list value AND what he's actually worth in THIS deal
   // after stacking discounts, need bonuses and the untouchable premium — so the
   // card can show the real math instead of a bare sum.
+  function drawTriangle(names, nets, worst) {
+    const tw = document.getElementById('triwrap');
+    if (names.length < 2) { tw.style.display = 'none'; return; }
+    tw.style.display = 'block';
+    const C = [[170, 52], [56, 196], [284, 196]];      // Astros always the apex
+    const scale = Math.max(18, ...names.map(n => Math.abs(nets[n] || 0)));
+    let dx = 0, dy = 0;
+    names.forEach((n, i) => {
+      const w = (nets[n] || 0) / scale;
+      dx += (C[i][0] - 170) * w * 0.75; dy += (C[i][1] - 148) * w * 0.75;
+    });
+    const dotCol = worst <= MAX_GAP ? '#1d7a4f' : worst <= 25 ? '#b8860b' : '#c0392b';
+    const short = n => (n && n.length > 12) ? n.slice(0, 11) + '…' : (n || '');
+    const node = (n, i) => {
+      const col = teamColor(n), v = nets[n] || 0, sign = v > 0 ? '+' : '';
+      const apex = i === 0, ty = apex ? C[i][1] - 22 : C[i][1] + 30, vy = apex ? C[i][1] - 40 : C[i][1] + 50;
+      return `<circle cx="${C[i][0]}" cy="${C[i][1]}" r="11" fill="${col}" stroke="var(--card)" stroke-width="3"/>` +
+        `<text x="${C[i][0]}" y="${ty}" text-anchor="middle" class="trilbl" fill="${col}">${BTD.esc(short(n))}</text>` +
+        `<text x="${C[i][0]}" y="${vy}" text-anchor="middle" class="trival" fill="${v > 0 ? '#1d7a4f' : v < 0 ? '#c0392b' : 'var(--muted)'}">${sign}${v.toFixed(1)}</text>`;
+    };
+    document.getElementById('tri').innerHTML =
+      `<polygon points="${C.map(c => c.join(',')).join(' ')}" fill="none" stroke="var(--card-line)" stroke-width="5" stroke-linejoin="round"/>` +
+      C.map(c => `<line x1="170" y1="148" x2="${c[0]}" y2="${c[1]}" stroke="var(--row-line)" stroke-width="2" stroke-dasharray="4 4"/>`).join('') +
+      `<circle cx="170" cy="148" r="4" fill="var(--row-line)"/>` +
+      names.map(node).join('') +
+      `<circle cx="${(170 + dx).toFixed(1)}" cy="${(148 + dy).toFixed(1)}" r="11" fill="${dotCol}" stroke="var(--card)" stroke-width="3"/>`;
+    document.getElementById('trinote').innerHTML = worst <= MAX_GAP
+      ? '✅ Every club lands within the fair band.'
+      : `Tilted toward <b>${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))}</b> by ${worst.toFixed(1)} points.`;
+  }
+
+  // ================= 3-TEAM MODE =================
+  // Three symmetric legs: each column is simply "what this club ships out",
+  // and every player carries a destination. No stacking discount here — the
+  // three-way bookkeeping is confusing enough without it.
+  const legTeams = () => S.legs.map(l => l.team).filter(Boolean);
+  function legNet() {                                  // team -> net value
+    const net = {};
+    legTeams().forEach(t => net[t] = 0);
+    S.legs.forEach(l => {
+      if (!l.team) return;
+      l.out.forEach(p => {
+        const to = p._to || S.legs.find(x => x.team && x.team !== l.team)?.team;
+        if (!to) return;
+        net[l.team] = (net[l.team] || 0) - (p.tv || 0);   // ships out
+        net[to] = (net[to] || 0) + (p.tv || 0);           // takes in
+      });
+    });
+    Object.keys(net).forEach(k => net[k] = Math.round(net[k] * 10) / 10);
+    return net;
+  }
+  function renderLegs() {
+    const names = legTeams();
+    S.legs.forEach((leg, i) => {
+      document.getElementById('legname' + i).textContent = leg.team || (i === 1 ? 'Team 2' : 'Team 3');
+      const dot = document.getElementById('dot' + i);
+      dot.style.background = leg.team ? teamColor(leg.team) : 'var(--row-line)';
+      document.getElementById('legout' + i).textContent =
+        leg.out.reduce((a, p) => a + (p.tv || 0), 0).toFixed(1);
+      // needs
+      const nd = leg.team ? (NEEDS[leg.team === 'Astros' ? 'Houston Astros' : leg.team] || []) : [];
+      const ne = document.getElementById('legneeds' + i);
+      ne.innerHTML = leg.team ? (nd.length ? `🎯 Needs: ${BTD.esc(nd.join(' · '))}` : '🎯 No stated needs.') : '';
+      // picked chips with a destination selector
+      const pk = document.getElementById('legpick' + i); pk.innerHTML = '';
+      leg.out.forEach((p, idx) => {
+        const others = names.filter(t => t !== leg.team);
+        if (!p._to || !others.includes(p._to)) p._to = others[0] || '';
+        const d = document.createElement('div');
+        d.className = 'pick' + (leg.team === 'Astros' ? ' away' : '');
+        d.innerHTML = `<span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> ` +
+          `<span class="rmeta">${BTD.esc(p.pos)}</span></span>` +
+          `<select class="dest">${others.map(o => `<option${o === p._to ? ' selected' : ''}>${BTD.esc(o)}</option>`).join('')}</select>` +
+          `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span><span class="x">×</span>`;
+        d.querySelector('.x').addEventListener('click', () => { leg.out.splice(idx, 1); renderAll(); });
+        const ds = d.querySelector('.dest');
+        if (ds) ds.addEventListener('change', e => { p._to = e.target.value; renderAll(); });
+        pk.appendChild(d);
+      });
+      // available players for this club
+      const used = new Set(S.legs.flatMap(l => l.out.map(p => p.id)));
+      let pool = !leg.team ? [] : all.filter(p =>
+        (leg.team === 'Astros' ? p.teamId === HOU : p.team === leg.team) &&
+        !used.has(p.id) && (!leg.q || p.name.toLowerCase().includes(leg.q)));
+      pool.sort(cmp(leg.sort));
+      renderList(document.getElementById('leglist' + i), pool, p => { leg.out.push(p); renderAll(); });
+    });
+  }
+
   // ---- Destination model ----
   // Roster crunch is about what a club ABSORBS, so the stacking discount is
   // applied per RECEIVING bundle, not per sending side. In a 2-team deal these
@@ -456,6 +572,44 @@ BTD.nav('builder');
     }
 
     // Package-adjusted values + special rules
+    // ---- 3-team mode runs on the leg ledger (no stacking) ----
+    if (S.mode === 3) {
+      renderLegs();
+      const nets3 = legNet();
+      const names3 = S.legs.map(l => l.team).filter(Boolean);
+      S.nets = nets3;
+      const moved = S.legs.reduce((a, l) => a + l.out.length, 0);
+      const worst3 = names3.length ? Math.max(...names3.map(n => Math.abs(nets3[n] || 0))) : 0;
+      drawTriangle(names3, nets3, worst3);
+      document.getElementById('bwrap').style.display = 'none';
+      document.getElementById('cbt').style.display = 'none';
+      const main3 = document.getElementById('vmain'), sub3 = document.getElementById('vsub');
+      if (names3.length < 3 || !moved) {
+        main3.textContent = 'Build a three-way'; main3.style.color = 'var(--ink)';
+        sub3.textContent = names3.length < 3 ? 'Choose the other two clubs, then move players between them.'
+          : 'Add players to each column and set where they go.';
+        S.accepted = false; S.vCard = null;
+      } else {
+        const tier3 = worst3 <= MAX_GAP ? TIERS[3] : (TIERS.find(x => x.max === Infinity) || TIERS[TIERS.length - 1]);
+        const ok3 = worst3 <= MAX_GAP;
+        S.accepted = ok3;
+        main3.textContent = ok3 ? '✅ Three-way works — everyone says yes' : '🚨 One club is getting fleeced';
+        main3.style.color = ok3 ? 'var(--good)' : 'var(--bad)';
+        const lead = names3.reduce((a, n) => Math.abs(nets3[n] || 0) > Math.abs(nets3[a] || 0) ? n : a, names3[0]);
+        sub3.textContent = ok3
+          ? `All three clubs land within ${MAX_GAP} points. ${moved} player${moved === 1 ? '' : 's'} on the move.`
+          : `${lead} is ${worst3.toFixed(1)} points off. Real deals land inside ${MAX_GAP}.`;
+        S.vCard = { txt: ok3 ? 'THREE-TEAM DEAL' : 'LOPSIDED THREE-WAY',
+          col: ok3 ? '#1d7a4f' : '#c0392b', ok: ok3, stamp: ok3 ? 'ACCEPTED' : 'NO DEAL',
+          blurb: ok3 ? 'Three clubs, one deal, nobody walks away sore.' : `${lead} is doing far too well here.` };
+      }
+      document.getElementById('share').style.display = moved ? 'inline-block' : 'none';
+      document.getElementById('submitFan').style.display = 'none';
+      const fn3 = document.getElementById('fanNote');
+      if (fn3) fn3.style.display = 'none';
+      return;
+    }
+
     // Value every receiving bundle, then read each club's ledger from it.
     const vb = valueBundles();
     const val = p => { const r = vb.perPlayer.get(p); return r ? r.eff : (p.tv || 0); };
@@ -493,41 +647,7 @@ BTD.nav('builder');
     const dump = effGet <= 0;
     const r = (dump ? (effGive <= 0 ? 1 : 3) : effGive / effGet) / req;
 
-    // ---- 3-team balance triangle ----
-    const tw = document.getElementById('triwrap');
-    if (S.mode === 3) {
-      tw.style.display = 'block';
-      const names = [ASTROS, pName, tName];          // Astros always the apex
-      const C = [[170, 52], [56, 196], [284, 196]];  // apex, bottom-left, bottom-right
-      const scale = Math.max(18, ...names.map(n => Math.abs(nets[n] || 0)));
-      let dx = 0, dy = 0;
-      names.forEach((n, i) => {
-        const w = (nets[n] || 0) / scale;
-        dx += (C[i][0] - 170) * w * 0.75;
-        dy += (C[i][1] - 148) * w * 0.75;
-      });
-      const worst = Math.max(...names.map(n => Math.abs(nets[n] || 0)));
-      const dotCol = worst <= 12 ? '#1d7a4f' : worst <= 25 ? '#b8860b' : '#c0392b';
-      const short = n => (n && n.length > 12) ? n.slice(0, 11) + '…' : (n || '');
-      const node = (n, i) => {
-        const col = teamColor(n), v = nets[n] || 0, sign = v > 0 ? '+' : '';
-        const apex = i === 0;
-        const ty = apex ? C[i][1] - 22 : C[i][1] + 30;   // label
-        const vy = apex ? C[i][1] - 40 : C[i][1] + 50;   // value
-        return `<circle cx="${C[i][0]}" cy="${C[i][1]}" r="11" fill="${col}" stroke="var(--card)" stroke-width="3"/>` +
-          `<text x="${C[i][0]}" y="${ty}" text-anchor="middle" class="trilbl" fill="${col}">${BTD.esc(short(n))}</text>` +
-          `<text x="${C[i][0]}" y="${vy}" text-anchor="middle" class="trival" fill="${v > 0 ? '#1d7a4f' : v < 0 ? '#c0392b' : 'var(--muted)'}">${sign}${v.toFixed(1)}</text>`;
-      };
-      document.getElementById('tri').innerHTML =
-        `<polygon points="${C.map(c => c.join(',')).join(' ')}" fill="none" stroke="var(--card-line)" stroke-width="5" stroke-linejoin="round"/>` +
-        C.map(c => `<line x1="170" y1="148" x2="${c[0]}" y2="${c[1]}" stroke="var(--row-line)" stroke-width="2" stroke-dasharray="4 4"/>`).join('') +
-        `<circle cx="170" cy="148" r="4" fill="var(--row-line)"/>` +
-        names.map(node).join('') +
-        `<circle cx="${(170 + dx).toFixed(1)}" cy="${(148 + dy).toFixed(1)}" r="11" fill="${dotCol}" stroke="var(--card)" stroke-width="3"/>`;
-      document.getElementById('trinote').innerHTML = worst <= 12
-        ? '✅ All three clubs land within the fair band.'
-        : `Tilted toward <b>${BTD.esc(names.reduce((a, n) => Math.abs(nets[n] || 0) > Math.abs(nets[a] || 0) ? n : a, names[0]))}</b> by ${worst.toFixed(1)} points.`;
-    } else tw.style.display = 'none';
+    document.getElementById('triwrap').style.display = 'none';
 
     const bw = document.getElementById('bwrap');
     if (effGive > 0 || effGet > 0) {
@@ -606,33 +726,37 @@ BTD.nav('builder');
     S.mode = m;
     document.getElementById('mode2').classList.toggle('on', m === 2);
     document.getElementById('mode3').classList.toggle('on', m === 3);
-    document.getElementById('tripanel').style.display = m === 3 ? 'block' : 'none';
+    document.getElementById('cols2').style.display = m === 3 ? 'none' : '';
+    document.getElementById('cols3').style.display = m === 3 ? 'block' : 'none';
     document.getElementById('modenote').textContent = m === 3
       ? 'Three clubs, one deal — the third team ships talent too, so the sides can balance where a 1-for-1 never would.'
       : 'Everything you receive must come from one trade partner.';
-    if (m === 2 && S.third.length) S.third = [];
     if (m === 2 && S.recv.length > 1) {
-      // collapse back to a single partner
-      const keep = S.recv[0].team;
+      const keep = S.recv[0].team;               // collapse back to one partner
       S.recv = S.recv.filter(p => p.team === keep);
     }
     renderAll();
   }
   document.getElementById('mode2').addEventListener('click', () => setMode(2));
   document.getElementById('mode3').addEventListener('click', () => setMode(3));
-  const tteamSel = document.getElementById('tteam');
-  teams.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; tteamSel.appendChild(o); });
-  tteamSel.addEventListener('change', e => {
-    S.tteam = e.target.value;
-    S.third = S.third.filter(p => p.team === S.tteam);   // drop players from the old third team
-    const tn = document.getElementById('tneeds');
-    const nd = NEEDS[S.tteam] || [];
-    if (S.tteam && nd.length) { tn.style.display = 'block'; tn.textContent = `🎯 ${S.tteam} needs: ${nd.join(' · ')}`; }
-    else tn.style.display = 'none';
-    renderAll();
+  // leg controls (3-team mode)
+  [1, 2].forEach(i => {
+    const sel = document.getElementById('legteam' + i);
+    teams.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o); });
+    sel.addEventListener('change', e => {
+      S.legs[i].team = e.target.value;
+      S.legs[i].out = [];                        // roster changed — clear picks
+      S.legs.forEach(l => l.out.forEach(p => { p._to = null; }));
+      renderAll();
+    });
+    document.getElementById('legq' + i).addEventListener('input', e => { S.legs[i].q = e.target.value.toLowerCase(); renderAll(); });
   });
-  document.getElementById('tsearch').addEventListener('input', e => { S.tq = e.target.value.toLowerCase(); renderLists(); });
-  document.getElementById('tsort').addEventListener('change', e => { S.tsort = e.target.value; renderLists(); });
+  document.getElementById('legq0').addEventListener('input', e => { S.legs[0].q = e.target.value.toLowerCase(); renderAll(); });
+  [0, 1, 2].forEach(i => {
+    const sel = document.getElementById('legsort' + i);
+    SORTS.forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = 'Sort: ' + t; sel.appendChild(o); });
+    sel.addEventListener('change', e => { S.legs[i].sort = e.target.value; renderAll(); });
+  });
 
   const askCash = k => { const v = parseFloat(prompt('Cash amount ($ millions):', '2')); if (v > 0) { S[k] = Math.round(v * 10) / 10; renderAll(); } };
   document.getElementById('gcash').addEventListener('click', () => askCash('gcash'));
@@ -667,8 +791,8 @@ BTD.nav('builder');
     const get = S.effGet != null ? S.effGet : sum(S.recv, S.rcash);
     // preload art
     const [gShots, rShots, houLogo, rLogo] = noImgs ? [[], [], null, null] : await Promise.all([
-      Promise.all((S.gRows || []).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
-      Promise.all((S.rRows || []).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
+      Promise.all((S.mode === 3 ? [] : (S.gRows || [])).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
+      Promise.all((S.mode === 3 ? [] : (S.rRows || [])).slice(0, 6).map(r => loadImg(BTD.shot(r.p.id)))),
       loadImg(teamSpot(HOU)),
       (() => { const ids = [...new Set(S.recv.map(p => p.teamId))]; return ids.length === 1 ? loadImg(teamSpot(ids[0])) : Promise.resolve(null); })(),
     ]);
@@ -776,16 +900,22 @@ BTD.nav('builder');
       x.strokeStyle = NAVY; x.lineWidth = 2;
       x.beginPath(); x.moveTo(cx + 250, cy - 34); x.lineTo(cx + CW, cy - 34); x.stroke();
       x.fillStyle = NAVY; x.font = '800 20px "Barlow Condensed", sans-serif'; x.textAlign = 'left';
-      x.fillText('TRADE VALUE', cx + 250, cy - 8);
-      x.textAlign = 'right'; x.fillStyle = ORANGE; x.font = '900 28px Inter, sans-serif';
-      x.fillText(BTD.pts(total), cx + CW, cy - 6); x.textAlign = 'left';
+      x.fillText(S.mode === 3 ? 'NET' : 'TRADE VALUE', cx + (S.mode === 3 ? 150 : 250), cy - 8);
+      x.textAlign = 'right';
+      x.fillStyle = (S.mode === 3 && total < 0) ? '#c0392b' : (S.mode === 3 && total > 0) ? '#1d7a4f' : ORANGE;
+      x.font = '900 28px Inter, sans-serif';
+      x.fillText((S.mode === 3 && total > 0 ? '+' : '') + BTD.pts(total), cx + CW, cy - 6); x.textAlign = 'left';
     };
-    if (S.mode === 3 && (S.tRows || []).length) {
-      // three narrower columns
-      col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 40, give, 300);
-      col(rName, rLogo, S.rRows || [], rShots, S.rcash, 390, get, 300);
-      col(S.tName || 'Third Team', null, S.tRows || [], [], 0, 740, sum(S.third, 0), 300);
-    } else {
+    if (S.mode === 3) {
+      // One column per club: what they ship, and where each player lands.
+      const nets3 = S.nets || {};
+      S.legs.forEach((leg, i) => {
+        if (!leg.team) return;
+        const rows = leg.out.map(p => ({ p, base: p.tv || 0, eff: p.tv || 0,
+          why: p._to ? ['→ ' + p._to] : [] }));
+        col(leg.team + ' send', null, rows, [], 0, 40 + i * 350, nets3[leg.team] || 0, 300);
+      });
+    } else if (false) {
       col('Astros Send', houLogo, S.gRows || [], gShots, S.gcash, 60, give);
       col(rName, rLogo, S.rRows || [], rShots, S.rcash, 570, get);
     }
