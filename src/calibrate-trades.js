@@ -296,3 +296,5 @@ async function main() {
 }
 
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
+// Reused by the GM-profile tool so both value players identically.
+module.exports = { valueAt, milbBase };
