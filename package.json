@@ -4,7 +4,7 @@
   "description": "Beyond the Diamond \u2014 league-wide MLB trade values, trade feed, and Astros mock trade builder",
   "private": true,
   "scripts": {
-    "build": "node src/fetch-salaries.js && node src/fetch-defense.js && node src/fetch-statcast.js && node src/fetch-il.js && node src/build-data.js && node src/transactions.js && node src/calibrate.js",
+    "build": "node src/fetch-salaries.js && node src/fetch-defense.js && node src/fetch-statcast.js && node src/fetch-il.js && node src/fetch-youtube.js && node src/build-data.js && node src/transactions.js && node src/calibrate.js",
     "statcast": "node src/fetch-statcast.js",
     "il": "node src/fetch-il.js",
     "defense": "node src/fetch-defense.js",
@@ -13,9 +13,11 @@
     "transactions": "node src/transactions.js",
     "calibrate": "node src/calibrate.js",
     "calibrate:trades": "node src/calibrate-trades.js",
+    "gm": "node src/gm-profile.js",
     "rankings": "node src/parse-rankings.js",
     "merge-rankings": "node src/merge-rankings.js",
-    "test": "node test/parity.test.js && node test/transactions.test.js && node test/salaries.test.js"
+    "test": "node test/parity.test.js && node test/transactions.test.js && node test/salaries.test.js",
+    "youtube": "node src/fetch-youtube.js"
   },
   "engines": {
     "node": ">=20"
