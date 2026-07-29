@@ -1,7 +1,7 @@
 {
   "team": "astros",
   "teamId": 117,
-  "updated": "2026-07-25",
+  "updated": "2026-07-29",
   "prospects": [
     {
       "rank": 1,
@@ -123,9 +123,8 @@
     },
     {
       "rank": 21,
-      "name": "Jose Fleury",
-      "pos": "RHP",
-      "mlbid": 800067
+      "name": "Luis De Leon",
+      "pos": "C"
     },
     {
       "rank": 22,
