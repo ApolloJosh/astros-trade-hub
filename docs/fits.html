@@ -152,7 +152,7 @@ BTD.nav('fits');
     <b class="pkv tv ${BTD.tvCls(p.tv)}">${pts(p.tv)}</b></div>`;
 
   const side = (label, teamId, players, total, isHou) => `<div class="tside${isHou ? ' hou' : ''}">
-    <div class="tshd"><img src="${BTD.logo(teamId)}" alt="" onerror="this.style.display='none'"><span>${esc(label)} receives</span></div>
+    <div class="tshd"><img src="${BTD.logo(teamId)}" alt="" onerror="this.style.display='none'"><span>${esc(label)} receive</span></div>
     ${players.map(row).join('') || '<div class="pick"><div class="pkn"><div class="m">—</div></div></div>'}
     <div class="ttot"><span>Total value</span><b class="tv ${BTD.tvCls(total)}">${pts(total)}</b></div></div>`;
 
