@@ -189,7 +189,8 @@ BTD.nav('builder');
     gf: 'all', team: 'all', gsort: 'tv', rsort: 'tv', tsort: 'tv', view: 'all', mode: 2, tteam: '' };
 
   const SORTS = [['tv', 'Trade value'], ['hit', 'Hitters first'], ['pit', 'Pitchers first'], ['pos', 'Position'],
-    ['hand', 'Handedness'], ['ops', 'OPS'], ['era', 'ERA'], ['ctrl', 'Most control'], ['age', 'Youngest']];
+    ['hand', 'Handedness'], ['ops', 'OPS'], ['era', 'ERA'], ['ctrl', 'Most control'], ['age', 'Youngest'],
+    ['owed', 'Most $ owed']];
   ['gsort', 'rsort'].forEach(id => {
     const sel = document.getElementById(id);
     if (!sel) return;
@@ -207,6 +208,9 @@ BTD.nav('builder');
       case 'era': return (a, b) => ((a.line && a.line.era) ?? 99) - ((b.line && b.line.era) ?? 99) || byTv(a, b);
       case 'ctrl': return (a, b) => (b.ctrl || 0) - (a.ctrl || 0) || byTv(a, b);
       case 'age': return (a, b) => (a.age ?? 99) - (b.age ?? 99) || byTv(a, b);
+      // Salary dumps first. Players with no contract on file sort last rather
+      // than tying at zero with genuinely cheap guys.
+      case 'owed': return (a, b) => ((b.rem ?? -1) - (a.rem ?? -1)) || byTv(a, b);
       default: return byTv;
     }
   }
