@@ -1,0 +1,18 @@
+{
+  "_readme": [
+    "Controls the video embedded on the front page.",
+    "Normally you touch nothing: the build shows whatever is live right now, and falls back to your",
+    "most recent past live stream, then your newest upload.",
+    "",
+    "pin — force a specific video onto the front page. Paste a full YouTube URL or just the id.",
+    "      Use this to put the deadline stream up the moment you go live instead of waiting for a build.",
+    "      Clear it back to \"\" when you're done and it returns to automatic.",
+    "pinLive — set true while the pinned video is actually streaming, so the card shows the LIVE badge.",
+    "pinTitle — optional label under the video for a pinned pick."
+  ],
+  "channelId": "UCYLBFr-T-gDL5kEVXwFVLzA",
+  "handle": "ApolloHOU",
+  "pin": "",
+  "pinLive": false,
+  "pinTitle": ""
+}
