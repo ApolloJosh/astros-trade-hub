@@ -24,6 +24,52 @@
   .tcbox .tcsub{font-size:13px}
   .tcbox .tcbtn{width:100%;padding:14px 0}
 }
+
+/* ---- Podcast promo ---- */
+.ytbox{margin:34px 0 8px;border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);background:var(--card);overflow:hidden}
+.ytbar{background:var(--accent);color:#fff;text-align:center;padding:11px 14px;
+  font-family:var(--hd2);font-weight:800;font-size:clamp(13px,2.1vw,16.5px);
+  letter-spacing:.06em;text-transform:uppercase;line-height:1.35}
+.ytbar .live{display:inline-block;background:#fff;color:var(--accent);border-radius:4px;
+  padding:1px 7px;margin-right:8px;font-size:.82em;letter-spacing:.1em;vertical-align:1px}
+.ytbody{padding:14px}
+.ytframe{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;
+  border:2px solid var(--card-line)}
+.ytframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytmeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:11px}
+.ytmeta .ytt{flex:1;min-width:0;font-size:13px;font-weight:700;line-height:1.35}
+.ytmeta .ytd{font-size:11.5px;color:var(--muted);font-weight:400}
+.ytbtn{display:inline-block;background:#ff0000;color:#fff;text-decoration:none;flex:0 0 auto;
+  font-family:var(--hd2);font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  padding:10px 20px;border-radius:6px;box-shadow:3px 3px 0 #8c0000;transition:transform .12s,box-shadow .12s}
+.ytbtn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #8c0000}
+.ytlivedot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;
+  margin-right:6px;vertical-align:middle;animation:ytpulse 1.4s ease-in-out infinite}
+@keyframes ytpulse{0%,100%{opacity:1}50%{opacity:.25}}
+@media(max-width:640px){.ytbtn{width:100%;text-align:center;padding:12px 0}.ytmeta .ytt{flex-basis:100%}}
+
+/* ---- Live stream popup ---- */
+.lsmodal{position:fixed;inset:0;background:rgba(12,16,28,.78);z-index:120;
+  display:flex;align-items:center;justify-content:center;padding:18px}
+.lscard{position:relative;width:100%;max-width:560px;background:var(--card);
+  border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;max-height:94vh;overflow-y:auto}
+.lscard img.thumb{display:block;width:100%;height:auto}
+.lsclose{position:absolute;top:9px;right:9px;z-index:2;background:rgba(0,0,0,.62);color:#fff;
+  border:2px solid #fff;border-radius:50%;width:32px;height:32px;font-size:17px;line-height:1;
+  cursor:pointer;padding:0;display:grid;place-items:center}
+.lsclose:hover{background:#000}
+.lsbody{padding:16px 18px 18px;text-align:center}
+.lskick{font-family:var(--hd2);font-weight:800;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.lstitle{font-family:var(--hd2);font-size:clamp(16px,3vw,20px);font-weight:800;line-height:1.3;margin:0 0 14px}
+.lsbtn{display:inline-block;background:#ff0000;color:#fff;text-decoration:none;width:100%;
+  font-family:var(--hd2);font-size:15px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  padding:14px 0;border-radius:6px;box-shadow:3px 3px 0 #8c0000}
+.lsbtn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #8c0000}
+.lsdismiss{display:block;margin:11px auto 0;background:none;border:0;color:var(--muted);
+  font-size:11.5px;text-decoration:underline;cursor:pointer;padding:4px}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -61,6 +107,18 @@
   </div>
 </div>
 
+<div class="ytbox" id="ytbox" style="display:none">
+  <div class="ytbar" id="ytbar">Beyond The Diamond — Astros Podcast LIVE Every M/W/F at Noon CT!</div>
+  <div class="ytbody">
+    <div class="ytframe" id="ytframe"></div>
+    <div class="ytmeta">
+      <div class="ytt" id="ytt"></div>
+      <a class="ytbtn" id="ytsub" href="https://www.youtube.com/@ApolloHOU?sub_confirmation=1"
+         target="_blank" rel="noopener">Subscribe on YouTube</a>
+    </div>
+  </div>
+</div>
+
 <div class="tcbox">
   <img src="assets/tank-commander-wide.svg" alt="Baseball Tank Commander">
   <div class="tckick">From the same dugout</div>
@@ -73,6 +131,64 @@
 <script src="assets/app.js"></script>
 <script>
 BTD.nav('index');
+
+// ---------- Podcast video embed ----------
+(async () => {
+  let Y;
+  try { Y = await BTD.data('youtube'); } catch (e) { return; }   // no file yet: section stays hidden
+  if (!Y || !Y.video || !Y.video.id) return;
+  const v = Y.video, box = document.getElementById('ytbox');
+  const chan = Y.channelUrl || 'https://www.youtube.com/@ApolloHOU';
+  document.getElementById('ytframe').innerHTML =
+    `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.id)}?rel=0"
+      title="Beyond the Diamond" loading="lazy" allowfullscreen
+      allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share"></iframe>`;
+  if (v.live) document.getElementById('ytbar').innerHTML =
+    '<span class="live"><span class="ytlivedot"></span>Live Now</span>Beyond The Diamond — Astros Podcast LIVE Every M/W/F at Noon CT!';
+  const when = v.published ? new Date(v.published) : null;
+  document.getElementById('ytt').innerHTML = BTD.esc(v.title || '') +
+    (when && !isNaN(when) ? `<div class="ytd">${when.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</div>` : '');
+  document.getElementById('ytsub').href = chan.replace(/\/$/, '') + '?sub_confirmation=1';
+  box.style.display = '';
+})();
+
+// ---------- Live stream popup: once per visitor per day ----------
+(function () {
+  const KEY = 'btd-ls-seen';
+  // Stops nagging on its own once the stream has happened.
+  const EXPIRES = new Date('2026-08-04T05:00:00Z');   // end of Aug 3, CT
+  const CHAN = 'https://www.youtube.com/@ApolloHOU';
+  const today = new Date().toISOString().slice(0, 10);
+  if (new Date() > EXPIRES) return;
+  let seen = null;
+  try { seen = localStorage.getItem(KEY); } catch (e) {}     // private mode: just show it
+  if (seen === today || seen === 'never') return;
+
+  const m = document.createElement('div');
+  m.className = 'lsmodal';
+  m.innerHTML =
+    '<div class="lscard" role="dialog" aria-modal="true" aria-label="Trade Deadline live stream">' +
+      '<button class="lsclose" aria-label="Close">✕</button>' +
+      `<a href="${CHAN}" target="_blank" rel="noopener">` +
+        '<img class="thumb" src="assets/live-stream.jpg" alt="Beyond the Diamond Trade Deadline live stream"></a>' +
+      '<div class="lsbody">' +
+        '<div class="lskick">Beyond the Diamond</div>' +
+        '<p class="lstitle">Tune into our Trade Deadline Live Stream starting at 11am CT August 3rd!</p>' +
+        `<a class="lsbtn" href="${CHAN}" target="_blank" rel="noopener">Watch on YouTube</a>` +
+        '<button class="lsdismiss">Don’t show this again</button>' +
+      '</div></div>';
+  function close(forever) {
+    try { localStorage.setItem(KEY, forever ? 'never' : today); } catch (e) {}
+    m.remove(); document.removeEventListener('keydown', onKey);
+  }
+  function onKey(e) { if (e.key === 'Escape') close(false); }
+  m.querySelector('.lsclose').addEventListener('click', () => close(false));
+  m.querySelector('.lsdismiss').addEventListener('click', () => close(true));
+  m.querySelectorAll('a').forEach(a => a.addEventListener('click', () => close(false)));
+  m.addEventListener('click', e => { if (e.target === m) close(false); });
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(m);
+})();
 (async () => {
   // ---- Recent trades highlight ----
   try {
