@@ -104,11 +104,12 @@ BTD.nav('fan');
       .catch(errs => { throw (errs && errs.errors ? errs.errors[0] : errs); });
   }
   window.BTD_api = callApi;
-  let trades = [];
+  let trades = [], tally = [];
   try {
     const data = await callApi('action=list');
     if (data.error) throw new Error(data.error);
     trades = data.trades || [];
+    tally = data.tally || [];
   } catch (e) {
     feedEl.innerHTML = '<div class="card hlempty">Could not load Fan Trades. ' +
       'Open the script URL with <code>?callback=test123</code> — if the reply isn\'t wrapped in <code>test123(...)</code>, ' +
@@ -170,13 +171,8 @@ BTD.nav('fan');
     const r = e.target.closest('.t5row'); if (r) jump(r.dataset.jump);
   });
 
-  // Most Traded For
-  const want = new Map();
-  trades.forEach(t => (t.get || []).forEach(p => {
-    const w = want.get(p.id) || { id: p.id, name: p.name, pos: p.pos, team: p.team, n: 0 };
-    w.n++; want.set(p.id, w);
-  }));
-  const most = [...want.values()].sort((a, b) => b.n - a.n).slice(0, 10);
+  // Most Traded For — lifetime, so pruned trades still count toward the board
+  const most = BTD.mergeWanted(trades, tally).slice(0, 10);
   if (most.length) document.getElementById('most').innerHTML = most.map(p =>
     `<div class="mostrow"><img loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">` +
     `<span><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span> <span class="rmeta">${BTD.esc([p.pos, p.team].filter(Boolean).join(' · '))}</span></span>` +

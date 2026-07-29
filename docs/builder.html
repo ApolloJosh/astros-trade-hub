@@ -85,6 +85,7 @@
       <button data-view="t100">Top 100</button>
       <button data-view="t30" id="t30btn" title="Pick a team to see their Top 30">Top 30</button>
       <button data-view="fits" title="The curated Astros Fits board">Astros Fits</button>
+      <button data-view="fans" title="Who Astros fans ask for most in Fan Trades">Fan Favs</button>
     </div>
     <div class="controls">
       <select id="team"><option value="all">All teams</option></select>
@@ -173,6 +174,13 @@ BTD.nav('builder');
     });
   } catch (e) {}
   const isFit = p => fitIds.has(p.id) || fitNames.has(p.name.toLowerCase());
+  // Fan Favs: lifetime "most traded for" counts from Fan Trades. Loaded in the
+  // background so a slow or offline backend never holds up the builder.
+  let fanRank = new Map();
+  BTD.fanWanted().then(list => {
+    fanRank = new Map(list.map(p => [p.id, p.n]));
+    if (S.view === 'fans') renderLists();
+  }).catch(() => {});
 
   const all = doc.players.filter(p => p.tv != null && !p.traded);
   const CASH_PTS = 0.5; // TV points per $M of cash (mirrors config sv.tv.cashPtsPerM)
@@ -246,6 +254,10 @@ BTD.nav('builder');
     if (S.view === 't100') { r = r.filter(p => p.top100 != null); r.sort(byRank('top100')); }
     else if (S.view === 't30') { r = r.filter(p => p.orgRank != null); r.sort(S.team === 'all' ? ((a, b) => a.team.localeCompare(b.team) || byRank('orgRank')(a, b)) : byRank('orgRank')); }
     else if (S.view === 'fits') { r = r.filter(isFit); r.sort(cmp(S.rsort)); }
+    else if (S.view === 'fans') {
+      r = r.filter(p => fanRank.has(p.id));
+      r.sort((a, b) => (fanRank.get(b.id) || 0) - (fanRank.get(a.id) || 0) || (b.tv || 0) - (a.tv || 0));
+    }
     else r.sort(cmp(S.rsort));
     renderList(document.getElementById('rlist'), r, p => { S.recv.push(p); renderAll(); });
 
@@ -259,6 +271,8 @@ BTD.nav('builder');
     } else if (S.view !== 'all' && !r.length) {
       note.style.display = 'block';
       note.textContent = S.view === 't100' ? 'Top 100 rankings are loading with the next data refresh.'
+        : S.view === 'fans' ? (fanRank.size ? 'No Fan Favs match the current filters.'
+            : 'No fan trades yet — be the first to submit one.')
         : S.view === 'fits' ? 'No Astros Fits players match the current filters.'
         : (S.team === 'all' ? 'Pick a team to see their Top 30.'
           : `No Top 30 on file for the ${S.team} yet.`);

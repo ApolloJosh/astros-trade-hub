@@ -85,8 +85,8 @@
     <span class="more">Full Trade Feed →</span>
   </div></a>
   <a class="hl" href="builder"><div class="card">
-    <h3>🔁 Make Your Call</h3>
-    <div id="hl-mock"><p class="sub">Loading mock trade…</p></div>
+    <h3 id="hl-mock-hd">🔥 Trade of the Day</h3>
+    <div id="hl-mock"><p class="sub">Loading trade of the day…</p></div>
     <span class="more">Open the Trade Builder →</span>
   </div></a>
   <a class="hl" href="fits"><div class="card">
@@ -155,14 +155,17 @@ BTD.nav('index');
 // ---------- Live stream popup: once per visitor per day ----------
 (function () {
   const KEY = 'btd-ls-seen';
+  // Bucket by the hour: someone who visits in the morning sees it again in the
+  // afternoon, but refreshing the page five times in a row does not.
+  const bucket = d => d.toISOString().slice(0, 13);   // YYYY-MM-DDTHH
   // Stops nagging on its own once the stream has happened.
   const EXPIRES = new Date('2026-08-04T05:00:00Z');   // end of Aug 3, CT
   const CHAN = 'https://www.youtube.com/@ApolloHOU';
-  const today = new Date().toISOString().slice(0, 10);
+  const now = bucket(new Date());
   if (new Date() > EXPIRES) return;
   let seen = null;
   try { seen = localStorage.getItem(KEY); } catch (e) {}     // private mode: just show it
-  if (seen === today || seen === 'never') return;
+  if (seen === now || seen === 'never') return;
 
   const m = document.createElement('div');
   m.className = 'lsmodal';
@@ -178,7 +181,7 @@ BTD.nav('index');
         '<button class="lsdismiss">Don’t show this again</button>' +
       '</div></div>';
   function close(forever) {
-    try { localStorage.setItem(KEY, forever ? 'never' : today); } catch (e) {}
+    try { localStorage.setItem(KEY, forever ? 'never' : now); } catch (e) {}
     m.remove(); document.removeEventListener('keydown', onKey);
   }
   function onKey(e) { if (e.key === 'Escape') close(false); }
@@ -205,8 +208,29 @@ BTD.nav('index');
     }).join('') : '<p class="sub">No trades yet in the window.</p>';
   } catch (e) { document.getElementById('hl-feed').innerHTML = '<p class="sub">Feed warming up…</p>'; }
 
-  // ---- Mock trade example ----
-  try {
+  // ---- Trade of the Day (top fan trade in the last 24h) ----
+  // Falls back to a worked example so the card is never empty.
+  const fanTOD = async () => {
+    const trades = await BTD.fanTrades();
+    if (!trades.length) return false;
+    const net = t => (t.likes || 0) - (t.dislikes || 0);
+    const since = Date.now() - 864e5;
+    const fresh = trades.filter(t => new Date(t.ts).getTime() >= since);
+    const pool = fresh.length ? fresh : trades;      // nothing today: best on the board
+    const t = pool.reduce((a, b) => net(b) > net(a) ? b : a);
+    const row = p => `<div class="hl-row"><span class="nm">${BTD.esc(p.name)} <span class="sub2">${BTD.esc(p.pos || '')}</span></span>` +
+      `<span class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</span></div>`;
+    const cash = c => c ? `<div class="hl-row"><span class="nm">💵 Cash $${c}M</span><span class="tv mid">${(c * 0.5).toFixed(1)}</span></div>` : '';
+    document.getElementById('hl-mock-hd').textContent = fresh.length ? '🔥 Trade of the Day' : '🔥 Top Fan Trade';
+    document.getElementById('hl-mock').innerHTML =
+      `<div class="mini-eq"><div class="side-hd">Astros send · ${BTD.pts(t.giveTotal)}</div>${(t.give || []).map(row).join('')}${cash(t.gcash)}` +
+      `<div class="side-hd">Astros receive · ${BTD.pts(t.getTotal)}</div>${(t.get || []).map(row).join('')}${cash(t.rcash)}` +
+      `<div class="mini-verdict" style="color:var(--good)">by ${BTD.esc(t.name)} · +${net(t)} 👍</div></div>`;
+    return true;
+  };
+  let todShown = false;
+  try { todShown = await fanTOD(); } catch (e) {}
+  if (!todShown) try {
     const doc = await BTD.data('players');
     const find = n => doc.players.find(p => p.name.toLowerCase().includes(n));
     const give = [find('blubaugh'), find('dezenzo')].filter(Boolean);
@@ -223,6 +247,7 @@ BTD.nav('index');
         `<div class="side-hd">Astros receive · ${r.toFixed(1)}</div>${get.map(row).join('')}` +
         `<div class="mini-verdict" style="color:${verdict[1]}">${verdict[0]}</div></div>`;
     } else el.innerHTML = '<p class="sub">Build any deal — every player in baseball carries a value.</p>';
+    document.getElementById('hl-mock-hd').textContent = '🔁 Make Your Call';
   } catch (e) { document.getElementById('hl-mock').innerHTML = '<p class="sub">Values loading…</p>'; }
 
   // ---- Astros fits highlight (2 hitters + 2 pitchers by trade value) ----
