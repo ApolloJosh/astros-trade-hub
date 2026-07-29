@@ -28,8 +28,36 @@ window.BTD = (function () {
     return r.json();
   }
   // Fan Trades feed (JSONP + fetch race — same channel as the Fan Trades page).
-  function fanTrades() {
-    if (!FAN_URL) return Promise.resolve([]);
+  // fanData() gives the whole response: live trades plus `tally`, the lifetime
+  // most-traded-for counts the backend keeps after old trades are pruned.
+  let _fan = null;
+  function fanData() {
+    if (_fan) return _fan;
+    _fan = rawFan().then(d => ({ trades: (d && d.trades) || [], tally: (d && d.tally) || [] }))
+      .catch(() => ({ trades: [], tally: [] }));
+    return _fan;
+  }
+  // Merged "most traded for" counts: pruned history + everything still live.
+  // Returns [{id, name, pos, team, n}] sorted by count. Pure, so a page that
+  // already has the API response can merge without asking for it twice.
+  function mergeWanted(trades, tally) {
+    trades = trades || []; tally = tally || [];
+    const m = new Map();
+    const bump = (p, n) => {
+      if (!p || !p.id) return;
+      const w = m.get(p.id) || { id: p.id, name: p.name || '', pos: p.pos || '', team: p.team || '', n: 0 };
+      if (!w.name && p.name) w.name = p.name;
+      if (!w.pos && p.pos) w.pos = p.pos;
+      if (!w.team && p.team) w.team = p.team;
+      w.n += n; m.set(p.id, w);
+    };
+    tally.forEach(p => bump(p, +p.n || 0));
+    trades.forEach(t => (t.get || []).forEach(p => bump(p, 1)));
+    return [...m.values()].filter(p => p.n > 0).sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
+  }
+  const fanWanted = () => fanData().then(d => mergeWanted(d.trades, d.tally));
+  function rawFan() {
+    if (!FAN_URL) return Promise.resolve({ trades: [], tally: [] });
     const jsonp = () => new Promise((resolve, reject) => {
       const cb = 'btd_' + Math.random().toString(36).slice(2);
       const s = document.createElement('script');
@@ -41,8 +69,9 @@ window.BTD = (function () {
       document.head.appendChild(s);
     });
     const fx = async () => (await fetch(FAN_URL + '?action=list&cb=' + Date.now())).json();
-    return Promise.any([jsonp(), fx()]).then(d => (d && d.trades) || []).catch(() => []);
+    return Promise.any([jsonp(), fx()]).catch(() => ({ trades: [], tally: [] }));
   }
+  const fanTrades = () => fanData().then(d => d.trades);
   const shot = id => id ? `https://midfield.mlbstatic.com/v1/people/${id}/spots/120` : '';
   const logo = teamId => teamId ? `https://www.mlbstatic.com/team-logos/${teamId}.svg` : '';
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -230,5 +259,5 @@ window.BTD = (function () {
     const n = e.target.closest('.pn');
     if (n && n.dataset.pid) { e.stopPropagation(); e.preventDefault(); openPlayer(+n.dataset.pid); }
   }, true);
-  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, fanTrades, FAN_URL };
+  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, fanTrades, fanData, fanWanted, mergeWanted, FAN_URL };
 })();
