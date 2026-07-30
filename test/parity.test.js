@@ -75,5 +75,32 @@ const t100 = E.tradeValue2(null, null, false, 20, 25, true, '', 15);
 console.log((t100 > 40 ? 'PASS  ' : 'FAIL  ') + 'top100 #15 lifts a low org rank (' + t100 + ')');
 if (!(t100 > 40)) fails++;
 
+
+// Graduated-prospect floor: engine.js vs Code.gs across the signal space.
+[
+  ['ex #3, age 21, 150 PA, elite Statcast', { ped: { top100: 3 }, scq: 88, nCareer: 150, debutAge: 20 }, 21, false],
+  ['ex #3, age 22, 150 PA, no Statcast',    { ped: { top100: 3 }, nCareer: 150 }, 22, false],
+  ['ex #40, age 24, 700 PA, poor Statcast', { ped: { top100: 40 }, scq: 18, nCareer: 700, debutAge: 23 }, 24, false],
+  ['org-only pedigree, age 23',             { ped: { org: 4 }, scq: 55, nCareer: 300 }, 23, false],
+  ['tier pedigree, age 23',                 { ped: { tier: 2 }, scq: 55, nCareer: 300 }, 23, false],
+  ['past the window (1400 PA)',             { ped: { top100: 3 }, scq: 80, nCareer: 1400 }, 22, false],
+  ['too old (28)',                          { ped: { top100: 3 }, scq: 80, nCareer: 200 }, 28, false],
+  ['no pedigree at all',                    { ped: null, scq: 80, nCareer: 200 }, 22, false],
+  ['pitcher, ex #12, age 23, 90 IP',        { ped: { top100: 12 }, scq: 70, nCareer: 90, debutAge: 21 }, 23, true],
+].forEach(function (c) {
+  const label = c[0], sv = c[1], age = c[2], pit = c[3];
+  const base = pit ? { sp: true, n: 90 } : { sp: false, n: 150 };
+  eq(E.gradFloor(sv, base, pit, age, E.CFG.sv.tv),
+     gradFloor_(sv, base, pit, age), 'gradFloor: ' + label);
+});
+// ...and that it flows through tradeValue2 identically.
+[[{ ped: { top100: 3 }, scq: 85, nCareer: 200, debutAge: 20, proj: 0.4, cost: 1, surplus: 2 }, 22],
+ [{ ped: { top100: 60 }, scq: 30, nCareer: 900, debutAge: 24, proj: 0.9, cost: 2, surplus: 4 }, 25]
+].forEach(function (c, i) {
+  const sv = c[0], age = c[1], base = { sp: false, n: 200, war: 0.2 };
+  eq(E.tradeValue2(sv, base, false, age, null, false, '', null),
+     tradeValue2_(sv, base, false, age, null, false, ''), 'tradeValue2 carrying the grad floor #' + (i + 1));
+});
+
 console.log(fails ? `\n${fails} PARITY FAILURES` : '\nENGINE PARITY OK');
 process.exit(fails ? 1 : 0);
