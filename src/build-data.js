@@ -10,7 +10,10 @@ const E = require('./engine.js');
 const api = require('./mlb-api.js');
 const R = require('./rankings.js');
 const IDC = require('./id-cache.js');
+const PED = require('./pedigree.js');
 const CFG = E.CFG;
+const PEDDB = PED.load();
+const GRADS = [];   // diagnostic: every graduate the floor touches
 
 const OUT = path.join(__dirname, '..', 'docs', 'data');
 const overridesPath = path.join(__dirname, '..', 'data-sources', 'salaries-manual.json');
@@ -114,6 +117,33 @@ function cotsLookup(p) {
 
 const isPitcherPos = pos => ['P', 'SP', 'RP', 'TWP', 'RHP', 'LHP'].includes(String(pos || '').toUpperCase());
 
+
+// Underlying-quality percentile (0-100) from Statcast, independent of results.
+// Hitters lean on expected outcomes and contact quality; pitchers on xERA and
+// bat-missing. Returns null when the player has no Statcast footprint.
+const SCQ_H = ['xwoba', 'xslg', 'hardhit', 'barrel', 'ev'];
+const SCQ_P = ['xera', 'pwhiff', 'pk', 'phardhit', 'pbarrel'];
+function statcastQuality(id, pitcher) {
+  const sc = SC[String(id)];
+  if (!sc || !sc.p) return null;
+  const keys = pitcher ? SCQ_P : SCQ_H;
+  const vals = keys.map(k => sc.p[k]).filter(v => v != null && !isNaN(v));
+  if (vals.length < 2) return null;
+  return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+}
+// Career major-league sample so far (PA for hitters, IP for pitchers).
+function careerSample(base) {
+  if (!base) return 0;
+  let n = base.histOnly ? 0 : E.toNum(base.n, 0);
+  (base.hist || []).forEach(h => { n += E.toNum(h.n, 0); });
+  return Math.round(n);
+}
+const debutAge = (age, debut) => {
+  if (age == null || !debut) return null;
+  const yrs = (Date.now() - new Date(debut).getTime()) / 3.15576e10;
+  return isNaN(yrs) ? null : Math.round((age - yrs) * 10) / 10;
+};
+
 async function historyBases(id, pitcher, pos, lg) {
   const d = await api.yearByYear(id, pitcher);
   const sp = (d && d.stats && d.stats[0] && d.stats[0].splits) || [];
@@ -207,9 +237,29 @@ async function valuePlayer(p, lg) {
     if (prospect) {      // farm-system context for prospect anchors
       sv.farmRank = FARM_RANK_BY_TEAM[p.teamId] || null;
       sv.tier = farmTier(p.name);
+    } else {
+      // Graduated: pedigree no longer appears in any ranking list, so pull it
+      // from the permanent record and let the engine hold a fading floor.
+      sv.ped = PED.lookup(PEDDB, p.name);
+      sv.scq = statcastQuality(p.id, pitcher);
+      sv.nCareer = careerSample(base);
+      sv.debutAge = debutAge(p.age, p.debut);
     }
   }
   const tv = E.tradeValue2(sv, base, pitcher, p.age, p.orgRank || null, prospect, p.il || '', p.top100 || null);
+  // Diagnostic: who the graduated-prospect floor moved, and who it could not
+  // help because no pedigree is on file.
+  if (!prospect && sv && (p.age != null && p.age <= (CFG.sv.tv.grad || {}).ageZero) && sv.nCareer != null) {
+    const floor = E.gradFloor(sv, base, pitcher, p.age, CFG.sv.tv);
+    const bare = E.tradeValue2(Object.assign({}, sv, { ped: null }), base, pitcher, p.age,
+      p.orgRank || null, prospect, p.il || '', p.top100 || null);
+    if (floor != null || (sv.nCareer > 0 && sv.nCareer < 2 * (pitcher ? 150 : 600))) {
+      GRADS.push({ name: p.name, team: p.teamName, age: p.age, pos: p.pos,
+        n: sv.nCareer, scq: sv.scq, debutAge: sv.debutAge,
+        ped: sv.ped, floor: floor == null ? null : E.r1(floor),
+        before: bare, after: tv, moved: (bare != null && tv != null) ? E.r1(tv - bare) : null });
+    }
+  }
 
   const line = display ? (pitcher
     ? { ip: display.inningsPitched, era: display.era, whip: display.whip, k: display.strikeOuts, sv: display.saves, g: display.gamesPlayed, gs: display.gamesStarted }
@@ -293,6 +343,22 @@ async function main() {
   console.log('  ', JSON.stringify(lg));
 
   const { teams: rankTeams, top100 } = R.loadAll();
+  // Bank today's rankings permanently. Lists drop a player the moment he
+  // graduates, so this is the only chance to record that he was ever ranked.
+  try {
+    const seen = new Map();
+    const put = (name, k, v) => {
+      if (!name || v == null) return;
+      const e = seen.get(R.norm(name)) || { name };
+      if (e[k] == null || v < e[k]) e[k] = v;
+      seen.set(R.norm(name), e);
+    };
+    (top100 || []).forEach((pr, i) => put(pr.name, 'top100', pr.rank || i + 1));
+    Object.values(rankTeams || {}).forEach(list =>
+      (list || []).forEach(pr => { put(pr.name, 'org', pr.rank); put(pr.name, 'tier', farmTier(pr.name)); }));
+    PED.capture([...seen.values()], CFG.season);
+    console.log(`  pedigree: banked ${seen.size} ranked prospects`);
+  } catch (e) { console.warn('  pedigree capture skipped:', e.message); }
   // Map farm-system ranks (keyed by team slug) onto teamIds via the ranking files.
   try {
     for (const f of fs.readdirSync(R.DIR)) {
@@ -447,7 +513,55 @@ async function main() {
       players: overridden.map(p => `${p.name} ${p.tvModel}->${p.tv}`) },
   }));
   IDC.save();
+  writeGradReport();
   console.log(`DONE: ${players.length} players, ${fits.length} fits.`);
+}
+
+
+// Backend diagnostic: who the graduated-prospect floor moved, and which young
+// graduates it could not help because no pedigree is on file.
+function writeGradReport() {
+  try {
+    const dir = path.join(__dirname, '..', 'reports');
+    fs.mkdirSync(dir, { recursive: true });
+    const moved = GRADS.filter(g => g.moved != null && g.moved > 0.05)
+      .sort((a, b) => b.moved - a.moved);
+    const missing = GRADS.filter(g => !g.ped).sort((a, b) => (a.age || 0) - (b.age || 0));
+    const L = [];
+    L.push(`# Young graduates — ${new Date().toISOString().slice(0, 10)}`);
+    L.push('');
+    L.push(`Former prospects past graduation, still inside the protection window.`);
+    L.push('');
+    L.push(`## Lifted by the pedigree floor (${moved.length})`);
+    L.push('');
+    if (!moved.length) L.push('_Nobody. If a player you expect is missing, he probably has no pedigree on file — see below._');
+    else {
+      L.push('| Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |');
+      L.push('|---|---|---:|---:|---:|---|---:|---:|---:|');
+      moved.forEach(g => {
+        const ped = g.ped ? [g.ped.top100 != null ? '#' + g.ped.top100 + ' top-100' : '',
+          g.ped.org != null ? 'org #' + g.ped.org : '', g.ped.tier != null ? 'tier ' + g.ped.tier : '',
+          g.ped.src === 'manual' ? '(manual)' : ''].filter(Boolean).join(', ') : '—';
+        L.push(`| ${g.name} | ${g.team} | ${g.age} | ${g.n} | ${g.scq == null ? '—' : g.scq + 'th'} | ${ped} | ${g.before == null ? '—' : g.before} | ${g.after} | +${g.moved} |`);
+      });
+    }
+    L.push('');
+    L.push(`## Young graduates with NO pedigree on file (${missing.length})`);
+    L.push('');
+    L.push('_These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._');
+    L.push('');
+    if (missing.length) {
+      L.push('| Player | Team | Age | Pos | Sample | Statcast | Value |');
+      L.push('|---|---|---:|---|---:|---:|---:|');
+      missing.slice(0, 60).forEach(g => L.push(
+        `| ${g.name} | ${g.team} | ${g.age} | ${g.pos} | ${g.n} | ${g.scq == null ? '—' : g.scq + 'th'} | ${g.after == null ? '—' : g.after} |`));
+      if (missing.length > 60) L.push(`| _…${missing.length - 60} more_ | | | | | | |`);
+    }
+    const out = L.join('\n') + '\n';
+    fs.writeFileSync(path.join(dir, 'graduates.md'), out);
+    if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out);
+    console.log(`  graduates.md: ${moved.length} lifted, ${missing.length} without pedigree`);
+  } catch (e) { console.warn('  grad report skipped:', e.message); }
 }
 
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });

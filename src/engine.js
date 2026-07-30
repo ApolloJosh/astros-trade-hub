@@ -202,6 +202,60 @@ function adjustProspectValue(sv, rank, prospect) {
   return sv;
 }
 
+// ---- Graduated-prospect floor ----
+// A top prospect falls off every ranking list the day he graduates, so ~300 bad
+// plate appearances get regressed toward a league-average prior with no pedigree
+// left to say otherwise. This restores a floor from his best-ever ranking and
+// fades it out as the major-league sample grows. It can only raise a value.
+//
+// Inputs ride on sv (same pattern as farmRank/tier/level):
+//   sv.ped      {top100, org, tier}  best-ever, from data-sources/pedigree.json
+//   sv.scq      0-100 Statcast underlying-quality percentile (xwOBA / xERA etc.)
+//   sv.nCareer  career MLB PA or IP
+//   sv.debutAge age at big-league debut
+function gradFloor(sv, base, pitcher, age, t) {
+  const g = t && t.grad;
+  if (!g || !sv || !sv.ped) return null;
+  const ped = sv.ped;
+
+  // Anchor: the best read we have on how good he was thought to be.
+  let anchor = null;
+  if (ped.top100 != null && t.top100Anchors) anchor = interp(t.top100Anchors, ped.top100);
+  if (ped.tier != null && t.tierAnchors && t.tierAnchors[String(ped.tier)] != null)
+    anchor = Math.max(anchor == null ? 0 : anchor, t.tierAnchors[String(ped.tier)]);
+  if (ped.org != null && t.prospectAnchors) {
+    let a = t.prospectAnchors[0][1];
+    t.prospectAnchors.forEach(x => { if (ped.org >= x[0]) a = x[1]; });
+    anchor = Math.max(anchor == null ? 0 : anchor, a);
+  }
+  if (anchor == null || anchor < (g.minAnchor || 0)) return null;
+
+  // Sample: full credit through one season's worth, gone by two.
+  const full = !pitcher ? SV.hitFullPA : (base && base.sp ? SV.spFullIP : SV.rpFullIP);
+  const n = toNum(sv.nCareer, base ? toNum(base.n, 0) : 0);
+  const span = ((g.sampleZero || 2) - (g.sampleFull || 1)) * full;
+  const dS = span > 0 ? clamp(((g.sampleZero || 2) * full - n) / span, 0, 1) : 0;
+  if (dS <= 0) return null;
+
+  // Age: struggling at 21 says far less than struggling at 26.
+  const aZero = g.ageZero || 27, aFull = g.ageFull || 23;
+  const dA = clamp((aZero - toNum(age, 99)) / (aZero - aFull), 0, 1);
+  if (dA <= 0) return null;
+
+  // Underlying quality: hitting it hard with nothing to show for it is a very
+  // different player from genuinely overmatched. Neutral when unknown.
+  let q = 1;
+  if (sv.scq != null) {
+    const lo = g.qLo != null ? g.qLo : 0.55, hi = g.qHi != null ? g.qHi : 1.15;
+    q = lo + (hi - lo) * clamp(toNum(sv.scq, 50) / 100, 0, 1);
+  }
+  // Track record: you do not reach the majors at 21 without having dominated.
+  if (sv.debutAge != null && toNum(sv.debutAge, 99) <= (g.youngDebut || 22))
+    q *= 1 + (g.debutBoost || 0);
+
+  return anchor * (g.frac != null ? g.frac : 0.72) * dS * dA * q;
+}
+
 // ---- Trade Value v2 (1-150, calibrated) ----
 function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
   const t = SV.tv;
@@ -335,6 +389,9 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
   // A player is only a LIABILITY if he's bad AND owed real money — that's the
   // McCullers case. A cheap struggling or injured big leaguer is simply worth
   // little; someone will always take the roster spot at the minimum.
+  // Former top prospect, still young, still a small sample — hold a floor.
+  const gf = gradFloor(sv, base, pitcher, age, t);
+  if (gf != null) statTV = (statTV == null) ? clamp(gf, 1, t.max) : Math.max(statTV, clamp(gf, 1, t.max));
   if (statTV == null) return null;
   const owed = Math.max(0, sv && sv.cost || 0);
   if (owed < (t.negMinOwed != null ? t.negMinOwed : 9)) statTV = Math.max(statTV, t.mlbFloor || 1);
@@ -356,5 +413,5 @@ module.exports = {
   CFG, SV, clamp, toNum, r1, ipNum, interp, defaultBaselines, posAdj600,
   warHitter, warPitcher, combineHitting, combinePitching,
   ageMult, projectFull, dollarsPerWar, valueFromBase,
-  rankValue, adjustProspectValue, tradeValue2, estimateContract,
+  rankValue, adjustProspectValue, tradeValue2, gradFloor, estimateContract,
 };
