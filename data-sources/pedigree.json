@@ -1,0 +1,1276 @@
+{
+  "_readme": [
+    "Prospect pedigree that survives graduation.",
+    "Ranking lists drop a player the moment he graduates, so without this the model cannot tell a",
+    "struggling former top-5 prospect from a struggling org filler. It gives young graduates a value",
+    "floor that fades as their major-league sample grows.",
+    "",
+    "players — captured automatically on every build from the top-100 and team top-30 lists.",
+    "          Best rank ever is kept and never downgraded. Do not hand-edit; it rebuilds itself.",
+    "",
+    "manual  — YOUR list, for players who graduated before tracking started (these will not appear",
+    "          in players{} because they were already off the lists on the first build).",
+    "          Either a grade or an exact rank:",
+    "            \"Roman Anthony\": \"elite\"        -> treated like a top-5 prospect",
+    "            \"Some Player\": \"strong\"         -> ~top 20",
+    "            \"Some Player\": \"solid\"          -> ~top 50",
+    "            \"Some Player\": \"fringe\"         -> ~top 90",
+    "            \"Some Player\": { \"top100\": 3 }  -> exact rank if you know it",
+    "",
+    "The floor only ever RAISES a value, never lowers one, and only applies to young players with a",
+    "small major-league sample. Check reports/graduates.md after a build to see exactly who moved and",
+    "which young graduates still have no pedigree on file."
+  ],
+  "updated": "2026-07-30T22:55:01.903Z",
+  "manual": {},
+  "players": {
+    "jacksonholliday": {
+      "name": "Jackson Holliday",
+      "top100": 1,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "jacksonchourio": {
+      "name": "Jackson Chourio",
+      "top100": 2,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "paulskenes": {
+      "name": "Paul Skenes",
+      "top100": 3,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "juniorcaminero": {
+      "name": "Junior Caminero",
+      "top100": 4,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "evancarter": {
+      "name": "Evan Carter",
+      "top100": 5,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "wyattlangford": {
+      "name": "Wyatt Langford",
+      "top100": 6,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "dylancrews": {
+      "name": "Dylan Crews",
+      "top100": 4,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "ethansalas": {
+      "name": "Ethan Salas",
+      "top100": 8,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "colsonmontgomery": {
+      "name": "Colson Montgomery",
+      "top100": 9,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "walkerjenkins": {
+      "name": "Walker Jenkins",
+      "top100": 3,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jordanlawlar": {
+      "name": "Jordan Lawlar",
+      "top100": 11,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jacksonmerrill": {
+      "name": "Jackson Merrill",
+      "top100": 12,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "maxclark": {
+      "name": "Max Clark",
+      "top100": 6,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jameswood": {
+      "name": "James Wood",
+      "top100": 14,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "marcelomayer": {
+      "name": "Marcelo Mayer",
+      "top100": 12,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "petecrowarmstrong": {
+      "name": "Pete Crow-Armstrong",
+      "top100": 16,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "samuelbasallo": {
+      "name": "Samuel Basallo",
+      "top100": 13,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "brookslee": {
+      "name": "Brooks Lee",
+      "top100": 18,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "coltoncowser": {
+      "name": "Colton Cowser",
+      "top100": 19,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "carsonwilliams": {
+      "name": "Carson Williams",
+      "top100": 9,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "noelvimarte": {
+      "name": "Noelvi Marte",
+      "top100": 21,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "coltkeith": {
+      "name": "Colt Keith",
+      "top100": 22,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "kyleharrison": {
+      "name": "Kyle Harrison",
+      "top100": 23,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "romananthony": {
+      "name": "Roman Anthony",
+      "top100": 2,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jacksonjobe": {
+      "name": "Jackson Jobe",
+      "top100": 5,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "cadehorton": {
+      "name": "Cade Horton",
+      "top100": 26,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "andrewpainter": {
+      "name": "Andrew Painter",
+      "top100": 8,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "adaelamador": {
+      "name": "Adael Amador",
+      "top100": 28,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "rickytiedemann": {
+      "name": "Ricky Tiedemann",
+      "top100": 29,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "cobymayo": {
+      "name": "Coby Mayo",
+      "top100": 14,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "chasedelauter": {
+      "name": "Chase DeLauter",
+      "top100": 31,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "hestonkjerstad": {
+      "name": "Heston Kjerstad",
+      "top100": 32,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "jacobmisiorowski": {
+      "name": "Jacob Misiorowski",
+      "top100": 33,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "rhettlowder": {
+      "name": "Rhett Lowder",
+      "top100": 34,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jefersonquero": {
+      "name": "Jeferson Quero",
+      "top100": 35,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "robbysnelling": {
+      "name": "Robby Snelling",
+      "top100": 36,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "coleyoung": {
+      "name": "Cole Young",
+      "top100": 37,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "harryford": {
+      "name": "Harry Ford",
+      "top100": 38,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "marcoluciano": {
+      "name": "Marco Luciano",
+      "top100": 39,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "kyleteel": {
+      "name": "Kyle Teel",
+      "top100": 32,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jassondominguez": {
+      "name": "Jasson Domínguez",
+      "top100": 21,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "emmanuelrodriguez": {
+      "name": "Emmanuel Rodriguez",
+      "top100": 37,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "masynwinn": {
+      "name": "Masyn Winn",
+      "top100": 43,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "termarrjohnson": {
+      "name": "Termarr Johnson",
+      "top100": 44,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jettwilliams": {
+      "name": "Jett Williams",
+      "top100": 45,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "tylerblack": {
+      "name": "Tyler Black",
+      "top100": 46,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "owencaissie": {
+      "name": "Owen Caissie",
+      "top100": 47,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "bradyhouse": {
+      "name": "Brady House",
+      "top100": 48,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "mickabel": {
+      "name": "Mick Abel",
+      "top100": 49,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "noahschultz": {
+      "name": "Noah Schultz",
+      "top100": 16,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "michaelbusch": {
+      "name": "Michael Busch",
+      "top100": 51,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "chasedollander": {
+      "name": "Chase Dollander",
+      "top100": 25,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "drewgilbert": {
+      "name": "Drew Gilbert",
+      "top100": 53,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "mattshaw": {
+      "name": "Matt Shaw",
+      "top100": 19,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "curtismead": {
+      "name": "Curtis Mead",
+      "top100": 55,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "dylanlesko": {
+      "name": "Dylan Lesko",
+      "top100": 56,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "noblemeyer": {
+      "name": "Noble Meyer",
+      "top100": 57,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "xavierisaac": {
+      "name": "Xavier Isaac",
+      "top100": 51,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "kylemanzardo": {
+      "name": "Kyle Manzardo",
+      "top100": 59,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "jacejung": {
+      "name": "Jace Jung",
+      "top100": 60,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "aidanmiller": {
+      "name": "Aidan Miller",
+      "top100": 27,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jaredjones": {
+      "name": "Jared Jones",
+      "top100": 62,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "joeyortiz": {
+      "name": "Joey Ortiz",
+      "top100": 63,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "tinkhence": {
+      "name": "Tink Hence",
+      "top100": 64,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "kevinalcantara": {
+      "name": "Kevin Alcántara",
+      "top100": 65,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "luisangelacuna": {
+      "name": "Luisangel Acuña",
+      "top100": 66,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "edwinarroyo": {
+      "name": "Edwin Arroyo",
+      "top100": 67,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "jacobwilson": {
+      "name": "Jacob Wilson",
+      "top100": 31,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "ajsmithshawver": {
+      "name": "AJ Smith-Shawver",
+      "top100": 69,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "connorphillips": {
+      "name": "Connor Phillips",
+      "top100": 70,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "sebastianwalcott": {
+      "name": "Sebastian Walcott",
+      "top100": 17,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "yanquielfernandez": {
+      "name": "Yanquiel Fernández",
+      "top100": 72,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "jamestriantos": {
+      "name": "James Triantos",
+      "top100": 73,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "tommytroy": {
+      "name": "Tommy Troy",
+      "top100": 74,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "daltonrushing": {
+      "name": "Dalton Rushing",
+      "top100": 30,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "ceddannerafaela": {
+      "name": "Ceddanne Rafaela",
+      "top100": 76,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "justincrawford": {
+      "name": "Justin Crawford",
+      "top100": 64,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "druwjones": {
+      "name": "Druw Jones",
+      "top100": 78,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "gabrielgonzalez": {
+      "name": "Gabriel Gonzalez",
+      "top100": 79,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "nickfrasso": {
+      "name": "Nick Frasso",
+      "top100": 80,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "jordanbeck": {
+      "name": "Jordan Beck",
+      "top100": 81,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "anthonysolometo": {
+      "name": "Anthony Solometo",
+      "top100": 82,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "carsonwhisenhunt": {
+      "name": "Carson Whisenhunt",
+      "top100": 83,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "spencerjones": {
+      "name": "Spencer Jones",
+      "top100": 84,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "drewthorpe": {
+      "name": "Drew Thorpe",
+      "top100": 85,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "roderickarias": {
+      "name": "Roderick Arias",
+      "top100": 86,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "coltemerson": {
+      "name": "Colt Emerson",
+      "top100": 20,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "brockporter": {
+      "name": "Brock Porter",
+      "top100": 88,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "orelvismartinez": {
+      "name": "Orelvis Martinez",
+      "top100": 89,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "hurstonwaldrep": {
+      "name": "Hurston Waldrep",
+      "top100": 90,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "brayanrocchio": {
+      "name": "Brayan Rocchio",
+      "top100": 91,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "chasehampton": {
+      "name": "Chase Hampton",
+      "top100": 92,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "bubbachandler": {
+      "name": "Bubba Chandler",
+      "top100": 15,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "blakemitchell": {
+      "name": "Blake Mitchell",
+      "top100": 48,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "nolanschanuel": {
+      "name": "Nolan Schanuel",
+      "top100": 95,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "bryceeldridge": {
+      "name": "Bryce Eldridge",
+      "top100": 24,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2025
+    },
+    "ryanclifford": {
+      "name": "Ryan Clifford",
+      "top100": 97,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "chasepetty": {
+      "name": "Chase Petty",
+      "top100": 98,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "tekoahroby": {
+      "name": "Tekoah Roby",
+      "top100": 99,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "danielespino": {
+      "name": "Daniel Espino",
+      "top100": 100,
+      "org": null,
+      "tier": null,
+      "first": 2024,
+      "last": 2024
+    },
+    "rokisasaki": {
+      "name": "Roki Sasaki",
+      "top100": 1,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "kristiancampbell": {
+      "name": "Kristian Campbell",
+      "top100": 7,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "travisbazzana": {
+      "name": "Travis Bazzana",
+      "top100": 10,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "leodevries": {
+      "name": "Leo De Vries",
+      "top100": 18,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jaccaglianone": {
+      "name": "Jac Caglianone",
+      "top100": 22,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jjwetherholt": {
+      "name": "JJ Wetherholt",
+      "top100": 23,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "chaseburns": {
+      "name": "Chase Burns",
+      "top100": 26,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "kevinmcgonigle": {
+      "name": "Kevin McGonigle",
+      "top100": 28,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "charliecondon": {
+      "name": "Charlie Condon",
+      "top100": 29,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "hagensmith": {
+      "name": "Hagen Smith",
+      "top100": 34,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "nickkurtz": {
+      "name": "Nick Kurtz",
+      "top100": 38,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "josuedepaula": {
+      "name": "Josue De Paula",
+      "top100": 40,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "thomaswhite": {
+      "name": "Thomas White",
+      "top100": 41,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "lazaromontes": {
+      "name": "Lazaro Montes",
+      "top100": 42,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "konnorgriffin": {
+      "name": "Konnor Griffin",
+      "top100": 43,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "kumarrocker": {
+      "name": "Kumar Rocker",
+      "top100": 44,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "quinnmathews": {
+      "name": "Quinn Mathews",
+      "top100": 45,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "brandonsproat": {
+      "name": "Brandon Sproat",
+      "top100": 46,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "alejandrorosario": {
+      "name": "Alejandro Rosario",
+      "top100": 50,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "brycerainer": {
+      "name": "Bryce Rainer",
+      "top100": 53,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "bradenmontgomery": {
+      "name": "Braden Montgomery",
+      "top100": 55,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jesusmade": {
+      "name": "Jesús Made",
+      "top100": 56,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "cooperpratt": {
+      "name": "Cooper Pratt",
+      "top100": 57,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "camsmith": {
+      "name": "Cam Smith",
+      "top100": 59,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jaisonchourio": {
+      "name": "Jaison Chourio",
+      "top100": 60,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "lukekeaschall": {
+      "name": "Luke Keaschall",
+      "top100": 61,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "angelgenao": {
+      "name": "Angel Genao",
+      "top100": 62,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "drakebaldwin": {
+      "name": "Drake Baldwin",
+      "top100": 63,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "edgarquero": {
+      "name": "Edgar Quero",
+      "top100": 66,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "braydentaylor": {
+      "name": "Brayden Taylor",
+      "top100": 67,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "christianmoore": {
+      "name": "Christian Moore",
+      "top100": 68,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "moisesballesteros": {
+      "name": "Moisés Ballesteros",
+      "top100": 69,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "travissykora": {
+      "name": "Travis Sykora",
+      "top100": 70,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jacksonferris": {
+      "name": "Jackson Ferris",
+      "top100": 71,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "alexfreeland": {
+      "name": "Alex Freeland",
+      "top100": 72,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "felnincelesten": {
+      "name": "Felnin Celesten",
+      "top100": 74,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "zyhirhope": {
+      "name": "Zyhir Hope",
+      "top100": 75,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "franklinarias": {
+      "name": "Franklin Arias",
+      "top100": 76,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "cadendana": {
+      "name": "Caden Dana",
+      "top100": 78,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jarlinsusana": {
+      "name": "Jarlin Susana",
+      "top100": 79,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "thomasharrington": {
+      "name": "Thomas Harrington",
+      "top100": 80,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "starlyncaba": {
+      "name": "Starlyn Caba",
+      "top100": 81,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "thayronliranzo": {
+      "name": "Thayron Liranzo",
+      "top100": 82,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "salstewart": {
+      "name": "Sal Stewart",
+      "top100": 84,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "carterjensen": {
+      "name": "Carter Jensen",
+      "top100": 86,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "arjunnimmala": {
+      "name": "Arjun Nimmala",
+      "top100": 87,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "treyyesavage": {
+      "name": "Trey Yesavage",
+      "top100": 88,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "camcaminiti": {
+      "name": "Cam Caminiti",
+      "top100": 89,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "camcollier": {
+      "name": "Cam Collier",
+      "top100": 91,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "eduardotait": {
+      "name": "Eduardo Tait",
+      "top100": 93,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "tremorgan": {
+      "name": "Tre' Morgan",
+      "top100": 94,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "josuebriceno": {
+      "name": "Josue Briceño",
+      "top100": 95,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jonnyfarmelo": {
+      "name": "Jonny Farmelo",
+      "top100": 96,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "jeffersonrojas": {
+      "name": "Jefferson Rojas",
+      "top100": 97,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "michaelarroyo": {
+      "name": "Michael Arroyo",
+      "top100": 98,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    },
+    "theogillen": {
+      "name": "Theo Gillen",
+      "top100": 99,
+      "org": null,
+      "tier": null,
+      "first": 2025,
+      "last": 2025
+    }
+  }
+}
