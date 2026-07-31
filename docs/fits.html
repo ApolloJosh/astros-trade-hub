@@ -68,8 +68,40 @@
 .tierhd:first-child{margin-top:4px}
 .tierhd span{font-family:inherit;font-size:11px;font-weight:700;color:var(--muted);
   background:var(--chip,rgba(128,128,128,.14));border-radius:999px;padding:2px 8px}
-.pcard.pmiss{opacity:.5}
-.pcard.pmiss .nm{text-decoration:line-through;text-decoration-thickness:1px}
+/* full-width dossier card */
+.wcard{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px;margin-bottom:14px}
+.wtop{display:flex;gap:12px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--row-line)}
+.wface{width:62px;height:62px;border-radius:50%;background:var(--navy);object-fit:cover;flex:0 0 auto}
+.wid{min-width:0}
+.wname{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--hd2);
+  font-size:19px;font-weight:800;line-height:1.15}
+.wtier{font-family:inherit;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:1px 8px}
+.wmeta{font-size:12px;color:var(--muted);margin-top:3px}
+.wawd{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.wvals{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin:11px 0 4px}
+.wv{background:var(--row-hover);border:1px solid var(--row-line);border-radius:6px;padding:6px 9px;text-align:center}
+.wv span{display:block;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.wv b{display:block;font-family:var(--hd2);font-size:16px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+.wgrid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:18px;margin-top:10px}
+@media(max-width:860px){.wgrid{grid-template-columns:1fr;gap:12px}}
+.wleft,.wright{min-width:0}
+.whd{font-family:var(--hd2);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:10px 0 6px}
+.whd:first-child{margin-top:0}
+.ytab{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.ytab th{font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;text-align:right;padding:3px 5px;border-bottom:1px solid var(--row-line)}
+.ytab th:first-child,.ytab th:nth-child(2),.ytab td:first-child,.ytab td.tm{text-align:left}
+.ytab td{padding:4px 5px;text-align:right;border-bottom:1px solid var(--row-line)}
+.ytab tr:last-child td{border-bottom:0}
+.ytab tr.cur td{font-weight:700;background:var(--row-hover)}
+.ytab td.tm{color:var(--muted);font-size:11px;max-width:74px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wposrow{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:12px;margin-bottom:5px}
+.wposrow b{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:48px}
+.wcard.wmiss{opacity:.5;padding:11px 16px}
+.wcard.wmiss .wname{text-decoration:line-through;text-decoration-thickness:1px;font-size:16px}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -98,7 +130,7 @@
 <div class="controls">
   <button data-pf="all" class="on">All</button><button data-pf="H">Hitters</button><button data-pf="P">Pitchers</button>
   <input id="pq" placeholder="Search…">
-  <select id="psort"><option value="tier">Sort: Tier order</option><option value="tv">Sort: Trade value</option><option value="sur">Sort: Surplus $</option><option value="name">Sort: Name</option></select>
+  <select id="psort"><option value="tier">Sort: Tier order</option><option value="war">Sort: WAR</option><option value="proj">Sort: Proj WAR</option><option value="age">Sort: Youngest</option><option value="name">Sort: Name</option></select>
 </div>
 <div id="picksbody"></div>
 </div>
@@ -273,18 +305,23 @@ BTD.nav('fits');
 });
 
 // ---------- ApolloJosh's Picks ----------
-// A hand-curated board kept in data/target-board.json. The list is just names +
-// tiers; every stat shown here is pulled live from players.json, so these cards
-// stay in step with the rest of the site. Names that the model doesn't carry
-// still render — greyed, so the list always reads complete.
+// Full-width dossier cards: bio + valuation up top, last four seasons and
+// position history on the left, Savant percentiles down the right. The list
+// itself (names + tiers) lives in data/target-board.json. Valuation comes from
+// players.json; career lines and position games come from the MLB StatsAPI,
+// fetched per card as it scrolls into view so the page still opens fast.
 (async () => {
   const el = document.getElementById('picksbody');
   let tb, pdoc;
   try { [tb, pdoc] = await Promise.all([BTD.data('target-board'), BTD.data('players')]); }
   catch (e) { el.innerHTML = '<div class="card">Picks list not loaded yet.</div>'; return; }
+  const poolAll = pdoc.players || [];
+  const SEASON = pdoc.season || new Date().getFullYear();
+  const YEARS = 4;
+  const AW = { MVP: 'MVP', CY: 'Cy Young', ROY: 'ROY', GG: 'Gold Glove', SS: 'Silver Slugger', AS: 'All-Star' };
 
-  const idx = new Map();
-  (pdoc.players || []).forEach(p => idx.set(String(p.name).trim().toLowerCase(), p));
+  const idx = new Map(), byId = new Map();
+  poolAll.forEach(p => { idx.set(String(p.name).trim().toLowerCase(), p); byId.set(p.id, p); });
   const find = o => {
     for (const n of [o.Player, ...(o.Alt || [])]) {
       const hit = idx.get(String(n).trim().toLowerCase());
@@ -292,52 +329,160 @@ BTD.nav('fits');
     }
     return null;
   };
-  const L = (p, k, d) => (p.line && p.line[k] != null ? p.line[k] : d);
-  const statLine = p => p.type === 'H'
-    ? `${L(p,'avg','—')} AVG · ${L(p,'ops','—')} OPS · ${L(p,'hr',0)} HR · ${L(p,'sb',0)} SB`
-    : `${L(p,'era','—')} ERA · ${L(p,'whip','—')} WHIP · ${L(p,'k',0)} K · ${L(p,'ip',0)} IP`;
+
+  // ---- MLB StatsAPI ----------------------------------------------------
+  // A traded player gets one row per club PLUS a combined row (numTeams set).
+  // Keep the combined row for the stat table so a mid-season move doesn't
+  // double-count, but use the per-club rows for position games.
+  const API = 'https://statsapi.mlb.com/api/v1/people/';
+  const cache = new Map();
+  function dedupe(splits) {
+    const by = new Map();
+    (splits || []).forEach(s => {
+      const cur = by.get(s.season);
+      if (!cur || (s.numTeams && !cur.numTeams)) by.set(s.season, s);
+    });
+    return [...by.values()].sort((a, b) => b.season - a.season);
+  }
+  function positions(splits) {
+    const career = new Map(), now = new Map();
+    (splits || []).forEach(s => {
+      if (s.numTeams) return;
+      const ab = s.position && s.position.abbreviation; if (!ab) return;
+      const g = +(s.stat && s.stat.games) || 0; if (!g) return;
+      career.set(ab, (career.get(ab) || 0) + g);
+      if (+s.season === +SEASON) now.set(ab, (now.get(ab) || 0) + g);
+    });
+    const fmt = m => [...m.entries()].sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v);
+    return { career: fmt(career), now: fmt(now) };
+  }
+  function detail(p) {
+    if (cache.has(p.id)) return cache.get(p.id);
+    const g = p.type === 'H' ? 'hitting' : 'pitching';
+    const j = u => fetch(u).then(r => r.ok ? r.json() : null).catch(() => null);
+    const pr = (async () => {
+      const [a, b] = await Promise.all([
+        j(API + p.id + '/stats?stats=yearByYear&group=' + g),
+        p.type === 'H' ? j(API + p.id + '/stats?stats=yearByYear&group=fielding') : null,
+      ]);
+      const sa = a && a.stats && a.stats[0] && a.stats[0].splits;
+      const sb = b && b.stats && b.stats[0] && b.stats[0].splits;
+      return { years: dedupe(sa).slice(0, YEARS), pos: positions(sb) };
+    })();
+    cache.set(p.id, pr);
+    return pr;
+  }
+
+  const HCOLS = [['G','gamesPlayed'],['PA','plateAppearances'],['AVG','avg'],['OBP','obp'],['SLG','slg'],
+    ['OPS','ops'],['HR','homeRuns'],['RBI','rbi'],['SB','stolenBases'],['BB','baseOnBalls'],['K','strikeOuts']];
+  const PCOLS = [['G','gamesPlayed'],['GS','gamesStarted'],['IP','inningsPitched'],['W','wins'],['L','losses'],
+    ['ERA','era'],['WHIP','whip'],['K','strikeOuts'],['BB','baseOnBalls'],['HR','homeRuns']];
+  function yearsTable(p, years) {
+    if (!years || !years.length) return '<div class="ppnote">No MLB seasons on file.</div>';
+    const cols = p.type === 'H' ? HCOLS : PCOLS;
+    const tm = s => s.numTeams ? s.numTeams + ' tms' : (s.team && s.team.name ? s.team.name.split(' ').pop() : '—');
+    return '<table class="ytab"><thead><tr><th>Yr</th><th>Tm</th>' +
+      cols.map(c => '<th>' + c[0] + '</th>').join('') + '</tr></thead><tbody>' +
+      years.map(s => '<tr' + (+s.season === +SEASON ? ' class="cur"' : '') + '>' +
+        '<td>' + String(s.season).slice(2) + '</td><td class="tm">' + BTD.esc(tm(s)) + '</td>' +
+        cols.map(c => '<td>' + BTD.esc(s.stat && s.stat[c[1]] != null ? s.stat[c[1]] : '—') + '</td>').join('') +
+        '</tr>').join('') + '</tbody></table>';
+  }
+  function posHTML(p, pos) {
+    if (p.type !== 'H') return '<div class="ppnote">Pitcher — ' + BTD.esc(p.pos || 'P') + '</div>';
+    if (!pos || (!pos.career.length && !pos.now.length)) return '<div class="ppnote">No fielding record on file.</div>';
+    const line = (lbl, arr) => arr.length
+      ? '<div class="wposrow"><b>' + lbl + '</b>' + arr.map(x => '<span class="chip">' + BTD.esc(x) + '</span>').join('') + '</div>'
+      : '';
+    return line(SEASON, pos.now) + line('Career', pos.career);
+  }
 
   const S = { f: 'all', q: '', sort: 'tier' };
   function card(o) {
     const p = find(o);
-    if (!p) return `<div class="card pcard pmiss"><div class="top"><div>` +
-      `<div class="nm">${BTD.esc(o.Player)}</div>` +
-      `<div class="meta">${BTD.esc(o.TierShort)} · not carried in the model data</div></div></div></div>`;
-    const meta = [p.team, p.pos, p.bt, p.age ? 'age ' + p.age : '',
-      p.ctrl != null ? p.ctrl + 'y ctrl' : '',
-      p.rem != null ? '~$' + p.rem.toFixed(1) + 'M owed' : ''].filter(Boolean).join(' · ');
-    return `<div class="card pcard">
-      <div class="top"><img class="face" loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">
-      <div><div class="nm"><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span></div>
-      <div class="meta">${BTD.esc(meta)}</div></div></div>
-      <div class="stats">${BTD.esc(statLine(p))}</div>
-      <div class="vals"><span>Trade value <b class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</b></span>
-      <span>Surplus <b>${p.sur != null ? '$' + p.sur.toFixed(1) + 'M' : '—'}</b></span></div>
-    </div>`;
+    if (!p) return '<div class="wcard wmiss"><div class="wname">' + BTD.esc(o.Player) + '</div>' +
+      '<div class="wmeta">' + BTD.esc(o.TierShort) + ' · not carried in the model data</div></div>';
+    const owed = p.rem != null ? '~$' + (+p.rem).toFixed(1) + 'M owed' + (p.salEst ? ' (est.)' : '') : '';
+    const bio = [p.team, p.pos, p.bt, p.age ? 'age ' + p.age : '',
+      p.ctrl != null ? p.ctrl + 'y control' : '',
+      p.salM != null ? '$' + (+p.salM).toFixed(1) + 'M/yr' : '', owed].filter(Boolean).join(' · ');
+    const awards = (p.awards || []).map(a =>
+      '<span class="chip awd">🏆 ' + (AW[a.t] || a.t) + ' ’' + String(a.s).slice(2) + '</span>').join('');
+    const vb = (l, v, cls) => v == null ? '' :
+      '<div class="wv"><span>' + l + '</span><b class="' + (cls || '') + '">' + v + '</b></div>';
+    return '<div class="wcard" data-pid="' + p.id + '">' +
+      '<div class="wtop"><img class="wface" loading="lazy" src="' + BTD.shot(p.id) + '" onerror="this.style.visibility=\'hidden\'">' +
+      '<div class="wid"><div class="wname"><span class="pn" data-pid="' + p.id + '">' + BTD.esc(p.name) + '</span>' +
+      BTD.badge(p) + '<span class="wtier">' + BTD.esc(o.TierShort) + '</span></div>' +
+      '<div class="wmeta">' + BTD.esc(bio) + '</div>' +
+      (awards ? '<div class="wawd">' + awards + '</div>' : '') + '</div></div>' +
+      // Trade value is deliberately omitted here — the model's numbers are
+      // still being evaluated, so this board shows scouting data only.
+      '<div class="wvals">' +
+        vb('WAR', p.war) + vb('Proj WAR', p.proj) +
+        vb('Def (FRV)', p.def != null ? (p.def > 0 ? '+' : '') + p.def : null) +
+        vb('IL · 4yr', p.ilDays != null ? p.ilDays + 'd / ' + (p.ilStints || 0) : null) +
+      '</div>' +
+      '<div class="wgrid"><div class="wleft">' +
+        '<div class="whd">Last ' + YEARS + ' seasons</div>' +
+        '<div class="wyears"><div class="ppload">Loading seasons…</div></div>' +
+        '<div class="whd">Positions played</div>' +
+        '<div class="wpos"><div class="ppload">Loading…</div></div>' +
+      '</div><div class="wright">' +
+        (BTD.barsHTML(p, poolAll) || '<div class="ppnote">No Statcast data on file.</div>') +
+      '</div></div></div>';
   }
+
+  let io = null;
+  function hydrate() {
+    if (io) io.disconnect();
+    if (!('IntersectionObserver' in window)) {
+      el.querySelectorAll('.wcard[data-pid]').forEach(fill);
+      return;
+    }
+    io = new IntersectionObserver(ents => ents.forEach(en => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target); fill(en.target);
+    }), { rootMargin: '400px' });
+    el.querySelectorAll('.wcard[data-pid]').forEach(n => io.observe(n));
+  }
+  async function fill(node) {
+    const p = byId.get(+node.dataset.pid); if (!p) return;
+    let d;
+    try { d = await detail(p); } catch (e) { d = { years: [], pos: null }; }
+    const y = node.querySelector('.wyears'), ps = node.querySelector('.wpos');
+    if (y) y.innerHTML = yearsTable(p, d.years);
+    if (ps) ps.innerHTML = posHTML(p, d.pos);
+  }
+
   const keep = o => {
     if (S.q && !String(o.Player).toLowerCase().includes(S.q)) return false;
     if (S.f === 'all') return true;
     const p = find(o); if (!p) return false;
     return S.f === 'H' ? p.type === 'H' : p.type !== 'H';
   };
-  const val = (o, k) => { const p = find(o); return p && p[k] != null ? p[k] : -1; };
+  // Missing values sort last in either direction, so an unmodeled name never
+  // jumps the queue just because the field is blank.
+  const val = (o, k, miss) => { const p = find(o); return p && p[k] != null ? +p[k] : miss; };
   function render() {
     const H = [];
     if (S.sort === 'tier') {
       tb.tiers.forEach(t => {
         const rows = tb.board.filter(o => o.Tier === t.key && keep(o));
         if (!rows.length) return;
-        H.push(`<div class="tierhd">${BTD.esc(t.label)}<span>${rows.length}</span></div>`);
-        H.push(`<div class="grid">${rows.map(card).join('')}</div>`);
+        H.push('<div class="tierhd">' + BTD.esc(t.label) + '<span>' + rows.length + '</span></div>');
+        H.push(rows.map(card).join(''));
       });
     } else {
+      const asc = S.sort === 'age';
       const rows = tb.board.filter(keep).sort((a, b) => S.sort === 'name'
         ? String(a.Player).localeCompare(String(b.Player))
-        : val(b, S.sort) - val(a, S.sort));
-      if (rows.length) H.push(`<div class="grid">${rows.map(card).join('')}</div>`);
+        : asc ? val(a, S.sort, 999) - val(b, S.sort, 999)
+              : val(b, S.sort, -1) - val(a, S.sort, -1));
+      H.push(rows.map(card).join(''));
     }
     el.innerHTML = H.join('') || '<div class="card">No picks match.</div>';
+    hydrate();
   }
   document.querySelectorAll('button[data-pf]').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('button[data-pf]').forEach(x => x.classList.remove('on'));
