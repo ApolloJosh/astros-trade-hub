@@ -54,8 +54,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Nacho Alvarez Jr. | Braves | 23 | SS | 240 | — | 19.3 |
 | Sam Antonacci | White Sox | 23 | LF | 352 | 55th | 75.8 |
 | Eury Pérez | Marlins | 23 | P | 291 | 58th | 67.9 |
-| Javier Sanoja | Marlins | 23 | 3B | 665 | 19th | 34.1 |
 | Joe Mack | Marlins | 23 | C | 208 | 63th | 55.4 |
+| Javier Sanoja | Marlins | 23 | 3B | 665 | 19th | 34.1 |
 | Ryan Waldschmidt | D-backs | 23 | CF | 158 | 45th | 48.5 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 196 | 55th | 48 |
 | Daylen Lile | Nationals | 23 | LF | 803 | 54th | 31.6 |
