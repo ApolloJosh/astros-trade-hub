@@ -61,6 +61,15 @@
   padding:4px 0 4px 9px;margin-top:9px}
 .tprot{font-size:11.5px;color:var(--muted);margin:6px 0 14px}
 .tprot b{color:var(--ink)}
+/* ---- ApolloJosh's Picks ---- */
+.tierhd{display:flex;align-items:center;gap:9px;font-family:var(--hd2);font-size:15px;
+  font-weight:800;letter-spacing:.01em;margin:22px 0 10px;padding-bottom:6px;
+  border-bottom:1px solid var(--line)}
+.tierhd:first-child{margin-top:4px}
+.tierhd span{font-family:inherit;font-size:11px;font-weight:700;color:var(--muted);
+  background:var(--chip,rgba(128,128,128,.14));border-radius:999px;padding:2px 8px}
+.pcard.pmiss{opacity:.5}
+.pcard.pmiss .nm{text-decoration:line-through;text-decoration-thickness:1px}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -71,6 +80,7 @@
 <div class="secbar">
   <button id="secBoard" class="on">Target Board</button>
   <button id="secDB">The Dana Brown Predictor</button>
+  <button id="secPicks">ApolloJosh's Picks</button>
 </div>
 
 <div id="board">
@@ -83,6 +93,15 @@
 </div>
 
 <div id="db" style="display:none"></div>
+
+<div id="picks" style="display:none">
+<div class="controls">
+  <button data-pf="all" class="on">All</button><button data-pf="H">Hitters</button><button data-pf="P">Pitchers</button>
+  <input id="pq" placeholder="Search…">
+  <select id="psort"><option value="tier">Sort: Tier order</option><option value="tv">Sort: Trade value</option><option value="sur">Sort: Surplus $</option><option value="name">Sort: Name</option></select>
+</div>
+<div id="picksbody"></div>
+</div>
 
 <p class="foot">Curated in Google Sheets · valued by the BTD model · Beyond the Diamond</p>
 <script src="assets/app.js"></script>
@@ -253,20 +272,100 @@ BTD.nav('fits');
   document.getElementById('db').innerHTML = '<div class="card">The predictor hit a snag: ' + BTD.esc(e && e.message || e) + '</div>';
 });
 
+// ---------- ApolloJosh's Picks ----------
+// A hand-curated board kept in data/target-board.json. The list is just names +
+// tiers; every stat shown here is pulled live from players.json, so these cards
+// stay in step with the rest of the site. Names that the model doesn't carry
+// still render — greyed, so the list always reads complete.
+(async () => {
+  const el = document.getElementById('picksbody');
+  let tb, pdoc;
+  try { [tb, pdoc] = await Promise.all([BTD.data('target-board'), BTD.data('players')]); }
+  catch (e) { el.innerHTML = '<div class="card">Picks list not loaded yet.</div>'; return; }
+
+  const idx = new Map();
+  (pdoc.players || []).forEach(p => idx.set(String(p.name).trim().toLowerCase(), p));
+  const find = o => {
+    for (const n of [o.Player, ...(o.Alt || [])]) {
+      const hit = idx.get(String(n).trim().toLowerCase());
+      if (hit) return hit;
+    }
+    return null;
+  };
+  const L = (p, k, d) => (p.line && p.line[k] != null ? p.line[k] : d);
+  const statLine = p => p.type === 'H'
+    ? `${L(p,'avg','—')} AVG · ${L(p,'ops','—')} OPS · ${L(p,'hr',0)} HR · ${L(p,'sb',0)} SB`
+    : `${L(p,'era','—')} ERA · ${L(p,'whip','—')} WHIP · ${L(p,'k',0)} K · ${L(p,'ip',0)} IP`;
+
+  const S = { f: 'all', q: '', sort: 'tier' };
+  function card(o) {
+    const p = find(o);
+    if (!p) return `<div class="card pcard pmiss"><div class="top"><div>` +
+      `<div class="nm">${BTD.esc(o.Player)}</div>` +
+      `<div class="meta">${BTD.esc(o.TierShort)} · not carried in the model data</div></div></div></div>`;
+    const meta = [p.team, p.pos, p.bt, p.age ? 'age ' + p.age : '',
+      p.ctrl != null ? p.ctrl + 'y ctrl' : '',
+      p.rem != null ? '~$' + p.rem.toFixed(1) + 'M owed' : ''].filter(Boolean).join(' · ');
+    return `<div class="card pcard">
+      <div class="top"><img class="face" loading="lazy" src="${BTD.shot(p.id)}" onerror="this.style.visibility='hidden'">
+      <div><div class="nm"><span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span></div>
+      <div class="meta">${BTD.esc(meta)}</div></div></div>
+      <div class="stats">${BTD.esc(statLine(p))}</div>
+      <div class="vals"><span>Trade value <b class="tv ${BTD.tvCls(p.tv)}">${BTD.pts(p.tv)}</b></span>
+      <span>Surplus <b>${p.sur != null ? '$' + p.sur.toFixed(1) + 'M' : '—'}</b></span></div>
+    </div>`;
+  }
+  const keep = o => {
+    if (S.q && !String(o.Player).toLowerCase().includes(S.q)) return false;
+    if (S.f === 'all') return true;
+    const p = find(o); if (!p) return false;
+    return S.f === 'H' ? p.type === 'H' : p.type !== 'H';
+  };
+  const val = (o, k) => { const p = find(o); return p && p[k] != null ? p[k] : -1; };
+  function render() {
+    const H = [];
+    if (S.sort === 'tier') {
+      tb.tiers.forEach(t => {
+        const rows = tb.board.filter(o => o.Tier === t.key && keep(o));
+        if (!rows.length) return;
+        H.push(`<div class="tierhd">${BTD.esc(t.label)}<span>${rows.length}</span></div>`);
+        H.push(`<div class="grid">${rows.map(card).join('')}</div>`);
+      });
+    } else {
+      const rows = tb.board.filter(keep).sort((a, b) => S.sort === 'name'
+        ? String(a.Player).localeCompare(String(b.Player))
+        : val(b, S.sort) - val(a, S.sort));
+      if (rows.length) H.push(`<div class="grid">${rows.map(card).join('')}</div>`);
+    }
+    el.innerHTML = H.join('') || '<div class="card">No picks match.</div>';
+  }
+  document.querySelectorAll('button[data-pf]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('button[data-pf]').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); S.f = b.dataset.pf; render();
+  }));
+  document.getElementById('pq').addEventListener('input', e => { S.q = e.target.value.toLowerCase(); render(); });
+  document.getElementById('psort').addEventListener('change', e => { S.sort = e.target.value; render(); });
+  render();
+})().catch(e => { document.getElementById('picksbody').innerHTML = '<div class="card">Picks hit a snag: ' + BTD.esc(e && e.message || e) + '</div>'; });
+
 // section switcher
 (function () {
-  const b = document.getElementById('secBoard'), d = document.getElementById('secDB');
-  const board = document.getElementById('board'), db = document.getElementById('db');
-  function show(which) {
-    const isDB = which === 'db';
-    db.style.display = isDB ? '' : 'none';
-    board.style.display = isDB ? 'none' : '';
-    d.classList.toggle('on', isDB); b.classList.toggle('on', !isDB);
-    history.replaceState(null, '', isDB ? '#predictor' : location.pathname);
+  const SEC = [
+    { btn: 'secBoard', pane: 'board', hash: '' },
+    { btn: 'secDB',    pane: 'db',    hash: '#predictor' },
+    { btn: 'secPicks', pane: 'picks', hash: '#picks' },
+  ];
+  function show(pane) {
+    SEC.forEach(s => {
+      const on = s.pane === pane;
+      document.getElementById(s.pane).style.display = on ? '' : 'none';
+      document.getElementById(s.btn).classList.toggle('on', on);
+      if (on) history.replaceState(null, '', s.hash || location.pathname);
+    });
   }
-  b.addEventListener('click', () => show('board'));
-  d.addEventListener('click', () => show('db'));
-  if (location.hash === '#predictor') show('db');
+  SEC.forEach(s => document.getElementById(s.btn).addEventListener('click', () => show(s.pane)));
+  const hit = SEC.find(s => s.hash && s.hash === location.hash);
+  if (hit) show(hit.pane);
 })();
 </script>
 </div></body></html>
