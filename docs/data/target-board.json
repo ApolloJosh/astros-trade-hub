@@ -1,570 +1,430 @@
 {
- "updated": "2026-07-31T14:43:01.941398Z",
- "season": 2026,
- "source": "Josh manual board, 2026-07-30",
+ "updated": "2026-07-31T15:15:27.588143Z",
+ "source": "Josh curated deadline target board",
  "tiers": [
   {
    "key": "crane",
-   "label": "Holy Sh*t",
-   "desc": "Jim Crane made the call",
-   "players": [
-    {
-     "name": "Mike Trout",
-     "team": "Angels",
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Divisional, absurd, exactly what this tier is for",
-     "verified": false
-    },
-    {
-     "name": "Byron Buxton",
-     "team": null,
-     "pos": "CF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Tarik Skubal",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Jackson Merrill",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    }
-   ]
+   "label": "Holy Sh*t \u2014 Jim Crane made the call",
+   "short": "Crane Call",
+   "order": 0
   },
   {
    "key": "hellyeah",
-   "label": "Hell Yeah",
-   "desc": "Real difference-makers",
-   "players": [
-    {
-     "name": "Luis Arraez",
-     "team": "Giants",
-     "pos": "2B",
-     "bt": "L/R",
-     "age": 29,
-     "ctrl": 0.5,
-     "tv": 59.0,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "Cole Ragans",
-     "team": "Royals",
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Controlled lefty starter, the pitching version of this tier",
-     "verified": false
-    },
-    {
-     "name": "Hunter Greene",
-     "team": "Reds",
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Front-line arm",
-     "verified": false
-    },
-    {
-     "name": "Jung Hoo Lee",
-     "team": "Giants",
-     "pos": "CF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Lefty CF, on-base fit",
-     "verified": false
-    },
-    {
-     "name": "Taylor Ward",
-     "team": "Angels",
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Angels need OF and YNG",
-     "verified": false
-    },
-    {
-     "name": "Heliot Ramos",
-     "team": "Giants",
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Bat-first corner OF",
-     "verified": false
-    },
-    {
-     "name": "Tyler Soderstrom",
-     "team": "Athletics",
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Lefty bat; filtered out of the predictor purely on control",
-     "verified": false
-    },
-    {
-     "name": "Logan Webb",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "George Springer",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Riley Greene",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Trevor Larnach",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Joe Ryan",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Casey Mize",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Wilyer Abreu",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Reid Detmers",
-     "team": null,
-     "pos": "P",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Michael King",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    }
-   ]
+   "label": "Hell Yeah \u2014 real difference-makers",
+   "short": "Hell Yeah",
+   "order": 1
   },
   {
    "key": "affordable",
    "label": "Affordable Impactors",
-   "desc": "Solid regulars that MIGHT be affordable",
-   "players": [
-    {
-     "name": "Jake McCarthy",
-     "team": "Rockies",
-     "pos": "CF",
-     "bt": "L/L",
-     "age": 28,
-     "ctrl": 2.5,
-     "tv": 66.3,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "Mickey Moniak",
-     "team": "Rockies",
-     "pos": "LF",
-     "bt": "L/R",
-     "age": 28,
-     "ctrl": 1.5,
-     "tv": 35.9,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "JJ Bleday",
-     "team": "Reds",
-     "pos": "LF",
-     "bt": "L/L",
-     "age": 28,
-     "ctrl": 2.5,
-     "tv": 30.3,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "Lane Thomas",
-     "team": "Royals",
-     "pos": "CF",
-     "bt": "R/R",
-     "age": 30,
-     "ctrl": 0.5,
-     "tv": 15.0,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "Nathaniel Lowe",
-     "team": "Reds",
-     "pos": "DH",
-     "bt": "L/R",
-     "age": 31,
-     "ctrl": 0.5,
-     "tv": 12.0,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "Lars Nootbaar",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Michael Wacha",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Wade Meckler",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Jose Siri",
-     "team": null,
-     "pos": "CF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Trevor Rogers",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Nathan Lukes",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Ryan Zeferjahn",
-     "team": null,
-     "pos": "RP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Jeremiah Estrada",
-     "team": null,
-     "pos": "RP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "JP Sears",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Gavin Sheets",
-     "team": null,
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Kody Clemens",
-     "team": null,
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Colton Cowser",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    }
-   ]
+   "short": "Affordable",
+   "order": 2
   },
   {
    "key": "bargain",
    "label": "Bargain Shopping",
-   "desc": "Cheap because they're bad this year",
-   "players": [
-    {
-     "name": "Daulton Varsho",
-     "team": "Blue Jays",
-     "pos": "CF",
-     "bt": "L/R",
-     "age": 30,
-     "ctrl": 0.5,
-     "tv": 10.0,
-     "note": "Model target",
-     "verified": true
-    },
-    {
-     "name": "Starling Marte",
-     "team": "Mets",
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Bench/DH depth",
-     "verified": false
-    },
-    {
-     "name": "Jeff McNeil",
-     "team": "Mets",
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Lefty utility",
-     "verified": false
-    },
-    {
-     "name": "Yusei Kikuchi",
-     "team": "Angels",
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "Brown has literally made this trade before",
-     "verified": false
-    },
-    {
-     "name": "Jorge Soler",
-     "team": null,
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Edouard Julien",
-     "team": null,
-     "pos": null,
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    }
-   ]
+   "short": "Bargain",
+   "order": 3
   },
   {
    "key": "notable",
    "label": "Notable Mentions",
-   "desc": "On the radar, not yet ranked",
-   "players": [
-    {
-     "name": "Jarren Duran",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Freddy Peralta",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Clay Holmes",
-     "team": null,
-     "pos": "P",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Lourdes Gurriel Jr.",
-     "team": null,
-     "pos": "OF",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    },
-    {
-     "name": "Max Scherzer",
-     "team": null,
-     "pos": "SP",
-     "bt": null,
-     "age": null,
-     "ctrl": null,
-     "tv": null,
-     "note": "",
-     "verified": false
-    }
+   "short": "Notable",
+   "order": 4
+  }
+ ],
+ "board": [
+  {
+   "Player": "Mike Trout",
+   "Tier": "crane",
+   "TierLabel": "Holy Sh*t \u2014 Jim Crane made the call",
+   "TierShort": "Crane Call",
+   "Order": 0,
+   "Alt": []
+  },
+  {
+   "Player": "Byron Buxton",
+   "Tier": "crane",
+   "TierLabel": "Holy Sh*t \u2014 Jim Crane made the call",
+   "TierShort": "Crane Call",
+   "Order": 0,
+   "Alt": []
+  },
+  {
+   "Player": "Tarik Skubal",
+   "Tier": "crane",
+   "TierLabel": "Holy Sh*t \u2014 Jim Crane made the call",
+   "TierShort": "Crane Call",
+   "Order": 0,
+   "Alt": []
+  },
+  {
+   "Player": "Jackson Merrill",
+   "Tier": "crane",
+   "TierLabel": "Holy Sh*t \u2014 Jim Crane made the call",
+   "TierShort": "Crane Call",
+   "Order": 0,
+   "Alt": []
+  },
+  {
+   "Player": "Luis Arraez",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Cole Ragans",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Hunter Greene",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Jung Hoo Lee",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Taylor Ward",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Heliot Ramos",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Tyler Soderstrom",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Logan Webb",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "George Springer",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Riley Greene",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Trevor Larnach",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Joe Ryan",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Casey Mize",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Wilyer Abreu",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Reid Detmers",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Michael King",
+   "Tier": "hellyeah",
+   "TierLabel": "Hell Yeah \u2014 real difference-makers",
+   "TierShort": "Hell Yeah",
+   "Order": 1,
+   "Alt": []
+  },
+  {
+   "Player": "Jake McCarthy",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Mickey Moniak",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "JJ Bleday",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": [
+    "J.J. Bleday"
    ]
+  },
+  {
+   "Player": "Nathaniel Lowe",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Lars Nootbaar",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Michael Wacha",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Wade Meckler",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Jose Siri",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Trevor Rogers",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Nathan Lukes",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Ryan Zeferjahn",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Jeremiah Estrada",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "JP Sears",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": [
+    "J.P. Sears",
+    "JP Sears"
+   ]
+  },
+  {
+   "Player": "Gavin Sheets",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Lane Thomas",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Kody Clemens",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Colton Cowser",
+   "Tier": "affordable",
+   "TierLabel": "Affordable Impactors",
+   "TierShort": "Affordable",
+   "Order": 2,
+   "Alt": []
+  },
+  {
+   "Player": "Daulton Varsho",
+   "Tier": "bargain",
+   "TierLabel": "Bargain Shopping",
+   "TierShort": "Bargain",
+   "Order": 3,
+   "Alt": []
+  },
+  {
+   "Player": "Starling Marte",
+   "Tier": "bargain",
+   "TierLabel": "Bargain Shopping",
+   "TierShort": "Bargain",
+   "Order": 3,
+   "Alt": []
+  },
+  {
+   "Player": "Jeff McNeil",
+   "Tier": "bargain",
+   "TierLabel": "Bargain Shopping",
+   "TierShort": "Bargain",
+   "Order": 3,
+   "Alt": []
+  },
+  {
+   "Player": "Yusei Kikuchi",
+   "Tier": "bargain",
+   "TierLabel": "Bargain Shopping",
+   "TierShort": "Bargain",
+   "Order": 3,
+   "Alt": []
+  },
+  {
+   "Player": "Jorge Soler",
+   "Tier": "bargain",
+   "TierLabel": "Bargain Shopping",
+   "TierShort": "Bargain",
+   "Order": 3,
+   "Alt": []
+  },
+  {
+   "Player": "Edouard Julien",
+   "Tier": "bargain",
+   "TierLabel": "Bargain Shopping",
+   "TierShort": "Bargain",
+   "Order": 3,
+   "Alt": []
+  },
+  {
+   "Player": "Jarren Duran",
+   "Tier": "notable",
+   "TierLabel": "Notable Mentions",
+   "TierShort": "Notable",
+   "Order": 4,
+   "Alt": []
+  },
+  {
+   "Player": "Freddy Peralta",
+   "Tier": "notable",
+   "TierLabel": "Notable Mentions",
+   "TierShort": "Notable",
+   "Order": 4,
+   "Alt": []
+  },
+  {
+   "Player": "Clay Holmes",
+   "Tier": "notable",
+   "TierLabel": "Notable Mentions",
+   "TierShort": "Notable",
+   "Order": 4,
+   "Alt": []
+  },
+  {
+   "Player": "Lourdes Gurriel Jr.",
+   "Tier": "notable",
+   "TierLabel": "Notable Mentions",
+   "TierShort": "Notable",
+   "Order": 4,
+   "Alt": [
+    "Lourdes Gurriel Jr",
+    "Lourdes Gurriel"
+   ]
+  },
+  {
+   "Player": "Max Scherzer",
+   "Tier": "notable",
+   "TierLabel": "Notable Mentions",
+   "TierShort": "Notable",
+   "Order": 4,
+   "Alt": []
   }
  ]
 }
