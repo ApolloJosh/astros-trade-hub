@@ -259,5 +259,5 @@ window.BTD = (function () {
     const n = e.target.closest('.pn');
     if (n && n.dataset.pid) { e.stopPropagation(); e.preventDefault(); openPlayer(+n.dataset.pid); }
   }, true);
-  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, fanTrades, fanData, fanWanted, mergeWanted, FAN_URL };
+  return { data, shot, logo, esc, pts, r1, r2, r3, tvCls, money, badge, statLine, statHTML, nav, openPlayer, pool, barsHTML, savantColor, fanTrades, fanData, fanWanted, mergeWanted, FAN_URL };
 })();
