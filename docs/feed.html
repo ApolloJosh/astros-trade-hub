@@ -41,6 +41,36 @@
 .rgo{flex:0 0 auto;font-size:17px;color:var(--muted)}
 .rnote{font-size:11.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--card-line);
   padding:4px 0 4px 9px;margin:14px 0 2px}
+.wholine{font-family:var(--hd2);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--card-line)}
+.tw{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:13px 15px;margin-bottom:11px}
+.twhd{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.twhd .rmono{width:34px;height:34px;font-size:12px}
+.twwho{min-width:0;flex:1}
+.twname{font-family:var(--hd2);font-weight:800;font-size:13.5px;line-height:1.15}
+.twbeat{font-size:11px;color:var(--muted)}
+.twopen{font-size:11.5px;color:var(--accent);font-weight:700;text-decoration:none;flex:0 0 auto}
+.twbody blockquote{margin:0;font-size:14px;line-height:1.5}
+.twbody blockquote p{margin:0 0 6px}
+.twbody a{color:var(--accent)}
+.twempty{background:var(--card);border:var(--card-line-w) dashed var(--card-line);border-radius:var(--radius);
+  padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+/* ---- League news ---- */
+.nw{display:block;text-decoration:none;color:inherit;background:var(--card);
+  border:var(--card-line-w) solid var(--card-line);border-left:3px solid var(--card-line);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px;margin-bottom:10px;
+  transition:border-left-color .12s ease,transform .12s ease}
+.nw:hover{transform:translateY(-1px);border-left-color:var(--accent)}
+.nw.hou{border-left-color:var(--accent)}
+.nwhd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.nwtitle{font-family:var(--hd2);font-weight:800;font-size:14.5px;line-height:1.25}
+.nwsum{font-size:13px;line-height:1.5;color:var(--ink)}
+.nwmeta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:6px}
+.nwmeta b{color:var(--accent);font-weight:700}
+.nwchip{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  background:var(--accent);color:#fff;border-radius:999px;padding:1px 7px;flex:0 0 auto}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -51,11 +81,21 @@
 <div class="secbar">
   <button id="secFeed" class="on">Trade Feed</button>
   <button id="secReps">Reporters Feed</button>
+  <button id="secNews">League News</button>
+</div>
+
+<div id="news" style="display:none">
+  <div class="controls" id="newsfilter"></div>
+  <div id="newslist"></div>
+  <p class="rnote" id="newsnote"></p>
 </div>
 
 <div id="feed"></div>
 
 <div id="reps" style="display:none">
+  <div class="controls" id="repfilter"></div>
+  <div id="reptweets"></div>
+  <div class="wholine">Follow them on X</div>
   <div class="rgrid">
     <a class="rep" href="https://x.com/brianmctaggart" target="_blank" rel="noopener">
       <span class="rmono">BM</span>
@@ -87,8 +127,9 @@
       <span class="rhandle">@feinsand</span>
       <div class="rbeat">MLB.com · national insider</div></span><span class="rgo">↗</span></a>
   </div>
-  <p class="rnote">Opens on X in a new tab. X stopped rendering embedded profile timelines for
-  logged-out visitors, so these are direct links rather than live feeds.</p>
+  <p class="rnote">Tweets are pulled through X's official oEmbed endpoint, so the text above is
+  the real post. X no longer renders live profile timelines for logged-out visitors, which is
+  why the feed is curated rather than automatic.</p>
 </div>
 
 <p class="foot">Values from the BTD model at time of refresh · Beyond the Diamond</p>
@@ -129,11 +170,102 @@ BTD.nav('feed');
   }).join('');
 })().catch(e => { document.getElementById('feed').innerHTML = '<div class="card">No feed data yet — run the pipeline.</div>'; });
 
+// ---------- Reporters Feed ----------
+// reporters.json is built by src/fetch-tweets.js: curated tweet URLs resolved
+// through X's oEmbed endpoint, so the markup below is X's own and needs no
+// third-party script on the page.
+(async () => {
+  const wrap = document.getElementById('reptweets'), bar = document.getElementById('repfilter');
+  let d;
+  try { d = await BTD.data('reporters'); } catch (e) { d = null; }
+  const tweets = (d && d.tweets) || [], reps = (d && d.reporters) || {};
+  if (!tweets.length) {
+    wrap.innerHTML = '<div class="twempty">No tweets pinned yet — add URLs to ' +
+      '<code>data-sources/reporter-tweets.json</code> and they appear on the next refresh.</div>';
+    return;
+  }
+  let filter = 'all';
+  const counts = tweets.reduce((a, t) => { a[t.handle] = (a[t.handle] || 0) + 1; return a; }, {});
+  function chips() {
+    const btn = (v, label, n) =>
+      `<button data-rf="${v}"${filter === v ? ' class="on"' : ''}>${BTD.esc(label)}${n ? ' ' + n : ''}</button>`;
+    bar.innerHTML = btn('all', 'All', tweets.length) +
+      Object.keys(reps).filter(h => counts[h])
+        .map(h => btn(h, (reps[h].name || h).split(' ').pop(), counts[h])).join('');
+    bar.querySelectorAll('button[data-rf]').forEach(b =>
+      b.addEventListener('click', () => { filter = b.dataset.rf; chips(); render(); }));
+  }
+  function render() {
+    const list = tweets.filter(t => filter === 'all' || t.handle === filter);
+    wrap.innerHTML = list.map(t => {
+      const r = reps[t.handle] || {};
+      return `<div class="tw"><div class="twhd">` +
+        `<span class="rmono${r.national ? '' : ''}" style="${r.national ? 'background:var(--accent)' : ''}">` +
+        `${BTD.esc(r.mono || t.handle.slice(0, 2).toUpperCase())}</span>` +
+        `<span class="twwho"><span class="twname">${BTD.esc(r.name || t.author)}</span>` +
+        `<div class="twbeat">@${BTD.esc(t.handle)}${r.beat ? ' · ' + BTD.esc(r.beat) : ''}</div></span>` +
+        `<a class="twopen" href="${BTD.esc(t.url)}" target="_blank" rel="noopener">Open ↗</a></div>` +
+        `<div class="twbody">${t.html}</div></div>`;
+    }).join('') || '<div class="twempty">Nothing from this reporter yet.</div>';
+  }
+  chips(); render();
+})().catch(() => {});
+
+// ---------- League news ----------
+// news.json is built by src/fetch-news.js. Summaries are ESPN's own excerpts,
+// capped at three sentences; a feed whose newest item is stale is withheld at
+// build time, so anything shown here is current by construction.
+(async () => {
+  const list = document.getElementById('newslist'), bar = document.getElementById('newsfilter'),
+        note = document.getElementById('newsnote');
+  let d;
+  try { d = await BTD.data('news'); } catch (e) { d = null; }
+  const items = (d && d.items) || [];
+  if (!items.length) {
+    const dead = (d && d.sources || []).filter(s => s.stale);
+    list.innerHTML = '<div class="twempty">No current news on file.' +
+      (dead.length ? ' ' + BTD.esc(dead.map(s => s.name).join(', ')) +
+        ' came back stale and ' + (dead.length > 1 ? 'were' : 'was') + ' withheld.' : '') + '</div>';
+    return;
+  }
+  const ago = iso => {
+    if (!iso) return '';
+    const h = (Date.now() - Date.parse(iso)) / 3.6e6;
+    if (h < 1) return 'just now';
+    if (h < 24) return Math.round(h) + 'h ago';
+    return Math.round(h / 24) + 'd ago';
+  };
+  let filter = 'all';
+  const nHou = items.filter(i => i.astros).length;
+  function chips() {
+    const btn = (v, l, n) => `<button data-nf="${v}"${filter === v ? ' class="on"' : ''}>${l}${n ? ' ' + n : ''}</button>`;
+    bar.innerHTML = btn('all', 'All', items.length) + (nHou ? btn('hou', 'Astros', nHou) : '');
+    bar.querySelectorAll('button[data-nf]').forEach(b =>
+      b.addEventListener('click', () => { filter = b.dataset.nf; chips(); render(); }));
+  }
+  function render() {
+    const rows = items.filter(i => filter === 'all' || i.astros);
+    list.innerHTML = rows.map(i =>
+      `<a class="nw${i.astros ? ' hou' : ''}" href="${BTD.esc(i.link)}" target="_blank" rel="noopener">` +
+      `<div class="nwhd"><span class="nwtitle">${BTD.esc(i.title)}</span>` +
+      `${i.astros ? '<span class="nwchip">Astros</span>' : ''}</div>` +
+      (i.summary ? `<div class="nwsum">${BTD.esc(i.summary)}</div>` : '') +
+      `<div class="nwmeta"><b>${BTD.esc(i.source)}</b>` +
+      `${i.author ? '<span>' + BTD.esc(i.author) + '</span>' : ''}` +
+      `<span>${BTD.esc(ago(i.date))}</span></div></a>`).join('');
+  }
+  const live = (d.sources || []).filter(s => !s.stale).map(s => s.name);
+  note.textContent = `Headlines and summaries from ${live.join(', ') || 'the wire'}, linking back to the ` +
+    `original reporting. Feeds older than ${d.maxAgeHours}h are withheld automatically.`;
+  chips(); render();
+})().catch(() => {});
+
 // section switcher
 (function () {
   const SEC = [
     { btn: 'secFeed', pane: 'feed', hash: '' },
     { btn: 'secReps', pane: 'reps', hash: '#reporters' },
+    { btn: 'secNews', pane: 'news', hash: '#news' },
   ];
   function show(pane) {
     SEC.forEach(s => {
