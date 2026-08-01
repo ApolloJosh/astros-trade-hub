@@ -41,6 +41,14 @@ const tag = (xml, name) => {
   const m = xml.match(new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${name}>`, 'i'));
   return m ? decode(m[1]) : null;
 };
+// MLB.com ships artwork as a self-closing <image href="…"/>, which the tag
+// matcher above can't see; others use <enclosure url="…" type="image/*">.
+const imageOf = xml => {
+  const img = xml.match(/<image[^>]*\shref=["']([^"']+)["']/i);
+  if (img) return img[1];
+  const enc = xml.match(/<enclosure[^>]*\surl=["']([^"']+)["'][^>]*type=["']image\//i);
+  return enc ? enc[1] : null;
+};
 
 // ESPN truncates some titles with a trailing ellipsis; the description carries
 // the real substance, so that's what gets trimmed to sentence count.
@@ -72,13 +80,16 @@ async function pull(feed) {
     if (!title || !link) continue;
     const pub = tag(b, 'pubDate');
     const ts = pub ? Date.parse(pub) : NaN;
-    const summary = distill(tag(b, 'description'));
+    // MLB.com leaves <description> off many items but repeats the standfirst
+    // in <content:encoded>, so fall back to that before giving up.
+    const summary = distill(tag(b, 'description') || tag(b, 'content:encoded'));
     items.push({
       title, link, source: feed.name,
       author: tag(b, 'dc:creator') || tag(b, 'creator') || null,
       date: isNaN(ts) ? null : new Date(ts).toISOString(),
       ts: isNaN(ts) ? 0 : ts,
       summary,
+      image: imageOf(b) || undefined,
       astros: HOU.test(title + ' ' + summary) || undefined,
     });
   }
