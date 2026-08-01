@@ -55,12 +55,12 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Nacho Alvarez Jr. | Braves | 23 | SS | 240 | — | 19.4 |
 | Sam Antonacci | White Sox | 23 | LF | 360 | 55th | 71.7 |
 | Eury Pérez | Marlins | 23 | P | 291 | 58th | 67.8 |
-| Joe Mack | Marlins | 23 | C | 212 | 65th | 60.7 |
 | Javier Sanoja | Marlins | 23 | 3B | 670 | 20th | 40.6 |
+| Joe Mack | Marlins | 23 | C | 212 | 65th | 60.7 |
 | Ryan Waldschmidt | D-backs | 23 | CF | 161 | 44th | 54.4 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 198 | 53th | 44.1 |
 | Daylen Lile | Nationals | 23 | LF | 807 | 52th | 30.5 |
-| Carson Benge | Mets | 23 | RF | 437 | 67th | 37.6 |
+| Carson Benge | Mets | 23 | RF | 438 | 67th | 37 |
 | Darell Hernaiz | Athletics | 24 | SS | 466 | 9th | 7.8 |
 | Joey Estes | Athletics | 24 | P | 153 | — | 3.2 |
 | Jacob Gonzalez | Pirates | 24 | SS | 133 | 47th | 31.1 |
@@ -74,7 +74,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Andrew Morris | Twins | 24 | P | 52 | 72th | 52.3 |
 | Anthony Molina | Braves | 24 | P | 99 | — | 3.8 |
 | Drew Romo | White Sox | 24 | C | 203 | 16th | 3.9 |
-| Grant Taylor | White Sox | 24 | P | 91 | 74th | 73.4 |
+| Grant Taylor | White Sox | 24 | P | 91 | 74th | 73.3 |
 | Agustín Ramírez | Marlins | 24 | C | 714 | 39th | 51.8 |
 | Angel Chivilli | Yankees | 24 | P | 105 | — | 8.8 |
 | José Fermin | Angels | 24 | P | 71 | 30th | 29.6 |
