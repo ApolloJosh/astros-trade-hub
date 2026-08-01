@@ -47,12 +47,26 @@ jobs:
       - name: Refresh trade feed
         run: node src/transactions.js
 
+      # Picks up any tweet URLs pasted into data-sources/reporter-tweets.json.
+      # Already-resolved tweets come from cache, so this is one request per new
+      # url — cheap enough to run on the 5-minute deadline-day cadence.
+      - name: Refresh reporters feed
+        continue-on-error: true
+        run: node src/fetch-tweets.js
+
+      # Cheap (one request per feed) and stale feeds are withheld by the
+      # fetcher itself, so this is safe to run on the deadline-day cadence.
+      - name: Refresh league news
+        continue-on-error: true
+        run: node src/fetch-news.js
+
       - name: Commit if the feed actually moved
         id: commit
         run: |
           git config user.name trade-hub-bot
           git config user.email actions@github.com
-          git add docs/data/feed.json docs/data/traded.json docs/data/players.json || true
+          git add docs/data/feed.json docs/data/traded.json docs/data/players.json \
+                  docs/data/reporters.json docs/data/news.json || true
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No new transactions — skipping publish."
