@@ -7,5 +7,7 @@
     "bnightengale": { "name": "Bob Nightengale", "beat": "USA Today · national columnist", "mono": "BN", "national": true },
     "feinsand": { "name": "Mark Feinsand", "beat": "MLB.com · national insider", "mono": "MF", "national": true }
   },
-  "tweets": [https://x.com/JeffPassan/status/2083617699473543462]
+  "tweets": ["feeds": [
+  { "name": "Passan", "https://x.com/JeffPassan/status/2083617699473543462": "https://www.espn.com/espn/rss/mlb/news" }
+]]
 }
