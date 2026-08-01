@@ -1,13 +1,13 @@
 {
-  "_note": "Reporters Feed. Paste tweet URLs into `tweets` — newest sort themselves to the top automatically (tweet IDs are time-ordered), so order here doesn't matter. Only URLs from handles listed in `reporters` are accepted; anything else is skipped. During the deadline the feed workflow runs every 5 minutes, so a pasted URL is live within minutes.",
+  "_note": "Reporters Feed. `feed` is an rss.app bridge over Josh's X List (@ApolloJosh1/MLB Reporters), which is what makes this automatic — X itself no longer renders profile or list timelines for logged-out visitors. `reporters` supplies display names and beats, matched on the handle in dc:creator; anyone retweeted into the list who isn't listed here still shows, using their handle. Add a reporter to the X List and they appear here on the next refresh, no code change.",
+  "feed": "https://rss.app/feeds/Z7j5ciJc3CTEv3Ak.xml",
+  "maxItems": 60,
+  "maxAgeHours": 72,
   "reporters": {
     "brianmctaggart": { "name": "Brian McTaggart", "beat": "MLB.com · Astros beat", "mono": "BM", "national": false },
     "chandler_rome": { "name": "Chandler Rome", "beat": "The Athletic · Astros beat", "mono": "CR", "national": false },
     "jeffpassan": { "name": "Jeff Passan", "beat": "ESPN · national insider", "mono": "JP", "national": true },
     "bnightengale": { "name": "Bob Nightengale", "beat": "USA Today · national columnist", "mono": "BN", "national": true },
     "feinsand": { "name": "Mark Feinsand", "beat": "MLB.com · national insider", "mono": "MF", "national": true }
-  },
-  "tweets": ["feeds": [
-  { "name": "Passan", "https://x.com/JeffPassan/status/2083617699473543462": "https://www.espn.com/espn/rss/mlb/news" }
-]]
+  }
 }
