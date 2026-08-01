@@ -344,6 +344,20 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
     // you must pay someone to absorb (see McCullers to Milwaukee). Below zero
     // we compress, so a bad contract is a drag without being a black hole.
     if (raw < 0) raw = -Math.sqrt(-raw) * 3;
+    // WIN-NOW PREMIUM. Surplus value says a half-season rental is worth almost
+    // nothing — two months of production minus two months of salary. But the
+    // deadline market says otherwise: contenders hand over real prospects for
+    // exactly these players, because a pennant race doesn't care about 2028.
+    // Scaled by how short the control is, and only ever applied to a player who
+    // already has positive value (it must never rescue a bad contract).
+    const rt = t.rental;
+    if (rt && raw >= (rt.minTv != null ? rt.minTv : 2)) {
+      const c = toNum(sv.ctrl, 3);
+      if (c > 0 && c <= rt.ctrlMax) {
+        const shortness = clamp(1 - c / rt.ctrlMax, 0, 1);   // 1.0 at zero control
+        raw *= 1 + (rt.mult - 1) * shortness;
+      }
+    }
     statTV = clamp(raw, t.min != null ? t.min : 1, t.max);
   }
   if (prospect) {
@@ -366,6 +380,16 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
       const a100 = interp(t.top100Anchors, top100);
       anchor = anchor == null ? a100 : Math.max(anchor, a100);
     }
+    // PERFORMANCE NUDGE. Anchors above are pure pedigree — where the lists rank
+    // him. That's blind to the season he's actually having: a AAA arm at the
+    // 90th percentile of his level and one at the 30th were carrying identical
+    // value. sv.psScore comes from milb.json (percentiles computed within
+    // level). Deliberately a tilt, not a takeover — the lists still lead.
+    const pa = t.psAdj;
+    if (anchor != null && pa && sv && sv.psScore != null) {
+      const ref = pa.refScore != null ? pa.refScore : 50;
+      anchor *= clamp(1 + pa.k * (toNum(sv.psScore, ref) - ref) / ref, pa.min, pa.max);
+    }
     if (anchor != null) {
       const s = (statTV == null) ? anchor : Math.min(statTV, t.prospectCapMult * anchor);
       return r1(clamp(t.prospectBlend * anchor + (1 - t.prospectBlend) * s, 1, t.max));
@@ -380,7 +404,14 @@ function tradeValue2(sv, base, pitcher, age, rank, prospect, il, top100) {
       let cap = t.unrankedProspectCap || 12;
       Object.keys(caps).forEach(k => { if (k.toUpperCase() === lvl) cap = caps[k]; });
       const fl = t.unrankedFloorFrac != null ? t.unrankedFloorFrac : 0.18;
-      const perf = clamp((sv && sv.proj || 0) / (t.unrankedRefWar || 2), 0, 1);
+      let perf = clamp((sv && sv.proj || 0) / (t.unrankedRefWar || 2), 0, 1);
+      // No pedigree to lean on here, so how he's actually pitching or hitting
+      // against his own level is the best signal available — arguably better
+      // than for ranked guys, where the lists already carry information.
+      if (sv && sv.psScore != null) {
+        const ref = (t.psAdj && t.psAdj.refScore != null) ? t.psAdj.refScore : 50;
+        perf = clamp(perf * 0.5 + clamp(toNum(sv.psScore, ref) / 100, 0, 1) * 0.5, 0, 1);
+      }
       const ceiling = cap * (fl + (1 - fl) * perf);
       return statTV == null ? r1(ceiling) : r1(clamp(Math.min(statTV, ceiling), 0.5, t.max));
     }

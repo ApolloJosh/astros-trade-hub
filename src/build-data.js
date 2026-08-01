@@ -41,6 +41,10 @@ const SC = (fs.existsSync(scPath) ? JSON.parse(fs.readFileSync(scPath, 'utf8')) 
 
 const defPath = path.join(__dirname, '..', 'data-sources', 'defense.json');
 const DEF = (fs.existsSync(defPath) ? JSON.parse(fs.readFileSync(defPath, 'utf8')) : { players: {} }).players || {};
+// Minor league percentiles (fetch-milb.js). Runs earlier in the build, so a
+// prospect's own performance can tilt his pedigree anchor. Absent = no tilt.
+const milbPath = path.join(__dirname, '..', 'docs', 'data', 'milb.json');
+const MILB = (fs.existsSync(milbPath) ? JSON.parse(fs.readFileSync(milbPath, 'utf8')) : { players: {} }).players || {};
 // Manual value overrides — Josh's eye test, applied last.
 const vmPath = path.join(__dirname, '..', 'data-sources', 'value-manual.json');
 let VMAN = [];
@@ -237,6 +241,9 @@ async function valuePlayer(p, lg) {
     if (prospect) {      // farm-system context for prospect anchors
       sv.farmRank = FARM_RANK_BY_TEAM[p.teamId] || null;
       sv.tier = farmTier(p.name);
+      // How he's actually performing, ranked within his own level (milb.json).
+      const ms = MILB[p.id];
+      if (ms && ms.score != null) sv.psScore = ms.score;
     } else {
       // Graduated: pedigree no longer appears in any ranking list, so pull it
       // from the permanent record and let the engine hold a fading floor.

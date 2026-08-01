@@ -15,6 +15,12 @@ const E = require('./engine.js');
 const CFG = require('../config.json');
 
 const OUT = path.join(__dirname, '..', 'docs', 'data');
+// Stated club needs, used to explain why a lopsided deal still made sense.
+const needsPath = path.join(OUT, 'team-needs.json');
+const NEEDS = (() => {
+  try { const n = JSON.parse(fs.readFileSync(needsPath, 'utf8')); return n.teams || n; }
+  catch (e) { return {}; }
+})();
 const cashPath = path.join(__dirname, '..', 'data-sources', 'cash-manual.json');
 const CASH = fs.existsSync(cashPath) ? (JSON.parse(fs.readFileSync(cashPath, 'utf8')).entries || []) : [];
 
@@ -37,13 +43,53 @@ function groupTrades(txs) {
   return [...groups.values()].filter(g => g.sides.size >= 2);
 }
 
-function verdictFor(ratio, dump) {
+// Why a trade came out uneven on our numbers. Plenty of real trades ARE
+// lopsided by surplus value and still make sense: clubs value players
+// differently, they bet on development, and a team in a race will pay over the
+// odds for the piece it needs. A bare "Lopsided" implies someone got fleeced,
+// which is usually the wrong read — so we say what the shape of the deal was.
+function reasonsFor(sides, teamNeeds) {
+  const R = [];
+  const heavy = sides[0], light = sides[sides.length - 1];
+  const all = s => (s && s.players) || [];
+  // Absorbing a negative-value contract to land the player they wanted.
+  const absorbed = all(heavy).filter(p => p.tv != null && p.tv < 0);
+  if (absorbed.length) {
+    R.push(`taking on ${absorbed.length > 1 ? 'bad contracts' : `${absorbed[0].name}'s contract`} to get the player they wanted`);
+  }
+  // A rental: almost no surplus left, but a pennant race doesn't care.
+  const rentals = all(light).concat(all(heavy)).filter(p => p.ctrl != null && p.ctrl <= 1 && p.tv != null && p.tv > 0 && !p.prospect);
+  if (rentals.length) R.push(`renting ${rentals[0].name} for the stretch run`);
+  // Prospect-heavy return = a bet on development, not on this season.
+  const pros = all(light).filter(p => p.prospect);
+  if (pros.length && pros.length === all(light).length && all(light).length) {
+    R.push('betting on prospects who have not proven it yet');
+  }
+  // Filling a stated need is worth a premium the model does not price.
+  const need = teamNeeds && teamNeeds[heavy.team];
+  if (need && need.length) {
+    const got = all(heavy).map(p => String(p.pos || ''));
+    const hit = need.find(n => got.some(pos =>
+      n === pos || (n === 'OF' && /LF|CF|RF|OF/.test(pos)) || (n === 'SP' && /^S?P$/.test(pos)) ||
+      (n === 'RP' && /^R?P$/.test(pos)) || (n === 'BAT' && pos && !/P$/.test(pos))));
+    if (hit) R.push(`fills a stated need at ${hit}`);
+  }
+  return R;
+}
+
+function verdictFor(ratio, dump, sides, teamNeeds) {
+  const why = sides ? reasonsFor(sides, teamNeeds) : [];
+  const tag = (label, cls) => {
+    const v = { label, cls };
+    if (why.length) { v.why = why; v.detail = `${label} — ${why.join('; ')}`; }
+    return v;
+  };
   // One side taking on negative value = a salary dump, not a talent swap.
-  if (dump) return { label: 'Salary dump', cls: 'edge' };
+  if (dump) return tag('Salary dump', 'edge');
   if (ratio == null) return { label: 'Unvalued', cls: 'na' };
-  if (ratio >= 0.9 && ratio <= 1.25) return { label: 'Balanced', cls: 'fair' };
-  if ((ratio >= 0.6 && ratio < 0.9) || (ratio > 1.25 && ratio <= 1.6)) return { label: 'Slight edge', cls: 'edge' };
-  return { label: 'Lopsided', cls: 'lop' };
+  if (ratio >= 0.9 && ratio <= 1.25) return tag('Balanced', 'fair');
+  if ((ratio >= 0.6 && ratio < 0.9) || (ratio > 1.25 && ratio <= 1.6)) return tag('Slight edge', 'edge');
+  return tag('Lopsided', 'lop');
 }
 
 function cashFor(g, side) {
@@ -145,6 +191,7 @@ async function main() {
           age: v ? v.age : undefined, bt: v ? v.bt : undefined,
           level: v && v.prospect ? v.topLevel : undefined,
           orgRank: v ? v.orgRank : undefined, top100: v ? v.top100 : undefined,
+          ctrl: v ? v.ctrl : undefined,   // lets the verdict spot a rental
           il: v ? v.il : undefined,
           owed: bigDeal ? v.rem : undefined,
           prospect: v ? !!v.prospect : undefined, crude: v && v.crude || undefined });
@@ -159,7 +206,8 @@ async function main() {
     const fullCover = sides.every(x => x.coverage >= 0.99 && x.players.length);
     const dump = fullCover && sides.some(x => x.total <= 0);
     const ratio = fullCover && sides[1].total > 0 ? Math.round(sides[0].total / sides[1].total * 100) / 100 : null;
-    feed.push({ date: g.date, desc: g.desc, sides, ratio, dump: dump || undefined, verdict: verdictFor(ratio, dump),
+    feed.push({ date: g.date, desc: g.desc, sides, ratio, dump: dump || undefined,
+      verdict: verdictFor(ratio, dump, sides, NEEDS),
       cashUnknown: g.cashHint && !sides.some(x => x.cashM != null) || undefined });
   }
   feed.sort((a, b) => b.date.localeCompare(a.date));
