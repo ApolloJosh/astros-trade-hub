@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-01T12:06:13.950Z",
+ "updated": "2026-08-01T19:54:21.534Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -334,6 +334,15 @@
     "control": 5.5,
     "salaryM": 0.079,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Luke Murphy",
+    "key": "lukemurphy",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.247,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -4394,12 +4403,21 @@
     "exactFA": true
    },
    {
+    "name": "Max Clark",
+    "key": "maxclark",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.246,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Trei Cruz",
     "key": "treicruz",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.079,
-    "remM": 0,
+    "salaryM": 0.112,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -4412,21 +4430,12 @@
     "exactFA": false
    },
    {
-    "name": "Andre Granillo",
-    "key": "andregranillo",
-    "svc": 0.076,
-    "control": 5.5,
-    "salaryM": 0.053,
-    "remM": 0,
-    "exactFA": false
-   },
-   {
     "name": "Brenan Hanifee",
     "key": "brenanhanifee",
     "svc": 1.069,
     "control": 4.5,
-    "salaryM": 0.556,
-    "remM": 0.3,
+    "salaryM": 0.367,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -5723,6 +5732,15 @@
     "exactFA": false
    },
    {
+    "name": "Cole Irvin",
+    "key": "coleirvin",
+    "svc": 3.083,
+    "control": 2.5,
+    "salaryM": 0.394,
+    "remM": 0.2,
+    "exactFA": false
+   },
+   {
     "name": "Hyeseong Kim",
     "key": "hyeseongkim",
     "svc": 0.149,
@@ -5748,15 +5766,6 @@
     "salaryM": 3.129,
     "remM": 1.6,
     "exactFA": true
-   },
-   {
-    "name": "Chayce McDermott",
-    "key": "chaycemcdermott",
-    "svc": 0.056,
-    "control": 5.5,
-    "salaryM": 0.138,
-    "remM": 0.1,
-    "exactFA": false
    },
    {
     "name": "Wyatt Mills",
@@ -5792,6 +5801,15 @@
     "control": 5.5,
     "salaryM": 0.19,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Chayce McDermott",
+    "key": "chaycemcdermott",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.093,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -7358,6 +7376,15 @@
     "exactFA": false
    },
    {
+    "name": "Jonathan Ornelas",
+    "key": "jonathanornelas",
+    "svc": 0.092,
+    "control": 5.5,
+    "salaryM": 0.246,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Jack Perkins",
     "key": "jackperkins",
     "svc": 0.099,
@@ -7380,8 +7407,8 @@
     "key": "colbythomas",
     "svc": 0.079,
     "control": 5.5,
-    "salaryM": 0.688,
-    "remM": 0.3,
+    "salaryM": 0.493,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -7432,9 +7459,9 @@
    {
     "name": "Chen Zhong-Ao Zhuang",
     "key": "chenzhongaozhuang",
-    "svc": 0,
-    "control": 5.5,
-    "salaryM": 0.064,
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.044,
     "remM": 0,
     "exactFA": false
    },
