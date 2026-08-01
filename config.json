@@ -11,6 +11,16 @@
   "feedOwedMin": 15,
   "concurrency": 10,
   "requestDelayMs": 40,
+  "news": {
+    "_note": "League news for the feed page. maxAgeHours is a safety guard: MLBTradeRumors' /feed still returns valid RSS whose newest item is from 2018, so any feed whose newest item is older than this is withheld rather than published.",
+    "maxAgeHours": 96,
+    "maxItems": 40,
+    "maxSentences": 3,
+    "maxChars": 320,
+    "feeds": [
+      { "name": "ESPN MLB", "url": "https://www.espn.com/espn/rss/mlb/news" }
+    ]
+  },
   "sv": {
     "lgOBP": 0.315,
     "lgSLG": 0.405,
