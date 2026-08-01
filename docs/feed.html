@@ -7,6 +7,8 @@
 .trade{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
 .thead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
 .tdate{font-size:12px;color:var(--muted)}
+.vwhy{font-size:11.5px;font-style:italic;color:var(--muted);margin-top:8px;padding-left:9px;
+  border-left:3px solid var(--card-line)}
 .vtag{font-family:var(--hd2);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 12px;border-radius:999px}
 .vtag.fair{background:var(--good);color:#fff}
 .vtag.edge{background:var(--warn);color:#fff}
@@ -21,6 +23,24 @@
 .eqsign{align-self:center;font-size:22px;color:var(--muted);text-align:center}
 .balbar{height:8px;background:var(--row-line);border-radius:99px;overflow:hidden;margin-top:12px;display:flex}
 .balbar div{height:100%}
+
+/* ---- Reporters ---- */
+.secbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 4px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:4px}
+.rep{display:flex;align-items:center;gap:12px;background:var(--card);text-decoration:none;color:inherit;
+  border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:13px 15px;transition:transform .12s ease,border-color .12s ease}
+.rep:hover{transform:translateY(-2px);border-color:var(--accent)}
+.rmono{width:46px;height:46px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
+  font-family:var(--hd2);font-weight:800;font-size:16px;letter-spacing:.02em;color:#fff;background:var(--navy)}
+.rep.nat .rmono{background:var(--accent)}
+.rinfo{min-width:0;flex:1}
+.rname{font-family:var(--hd2);font-weight:800;font-size:15px;line-height:1.2}
+.rhandle{font-size:12px;color:var(--accent);font-weight:700}
+.rbeat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.rgo{flex:0 0 auto;font-size:17px;color:var(--muted)}
+.rnote{font-size:11.5px;color:var(--muted);font-style:italic;border-left:3px solid var(--card-line);
+  padding:4px 0 4px 9px;margin:14px 0 2px}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -28,7 +48,49 @@
 <div class="hero"><div class="kicker">The Wire</div>
 <h1>Trade Feed</h1>
 <p class="sub" id="feedsub">Every MLB trade as a value equation — our model's totals per side, with a balance verdict. This is also the data that calibrates the Trade Value formula.</p></div>
+<div class="secbar">
+  <button id="secFeed" class="on">Trade Feed</button>
+  <button id="secReps">Reporters Feed</button>
+</div>
+
 <div id="feed"></div>
+
+<div id="reps" style="display:none">
+  <div class="rgrid">
+    <a class="rep" href="https://x.com/brianmctaggart" target="_blank" rel="noopener">
+      <span class="rmono">BM</span>
+      <span class="rinfo"><span class="rname">Brian McTaggart</span>
+      <span class="rhandle">@brianmctaggart</span>
+      <div class="rbeat">MLB.com · Astros beat</div></span><span class="rgo">↗</span></a>
+
+    <a class="rep" href="https://x.com/chandler_rome" target="_blank" rel="noopener">
+      <span class="rmono">CR</span>
+      <span class="rinfo"><span class="rname">Chandler Rome</span>
+      <span class="rhandle">@chandler_rome</span>
+      <div class="rbeat">The Athletic · Astros beat</div></span><span class="rgo">↗</span></a>
+
+    <a class="rep nat" href="https://x.com/jeffpassan" target="_blank" rel="noopener">
+      <span class="rmono">JP</span>
+      <span class="rinfo"><span class="rname">Jeff Passan</span>
+      <span class="rhandle">@jeffpassan</span>
+      <div class="rbeat">ESPN · national insider</div></span><span class="rgo">↗</span></a>
+
+    <a class="rep nat" href="https://x.com/bnightengale" target="_blank" rel="noopener">
+      <span class="rmono">BN</span>
+      <span class="rinfo"><span class="rname">Bob Nightengale</span>
+      <span class="rhandle">@bnightengale</span>
+      <div class="rbeat">USA Today · national columnist</div></span><span class="rgo">↗</span></a>
+
+    <a class="rep nat" href="https://x.com/feinsand" target="_blank" rel="noopener">
+      <span class="rmono">MF</span>
+      <span class="rinfo"><span class="rname">Mark Feinsand</span>
+      <span class="rhandle">@feinsand</span>
+      <div class="rbeat">MLB.com · national insider</div></span><span class="rgo">↗</span></a>
+  </div>
+  <p class="rnote">Opens on X in a new tab. X stopped rendering embedded profile timelines for
+  logged-out visitors, so these are direct links rather than live feeds.</p>
+</div>
+
 <p class="foot">Values from the BTD model at time of refresh · Beyond the Diamond</p>
 <script src="assets/app.js"></script>
 <script>
@@ -60,8 +122,29 @@ BTD.nav('feed');
       `<span class="vtag ${t.verdict.cls}">${BTD.esc(t.verdict.label)}${t.ratio != null ? ' · ' + t.ratio + 'x' : ''}</span></div>` +
       `<div class="eq">${side(a)}<div class="eqsign">${t.ratio != null && (t.ratio >= 0.9 && t.ratio <= 1.25) ? '≈' : '≠'}</div>${side(b)}</div>` +
       `<div class="balbar"><div style="width:${a.total / total * 100}%;background:var(--accent)"></div><div style="width:${b.total / total * 100}%;background:var(--accent2)"></div></div>` +
+      // An uneven trade usually isn't a fleecing — say what shape it was.
+      (t.verdict.why && t.verdict.why.length
+        ? `<div class="vwhy">${BTD.esc(t.verdict.why.join(' · '))}</div>` : '') +
       `</div>`;
   }).join('');
 })().catch(e => { document.getElementById('feed').innerHTML = '<div class="card">No feed data yet — run the pipeline.</div>'; });
+
+// section switcher
+(function () {
+  const SEC = [
+    { btn: 'secFeed', pane: 'feed', hash: '' },
+    { btn: 'secReps', pane: 'reps', hash: '#reporters' },
+  ];
+  function show(pane) {
+    SEC.forEach(s => {
+      const on = s.pane === pane;
+      document.getElementById(s.pane).style.display = on ? '' : 'none';
+      document.getElementById(s.btn).classList.toggle('on', on);
+      if (on) history.replaceState(null, '', s.hash || location.pathname);
+    });
+  }
+  SEC.forEach(s => document.getElementById(s.btn).addEventListener('click', () => show(s.pane)));
+  if (location.hash === '#reporters') show('reps');
+})();
 </script>
 </div></body></html>
