@@ -215,6 +215,43 @@ window.BTD = (function () {
       return `<div class="pphd">Home / Road Splits</div>${row('🏠 Home', home)}${row('✈️ Road', road)}`;
     } catch (e) { return ''; }
   }
+  // ---------- Minor league percentiles (prospects) ----------
+  // milb.json is only needed once a popup is opened, and only for prospects,
+  // so it loads lazily and a miss is cached as `false` rather than retried.
+  let _milb;
+  async function milbData() {
+    if (_milb !== undefined) return _milb;
+    try { _milb = await data('milb'); } catch (e) { _milb = false; }
+    return _milb;
+  }
+  async function milbHTML(P) {
+    const d = await milbData();
+    const m = d && d.players && d.players[P.id];
+    if (!m) return '';
+    const labels = new Map((d.labels && d.labels[m.kind]) || []);
+    const pool = (d.pools || []).find(x => x.level === m.lvl &&
+      x.group === (m.kind === 'H' ? 'hitting' : 'pitching'));
+    const rows = Object.entries(m.p || {}).filter(([k]) => k !== 'age').map(([k, pc]) => {
+      const col = savantColor(pc), v = m.v[k];
+      return `<div class="sbar"><span class="slbl">${esc(labels.get(k) || k)}</span>` +
+        `<span class="strack"><span class="sfill" style="width:${pc}%;background:${col}"></span>` +
+        `<span class="sdot" style="left:calc(${pc}% - 11px);background:${col}">${pc}</span></span>` +
+        `<span class="sval">${v == null ? '—' : v}</span></div>`;
+    });
+    if (!rows.length) return '';
+    const box = (l, v) => v == null ? '' : `<div class="pvbox"><span>${esc(l)}</span><b>${v}</b></div>`;
+    const comps = Object.entries(m.comp || {}).map(([k, v]) => box(k.replace(/_/g, ' '), v)).join('');
+    return `<div class="pphd">Minor league percentiles ` +
+      `<span class="ppnote">${esc(m.lvl)}${pool ? ' · vs ' + pool.n + ' qualified' : ''}</span></div>` +
+      `<div class="pvgrid">${box('Prospect score', m.score)}${box('Agg', m.agg)}` +
+      `${box('Young for level', m.p && m.p.age)}${comps}</div>` +
+      (m.line ? `<div class="ppline" style="margin:8px 0">${esc(m.line)}</div>` : '') +
+      `<div class="sscale"><span style="color:#3254a8">POOR</span><span>AVERAGE</span><span style="color:#c42828">GREAT</span></div>` +
+      rows.join('') +
+      `<div class="ppnote" style="margin-top:8px">Ranked against ${esc(m.lvl)} only. Computed from the ` +
+      `<a href="https://statsapi.mlb.com" target="_blank" rel="noopener">MLB Stats API</a>. ` +
+      `Inspired by <a href="https://prospectsavant.com" target="_blank" rel="noopener">Prospect Savant</a>.</div>`;
+  }
   function ensurePop() {
     if (document.getElementById('ppop')) return;
     const d = document.createElement('div');
@@ -248,8 +285,11 @@ window.BTD = (function () {
         val('Salary', P.salM != null ? '$' + (+P.salM).toFixed(1) + 'M/yr' : null) +
         val('IL · 4 yrs', P.ilDays != null ? P.ilDays + 'd / ' + (P.ilStints || 0) + ' stints' : null) + '</div>' +
       `<div class="pphd">This Season</div><div class="ppline">${statHTML(P)}</div>` +
+      `<div id="ppmilb"></div>` +
       `<div id="ppsplits"><div class="ppload">Loading splits…</div></div>` +
       `<div id="ppbars">${barsHTML(P, _pool.players)}</div>`;
+    // Prospects get minor league percentiles where the big leaguers get Statcast.
+    milbHTML(P).then(h => { const el = document.getElementById('ppmilb'); if (el) el.innerHTML = h; }).catch(() => {});
     document.getElementById('ppsplits').innerHTML = await splitsHTML(P, season) ||
       (P.prospect ? '' : '<div class="ppnote" style="padding:4px 0">No MLB splits available.</div>');
   }
