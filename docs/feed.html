@@ -58,12 +58,15 @@
   padding:18px;text-align:center;color:var(--muted);font-size:13px}
 
 /* ---- League news ---- */
-.nw{display:block;text-decoration:none;color:inherit;background:var(--card);
+.nw{display:flex;gap:13px;align-items:flex-start;text-decoration:none;color:inherit;background:var(--card);
   border:var(--card-line-w) solid var(--card-line);border-left:3px solid var(--card-line);
   border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px;margin-bottom:10px;
   transition:border-left-color .12s ease,transform .12s ease}
 .nw:hover{transform:translateY(-1px);border-left-color:var(--accent)}
 .nw.hou{border-left-color:var(--accent)}
+.nwimg{width:104px;height:59px;object-fit:cover;border-radius:6px;flex:0 0 auto;background:var(--row-hover)}
+@media(max-width:520px){.nwimg{display:none}}
+.nwtxt{min-width:0;flex:1}
 .nwhd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .nwtitle{font-family:var(--hd2);font-weight:800;font-size:14.5px;line-height:1.25}
 .nwsum{font-size:13px;line-height:1.5;color:var(--ink)}
@@ -247,12 +250,15 @@ BTD.nav('feed');
     const rows = items.filter(i => filter === 'all' || i.astros);
     list.innerHTML = rows.map(i =>
       `<a class="nw${i.astros ? ' hou' : ''}" href="${BTD.esc(i.link)}" target="_blank" rel="noopener">` +
+      (i.image ? `<img class="nwimg" loading="lazy" src="${BTD.esc(i.image)}" alt=""` +
+        ` onerror="this.remove()">` : '') +
+      `<span class="nwtxt">` +
       `<div class="nwhd"><span class="nwtitle">${BTD.esc(i.title)}</span>` +
       `${i.astros ? '<span class="nwchip">Astros</span>' : ''}</div>` +
       (i.summary ? `<div class="nwsum">${BTD.esc(i.summary)}</div>` : '') +
       `<div class="nwmeta"><b>${BTD.esc(i.source)}</b>` +
       `${i.author ? '<span>' + BTD.esc(i.author) + '</span>' : ''}` +
-      `<span>${BTD.esc(ago(i.date))}</span></div></a>`).join('');
+      `<span>${BTD.esc(ago(i.date))}</span></div></span></a>`).join('');
   }
   const live = (d.sources || []).filter(s => !s.stale).map(s => s.name);
   note.textContent = `Headlines and summaries from ${live.join(', ') || 'the wire'}, linking back to the ` +
