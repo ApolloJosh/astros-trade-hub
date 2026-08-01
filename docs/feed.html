@@ -51,9 +51,9 @@
 .twname{font-family:var(--hd2);font-weight:800;font-size:13.5px;line-height:1.15}
 .twbeat{font-size:11px;color:var(--muted)}
 .twopen{font-size:11.5px;color:var(--accent);font-weight:700;text-decoration:none;flex:0 0 auto}
-.twbody blockquote{margin:0;font-size:14px;line-height:1.5}
-.twbody blockquote p{margin:0 0 6px}
-.twbody a{color:var(--accent)}
+.twbody{font-size:14px;line-height:1.5;white-space:pre-line}
+.twbody a{color:var(--accent);word-break:break-word}
+.twimg{margin-top:9px;max-width:100%;max-height:280px;border-radius:8px;display:block;object-fit:cover}
 .twempty{background:var(--card);border:var(--card-line-w) dashed var(--card-line);border-radius:var(--radius);
   padding:18px;text-align:center;color:var(--muted);font-size:13px}
 
@@ -96,9 +96,6 @@
 <div id="feed"></div>
 
 <div id="reps" style="display:none">
-  <div class="controls" id="repfilter"></div>
-  <div id="reptweets"></div>
-  <div class="wholine">Follow them on X</div>
   <div class="rgrid">
     <a class="rep" href="https://x.com/brianmctaggart" target="_blank" rel="noopener">
       <span class="rmono">BM</span>
@@ -130,9 +127,10 @@
       <span class="rhandle">@feinsand</span>
       <div class="rbeat">MLB.com · national insider</div></span><span class="rgo">↗</span></a>
   </div>
-  <p class="rnote">Tweets are pulled through X's official oEmbed endpoint, so the text above is
-  the real post. X no longer renders live profile timelines for logged-out visitors, which is
-  why the feed is curated rather than automatic.</p>
+  <div class="wholine" id="repwho">The Feed</div>
+  <div class="controls" id="repfilter"></div>
+  <div id="reptweets"></div>
+  <p class="rnote" id="repnote"></p>
 </div>
 
 <p class="foot">Values from the BTD model at time of refresh · Beyond the Diamond</p>
@@ -178,17 +176,25 @@ BTD.nav('feed');
 // through X's oEmbed endpoint, so the markup below is X's own and needs no
 // third-party script on the page.
 (async () => {
-  const wrap = document.getElementById('reptweets'), bar = document.getElementById('repfilter');
+  const wrap = document.getElementById('reptweets'), bar = document.getElementById('repfilter'),
+        note = document.getElementById('repnote'), who = document.getElementById('repwho');
   let d;
   try { d = await BTD.data('reporters'); } catch (e) { d = null; }
   const tweets = (d && d.tweets) || [], reps = (d && d.reporters) || {};
   if (!tweets.length) {
-    wrap.innerHTML = '<div class="twempty">No tweets pinned yet — add URLs to ' +
-      '<code>data-sources/reporter-tweets.json</code> and they appear on the next refresh.</div>';
+    wrap.innerHTML = '<div class="twempty">Feed unavailable right now — the links above still work.</div>';
     return;
   }
+  const ago = iso => {
+    if (!iso) return '';
+    const m = (Date.now() - Date.parse(iso)) / 6e4;
+    if (m < 1) return 'just now';
+    if (m < 60) return Math.round(m) + 'm ago';
+    if (m < 1440) return Math.round(m / 60) + 'h ago';
+    return Math.round(m / 1440) + 'd ago';
+  };
   let filter = 'all';
-  const counts = tweets.reduce((a, t) => { a[t.handle] = (a[t.handle] || 0) + 1; return a; }, {});
+  const counts = tweets.reduce((a, t) => { a[t.key] = (a[t.key] || 0) + 1; return a; }, {});
   function chips() {
     const btn = (v, label, n) =>
       `<button data-rf="${v}"${filter === v ? ' class="on"' : ''}>${BTD.esc(label)}${n ? ' ' + n : ''}</button>`;
@@ -199,18 +205,25 @@ BTD.nav('feed');
       b.addEventListener('click', () => { filter = b.dataset.rf; chips(); render(); }));
   }
   function render() {
-    const list = tweets.filter(t => filter === 'all' || t.handle === filter);
+    const list = tweets.filter(t => filter === 'all' || t.key === filter);
     wrap.innerHTML = list.map(t => {
-      const r = reps[t.handle] || {};
+      const r = reps[t.key] || {};
       return `<div class="tw"><div class="twhd">` +
-        `<span class="rmono${r.national ? '' : ''}" style="${r.national ? 'background:var(--accent)' : ''}">` +
+        `<span class="rmono"${r.national ? ' style="background:var(--accent)"' : ''}>` +
         `${BTD.esc(r.mono || t.handle.slice(0, 2).toUpperCase())}</span>` +
         `<span class="twwho"><span class="twname">${BTD.esc(r.name || t.author)}</span>` +
-        `<div class="twbeat">@${BTD.esc(t.handle)}${r.beat ? ' · ' + BTD.esc(r.beat) : ''}</div></span>` +
+        `<div class="twbeat">@${BTD.esc(t.handle)}${r.beat ? ' · ' + BTD.esc(r.beat) : ''}` +
+        `${t.date ? ' · ' + BTD.esc(ago(t.date)) : ''}</div></span>` +
         `<a class="twopen" href="${BTD.esc(t.url)}" target="_blank" rel="noopener">Open ↗</a></div>` +
-        `<div class="twbody">${t.html}</div></div>`;
+        `<div class="twbody">${t.html}</div>` +
+        (t.image ? `<img class="twimg" loading="lazy" src="${BTD.esc(t.image)}" alt="" onerror="this.remove()">` : '') +
+        `</div>`;
     }).join('') || '<div class="twempty">Nothing from this reporter yet.</div>';
   }
+  who.textContent = `The Feed${d.newest ? ' · latest ' + ago(d.newest) : ''}`;
+  note.textContent = d.stale
+    ? `Feed has not updated in ${d.ageHours}h — showing the last posts received.`
+    : 'Live from the MLB Reporters X List. Tweets are the reporters’ own; tap any post to open it on X.';
   chips(); render();
 })().catch(() => {});
 
