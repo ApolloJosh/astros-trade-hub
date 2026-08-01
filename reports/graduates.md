@@ -45,7 +45,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | A.J. Ewing | Mets | 21 | CF | 283 | 63th | 70.5 |
 | Henry Bolte | Athletics | 22 | CF | 241 | 53th | 34.3 |
 | Esmerlyn Valdez | Pirates | 22 | RF | 164 | 95th | 132.7 |
-| Bradgley Rodriguez | Padres | 22 | P | 55 | 93th | 75.2 |
+| Bradgley Rodriguez | Padres | 22 | P | 55 | 93th | 75.1 |
 | Denzer Guzman | Angels | 22 | 3B | 192 | 33th | 20.1 |
 | Jose Fernandez | D-backs | 22 | DH | 177 | 35th | 5.5 |
 | Pedro Ramírez | Cubs | 22 | 2B | 104 | 51th | 87 |
