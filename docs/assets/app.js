@@ -55,9 +55,25 @@ window.BTD = (function () {
     trades.forEach(t => (t.get || []).forEach(p => bump(p, 1)));
     return [...m.values()].filter(p => p.n > 0).sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
   }
-  const fanWanted = () => fanData().then(d => mergeWanted(d.trades, d.tally));
-  function rawFan() {
-    if (!FAN_URL) return Promise.resolve({ trades: [], tally: [] });
+  // Most-traded-for now comes from the backend, which counts EVERY row in the
+  // sheet. Deriving it from the trade list undercounted: that list is capped at
+  // MAX_LIST, so once submissions outran the cap the leaderboard quietly became
+  // "the last N trades" rather than all time. mergeWanted stays as the fallback
+  // for an older deployment that doesn't serve ?action=wanted yet.
+  let _wanted = null;
+  function fanWanted() {
+    if (_wanted) return _wanted;
+    _wanted = callFan('wanted')
+      .then(d => (d && Array.isArray(d.wanted) && d.wanted.length)
+        ? d.wanted
+        : fanData().then(f => mergeWanted(f.trades, f.tally)))
+      .catch(() => fanData().then(f => mergeWanted(f.trades, f.tally)));
+    return _wanted;
+  }
+  // JSONP first (Apps Script blocks cross-origin fetch), plain fetch alongside.
+  function callFan(action, empty) {
+    if (!FAN_URL) return Promise.resolve(empty || {});
+    const qs = '?action=' + action;
     const jsonp = () => new Promise((resolve, reject) => {
       const cb = 'btd_' + Math.random().toString(36).slice(2);
       const s = document.createElement('script');
@@ -65,11 +81,14 @@ window.BTD = (function () {
       function cleanup() { clearTimeout(t); delete window[cb]; s.remove(); }
       window[cb] = d => { cleanup(); resolve(d); };
       s.onerror = () => { cleanup(); reject(new Error('script error')); };
-      s.src = FAN_URL + '?action=list&callback=' + cb + '&cb=' + Date.now();
+      s.src = FAN_URL + qs + '&callback=' + cb + '&cb=' + Date.now();
       document.head.appendChild(s);
     });
-    const fx = async () => (await fetch(FAN_URL + '?action=list&cb=' + Date.now())).json();
-    return Promise.any([jsonp(), fx()]).catch(() => ({ trades: [], tally: [] }));
+    const fx = async () => (await fetch(FAN_URL + qs + '&cb=' + Date.now())).json();
+    return Promise.any([jsonp(), fx()]).catch(() => empty || {});
+  }
+  function rawFan() {
+    return callFan('list', { trades: [], tally: [] });
   }
   const fanTrades = () => fanData().then(d => d.trades);
   const shot = id => id ? `https://midfield.mlbstatic.com/v1/people/${id}/spots/120` : '';
