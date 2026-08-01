@@ -361,6 +361,19 @@
       },
       "unrankedRefWar": 2.0,
       "unrankedFloorFrac": 0.18,
+      "psAdj": {
+        "_note": "Prospect performance nudge from milb.json percentiles. Pedigree still leads; this only tilts the anchor. k = swing at the extremes, clamped by min/max. Raise k if prospect-heavy returns keep coming back lopsided.",
+        "k": 0.3,
+        "min": 0.8,
+        "max": 1.25,
+        "refScore": 50
+      },
+      "rental": {
+        "_note": "Win-now premium. Two months of control produces almost no surplus, but contenders demonstrably pay real prospects for a stretch-run piece. Applies to positive values only, scaled by how short the control is.",
+        "ctrlMax": 1.0,
+        "mult": 1.35,
+        "minTv": 2
+      },
       "min": -30,
       "mlbFloor": 2,
       "negMinOwed": 9,
