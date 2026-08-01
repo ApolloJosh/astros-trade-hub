@@ -1,0 +1,11 @@
+{
+  "_note": "Reporters Feed. Paste tweet URLs into `tweets` — newest sort themselves to the top automatically (tweet IDs are time-ordered), so order here doesn't matter. Only URLs from handles listed in `reporters` are accepted; anything else is skipped. During the deadline the feed workflow runs every 5 minutes, so a pasted URL is live within minutes.",
+  "reporters": {
+    "brianmctaggart": { "name": "Brian McTaggart", "beat": "MLB.com · Astros beat", "mono": "BM", "national": false },
+    "chandler_rome": { "name": "Chandler Rome", "beat": "The Athletic · Astros beat", "mono": "CR", "national": false },
+    "jeffpassan": { "name": "Jeff Passan", "beat": "ESPN · national insider", "mono": "JP", "national": true },
+    "bnightengale": { "name": "Bob Nightengale", "beat": "USA Today · national columnist", "mono": "BN", "national": true },
+    "feinsand": { "name": "Mark Feinsand", "beat": "MLB.com · national insider", "mono": "MF", "national": true }
+  },
+  "tweets": []
+}
