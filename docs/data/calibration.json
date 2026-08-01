@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-01T22:41:26.651Z",
+ "updated": "2026-08-01T23:24:33.567Z",
  "tradesAnalyzed": 23,
  "tradesTotal": 23,
  "marketTemp": 2,
@@ -7,7 +7,7 @@
   "score": 3,
   "label": "Warming",
   "recentTrades": 10,
-  "recentValue": 81.5,
+  "recentValue": 81.4,
   "windowDays": 14
  }
 }
