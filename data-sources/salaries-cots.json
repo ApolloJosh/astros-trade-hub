@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-02T21:39:53.465Z",
+ "updated": "2026-08-02T22:58:48.367Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -6694,8 +6694,8 @@
     "key": "xzavioncurry",
     "svc": 1.089,
     "control": 4.5,
-    "salaryM": 0.314,
-    "remM": 0.2,
+    "salaryM": 0.128,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -6723,6 +6723,15 @@
     "control": 5.5,
     "salaryM": 0.375,
     "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Kevin Herget",
+    "key": "kevinherget",
+    "svc": 0.102,
+    "control": 5.5,
+    "salaryM": 0.242,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -7245,8 +7254,8 @@
     "key": "luismorales",
     "svc": 0.059,
     "control": 5.5,
-    "salaryM": 0.41,
-    "remM": 0.2,
+    "salaryM": 0.7,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -7301,6 +7310,15 @@
     "control": 5.5,
     "salaryM": 0.58,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Ben Bowden",
+    "key": "benbowden",
+    "svc": 1.068,
+    "control": 4.5,
+    "salaryM": 0.245,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -8750,6 +8768,15 @@
     "exactFA": false
    },
    {
+    "name": "Stuart Fairchild",
+    "key": "stuartfairchild",
+    "svc": 3.114,
+    "control": 2.5,
+    "salaryM": 0.296,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Alex Hoppe",
     "key": "alexhoppe",
     "svc": 0,
@@ -9271,6 +9298,15 @@
     "control": 5.5,
     "salaryM": 0.64,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Nate Furman",
+    "key": "natefurman",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.242,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -10553,8 +10589,8 @@
     "key": "luiscurvelo",
     "svc": 0.061,
     "control": 5.5,
-    "salaryM": 0.526,
-    "remM": 0.3,
+    "salaryM": 0.324,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -10600,6 +10636,15 @@
     "control": 5.5,
     "salaryM": 0.6,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Nolan Kingham",
+    "key": "nolankingham",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.242,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -12663,15 +12708,6 @@
     "exactFA": false
    },
    {
-    "name": "Elieser Hernández",
-    "key": "elieserhernandez",
-    "svc": 5.044,
-    "control": 0.5,
-    "salaryM": 0.561,
-    "remM": 0.3,
-    "exactFA": true
-   },
-   {
     "name": "Brewer Hicklen",
     "key": "brewerhicklen",
     "svc": 0.038,
@@ -12694,8 +12730,8 @@
     "key": "jameskarinchak",
     "svc": 4.099,
     "control": 1.5,
-    "salaryM": 0.278,
-    "remM": 0.1,
+    "salaryM": 0.495,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -12769,6 +12805,15 @@
     "salaryM": 0.847,
     "remM": 0.4,
     "exactFA": true
+   },
+   {
+    "name": "Elieser Hernández",
+    "key": "elieserhernandez",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.104,
+    "remM": 0.1,
+    "exactFA": false
    },
    {
     "name": "Connor Thomas",
