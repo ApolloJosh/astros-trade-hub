@@ -146,6 +146,15 @@ BTD.nav('feed');
 (async () => {
   const f = await BTD.data('feed');
   document.getElementById('feedsub').innerHTML += ` <b>${f.trades.length}</b> trades since ${f.since}.`;
+  // "14m ago" reads better than a raw clock on a wire feed.
+  const ago = iso => {
+    const m = (Date.now() - Date.parse(iso)) / 6e4;
+    if (!isFinite(m) || m < 0) return '';
+    if (m < 1) return 'just now';
+    if (m < 60) return Math.round(m) + 'm ago';
+    if (m < 1440) return Math.round(m / 60) + 'h ago';
+    return Math.round(m / 1440) + 'd ago';
+  };
   const el = document.getElementById('feed');
   if (!f.trades.length) { el.innerHTML = '<div class="card">No trades in the window yet.</div>'; return; }
   el.innerHTML = f.trades.map(t => {
@@ -165,7 +174,8 @@ BTD.nav('feed');
       (s.cashM != null ? `<div class="pl"><span>💵 Cash <span class="chip">$${(+s.cashM).toFixed(1)}M</span></span><span class="tv mid">${(s.cashM * 0.5).toFixed(1)}</span></div>` : '') +
       `<div class="sum"><span>Total</span><span class="tv ${BTD.tvCls(s.total)}">${BTD.pts(s.total)}</span></div></div>`;
     const total = (a.total + b.total) || 1;
-    return `<div class="trade${t.reported ? ' unofficial' : ''}"><div class="thead"><span class="tdate">${BTD.esc(t.date)}</span>` +
+    return `<div class="trade${t.reported ? ' unofficial' : ''}"><div class="thead">` +
+      `<span class="tdate">${BTD.esc(t.date)}${t.firstSeen ? ' · ' + BTD.esc(ago(t.firstSeen)) : ''}</span>` +
       // Reported = a reporter has it, MLB has not filed it. Say so plainly.
       (t.reported ? `<span class="repchip">📣 Reported${t.source ? ' · ' + BTD.esc(t.source) : ''}</span>` : '') +
       `${t.cashUnknown ? '<span class="chip">💵 cash involved — amount unreported</span>' : ''}` +
