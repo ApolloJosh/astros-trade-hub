@@ -1,13 +1,18 @@
 {
- "updated": "2026-08-01T23:24:33.567Z",
- "tradesAnalyzed": 23,
- "tradesTotal": 23,
- "marketTemp": 2,
+ "updated": "2026-08-02T06:44:52.916Z",
+ "tradesAnalyzed": 25,
+ "tradesTotal": 25,
+ "marketTemp": 1.97,
  "hotStove": {
-  "score": 3,
-  "label": "Warming",
-  "recentTrades": 10,
-  "recentValue": 81.4,
+  "score": 6.3,
+  "label": "Hot",
+  "recentTrades": 12,
+  "recentValue": 110.5,
+  "weightedTrades": 6,
+  "last24h": 2,
+  "last72h": 6,
+  "hoursSinceLast": 6.7,
+  "halfLifeDays": 3,
   "windowDays": 14
  }
 }
