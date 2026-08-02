@@ -9,6 +9,11 @@
 .tdate{font-size:12px;color:var(--muted)}
 .vwhy{font-size:11.5px;font-style:italic;color:var(--muted);margin-top:8px;padding-left:9px;
   border-left:3px solid var(--card-line)}
+/* reported-but-not-official */
+.trade.rep{border-style:dashed;background:linear-gradient(0deg,var(--row-hover),var(--row-hover)),var(--card)}
+.repchip{font-family:var(--hd2);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--warn);color:#fff;border-radius:999px;padding:3px 11px}
+.repnote{font-size:11.5px;font-style:italic;color:var(--muted);margin:2px 0 10px}
 .vtag{font-family:var(--hd2);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 12px;border-radius:999px}
 .vtag.fair{background:var(--good);color:#fff}
 .vtag.edge{background:var(--warn);color:#fff}
@@ -159,9 +164,12 @@ BTD.nav('feed');
       (s.cashM != null ? `<div class="pl"><span>💵 Cash <span class="chip">$${(+s.cashM).toFixed(1)}M</span></span><span class="tv mid">${(s.cashM * 0.5).toFixed(1)}</span></div>` : '') +
       `<div class="sum"><span>Total</span><span class="tv ${BTD.tvCls(s.total)}">${BTD.pts(s.total)}</span></div></div>`;
     const total = (a.total + b.total) || 1;
-    return `<div class="trade"><div class="thead"><span class="tdate">${BTD.esc(t.date)}</span>` +
+    return `<div class="trade${t.reported ? ' rep' : ''}"><div class="thead"><span class="tdate">${BTD.esc(t.date)}</span>` +
+      // Reported = a reporter has it, MLB has not filed it. Say so plainly.
+      (t.reported ? `<span class="repchip">📣 Reported${t.source ? ' · ' + BTD.esc(t.source) : ''}</span>` : '') +
       `${t.cashUnknown ? '<span class="chip">💵 cash involved — amount unreported</span>' : ''}` +
       `<span class="vtag ${t.verdict.cls}">${BTD.esc(t.verdict.label)}${t.ratio != null ? ' · ' + t.ratio + 'x' : ''}</span></div>` +
+      (t.reported ? `<div class="repnote">Not yet official — appears here from reporting, and will be replaced by MLB's filed transaction once it goes through.</div>` : '') +
       `<div class="eq">${side(a)}<div class="eqsign">${t.ratio != null && (t.ratio >= 0.9 && t.ratio <= 1.25) ? '≈' : '≠'}</div>${side(b)}</div>` +
       `<div class="balbar"><div style="width:${a.total / total * 100}%;background:var(--accent)"></div><div style="width:${b.total / total * 100}%;background:var(--accent2)"></div></div>` +
       // An uneven trade usually isn't a fleecing — say what shape it was.
