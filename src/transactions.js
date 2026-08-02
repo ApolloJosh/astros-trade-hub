@@ -93,6 +93,27 @@ function stackedTotal(items) {
   return t;
 }
 
+/**
+ * Ordering.
+ *
+ * MLB's transaction API dates trades to the day, with no clock time, so several
+ * deals on deadline day are indistinguishable by date alone and drift around
+ * between builds. Instead we record when OUR pipeline first saw each trade and
+ * carry that forward, so the newest thing on the wire stays pinned to the top.
+ * A reported trade can override it with an explicit `at` timestamp.
+ */
+function tradeKey(t) {
+  return (t.date || '') + '|' + String(t.desc || '').slice(0, 140);
+}
+function readFirstSeen() {
+  const m = new Map();
+  try {
+    const prev = JSON.parse(fs.readFileSync(path.join(OUT, 'feed.json'), 'utf8'));
+    (prev.trades || []).forEach(t => { if (t.firstSeen) m.set(tradeKey(t), t.firstSeen); });
+  } catch (e) {}
+  return m;
+}
+
 function reasonsFor(sides, teamNeeds) {
   const R = [];
   const heavy = sides[0], light = sides[sides.length - 1];
@@ -202,6 +223,8 @@ function buildReported(byId, teamIdByName, cfgOverride) {
     const desc = sides.map(s => `${s.team} receive ${s.players.map(p => p.name).join(', ')}`).join('; ');
     out.push({
       date: t.date || new Date().toISOString().slice(0, 10),
+      // "at": "2026-08-02T19:40:00Z" pins it to the minute the scoop landed.
+      at: t.at || undefined,
       desc: t.note || desc, sides, ratio,
       verdict: verdictFor(ratio, false, sides, NEEDS),
       reported: true, source: t.source || null,
@@ -378,8 +401,22 @@ async function main() {
   if (reported.length) console.log(`  + ${reported.length} reported (unofficial) trade(s)`);
   feed.push(...reported);
 
-  feed.sort((a, b) => b.date.localeCompare(a.date) ||
-    ((a.reported ? 1 : 0) - (b.reported ? 1 : 0)));   // official first within a day
+  // Stamp each trade with when we first saw it, reusing the previous run's
+  // value so ordering is stable rather than reshuffling on every build.
+  const seen = readFirstSeen();
+  const nowIso = new Date().toISOString();
+  feed.forEach(t => {
+    const k = tradeKey(t);
+    // `at` lets a reported scoop carry the minute it actually broke.
+    const stamp = t.at || seen.get(k) || nowIso;
+    t.firstSeen = stamp;
+    if (!seen.has(k)) seen.set(k, stamp);
+  });
+  // Newest first by first-seen; date breaks ties (notably the first run after
+  // this shipped, when everything shares a timestamp).
+  feed.sort((a, b) => String(b.firstSeen).localeCompare(String(a.firstSeen)) ||
+    b.date.localeCompare(a.date) ||
+    ((a.reported ? 1 : 0) - (b.reported ? 1 : 0)));   // official first within a tie
 
   fs.writeFileSync(path.join(OUT, 'feed.json'), JSON.stringify({ updated: new Date().toISOString(), since: CFG.feedSince, trades: feed }));
   fs.writeFileSync(autoPath, JSON.stringify({ updated: new Date().toISOString(), modelSig, players: [...autoOut.values()] }));
