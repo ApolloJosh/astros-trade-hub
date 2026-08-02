@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-02T23:01:52.074Z",
+ "updated": "2026-08-02T23:21:19.202Z",
  "tradesAnalyzed": 27,
  "tradesTotal": 27,
  "marketTemp": 1.83,
@@ -8,10 +8,10 @@
   "label": "Inferno",
   "recentTrades": 14,
   "recentValue": 246.8,
-  "weightedTrades": 6.8,
+  "weightedTrades": 6.7,
   "last24h": 4,
   "last72h": 8,
-  "hoursSinceLast": 23,
+  "hoursSinceLast": 23.4,
   "halfLifeDays": 3,
   "windowDays": 14
  }
