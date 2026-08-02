@@ -390,6 +390,10 @@
       "negMinOwed": 9,
       "marketMult": 1.0,
       "cashPtsPerM": 0.5,
+      "pkgWeights": [1, 0.74, 0.52, 0.36, 0.25, 0.17, 0.11, 0.07],
+      "needMult": 1.08,
+      "_needMultNote": "Fit premium on an acquired MLB player. A club trading for an established big leaguer in July is filling a hole by revealed preference \u2014 nobody gives up prospects for someone they don't need. Prospects are excluded (a bet on later, not a hole now), as are liabilities.",
+      "_pkgWeightsNote": "Package stacking. Sorted by value, the headline player counts full, the next 74%, the third 52% and so on — five decent prospects are not worth one star, because a roster only has so many spots and quality does not aggregate. The Trade Builder has always applied this; the trade feed did not, which inflated prospect-heavy sides and made real trades look lopsided. Liabilities (tv <= 0) are exempt: bad contracts do not get cheaper in bulk.",
       "crudeFallback": {
         "MLB": 12,
         "AAA": 8,
