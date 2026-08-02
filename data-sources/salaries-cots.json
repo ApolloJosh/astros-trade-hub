@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-02T19:36:16.262Z",
+ "updated": "2026-08-02T21:39:53.465Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -197,7 +197,7 @@
     "key": "ryanjohnson",
     "svc": 0.043,
     "control": 5.5,
-    "salaryM": 0.688,
+    "salaryM": 0.684,
     "remM": 0.3,
     "exactFA": false
    },
@@ -296,8 +296,8 @@
     "key": "brettkerry",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.082,
-    "remM": 0,
+    "salaryM": 0.284,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -9658,8 +9658,8 @@
     "key": "mattsvanson",
     "svc": 0.116,
     "control": 5.5,
-    "salaryM": 0.744,
-    "remM": 0.4,
+    "salaryM": 0.539,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -9753,15 +9753,6 @@
     "exactFA": false
    },
    {
-    "name": "Tink Hence",
-    "key": "tinkhence",
-    "svc": 0,
-    "control": 5.5,
-    "salaryM": 0.127,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
     "name": "Cooper Hjerpe",
     "key": "cooperhjerpe",
     "svc": 0,
@@ -9777,6 +9768,15 @@
     "control": 5.5,
     "salaryM": 0.45,
     "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Quinn Mathews",
+    "key": "quinnmathews",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.242,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -11408,15 +11408,6 @@
     "exactFA": false
    },
    {
-    "name": "Cody Laweryson",
-    "key": "codylaweryson",
-    "svc": 0.017,
-    "control": 5.5,
-    "salaryM": 0.179,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
     "name": "Kody Clemens",
     "key": "kodyclemens",
     "svc": 2.134,
@@ -11529,8 +11520,8 @@
     "key": "garrettacton",
     "svc": 0.031,
     "control": 5.5,
-    "salaryM": 0.739,
-    "remM": 0.4,
+    "salaryM": 0.535,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -11619,8 +11610,8 @@
     "key": "zebbymatthews",
     "svc": 1.01,
     "control": 4.5,
-    "salaryM": 0.656,
-    "remM": 0.3,
+    "salaryM": 0.5,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -11720,6 +11711,15 @@
     "control": 5.5,
     "salaryM": 0.56,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Cody Laweryson",
+    "key": "codylaweryson",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.141,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -12224,7 +12224,7 @@
     "key": "stewardberroa",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.136,
+    "salaryM": 0.141,
     "remM": 0.1,
     "exactFA": false
    },
@@ -13544,8 +13544,8 @@
     "key": "grahampauley",
     "svc": 1.005,
     "control": 4.5,
-    "salaryM": 0.63,
-    "remM": 0.3,
+    "salaryM": 0.479,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -13951,8 +13951,8 @@
     "key": "yovannycruz",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.111,
-    "remM": 0.1,
+    "salaryM": 0.314,
+    "remM": 0.2,
     "exactFA": false
    },
    {
