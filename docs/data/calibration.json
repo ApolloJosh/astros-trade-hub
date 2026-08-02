@@ -1,17 +1,17 @@
 {
- "updated": "2026-08-02T23:45:40.406Z",
- "tradesAnalyzed": 27,
- "tradesTotal": 27,
- "marketTemp": 1.83,
+ "updated": "2026-08-02T23:58:04.343Z",
+ "tradesAnalyzed": 28,
+ "tradesTotal": 28,
+ "marketTemp": 1.815,
  "hotStove": {
-  "score": 8.6,
+  "score": 9.7,
   "label": "Inferno",
-  "recentTrades": 14,
-  "recentValue": 246.8,
-  "weightedTrades": 6.7,
-  "last24h": 4,
-  "last72h": 8,
-  "hoursSinceLast": 23.8,
+  "recentTrades": 15,
+  "recentValue": 271.5,
+  "weightedTrades": 7.5,
+  "last24h": 5,
+  "last72h": 9,
+  "hoursSinceLast": 24,
   "halfLifeDays": 3,
   "windowDays": 14
  }

@@ -15,7 +15,7 @@ Former prospects past graduation, still inside the protection window.
 | Brady House | Nationals | 23 | 474 | 81th | #48 top-100 | 13.1 | 37.6 | +24.5 |
 | Carson Williams | Rays | 23 | 139 | 7th | #9 top-100 | 4.3 | 28.2 | +23.9 |
 | Jasson Domínguez | Yankees | 23 | 737 | 42th | #21 top-100 | 8.7 | 28.3 | +19.6 |
-| Coby Mayo | Orioles | 24 | 621 | 78th | #14 top-100 | 18.2 | 36.4 | +18.2 |
+| Coby Mayo | Orioles | 24 | 621 | 78th | #14 top-100 | 18.3 | 36.4 | +18.1 |
 | Moisés Ballesteros | Cubs | 22 | 241 | 68th | #69 top-100 | 14.6 | 31.3 | +16.7 |
 | Jordan Lawlar | D-backs | 24 | 152 | 74th | #11 top-100 | 22.2 | 38 | +15.8 |
 | Edwin Arroyo | Reds | 22 | 142 | 30th | #67 top-100 | 9.7 | 24.1 | +14.4 |
@@ -28,7 +28,7 @@ Former prospects past graduation, still inside the protection window.
 | Luisangel Acuña | White Sox | 24 | 411 | 36th | #66 top-100 | 11.5 | 17.3 | +5.8 |
 | Tommy Troy | D-backs | 24 | 134 | 47th | #74 top-100 | 12.6 | 18.1 | +5.5 |
 | Connor Phillips | Reds | 25 | 73 | 26th | #70 top-100 | 3.7 | 9.1 | +5.4 |
-| Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 32.4 | 36.9 | +4.5 |
+| Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 32.5 | 36.9 | +4.4 |
 | Evan Carter | Rangers | 23 | 770 | 39th | #5 top-100 | 27.9 | 31.4 | +3.5 |
 | Alex Freeland | Dodgers | 24 | 320 | 35th | #72 top-100 | 13.3 | 16.7 | +3.4 |
 | Jordan Beck | Rockies | 25 | 860 | 16th | #81 top-100 | 2 | 5.1 | +3.1 |
@@ -53,7 +53,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Max Muncy | Athletics | 23 | 3B | 398 | 68th | 16.5 |
 | Blaze Jordan | Cardinals | 23 | 3B | 134 | 61th | 12.3 |
 | Alejandro Osuna | Rangers | 23 | LF | 394 | 20th | 11.1 |
-| Nacho Alvarez Jr. | Braves | 23 | SS | 240 | — | 19.4 |
+| Nacho Alvarez Jr. | Braves | 23 | SS | 240 | — | 19.5 |
 | Sam Antonacci | White Sox | 23 | LF | 366 | 56th | 63.9 |
 | Eury Pérez | Marlins | 23 | P | 291 | 57th | 67.7 |
 | Javier Sanoja | Marlins | 23 | 3B | 676 | 20th | 35.3 |
@@ -70,7 +70,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Thomas Saggese | Cardinals | 24 | LF | 429 | 49th | 3.5 |
 | Victor Mesa Jr. | Rays | 24 | RF | 178 | 60th | 25.8 |
 | Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 28.5 |
-| Mason Fluharty | Blue Jays | 24 | P | 96 | 68th | 13.7 |
+| Mason Fluharty | Blue Jays | 24 | P | 96 | 68th | 13.6 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 69th | 23 |
 | Andrew Morris | Twins | 24 | P | 53 | 68th | 49 |
 | Anthony Molina | Braves | 24 | P | 99 | — | 3.8 |
@@ -85,7 +85,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | CJ Kayfus | Guardians | 24 | LF | 163 | 65th | 17 |
 | Petey Halpin | Guardians | 24 | CF | 125 | 28th | 11 |
 | Cole Carrigg | Rockies | 24 | CF | 168 | 45th | 128.9 |
-| Kyle Karros | Rockies | 24 | 3B | 520 | 69th | 87.4 |
+| Kyle Karros | Rockies | 24 | 3B | 520 | 69th | 87.5 |
 | Brice Matthews | Astros | 24 | CF | 273 | 36th | 2 |
 | Luinder Avila | Royals | 24 | P | 84 | 52th | 17.1 |
 | Edgardo Henriquez | Dodgers | 24 | P | 65 | 96th | 53.4 |
@@ -97,7 +97,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Jimmy Crooks | Cardinals | 25 | C | 144 | 83th | 6.5 |
 | Victor Scott II | Cardinals | 25 | CF | 802 | 15th | 3.6 |
 | Ben Williamson | Rays | 25 | 2B | 560 | 26th | 15.7 |
-| Chandler Simpson | Rays | 25 | LF | 854 | 9th | 25.3 |
+| Chandler Simpson | Rays | 25 | LF | 854 | 9th | 25.4 |
 | Jacob Melton | Rays | 25 | LF | 78 | — | 4 |
 | Cody Freeman | Rangers | 25 | 3B | 139 | 4th | 2 |
 | Brandon Valenzuela | Blue Jays | 25 | C | 207 | 57th | 65.6 |
