@@ -15,7 +15,7 @@ Former prospects past graduation, still inside the protection window.
 | Brady House | Nationals | 23 | 474 | 81th | #48 top-100 | 13.1 | 37.6 | +24.5 |
 | Carson Williams | Rays | 23 | 139 | 7th | #9 top-100 | 4.3 | 28.2 | +23.9 |
 | Jasson Domínguez | Yankees | 23 | 737 | 42th | #21 top-100 | 8.7 | 28.3 | +19.6 |
-| Coby Mayo | Orioles | 24 | 621 | 78th | #14 top-100 | 18.3 | 36.4 | +18.1 |
+| Coby Mayo | Orioles | 24 | 621 | 78th | #14 top-100 | 18.2 | 36.4 | +18.2 |
 | Moisés Ballesteros | Cubs | 22 | 241 | 68th | #69 top-100 | 14.6 | 31.3 | +16.7 |
 | Jordan Lawlar | D-backs | 24 | 152 | 74th | #11 top-100 | 22.2 | 38 | +15.8 |
 | Edwin Arroyo | Reds | 22 | 142 | 30th | #67 top-100 | 9.7 | 24.1 | +14.4 |
@@ -70,7 +70,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Thomas Saggese | Cardinals | 24 | LF | 429 | 49th | 3.5 |
 | Victor Mesa Jr. | Rays | 24 | RF | 178 | 60th | 25.8 |
 | Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 28.5 |
-| Mason Fluharty | Blue Jays | 24 | P | 96 | 68th | 13.6 |
+| Mason Fluharty | Blue Jays | 24 | P | 96 | 68th | 13.7 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 69th | 23 |
 | Andrew Morris | Twins | 24 | P | 53 | 68th | 49 |
 | Anthony Molina | Braves | 24 | P | 99 | — | 3.8 |
@@ -78,7 +78,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Grant Taylor | White Sox | 24 | P | 93 | 73th | 75 |
 | Agustín Ramírez | Marlins | 24 | C | 714 | 39th | 51.9 |
 | Angel Chivilli | Yankees | 24 | P | 106 | — | 8.7 |
-| José Fermin | Angels | 24 | P | 71 | 29th | 29.5 |
+| José Fermin | Angels | 24 | P | 71 | 29th | 29.6 |
 | Kyren Paris | Angels | 24 | 2B | 245 | — | 9.4 |
 | Dylan Beavers | Orioles | 24 | RF | 334 | 52th | 24.7 |
 | Angel Martínez | Guardians | 24 | LF | 920 | 44th | 2 |
