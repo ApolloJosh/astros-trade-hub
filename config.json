@@ -450,10 +450,13 @@
     ]
   },
   "hotStove": {
+    "_note": "Market temperature. Trades decay by half-life so a burst reads hotter than the same count spread thin: at halfLifeDays=3 a trade today counts 1.0, three days ago 0.5, a week ago ~0.2. perTrade and valueDiv are tuned so a genuine deadline burst reaches Inferno while a steady drip sits around Simmering.",
     "days": 14,
-    "perTrade": 0.25,
-    "valueDiv": 150,
-    "max": 10
+    "halfLifeDays": 3,
+    "perTrade": 0.9,
+    "valueDiv": 60,
+    "max": 10,
+    "bands": [[2, "Cold"], [4, "Warming"], [6, "Simmering"], [8, "Hot"], [999, "Inferno"]]
   },
   "deadlineBanner": "\ud83d\udd25 Trade Deadline: Monday, August 3rd \u2014 5:00 PM CT",
   "payrollDefaults": {
