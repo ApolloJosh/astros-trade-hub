@@ -1,18 +1,5 @@
 {
-  "_note": "Trades reporters have broken but MLB has not filed yet. They appear in the feed tagged REPORTED and are valued like official ones. PUT ENTRIES IN THE \"trades\" ARRAY BELOW — nothing outside it is read. Shape: { \"date\": \"2026-08-02\", \"source\": \"Will Sammon\", \"sides\": [ { \"team\": \"Rays\", \"gets\": [\"Freddy Peralta\"] }, { \"team\": \"Mets\", \"gets\": [\"Aidan Smith\"] } ] }. Each side lists who RECEIVES. Names are matched against players.json; accents and punctuation don't matter. When MLB files the deal, any reported trade sharing a player is dropped automatically. Unconfirmed entries also expire after staleDays.",
-  "staleDays": 4,
-  "trades": [
-    {
-      "date": "2026-08-02",
-      "source": "Will Sammon",
-      "sides": [
-        { "team": "Rays", "gets": ["Freddy Peralta"] },
-        { "team": "Mets", "gets": ["Aidan Smith", "Emilien Pitre", "Gary Gill Hill"] }
-      ]
-    }
   ]
-}
-{
   "_note": "Trades reporters have broken but MLB has not filed yet. They appear in the feed tagged REPORTED and are valued like official ones. PUT ENTRIES IN THE \"trades\" ARRAY BELOW — nothing outside it is read. Shape: { \"date\": \"2026-08-02\", \"source\": \"Will Sammon\", \"sides\": [ { \"team\": \"Rays\", \"gets\": [\"Freddy Peralta\"] }, { \"team\": \"Mets\", \"gets\": [\"Aidan Smith\"] } ] }. Each side lists who RECEIVES. Names are matched against players.json; accents and punctuation don't matter. When MLB files the deal, any reported trade sharing a player is dropped automatically. Unconfirmed entries also expire after staleDays.",
   "staleDays": 4,
   "trades": [
