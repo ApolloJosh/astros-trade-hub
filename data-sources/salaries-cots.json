@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-02T18:40:00.643Z",
+ "updated": "2026-08-02T19:36:16.262Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1227,9 +1227,9 @@
     "key": "yenniercano",
     "svc": 3.065,
     "control": 2.5,
-    "salaryM": 1.6,
-    "remM": 0.8,
-    "exactFA": false
+    "salaryM": 3.32,
+    "remM": 8.3,
+    "exactFA": true
    },
    {
     "name": "Rico Garcia",
@@ -1326,8 +1326,8 @@
     "key": "yaramilhiraldo",
     "svc": 0.053,
     "control": 5.5,
-    "salaryM": 0.508,
-    "remM": 0.3,
+    "salaryM": 0.712,
+    "remM": 0.4,
     "exactFA": false
    },
    {
@@ -1488,7 +1488,7 @@
     "key": "samhuff",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.182,
+    "salaryM": 0.203,
     "remM": 0.1,
     "exactFA": false
    },
