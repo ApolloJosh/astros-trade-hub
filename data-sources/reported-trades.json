@@ -2,10 +2,10 @@
   "_note": "Trades that reporters have broken but MLB has not filed yet. These appear in the feed tagged REPORTED, valued exactly like official ones. When the official transaction lands, any reported trade sharing a player with it is dropped automatically — you never have to come back and clean up. Players are matched by name against players.json, so spelling matters but accents and punctuation do not. Delete entries whenever you like; they also expire on their own after `staleDays`.",
   "_example": {
     "date": "2026-08-02",
-    "source": "Jeff Passan",
+    "source": "Will Sammon",
     "sides": [
-      { "team": "Dodgers", "gets": ["Tarik Skubal"] },
-      { "team": "Tigers", "gets": ["Zyhir Hope", "River Ryan", "Brady Smith"] }
+      { "team": "Rays", "gets": ["Freddy Peralta"] },
+      { "team": "Mets", "gets": ["Aidan Smith", "Emilien Pitre", "Gary Gill Hill"] }
     ]
   },
   "staleDays": 4,
