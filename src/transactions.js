@@ -48,6 +48,51 @@ function groupTrades(txs) {
 // differently, they bet on development, and a team in a race will pay over the
 // odds for the piece it needs. A bare "Lopsided" implies someone got fleeced,
 // which is usually the wrong read — so we say what the shape of the deal was.
+/**
+ * Package stacking — the same rule the Trade Builder applies via PKG_W.
+ *
+ * Value does not aggregate linearly. A club receiving four useful prospects is
+ * not getting the sum of four useful prospects: there are only so many roster
+ * spots and only the best piece really moves the needle. So sort by value and
+ * taper each subsequent player.
+ *
+ * Liabilities are exempt. A bad contract stays a full drag no matter how many
+ * of them you take on — bulk doesn't make them cheaper.
+ */
+const PKG_W = (CFG.sv && CFG.sv.tv && CFG.sv.tv.pkgWeights) || [1, 0.74, 0.52, 0.36, 0.25, 0.17, 0.11, 0.07];
+const NEED_MULT = (CFG.sv && CFG.sv.tv && CFG.sv.tv.needMult) || 1.08;
+
+/**
+ * Side value, mirroring the Trade Builder's effList().
+ *
+ * Two adjustments on top of raw surplus:
+ *
+ *  1. STACKING — sorted by value, each subsequent piece counts for less. Five
+ *     decent prospects aren't a star; a roster only has so many spots.
+ *
+ *  2. FIT — a club acquiring an established big leaguer at the deadline is,
+ *     by revealed preference, filling a hole. Nobody trades prospects in July
+ *     for a player they don't need. Raw surplus value can't see that, so an
+ *     acquired MLB player carries a small premium. Prospects don't: they're a
+ *     bet on later, not a hole being filled now.
+ *
+ * Liabilities are exempt from both — a bad contract is a full drag, and no
+ * one takes one on because it "fits".
+ */
+function stackedTotal(items) {
+  const rows = items.map(x => (typeof x === 'number' ? { tv: x, prospect: false } : x))
+    .filter(r => r && r.tv != null);
+  const pos = rows.filter(r => r.tv > 0).sort((a, b) => b.tv - a.tv);
+  const neg = rows.filter(r => r.tv <= 0);
+  let t = 0;
+  pos.forEach((r, i) => {
+    const fit = r.prospect ? 1 : NEED_MULT;
+    t += r.tv * PKG_W[Math.min(i, PKG_W.length - 1)] * fit;
+  });
+  neg.forEach(r => { t += r.tv; });
+  return t;
+}
+
 function reasonsFor(sides, teamNeeds) {
   const R = [];
   const heavy = sides[0], light = sides[sides.length - 1];
@@ -127,18 +172,21 @@ function buildReported(byId, teamIdByName, cfgOverride) {
     let missing = 0;
     for (const s of t.sides) {
       const players = [];
-      let total = 0, valued = 0;
+      const tvs = [];
+      let valued = 0;
       (s.gets || []).forEach(nm => {
         const p = byName.get(norm(nm));
         if (!p) { missing++; console.warn(`  reported[${i}]: no player named "${nm}" in the pool`);
           players.push({ id: null, name: String(nm), pos: '', tv: null }); return; }
-        if (p.tv != null) { total += p.tv; valued++; }
+        if (p.tv != null) { tvs.push({ tv: p.tv, prospect: !!p.prospect }); valued++; }
         players.push({ id: p.id, name: p.name, pos: p.pos, tv: p.tv, age: p.age, bt: p.bt,
           ctrl: p.ctrl, prospect: p.prospect || undefined, orgRank: p.orgRank, top100: p.top100 });
       });
+      // Same package stacking the official feed and the builder use.
       sides.push({ team: s.team, teamId: teamIdByName.get(norm(s.team)) || null, players,
         coverage: players.length ? valued / players.length : 0,
-        total: Math.round(total * 10) / 10 });
+        total: Math.round(stackedTotal(tvs) * 10) / 10,
+        rawTotal: Math.round(tvs.reduce((a, b) => a + b.tv, 0) * 10) / 10 });
     }
     // Every side needs at least one player we can actually value. A typo that
     // resolves nothing would otherwise publish an empty card mid-broadcast.
@@ -275,7 +323,8 @@ async function main() {
   for (const g of trades) {
     const sides = [];
     for (const s of g.sides.values()) {
-      let total = 0, valued = 0;
+      let valued = 0;
+      const tvs = [];
       const players = [];
       for (const pl of s.gets) {
         tradedIds.add(pl.id);
@@ -284,7 +333,7 @@ async function main() {
           v = await autoValue(pl.id, pl.name, pl.from ? { id: 0, name: pl.from } : null, lg);
           if (v) { byId.set(v.id, v); autoOut.set(v.id, v); console.log(`  + auto-valued ${v.name} (tv ${v.tv}${v.crude ? ', crude' : ''})`); }
         }
-        if (v && v.tv != null) { total += v.tv; valued++; }
+        if (v && v.tv != null) { tvs.push({ tv: v.tv, prospect: !!v.prospect }); valued++; }
         // Baseball facts, not projected salary. "Owed" only means something for
         // real guaranteed money, so it's flagged separately below.
         const bigDeal = v && v.salSource === 'cots' && (v.rem || 0) >= (CFG.feedOwedMin || 15) && !v.prospect;
@@ -299,8 +348,14 @@ async function main() {
       }
       const side = { team: s.team, teamId: s.teamId, players, coverage: players.length ? valued / players.length : 0 };
       const cash = cashFor(g, side);
+      // Stack the players, then add cash — cash isn't a roster spot, so it
+      // takes no package discount.
+      let total = stackedTotal(tvs);
+      const rawTotal = tvs.reduce((a, b) => a + b.tv, 0);
       if (cash) { side.cashM = cash.cashM; total += cash.tv; }
       side.total = Math.round(total * 10) / 10;
+      // Kept for the calibration report: how much the stacking rule moved it.
+      side.rawTotal = Math.round((rawTotal + (cash ? cash.tv : 0)) * 10) / 10;
       sides.push(side);
     }
     sides.sort((a, b) => b.total - a.total);
