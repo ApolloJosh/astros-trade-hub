@@ -77,6 +77,98 @@ function reasonsFor(sides, teamNeeds) {
   return R;
 }
 
+/**
+ * Reported-but-not-yet-official trades.
+ *
+ * MLB's transaction log is the source of truth for the feed, but it lags the
+ * reporting by hours — on deadline day that's the whole story missing. These
+ * are hand-entered from data-sources/reported-trades.json, valued with the same
+ * engine, and flagged so nobody mistakes them for filed transactions.
+ *
+ * They remove themselves two ways: when an official trade shows up sharing any
+ * player (the deal went through, so the real record wins), or once they pass
+ * staleDays without ever being confirmed.
+ */
+const reportedPath = path.join(__dirname, '..', 'data-sources', 'reported-trades.json');
+const norm = s => String(s || '').toLowerCase().normalize('NFD')
+  .replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+
+function buildReported(byId, teamIdByName, cfgOverride) {
+  let cfg = cfgOverride;
+  if (!cfg) {
+    try { cfg = JSON.parse(fs.readFileSync(reportedPath, 'utf8')); }
+    catch (e) { return []; }
+  }
+  const list = (cfg && cfg.trades) || [];
+  if (!list.length) return [];
+
+  const byName = new Map();
+  byId.forEach(p => { const k = norm(p.name); if (k && !byName.has(k)) byName.set(k, p); });
+
+  const staleMs = (cfg.staleDays != null ? cfg.staleDays : 4) * 86400000;
+  const out = [];
+  list.forEach((t, i) => {
+    if (!t || !Array.isArray(t.sides) || t.sides.length < 2) {
+      console.warn(`  reported[${i}]: needs at least two sides — skipped`); return;
+    }
+    if (t.date && Date.now() - Date.parse(t.date) > staleMs) {
+      console.warn(`  reported[${i}] (${t.date}): older than staleDays and never confirmed — dropped`); return;
+    }
+    const sides = [];
+    let missing = 0;
+    for (const s of t.sides) {
+      const players = [];
+      let total = 0, valued = 0;
+      (s.gets || []).forEach(nm => {
+        const p = byName.get(norm(nm));
+        if (!p) { missing++; console.warn(`  reported[${i}]: no player named "${nm}" in the pool`);
+          players.push({ id: null, name: String(nm), pos: '', tv: null }); return; }
+        if (p.tv != null) { total += p.tv; valued++; }
+        players.push({ id: p.id, name: p.name, pos: p.pos, tv: p.tv, age: p.age, bt: p.bt,
+          ctrl: p.ctrl, prospect: p.prospect || undefined, orgRank: p.orgRank, top100: p.top100 });
+      });
+      sides.push({ team: s.team, teamId: teamIdByName.get(norm(s.team)) || null, players,
+        coverage: players.length ? valued / players.length : 0,
+        total: Math.round(total * 10) / 10 });
+    }
+    // Every side needs at least one player we can actually value. A typo that
+    // resolves nothing would otherwise publish an empty card mid-broadcast.
+    const thin = sides.filter(s => !s.players.some(p => p.id));
+    if (thin.length) {
+      console.warn(`  reported[${i}]: no known players on the ${thin.map(s => s.team).join(' / ')} side — skipped`);
+      return;
+    }
+    sides.sort((a, b) => b.total - a.total);
+    const fullCover = sides.every(x => x.coverage >= 0.99 && x.players.length);
+    const ratio = fullCover && sides[1].total > 0
+      ? Math.round(sides[0].total / sides[1].total * 100) / 100 : null;
+    const desc = sides.map(s => `${s.team} receive ${s.players.map(p => p.name).join(', ')}`).join('; ');
+    out.push({
+      date: t.date || new Date().toISOString().slice(0, 10),
+      desc: t.note || desc, sides, ratio,
+      verdict: verdictFor(ratio, false, sides, NEEDS),
+      reported: true, source: t.source || null,
+      unresolved: missing || undefined,
+    });
+  });
+  return out;
+}
+
+// A reported trade is confirmed the moment an official one shares any player.
+function dropConfirmed(official, reported) {
+  if (!reported.length) return reported;
+  const officialIds = new Set();
+  official.forEach(t => (t.sides || []).forEach(s =>
+    (s.players || []).forEach(p => { if (p.id) officialIds.add(p.id); })));
+  return reported.filter(t => {
+    const ids = [];
+    (t.sides || []).forEach(s => (s.players || []).forEach(p => { if (p.id) ids.push(p.id); }));
+    const hit = ids.find(id => officialIds.has(id));
+    if (hit) console.log(`  reported "${t.desc.slice(0, 60)}" is now official — dropped`);
+    return !hit;
+  });
+}
+
 function verdictFor(ratio, dump, sides, teamNeeds) {
   const why = sides ? reasonsFor(sides, teamNeeds) : [];
   const tag = (label, cls) => {
@@ -210,7 +302,20 @@ async function main() {
       verdict: verdictFor(ratio, dump, sides, NEEDS),
       cashUnknown: g.cashHint && !sides.some(x => x.cashM != null) || undefined });
   }
-  feed.sort((a, b) => b.date.localeCompare(a.date));
+  // Hand-entered scoops, minus any the official log has since confirmed.
+  const teamIdByName = new Map();
+  byId.forEach(p => {
+    if (!p.team || !p.teamId) return;
+    const k = norm(p.team); if (!teamIdByName.has(k)) teamIdByName.set(k, p.teamId);
+    const short = norm(String(p.team).split(' ').pop());
+    if (short && !teamIdByName.has(short)) teamIdByName.set(short, p.teamId);
+  });
+  const reported = dropConfirmed(feed, buildReported(byId, teamIdByName));
+  if (reported.length) console.log(`  + ${reported.length} reported (unofficial) trade(s)`);
+  feed.push(...reported);
+
+  feed.sort((a, b) => b.date.localeCompare(a.date) ||
+    ((a.reported ? 1 : 0) - (b.reported ? 1 : 0)));   // official first within a day
 
   fs.writeFileSync(path.join(OUT, 'feed.json'), JSON.stringify({ updated: new Date().toISOString(), since: CFG.feedSince, trades: feed }));
   fs.writeFileSync(autoPath, JSON.stringify({ updated: new Date().toISOString(), modelSig, players: [...autoOut.values()] }));
@@ -227,4 +332,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
-module.exports = { groupTrades, verdictFor, cashFor };
+module.exports = { groupTrades, verdictFor, cashFor, buildReported, dropConfirmed, norm };
