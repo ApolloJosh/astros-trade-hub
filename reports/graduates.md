@@ -55,8 +55,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Nacho Alvarez Jr. | Braves | 23 | SS | 240 | — | 19.3 |
 | Sam Antonacci | White Sox | 23 | LF | 361 | 56th | 70 |
 | Eury Pérez | Marlins | 23 | P | 291 | 57th | 67.9 |
-| Javier Sanoja | Marlins | 23 | 3B | 673 | 20th | 37.9 |
 | Joe Mack | Marlins | 23 | C | 212 | 65th | 60.7 |
+| Javier Sanoja | Marlins | 23 | 3B | 673 | 20th | 37.9 |
 | Ryan Waldschmidt | D-backs | 23 | CF | 165 | 43th | 62.9 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 198 | 53th | 44.1 |
 | Daylen Lile | Nationals | 23 | LF | 808 | 52th | 30.1 |
@@ -86,7 +86,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Cole Carrigg | Rockies | 24 | CF | 164 | 45th | 120.9 |
 | Kyle Karros | Rockies | 24 | 3B | 520 | 69th | 87.2 |
 | Brice Matthews | Astros | 24 | CF | 273 | 36th | 2 |
-| Luinder Avila | Royals | 24 | P | 84 | 52th | 17.7 |
+| Luinder Avila | Royals | 24 | P | 84 | 52th | 17.3 |
 | Edgardo Henriquez | Dodgers | 24 | P | 65 | 96th | 53.5 |
 | Colby Thomas | Athletics | 25 | RF | 253 | 41th | 4.4 |
 | Jase Bowen | Padres | 25 | RF | 66 | 26th | 4.7 |
