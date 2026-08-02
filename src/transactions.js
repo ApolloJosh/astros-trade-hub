@@ -100,7 +100,16 @@ function buildReported(byId, teamIdByName, cfgOverride) {
     catch (e) { return []; }
   }
   const list = (cfg && cfg.trades) || [];
-  if (!list.length) return [];
+  if (!list.length) {
+    // Easy mistake: filling in a documentation key instead of the live array.
+    Object.keys(cfg || {}).forEach(k => {
+      const v = cfg[k];
+      if (k !== 'trades' && v && (Array.isArray(v.sides) || (Array.isArray(v) && v[0] && v[0].sides))) {
+        console.warn(`  reported-trades.json: found a trade under "${k}" — only the "trades" array is read. Move it there.`);
+      }
+    });
+    return [];
+  }
 
   const byName = new Map();
   byId.forEach(p => { const k = norm(p.name); if (k && !byName.has(k)) byName.set(k, p); });
