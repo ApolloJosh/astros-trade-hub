@@ -4,10 +4,13 @@
     { "name": "Hyeseong Kim", "max": 9, "why": "not a piece anyone is paying for" },
     { "name": "Carlos Correa", "max": 9, "why": "huge contract on an often-injured 31yo; Astros got him for nothing" },
     { "name": "Anthony Volpe", "max": 9, "why": "production doesn't match the name value" },
+    { "name": "Trevor Larnach", "max": 38.9, "why": "production doesn't match the name value" },
     { "name": "Yordan Alvarez", "min": 135.7, "why": "production doesn't match the name value" },
     { "name": "Hunter Brown", "min": 94.2, "why": "production doesn't match the name value" },
     { "name": "Luke Weaver", "min": 41.2, "why": "production doesn't match the name value" },
     { "name": "Oneil Cruz", "min": 54.4, "why": "production doesn't match the name value" },
+    { "name": "Bryan Abreu", "min": 34.5, "why": "production doesn't match the name value" },
+    { "name": "AJ Blubaugh", "min": 26.3, "why": "production doesn't match the name value" },
     { "name": "Shohei Ohtani", "min": 165, "why": "repeat MVP; the one asset allowed above the 150 scale" }
   ]
 }
