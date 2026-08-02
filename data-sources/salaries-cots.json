@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-02T06:42:36.730Z",
+ "updated": "2026-08-02T12:09:23.340Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -4133,15 +4133,6 @@
   ],
   "116": [
    {
-    "name": "Tarik Skubal",
-    "key": "tarikskubal",
-    "svc": 5.114,
-    "control": 0.5,
-    "salaryM": 32,
-    "remM": 16,
-    "exactFA": true
-   },
-   {
     "name": "Javier Báez",
     "key": "javierbaez",
     "svc": 10.089,
@@ -4517,6 +4508,15 @@
     "control": 3.5,
     "salaryM": 0.765,
     "remM": 0.4,
+    "exactFA": false
+   },
+   {
+    "name": "River Ryan",
+    "key": "riverryan",
+    "svc": 1.07,
+    "control": 4.5,
+    "salaryM": 0.115,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -5390,6 +5390,15 @@
     "exactFA": true
    },
    {
+    "name": "Tarik Skubal",
+    "key": "tarikskubal",
+    "svc": 5.114,
+    "control": 0.5,
+    "salaryM": 9.583,
+    "remM": 4.8,
+    "exactFA": true
+   },
+   {
     "name": "Shohei Ohtani",
     "key": "shoheiohtani",
     "svc": 8,
@@ -5727,7 +5736,7 @@
     "key": "kylehurt",
     "svc": 1.099,
     "control": 4.5,
-    "salaryM": 0.732,
+    "salaryM": 0.706,
     "remM": 0.4,
     "exactFA": false
    },
@@ -5772,16 +5781,7 @@
     "key": "wyattmills",
     "svc": 1.134,
     "control": 4.5,
-    "salaryM": 0.176,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
-    "name": "River Ryan",
-    "key": "riverryan",
-    "svc": 1.07,
-    "control": 4.5,
-    "salaryM": 0.385,
+    "salaryM": 0.365,
     "remM": 0.2,
     "exactFA": false
    },
@@ -5804,6 +5804,15 @@
     "exactFA": false
    },
    {
+    "name": "River Ryan",
+    "key": "riverryan",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.27,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Chayce McDermott",
     "key": "chaycemcdermott",
     "svc": null,
@@ -5817,7 +5826,7 @@
     "key": "charliebarnes",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.136,
+    "salaryM": 0.148,
     "remM": 0.1,
     "exactFA": false
    },
