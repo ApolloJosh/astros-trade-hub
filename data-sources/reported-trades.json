@@ -7,7 +7,7 @@
       "date": "2026-08-02",
       "source": "Mark Feinsand",
       "sides": [
-        { "team": "Yankees", "gets": ["Luis Garcia Jr."] },
+        { "team": "Yankees", "gets": ["Luis Garcia Jr"] },
         { "team": "Nationals", "gets": ["Ben Grable", "Jake Bird", "Yovanny Cruz", "Jack Cebert"] }
       ]
     }
