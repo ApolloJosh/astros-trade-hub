@@ -14,19 +14,50 @@ const REPORTS = path.join(__dirname, '..', 'reports');
 
 function median(a) { if (!a.length) return null; const s = [...a].sort((x, y) => x - y); const m = Math.floor(s.length / 2); return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
 
+/**
+ * Market temperature.
+ *
+ * The old version counted every trade in the window equally, so eight deals in
+ * three days scored the same as eight spread over a fortnight — which is not
+ * what a hot stove is. Each trade now decays on a half-life, so recent activity
+ * dominates and the number falls away on its own once things go quiet.
+ */
 function hotStove(trades) {
-  const hs = CFG.hotStove || { days: 14, perTrade: 0.25, valueDiv: 150, max: 10 };
-  const cutoff = Date.now() - hs.days * 86400000;
+  const hs = Object.assign(
+    { days: 14, halfLifeDays: 3, perTrade: 0.9, valueDiv: 60, max: 10 },
+    CFG.hotStove || {});
+  const bands = hs.bands || [[2, 'Cold'], [4, 'Warming'], [6, 'Simmering'], [8, 'Hot'], [999, 'Inferno']];
+  const now = Date.now();
+  const cutoff = now - hs.days * 86400000;
   const recent = trades.filter(t => Date.parse(t.date) >= cutoff);
-  let valueSum = 0;
+
+  let wTrades = 0, wValue = 0, valueSum = 0, newest = null;
   recent.forEach(t => {
-    const totals = (t.sides || []).map(s => s.total || 0);
-    valueSum += Math.min(...totals, Infinity) === Infinity ? 0 : Math.min(...totals);
+    const ts = Date.parse(t.date);
+    // Feed dates are day-resolution, so today's trades can look slightly future.
+    const ageDays = Math.max(0, (now - ts) / 86400000);
+    const w = Math.pow(0.5, ageDays / hs.halfLifeDays);
+    // The smaller side is what actually changed hands; a lopsided salary dump
+    // shouldn't read as a blockbuster.
+    const totals = (t.sides || []).map(s => s.total || 0).filter(v => v > 0);
+    const v = totals.length ? Math.min(...totals) : 0;
+    wTrades += w; wValue += w * v; valueSum += v;
+    if (newest == null || ts > newest) newest = ts;
   });
-  const score = Math.min(hs.max, recent.length * hs.perTrade + valueSum / hs.valueDiv);
-  const label = score < 2 ? 'Cold' : score < 4 ? 'Warming' : score < 6 ? 'Simmering' : score < 8 ? 'Hot' : 'Inferno';
-  return { score: Math.round(score * 10) / 10, label, recentTrades: recent.length,
-    recentValue: Math.round(valueSum * 10) / 10, windowDays: hs.days };
+
+  const score = Math.min(hs.max, wTrades * hs.perTrade + wValue / hs.valueDiv);
+  const label = (bands.find(b => score < b[0]) || bands[bands.length - 1])[1];
+  return {
+    score: Math.round(score * 10) / 10, label,
+    recentTrades: recent.length,
+    recentValue: Math.round(valueSum * 10) / 10,
+    // Effective trade count after decay — the reason a burst outscores a drip.
+    weightedTrades: Math.round(wTrades * 10) / 10,
+    last24h: recent.filter(t => now - Date.parse(t.date) <= 86400000).length,
+    last72h: recent.filter(t => now - Date.parse(t.date) <= 3 * 86400000).length,
+    hoursSinceLast: newest == null ? null : Math.round((now - newest) / 36e5 * 10) / 10,
+    halfLifeDays: hs.halfLifeDays, windowDays: hs.days,
+  };
 }
 
 function main() {
