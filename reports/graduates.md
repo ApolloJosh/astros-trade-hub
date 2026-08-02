@@ -44,7 +44,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 |---|---|---:|---|---:|---:|---:|
 | Didier Fuentes | Braves | 21 | P | 60 | 79th | 67.9 |
 | A.J. Ewing | Mets | 21 | CF | 292 | 62th | 61.3 |
-| Henry Bolte | Athletics | 22 | CF | 249 | 61th | 47.1 |
+| Henry Bolte | Athletics | 22 | CF | 250 | 61th | 46.1 |
 | Esmerlyn Valdez | Pirates | 22 | RF | 172 | 95th | 132.1 |
 | Bradgley Rodriguez | Padres | 22 | P | 56 | 93th | 68.3 |
 | Denzer Guzman | Angels | 22 | 3B | 198 | 35th | 19.5 |
