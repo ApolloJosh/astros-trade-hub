@@ -1,7 +1,7 @@
 {
   "team": "yankees",
   "teamId": 147,
-  "updated": "2026-07-25",
+  "updated": "2026-08-02",
   "prospects": [
     {
       "rank": 1,
@@ -15,7 +15,7 @@
     },
     {
       "rank": 3,
-      "name": "Elmer Rodríguez",
+      "name": "Elmer Rodr\u00edguez",
       "pos": "RHP"
     },
     {
@@ -120,7 +120,7 @@
     },
     {
       "rank": 24,
-      "name": "Sean Paul Liñan",
+      "name": "Sean Paul Li\u00f1an",
       "pos": "RHP"
     },
     {
@@ -157,6 +157,12 @@
       "rank": null,
       "name": "Harrison Cohen",
       "pos": "SP"
+    },
+    {
+      "rank": 31,
+      "name": "Ben Grable",
+      "mlbid": 695066,
+      "pos": "RHP"
     }
   ]
 }
