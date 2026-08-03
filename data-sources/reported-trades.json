@@ -3,19 +3,35 @@
   "staleDays": 4,
   "trades": [
     {
-      "date": "2026-08-02",
-      "source": "Ken Rosenthal",
+      "date": "2026-08-03",
+      "source": "Jeff Passan",
       "sides": [
-        { "team": "Cubs", "gets": ["Kevin Gausman"] },
-        { "team": "Blue Jays", "gets": ["Ty Southisene", "Brett Bateman"] }
+        { "team": "Blue Jays", "gets": ["Jose Soriano"] },
+        { "team": "Angels", "gets": ["Arjun Nimmala", "Eddie Micheletti", "Angel Rivero"] }
       ]
     },
     {
-      "date": "2026-08-02",
-      "source": "Robert Murray",
+      "date": "2026-08-03",
+      "source": "Jeff Passan",
       "sides": [
-        { "team": "Braves", "gets": ["Tyler Mahle"] },
-        { "team": "Giants", "gets": ["Anthony Molina"] }
+        { "team": "Phillies", "gets": ["Luis Arraez", "Caleb Kilian"] },
+        { "team": "Giants", "gets": ["Ramon Marquez", "Marty Gair"] }
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "source": "Jeff Passan",
+      "sides": [
+        { "team": "Mariners", "gets": ["Taylor Ward"] },
+        { "team": "Orioles", "gets": ["Alex Hoppe", "Harrison Kreiling", "Brock Moore"] }
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "source": "Jeff Passan",
+      "sides": [
+        { "team": "Angels", "gets": ["Jo Adell"] },
+        { "team": "Guardians", "gets": ["Jacob Cozart"] }
       ]
     }
   ]
