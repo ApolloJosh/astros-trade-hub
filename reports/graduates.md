@@ -73,8 +73,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Mason Fluharty | Blue Jays | 24 | P | 96 | 68th | 13.7 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 69th | 23 |
 | Andrew Morris | Twins | 24 | P | 53 | 68th | 49 |
-| Drew Romo | White Sox | 24 | C | 207 | 15th | 3.5 |
 | Grant Taylor | White Sox | 24 | P | 93 | 74th | 75 |
+| Drew Romo | White Sox | 24 | C | 207 | 15th | 3.5 |
 | Agustín Ramírez | Marlins | 24 | C | 714 | 40th | 51.9 |
 | Angel Chivilli | Yankees | 24 | P | 106 | — | 8.8 |
 | José Fermin | Angels | 24 | P | 71 | 29th | 29.6 |
