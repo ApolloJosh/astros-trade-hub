@@ -4,10 +4,10 @@
   "trades": [
     {
       "date": "2026-08-02",
-      "source": "Mark Feinsand",
+      "source": "Ken Rosenthal",
       "sides": [
-        { "team": "Yankees", "gets": ["Luis Garcia Jr"] },
-        { "team": "Nationals", "gets": ["Jake Bird", "Yovanny Cruz", "Ben Grable", "Jack Cebert"] }
+        { "team": "Cubs", "gets": ["Kevin Gausman"] },
+        { "team": "Blue Jays", "gets": ["Ty Southisene", "Brett Bateman"] }
       ]
     }
   ]
