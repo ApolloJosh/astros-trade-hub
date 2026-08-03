@@ -10,5 +10,17 @@
         { "team": "Blue Jays", "gets": ["Ty Southisene", "Brett Bateman"] }
       ]
     }
+    {
+  "_note": "Trades reporters have broken but MLB has not filed yet. They appear in the feed tagged REPORTED and are valued like official ones. PUT ENTRIES IN THE \"trades\" ARRAY BELOW — nothing outside it is read. Shape: { \"date\": \"2026-08-02\", \"at\": \"2026-08-02T19:30:00Z\", \"source\": \"Jeff Passan\", \"sides\": [ { \"team\": \"Rays\", \"gets\": [\"Freddy Peralta\"] }, { \"team\": \"Mets\", \"gets\": [\"Aidan Smith\"] } ] }. Each side lists who RECEIVES — a player should never appear under the team he is already on. \"at\" is optional and pins the minute the scoop broke. Names are matched against players.json; accents and punctuation don't matter, spelling does. If any name fails to resolve the whole trade grades as Unvalued, so check the build log.",
+  "staleDays": 4,
+  "trades": [
+    {
+      "date": "2026-08-02",
+      "source": "Robert Murray",
+      "sides": [
+        { "team": "Braves", "gets": ["Tyler Mahle"] },
+        { "team": "Giants", "gets": ["Anthony Molina"] }
+      ]
+    }
   ]
 }
