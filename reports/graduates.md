@@ -2,7 +2,7 @@
 
 Former prospects past graduation, still inside the protection window.
 
-## Lifted by the pedigree floor (29)
+## Lifted by the pedigree floor (28)
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
@@ -16,7 +16,6 @@ Former prospects past graduation, still inside the protection window.
 | Carson Williams | Rays | 23 | 139 | 8th | #9 top-100 | 4.3 | 28.5 | +24.2 |
 | Jasson Domínguez | Yankees | 23 | 737 | 42th | #21 top-100 | 8.7 | 28.3 | +19.6 |
 | Coby Mayo | Orioles | 24 | 621 | 78th | #14 top-100 | 18.3 | 36.4 | +18.1 |
-| Moisés Ballesteros | Cubs | 22 | 241 | 68th | #69 top-100 | 14.6 | 31.3 | +16.7 |
 | Jordan Lawlar | D-backs | 24 | 152 | 74th | #11 top-100 | 22.1 | 38 | +15.9 |
 | Edwin Arroyo | Reds | 22 | 142 | 30th | #67 top-100 | 9.7 | 24.1 | +14.4 |
 | Cam Smith | Astros | 23 | 904 | 74th | #59 top-100 | 3.8 | 16.8 | +13 |
@@ -36,7 +35,7 @@ Former prospects past graduation, still inside the protection window.
 | Braden Montgomery | White Sox | 23 | 178 | 48th | #55 top-100 | 24.4 | 26.5 | +2.1 |
 | Owen Caissie | Marlins | 24 | 276 | 81th | #47 top-100 | 24.6 | 25.8 | +1.2 |
 
-## Young graduates with NO pedigree on file (249)
+## Young graduates with NO pedigree on file (248)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -102,4 +101,4 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Cody Freeman | Rangers | 25 | 3B | 139 | 4th | 2 |
 | Brandon Valenzuela | Blue Jays | 25 | C | 207 | 57th | 65.6 |
 | Johan Rojas | Phillies | 25 | CF | 699 | — | 6.5 |
-| _…189 more_ | | | | | | |
+| _…188 more_ | | | | | | |
