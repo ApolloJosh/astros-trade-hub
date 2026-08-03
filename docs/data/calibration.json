@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-03T00:36:56.629Z",
+ "updated": "2026-08-03T00:44:35.048Z",
  "tradesAnalyzed": 28,
  "tradesTotal": 28,
  "marketTemp": 1.815,
@@ -11,7 +11,7 @@
   "weightedTrades": 7.6,
   "last24h": 1,
   "last72h": 8,
-  "hoursSinceLast": 0.6,
+  "hoursSinceLast": 0.7,
   "halfLifeDays": 3,
   "windowDays": 14
  }
