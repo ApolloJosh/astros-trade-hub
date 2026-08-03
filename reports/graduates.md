@@ -53,11 +53,11 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Max Muncy | Athletics | 23 | 3B | 398 | 68th | 16.5 |
 | Blaze Jordan | Cardinals | 23 | 3B | 134 | 60th | 12.3 |
 | Alejandro Osuna | Rangers | 23 | LF | 394 | 21th | 11.1 |
-| Nacho Alvarez Jr. | Braves | 23 | SS | 240 | — | 19.4 |
 | Sam Antonacci | White Sox | 23 | LF | 366 | 55th | 63.8 |
 | Eury Pérez | Marlins | 23 | P | 291 | 57th | 67.8 |
 | Javier Sanoja | Marlins | 23 | 3B | 676 | 20th | 35.3 |
 | Joe Mack | Marlins | 23 | C | 215 | 69th | 72.5 |
+| Nacho Alvarez Jr. | Angels | 23 | SS | 240 | — | 17 |
 | Ryan Waldschmidt | D-backs | 23 | CF | 165 | 43th | 63.1 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 203 | 54th | 41.3 |
 | Daylen Lile | Nationals | 23 | LF | 812 | 52th | 30.8 |
@@ -65,7 +65,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Joey Estes | Athletics | 24 | P | 153 | — | 3.2 |
 | Jacob Gonzalez | Pirates | 24 | SS | 136 | 51th | 38.4 |
 | Nick Yorke | Pirates | 24 | 3B | 200 | 56th | 8.5 |
-| Anthony Molina | Giants | 24 | P | 99 | — | 3.6 |
+| Anthony Molina | Giants | 24 | P | 99 | — | 3.8 |
 | Hayden Birdsong | Giants | 24 | P | 138 | — | 2 |
 | Thomas Saggese | Cardinals | 24 | LF | 429 | 49th | 3.5 |
 | Victor Mesa Jr. | Rays | 24 | RF | 178 | 60th | 25.8 |
