@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-03T17:05:19.089Z",
+ "updated": "2026-08-03T19:20:08.102Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -6206,8 +6206,8 @@
     "key": "andrewalvarez",
     "svc": 0.028,
     "control": 5.5,
-    "salaryM": 0.389,
-    "remM": 0.2,
+    "salaryM": 0.584,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -6305,8 +6305,8 @@
     "key": "abimelecortiz",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.083,
-    "remM": 0,
+    "salaryM": 0.297,
+    "remM": 0.1,
     "exactFA": false
    },
    {
