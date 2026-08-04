@@ -129,7 +129,8 @@ window.BTD = (function () {
   }
   async function nav(active) {
     const el = document.getElementById('mast') || document.getElementById('nav');
-    const links = [['index', 'Hub'], ['builder', 'Trade Builder'], ['feed', 'Trade Feed'], ['fan', 'Fan Trades'], ['fits', 'Astros Fits']];
+    const links = [['index', 'Hub'], ['builder', 'Trade Builder'], ['feed', 'Trade Feed'],
+      ['deadline', 'Deadline Review'], ['fan', 'Fan Trades'], ['fits', 'Astros Fits']];
     el.innerHTML =
       '<div class="deadline-banner">🔥 Trade Deadline: Monday, August 3rd — 5:00 PM CT 🔥</div>' +
       '<div class="stripe"></div>' +
