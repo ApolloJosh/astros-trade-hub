@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deadline Review — BTD Trade Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* Everything here is computed in the browser from feed.json — no extra build
+   step, no charting library. Bars are divs, the scatter is inline SVG. */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0 6px}
+.kpi{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:11px 13px;text-align:center}
+.kpi span{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kpi b{display:block;font-family:var(--hd2);font-size:23px;font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums}
+
+.panel{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:15px 17px;margin-bottom:16px}
+.phd{font-family:var(--hd);font-size:clamp(16px,2.2vw,20px);text-transform:uppercase;letter-spacing:.03em;
+  border-bottom:2px solid var(--card-line);padding-bottom:6px;margin:0 0 4px}
+.psub{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+
+/* ranked bars */
+.row2{display:grid;grid-template-columns:150px 1fr 62px;gap:9px;align-items:center;font-size:12.5px;
+  padding:2.5px 0;cursor:pointer;border-radius:4px}
+.row2:hover{background:var(--row-hover)}
+.row2.dim{opacity:.32}
+.row2 .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.row2 .nm img{width:17px;height:17px;object-fit:contain;flex:0 0 auto}
+.row2 .val{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+.track{background:var(--row-line);border-radius:99px;height:15px;position:relative;overflow:hidden}
+.fill{height:100%;border-radius:99px;transition:width .35s ease}
+/* diverging: zero line in the middle */
+.dtrack{position:relative;height:15px;background:var(--row-line);border-radius:99px}
+.dtrack .zero{position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.4}
+.dfill{position:absolute;top:0;height:100%;border-radius:99px;transition:all .35s ease}
+
+.controls2{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.controls2 button{font-family:var(--hd2);font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;padding:5px 11px;border-radius:999px;cursor:pointer;
+  border:2px solid var(--card-line);background:var(--card);color:var(--ink)}
+.controls2 button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* scatter */
+.scwrap{position:relative}
+.sc{width:100%;height:auto;display:block;overflow:visible}
+.sc .dot{cursor:pointer;transition:r .15s ease,opacity .15s ease}
+.sc .dot:hover{opacity:1}
+.sc text{font-size:9px;fill:var(--muted)}
+.sc .qlab{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.5}
+.tip{position:absolute;pointer-events:none;background:var(--navy);color:#fff;font-size:11.5px;
+  padding:7px 10px;border-radius:7px;white-space:nowrap;opacity:0;transition:opacity .12s;z-index:5;line-height:1.45}
+
+.ftab{width:100%;border-collapse:collapse;font-size:12.5px}
+.ftab th{font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700;
+  text-align:left;padding:4px 6px;border-bottom:1px solid var(--row-line)}
+.ftab td{padding:5px 6px;border-bottom:1px solid var(--row-line);vertical-align:middle}
+.ftab tr:last-child td{border-bottom:0}
+.ftab .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
+.gapbar{height:9px;border-radius:99px;background:var(--accent);min-width:3px}
+.cav{font-size:11.5px;font-style:italic;color:var(--muted);border-left:3px solid var(--warn);
+  padding:5px 0 5px 10px;margin-top:12px}
+@media(max-width:560px){.row2{grid-template-columns:104px 1fr 52px;font-size:11.5px}}
+</style>
+</head><body>
+<header id="mast"></header>
+<div class="wrap">
+<div class="hero"><div class="kicker">The Reckoning</div>
+<h1>Deadline Review</h1>
+<p class="sub" id="dsub">Every deal of the deadline, scored by the BTD model — who bought, who sold, and who won the exchange.</p></div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="panel">
+  <div class="phd">Team Leaderboard</div>
+  <p class="psub" id="lbsub"></p>
+  <div class="controls2" id="metric"></div>
+  <div id="chart"></div>
+</div>
+
+<div class="panel">
+  <div class="phd">Buyers and Sellers</div>
+  <p class="psub">Big-league talent added against prospect value added. Buyers take on major leaguers and
+  pay in prospects; sellers do the reverse. Distance from the diagonal is how committed they were.</p>
+  <div class="scwrap"><div id="sctip" class="tip"></div><div id="scatter"></div></div>
+</div>
+
+<div class="panel">
+  <div class="phd">Biggest Gaps</div>
+  <p class="psub" id="flsub"></p>
+  <div class="controls2" id="fmode"></div>
+  <div id="fleece"></div>
+  <div class="cav">A gap means one side gave up more surplus value, not that anyone was fooled. Clubs
+  value players differently, bet on development, and pay over the odds for a fit the model can't see.</div>
+</div>
+
+<div class="panel">
+  <div class="phd">Biggest Pieces Moved</div>
+  <p class="psub">Every player who changed hands, by trade value. Tap a name for the full card.</p>
+  <div class="controls2" id="pmode"></div>
+  <div id="pieces"></div>
+</div>
+
+<p class="foot" id="dfoot">Model estimates at time of refresh · Beyond the Diamond</p>
+<script src="assets/app.js"></script>
+<script>
+BTD.nav('deadline');
+(async () => {
+  const f = await BTD.data('feed');
+  // Reported-but-unofficial deals are excluded: this is the settled record.
+  const off = (f.trades || []).filter(t => !t.reported && (t.sides || []).length >= 2);
+  if (!off.length) { document.getElementById('chart').innerHTML = '<div class="card">No trades yet.</div>'; return; }
+  const V = s => s.total || 0;
+
+  // ---- aggregate per club -------------------------------------------------
+  const T = new Map();
+  const club = n => { if (!T.has(n)) T.set(n, { team: n, teamId: null, in: 0, out: 0, deals: 0,
+    prosIn: 0, prosOut: 0, mlbIn: 0, mlbOut: 0, nProsIn: 0, nProsOut: 0, rankedOut: 0 }); return T.get(n); };
+  const moved = [];
+  off.forEach(t => {
+    t.sides.forEach(s => {
+      const me = club(s.team); me.deals++; me.teamId = me.teamId || s.teamId;
+      me.in += V(s);
+      (s.players || []).forEach(p => {
+        const v = p.tv || 0;
+        if (p.prospect) { me.prosIn += v; me.nProsIn++; } else { me.mlbIn += v; }
+        moved.push({ name: p.name, id: p.id, tv: v, to: s.team, prospect: !!p.prospect, date: t.date });
+      });
+      t.sides.filter(o => o !== s).forEach(o => {
+        me.out += V(o);
+        (o.players || []).forEach(p => {
+          const v = p.tv || 0;
+          if (p.prospect) { me.prosOut += v; me.nProsOut++; if (p.orgRank || p.top100) me.rankedOut++; }
+          else me.mlbOut += v;
+        });
+      });
+    });
+  });
+  const A = [...T.values()].map(x => ({ ...x, net: x.in - x.out }));
+  const r1 = v => Math.round(v * 10) / 10;
+
+  // ---- KPIs ---------------------------------------------------------------
+  const totalValue = off.reduce((a, t) => a + t.sides.reduce((b, s) => b + V(s), 0), 0);
+  const prospects = moved.filter(m => m.prospect).length;
+  const dates = off.map(t => t.date).sort();
+  document.getElementById('kpis').innerHTML =
+    [['Trades', off.length], ['Clubs active', A.length], ['Value moved', r1(totalValue)],
+     ['Players moved', moved.length], ['Prospects moved', prospects]]
+    .map(([l, v]) => `<div class="kpi"><span>${l}</span><b>${v}</b></div>`).join('');
+  document.getElementById('dsub').innerHTML +=
+    ` <b>${off.length}</b> deals, ${BTD.esc(dates[0])} to ${BTD.esc(dates[dates.length - 1])}.`;
+
+  // ---- leaderboard --------------------------------------------------------
+  const METRICS = [
+    ['net', 'Net value', 'Acquired minus surrendered. The bottom line.', true],
+    ['in', 'Acquired', 'Total value taken in.', false],
+    ['out', 'Surrendered', 'Total value given up.', false],
+    ['prosOut', 'Prospects paid', 'Prospect value surrendered — the cost of buying.', false],
+    ['prosIn', 'Prospects gained', 'Prospect value acquired — the reward for selling.', false],
+    ['mlbIn', 'MLB talent added', 'Established big leaguers acquired.', false],
+    ['mlbOut', 'MLB talent shipped', 'Established big leaguers sent away.', false],
+    ['rankedOut', 'Ranked prospects paid', 'Count of ranked prospects given up.', false],
+    ['deals', 'Deals made', 'Sheer volume of activity.', false],
+  ];
+  let metric = 'net', highlight = null;
+  const mbar = document.getElementById('metric');
+  mbar.innerHTML = METRICS.map(([k, l]) =>
+    `<button data-m="${k}"${k === metric ? ' class="on"' : ''}>${l}</button>`).join('');
+  mbar.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    metric = b.dataset.m;
+    mbar.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    drawChart();
+  }));
+
+  function drawChart() {
+    const M = METRICS.find(m => m[0] === metric);
+    document.getElementById('lbsub').textContent = M[2];
+    const rows = A.slice().sort((a, b) => b[metric] - a[metric]);
+    const diverging = M[3];
+    const max = Math.max(...rows.map(x => Math.abs(x[metric])), 1);
+    document.getElementById('chart').innerHTML = rows.map(x => {
+      const v = x[metric], pct = Math.abs(v) / max * 50;
+      const dim = highlight && highlight !== x.team ? ' dim' : '';
+      const bar = diverging
+        ? `<div class="dtrack"><div class="zero"></div><div class="dfill" style="` +
+          (v >= 0 ? `left:50%;width:${pct}%;background:var(--tvhi,var(--good))`
+                  : `right:50%;width:${pct}%;background:var(--bad)`) + `"></div></div>`
+        : `<div class="track"><div class="fill" style="width:${Math.abs(v) / max * 100}%;` +
+          `background:${metric.startsWith('pros') || metric === 'rankedOut' ? 'var(--accent2)' : 'var(--accent)'}"></div></div>`;
+      return `<div class="row2${dim}" data-team="${BTD.esc(x.team)}">` +
+        `<span class="nm"><img src="${BTD.logo(x.teamId)}" onerror="this.style.display='none'">${BTD.esc(x.team)}</span>` +
+        bar + `<span class="val">${v > 0 && diverging ? '+' : ''}${r1(v)}</span></div>`;
+    }).join('');
+    document.querySelectorAll('#chart .row2').forEach(el => el.addEventListener('click', () => {
+      highlight = highlight === el.dataset.team ? null : el.dataset.team;
+      drawChart(); drawScatter();
+    }));
+  }
+
+  // ---- buyers / sellers scatter ------------------------------------------
+  const tip = document.getElementById('sctip');
+  function drawScatter() {
+    const W = 720, H = 430, P = 46;
+    const maxX = Math.max(...A.map(x => x.mlbIn), 10) * 1.08;
+    const maxY = Math.max(...A.map(x => x.prosIn), 10) * 1.08;
+    const sx = v => P + (v / maxX) * (W - P * 1.4);
+    const sy = v => H - P - (v / maxY) * (H - P * 1.7);
+    const dots = A.map(x => {
+      const rr = 5 + Math.min(9, x.deals) * 0.85;
+      const dim = highlight && highlight !== x.team ? 0.18 : 0.85;
+      const buy = x.mlbIn >= x.prosIn;
+      return `<circle class="dot" cx="${sx(x.mlbIn).toFixed(1)}" cy="${sy(x.prosIn).toFixed(1)}" r="${rr.toFixed(1)}"
+        fill="${buy ? 'var(--accent)' : 'var(--accent2)'}" opacity="${dim}"
+        data-t="${BTD.esc(x.team)}" data-i="${r1(x.mlbIn)}" data-p="${r1(x.prosIn)}"
+        data-n="${r1(x.net)}" data-d="${x.deals}"></circle>`;
+    }).join('');
+    const gridX = [0, 0.25, 0.5, 0.75, 1].map(g => {
+      const v = maxX * g;
+      return `<line x1="${sx(v)}" y1="${P - 10}" x2="${sx(v)}" y2="${H - P}" stroke="var(--row-line)" stroke-width="1"/>` +
+             `<text x="${sx(v)}" y="${H - P + 15}" text-anchor="middle">${Math.round(v)}</text>`;
+    }).join('');
+    const gridY = [0, 0.25, 0.5, 0.75, 1].map(g => {
+      const v = maxY * g;
+      return `<line x1="${P}" y1="${sy(v)}" x2="${W - P * 0.4}" y2="${sy(v)}" stroke="var(--row-line)" stroke-width="1"/>` +
+             `<text x="${P - 8}" y="${sy(v) + 3}" text-anchor="end">${Math.round(v)}</text>`;
+    }).join('');
+    document.getElementById('scatter').innerHTML =
+      `<svg class="sc" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+        ${gridY}${gridX}
+        <text class="qlab" x="${W - P * 0.5}" y="${H - P + 32}" text-anchor="end" fill="var(--accent)">Bought →</text>
+        <text class="qlab" x="${P - 8}" y="${P - 16}" text-anchor="start" fill="var(--accent2)">↑ Sold</text>
+        ${dots}
+      </svg>`;
+    const wrap = document.querySelector('.scwrap');
+    document.querySelectorAll('.sc .dot').forEach(c => {
+      c.addEventListener('mousemove', e => {
+        const b = wrap.getBoundingClientRect();
+        tip.innerHTML = `<b>${c.dataset.t}</b><br>MLB in ${c.dataset.i} · prospects in ${c.dataset.p}` +
+          `<br>net ${c.dataset.n} · ${c.dataset.d} deals`;
+        tip.style.opacity = 1;
+        tip.style.left = Math.min(b.width - 190, e.clientX - b.left + 12) + 'px';
+        tip.style.top = (e.clientY - b.top + 12) + 'px';
+      });
+      c.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
+      c.addEventListener('click', () => {
+        highlight = highlight === c.dataset.t ? null : c.dataset.t; drawChart(); drawScatter();
+      });
+    });
+  }
+
+  // ---- biggest gaps -------------------------------------------------------
+  const fl = [];
+  off.forEach(t => {
+    if (t.sides.length !== 2) return;
+    const [h, l] = [...t.sides].sort((a, b) => V(b) - V(a));
+    if (V(l) <= 0) return;
+    fl.push({ date: t.date, win: h.team, winId: h.teamId, lose: l.team, loseId: l.teamId,
+      gap: V(h) - V(l), ratio: V(h) / V(l), verdict: t.verdict ? t.verdict.label : '' });
+  });
+  let fmode = 'gap';
+  const fbar = document.getElementById('fmode');
+  fbar.innerHTML = `<button data-f="gap" class="on">By value gap</button><button data-f="ratio">By ratio</button>`;
+  fbar.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    fmode = b.dataset.f;
+    fbar.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    drawFleece();
+  }));
+  function drawFleece() {
+    // Ratio on a tiny deal is arithmetic, not a story — require a real gap.
+    const rows = (fmode === 'gap' ? fl.slice().sort((a, b) => b.gap - a.gap)
+      : fl.filter(x => x.gap > 3).sort((a, b) => b.ratio - a.ratio)).slice(0, 12);
+    document.getElementById('flsub').textContent = fmode === 'gap'
+      ? 'The deals where the two sides were furthest apart in raw value.'
+      : 'Largest multiples — filtered to gaps above 3 points, because a big ratio on a small deal is just arithmetic.';
+    const max = Math.max(...rows.map(x => fmode === 'gap' ? x.gap : x.ratio), 1);
+    document.getElementById('fleece').innerHTML =
+      `<table class="ftab"><thead><tr><th>Date</th><th>Came out ahead</th><th>Other side</th>
+        <th style="width:32%"></th><th class="num">${fmode === 'gap' ? 'Gap' : 'Ratio'}</th></tr></thead><tbody>` +
+      rows.map(x => {
+        const v = fmode === 'gap' ? x.gap : x.ratio;
+        return `<tr><td style="color:var(--muted)">${BTD.esc(x.date)}</td>` +
+          `<td><img src="${BTD.logo(x.winId)}" style="width:16px;vertical-align:-3px;margin-right:5px" onerror="this.style.display='none'">${BTD.esc(x.win)}</td>` +
+          `<td style="color:var(--muted)">${BTD.esc(x.lose)}</td>` +
+          `<td><div class="gapbar" style="width:${(v / max * 100).toFixed(1)}%"></div></td>` +
+          `<td class="num">${fmode === 'gap' ? '+' + r1(v) : r1(v) + 'x'}</td></tr>`;
+      }).join('') + '</tbody></table>';
+  }
+
+  // ---- biggest pieces -----------------------------------------------------
+  let pmode = 'all';
+  const pbar = document.getElementById('pmode');
+  pbar.innerHTML = `<button data-p="all" class="on">All players</button>` +
+    `<button data-p="mlb">Big leaguers</button><button data-p="pros">Prospects</button>`;
+  pbar.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    pmode = b.dataset.p;
+    pbar.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    drawPieces();
+  }));
+  function drawPieces() {
+    const rows = moved.filter(m => pmode === 'all' || (pmode === 'pros' ? m.prospect : !m.prospect))
+      .sort((a, b) => b.tv - a.tv).slice(0, 15);
+    const max = Math.max(...rows.map(x => x.tv), 1);
+    document.getElementById('pieces').innerHTML = rows.map(m =>
+      `<div class="row2"><span class="nm">${m.id ? `<span class="pn" data-pid="${m.id}">${BTD.esc(m.name)}</span>` : BTD.esc(m.name)}</span>` +
+      `<div class="track"><div class="fill" style="width:${(m.tv / max * 100).toFixed(1)}%;` +
+      `background:${m.prospect ? 'var(--accent2)' : 'var(--accent)'}"></div></div>` +
+      `<span class="val">${r1(m.tv)}</span></div>` +
+      `<div style="font-size:11px;color:var(--muted);margin:-2px 0 5px 0">to ${BTD.esc(m.to)} · ${BTD.esc(m.date)}${m.prospect ? ' · prospect' : ''}</div>`
+    ).join('');
+  }
+
+  drawChart(); drawScatter(); drawFleece(); drawPieces();
+  document.getElementById('dfoot').textContent =
+    `${off.length} official trades · reported-only deals excluded · model estimates at time of refresh · Beyond the Diamond`;
+})().catch(e => {
+  document.getElementById('chart').innerHTML = '<div class="card">Deadline data not available yet.</div>';
+});
+</script>
+</div></body></html>
