@@ -59,6 +59,48 @@
 .cav{font-size:11.5px;font-style:italic;color:var(--muted);border-left:3px solid var(--warn);
   padding:5px 0 5px 10px;margin-top:12px}
 @media(max-width:560px){.row2{grid-template-columns:104px 1fr 52px;font-size:11.5px}}
+
+/* anything that opens a trade */
+.clik{cursor:pointer}
+.clik:hover{background:var(--row-hover)}
+
+/* team picker */
+.teamgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px;margin-bottom:14px}
+.tbtn{display:flex;align-items:center;gap:6px;background:var(--card);border:2px solid var(--card-line);
+  border-radius:8px;padding:5px 8px;cursor:pointer;font-size:11.5px;font-weight:700;color:inherit;
+  text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tbtn img{width:18px;height:18px;object-fit:contain;flex:0 0 auto}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.tsum{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:10px}
+.tsum b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* one trade, rendered the same way everywhere */
+.tc{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  padding:12px 14px;margin-bottom:11px}
+.tc.unofficial{border-style:dashed}
+.tchd2{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:8px}
+.tceq{display:grid;grid-template-columns:1fr auto 1fr;gap:11px;align-items:start}
+@media(max-width:620px){.tceq{grid-template-columns:1fr}}
+.tcside h5{margin:0 0 5px;font-size:12px;font-family:var(--hd2);font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;display:flex;align-items:center;gap:5px}
+.tcside h5 img{width:17px;height:17px;object-fit:contain}
+.tcside.me h5{color:var(--accent)}
+.tcpl{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:3px 0;border-bottom:1px solid var(--row-line)}
+.tcpl .t{font-variant-numeric:tabular-nums;font-weight:700;flex:0 0 auto}
+.tctot{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800;padding-top:5px}
+.tcsign{align-self:center;font-size:19px;color:var(--muted);text-align:center}
+.tcwhy{font-size:11px;font-style:italic;color:var(--muted);margin-top:8px;padding-left:8px;border-left:3px solid var(--card-line)}
+
+/* modal */
+.mback{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-start;
+  justify-content:center;padding:34px 14px;z-index:60;overflow:auto}
+.mback.open{display:flex}
+.mcard{background:var(--card);border:var(--card-line-w) solid var(--card-line);border-radius:var(--radius);
+  box-shadow:0 18px 50px rgba(0,0,0,.4);max-width:720px;width:100%;padding:16px 18px;position:relative}
+.mclose{position:absolute;top:9px;right:11px;background:none;border:0;font-size:23px;line-height:1;
+  cursor:pointer;color:var(--muted)}
+.mhd{font-family:var(--hd);font-size:17px;text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px;padding-right:26px}
 </style>
 </head><body>
 <header id="mast"></header>
@@ -99,7 +141,21 @@
   <div id="pieces"></div>
 </div>
 
+<div class="panel">
+  <div class="phd">Trade Ledger</div>
+  <p class="psub">Every deal a club made, in order. Pick a team — or click one anywhere else on this page.</p>
+  <div class="teamgrid" id="ledgerteams"></div>
+  <div class="tsum" id="ledgersum"></div>
+  <div id="ledgerlist"></div>
+</div>
+
 <p class="foot" id="dfoot">Model estimates at time of refresh · Beyond the Diamond</p>
+
+<div class="mback" id="tmodal"><div class="mcard">
+  <button class="mclose" id="mclose" aria-label="Close">×</button>
+  <div class="mhd" id="mhd">Trade</div>
+  <div id="mbody"></div>
+</div></div>
 <script src="assets/app.js"></script>
 <script>
 BTD.nav('deadline');
@@ -115,14 +171,14 @@ BTD.nav('deadline');
   const club = n => { if (!T.has(n)) T.set(n, { team: n, teamId: null, in: 0, out: 0, deals: 0,
     prosIn: 0, prosOut: 0, mlbIn: 0, mlbOut: 0, nProsIn: 0, nProsOut: 0, rankedOut: 0 }); return T.get(n); };
   const moved = [];
-  off.forEach(t => {
+  off.forEach((t, ti) => {
     t.sides.forEach(s => {
       const me = club(s.team); me.deals++; me.teamId = me.teamId || s.teamId;
       me.in += V(s);
       (s.players || []).forEach(p => {
         const v = p.tv || 0;
         if (p.prospect) { me.prosIn += v; me.nProsIn++; } else { me.mlbIn += v; }
-        moved.push({ name: p.name, id: p.id, tv: v, to: s.team, prospect: !!p.prospect, date: t.date });
+        moved.push({ name: p.name, id: p.id, tv: v, to: s.team, prospect: !!p.prospect, date: t.date, ti: ti });
       });
       t.sides.filter(o => o !== s).forEach(o => {
         me.out += V(o);
@@ -136,6 +192,45 @@ BTD.nav('deadline');
   });
   const A = [...T.values()].map(x => ({ ...x, net: x.in - x.out }));
   const r1 = v => Math.round(v * 10) / 10;
+
+  // ---- one trade, rendered identically wherever it appears ---------------
+  function tradeCard(t, focusTeam) {
+    const S = t.sides;
+    const side = s => {
+      const me = focusTeam && s.team === focusTeam;
+      return `<div class="tcside${me ? ' me' : ''}"><h5>` +
+        `<img src="${BTD.logo(s.teamId)}" onerror="this.style.display='none'">${BTD.esc(s.team)} receive</h5>` +
+        (s.players || []).map(p =>
+          `<div class="tcpl"><span>${p.id ? `<span class="pn" data-pid="${p.id}">${BTD.esc(p.name)}</span>` : BTD.esc(p.name)}` +
+          `${p.pos ? ' <span style="color:var(--muted)">' + BTD.esc(p.pos) + '</span>' : ''}` +
+          `${p.prospect ? ' <span style="color:var(--muted)">·prospect</span>' : ''}</span>` +
+          `<span class="t">${p.tv == null ? '—' : r1(p.tv)}</span></div>`).join('') +
+        (s.cashM ? `<div class="tcpl"><span>💵 $${s.cashM}M cash</span><span class="t"></span></div>` : '') +
+        `<div class="tctot"><span>Total</span><span>${r1(V(s))}</span></div></div>`;
+    };
+    const bal = t.ratio != null && t.ratio >= 0.9 && t.ratio <= 1.25;
+    return `<div class="tc${t.reported ? ' unofficial' : ''}">` +
+      `<div class="tchd2"><span style="font-size:12px;color:var(--muted)">${BTD.esc(t.date)}</span>` +
+      (t.reported ? `<span class="repchip" style="background:var(--warn);color:#fff;border-radius:999px;padding:2px 9px;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase">Reported</span>` : '') +
+      `<span class="vtag ${t.verdict ? t.verdict.cls : 'na'}" style="font-family:var(--hd2);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 11px;border-radius:999px">` +
+      `${BTD.esc(t.verdict ? t.verdict.label : '—')}${t.ratio != null ? ' · ' + t.ratio + 'x' : ''}</span></div>` +
+      `<div class="tceq">${side(S[0])}<div class="tcsign">${bal ? '≈' : '≠'}</div>${side(S[1])}</div>` +
+      (t.verdict && t.verdict.why && t.verdict.why.length
+        ? `<div class="tcwhy">${BTD.esc(t.verdict.why.join(' · '))}</div>` : '') +
+      `</div>`;
+  }
+  // Modal, shared by every clickable reference to a trade on the page.
+  const modal = document.getElementById('tmodal');
+  function openTrade(ti, focusTeam) {
+    const t = off[ti]; if (!t) return;
+    document.getElementById('mhd').textContent = `${t.sides[0].team} ⇄ ${t.sides[1].team}`;
+    document.getElementById('mbody').innerHTML = tradeCard(t, focusTeam);
+    modal.classList.add('open');
+  }
+  const closeModal = () => modal.classList.remove('open');
+  document.getElementById('mclose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   // ---- KPIs ---------------------------------------------------------------
   const totalValue = off.reduce((a, t) => a + t.sides.reduce((b, s) => b + V(s), 0), 0);
@@ -190,8 +285,7 @@ BTD.nav('deadline');
         bar + `<span class="val">${v > 0 && diverging ? '+' : ''}${r1(v)}</span></div>`;
     }).join('');
     document.querySelectorAll('#chart .row2').forEach(el => el.addEventListener('click', () => {
-      highlight = highlight === el.dataset.team ? null : el.dataset.team;
-      drawChart(); drawScatter();
+      setLedger(el.dataset.team);
     }));
   }
 
@@ -240,19 +334,17 @@ BTD.nav('deadline');
         tip.style.top = (e.clientY - b.top + 12) + 'px';
       });
       c.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
-      c.addEventListener('click', () => {
-        highlight = highlight === c.dataset.t ? null : c.dataset.t; drawChart(); drawScatter();
-      });
+      c.addEventListener('click', () => setLedger(c.dataset.t));
     });
   }
 
   // ---- biggest gaps -------------------------------------------------------
   const fl = [];
-  off.forEach(t => {
+  off.forEach((t, ti) => {
     if (t.sides.length !== 2) return;
     const [h, l] = [...t.sides].sort((a, b) => V(b) - V(a));
     if (V(l) <= 0) return;
-    fl.push({ date: t.date, win: h.team, winId: h.teamId, lose: l.team, loseId: l.teamId,
+    fl.push({ ti, date: t.date, win: h.team, winId: h.teamId, lose: l.team, loseId: l.teamId,
       gap: V(h) - V(l), ratio: V(h) / V(l), verdict: t.verdict ? t.verdict.label : '' });
   });
   let fmode = 'gap';
@@ -276,12 +368,16 @@ BTD.nav('deadline');
         <th style="width:32%"></th><th class="num">${fmode === 'gap' ? 'Gap' : 'Ratio'}</th></tr></thead><tbody>` +
       rows.map(x => {
         const v = fmode === 'gap' ? x.gap : x.ratio;
-        return `<tr><td style="color:var(--muted)">${BTD.esc(x.date)}</td>` +
+        return `<tr class="clik" data-ti="${x.ti}" data-team="${BTD.esc(x.win)}"><td style="color:var(--muted)">${BTD.esc(x.date)}</td>` +
           `<td><img src="${BTD.logo(x.winId)}" style="width:16px;vertical-align:-3px;margin-right:5px" onerror="this.style.display='none'">${BTD.esc(x.win)}</td>` +
           `<td style="color:var(--muted)">${BTD.esc(x.lose)}</td>` +
           `<td><div class="gapbar" style="width:${(v / max * 100).toFixed(1)}%"></div></td>` +
           `<td class="num">${fmode === 'gap' ? '+' + r1(v) : r1(v) + 'x'}</td></tr>`;
       }).join('') + '</tbody></table>';
+    document.querySelectorAll('#fleece tr.clik').forEach(tr => tr.addEventListener('click', e => {
+      if (e.target.closest('.pn')) return;          // player links keep their own popup
+      openTrade(+tr.dataset.ti, tr.dataset.team);
+    }));
   }
 
   // ---- biggest pieces -----------------------------------------------------
@@ -299,15 +395,52 @@ BTD.nav('deadline');
       .sort((a, b) => b.tv - a.tv).slice(0, 15);
     const max = Math.max(...rows.map(x => x.tv), 1);
     document.getElementById('pieces').innerHTML = rows.map(m =>
-      `<div class="row2"><span class="nm">${m.id ? `<span class="pn" data-pid="${m.id}">${BTD.esc(m.name)}</span>` : BTD.esc(m.name)}</span>` +
+      `<div class="row2 clik" data-ti="${m.ti}" data-team="${BTD.esc(m.to)}"><span class="nm">${m.id ? `<span class="pn" data-pid="${m.id}">${BTD.esc(m.name)}</span>` : BTD.esc(m.name)}</span>` +
       `<div class="track"><div class="fill" style="width:${(m.tv / max * 100).toFixed(1)}%;` +
       `background:${m.prospect ? 'var(--accent2)' : 'var(--accent)'}"></div></div>` +
       `<span class="val">${r1(m.tv)}</span></div>` +
       `<div style="font-size:11px;color:var(--muted);margin:-2px 0 5px 0">to ${BTD.esc(m.to)} · ${BTD.esc(m.date)}${m.prospect ? ' · prospect' : ''}</div>`
     ).join('');
+    document.querySelectorAll('#pieces .row2.clik').forEach(el => el.addEventListener('click', e => {
+      if (e.target.closest('.pn')) return;
+      openTrade(+el.dataset.ti, el.dataset.team);
+    }));
   }
 
-  drawChart(); drawScatter(); drawFleece(); drawPieces();
+  // ---- per-club ledger ----------------------------------------------------
+  let ledger = null;
+  const tgrid = document.getElementById('ledgerteams');
+  function drawTeamButtons() {
+    tgrid.innerHTML = A.slice().sort((a, b) => a.team.localeCompare(b.team)).map(x =>
+      `<button class="tbtn${ledger === x.team ? ' on' : ''}" data-team="${BTD.esc(x.team)}">` +
+      `<img src="${BTD.logo(x.teamId)}" onerror="this.style.display='none'">${BTD.esc(x.team.split(' ').pop())}` +
+      ` <span style="margin-left:auto;opacity:.7">${x.deals}</span></button>`).join('');
+    tgrid.querySelectorAll('.tbtn').forEach(b => b.addEventListener('click', () => setLedger(b.dataset.team)));
+  }
+  function setLedger(team) {
+    ledger = ledger === team ? null : team;
+    highlight = ledger;
+    drawTeamButtons(); drawLedger(); drawChart(); drawScatter();
+  }
+  function drawLedger() {
+    const sum = document.getElementById('ledgersum');
+    const list = document.getElementById('ledgerlist');
+    if (!ledger) {
+      sum.innerHTML = '';
+      list.innerHTML = '<div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">' +
+        'Pick a club above to see every deal it made.</div>';
+      return;
+    }
+    const x = A.find(a => a.team === ledger);
+    const deals = off.map((t, ti) => ({ t, ti })).filter(o => o.t.sides.some(s => s.team === ledger));
+    sum.innerHTML = [['Deals', x.deals], ['Acquired', r1(x.in)], ['Surrendered', r1(x.out)],
+      ['Net', (x.net > 0 ? '+' : '') + r1(x.net)], ['Prospects in', x.nProsIn], ['Prospects out', x.nProsOut]]
+      .map(([l, v]) => `<span>${l} <b>${v}</b></span>`).join('');
+    list.innerHTML = deals.map(o => tradeCard(o.t, ledger)).join('') ||
+      '<div style="padding:14px;color:var(--muted)">No deals.</div>';
+  }
+
+  drawChart(); drawScatter(); drawFleece(); drawPieces(); drawTeamButtons(); drawLedger();
   document.getElementById('dfoot').textContent =
     `${off.length} official trades · reported-only deals excluded · model estimates at time of refresh · Beyond the Diamond`;
 })().catch(e => {
