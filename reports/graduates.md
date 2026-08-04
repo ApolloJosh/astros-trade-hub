@@ -55,8 +55,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Alejandro Osuna | Rangers | 23 | LF | 395 | 21th | 10.1 |
 | Sam Antonacci | White Sox | 23 | LF | 366 | 55th | 63.7 |
 | Eury Pérez | Marlins | 23 | P | 291 | 58th | 68.2 |
-| Joe Mack | Marlins | 23 | C | 215 | 69th | 72.3 |
 | Javier Sanoja | Marlins | 23 | 3B | 676 | 20th | 35.1 |
+| Joe Mack | Marlins | 23 | C | 215 | 69th | 72.3 |
 | Nacho Alvarez Jr. | Angels | 23 | SS | 240 | — | 19.4 |
 | Ryan Waldschmidt | D-backs | 23 | CF | 168 | 43th | 56.2 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 203 | 54th | 41 |
