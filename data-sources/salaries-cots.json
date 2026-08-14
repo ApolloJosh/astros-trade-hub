@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-13T11:53:48.064Z",
+ "updated": "2026-08-14T11:50:51.271Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1018,8 +1018,8 @@
     "key": "paulsewald",
     "svc": null,
     "control": 0.5,
-    "salaryM": 1.5,
-    "remM": 0.8,
+    "salaryM": 1.131,
+    "remM": 0.6,
     "exactFA": false
    },
    {
@@ -4306,7 +4306,7 @@
     "key": "edouardjulien",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.594,
+    "salaryM": 0.602,
     "remM": 0.3,
     "exactFA": false
    },
@@ -7839,8 +7839,8 @@
     "key": "haydenjuenger",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.246,
-    "remM": 0.1,
+    "salaryM": 0.41,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -7907,6 +7907,15 @@
     "exactFA": false
    },
    {
+    "name": "Drew Rom",
+    "key": "drewrom",
+    "svc": 1.044,
+    "control": 4.5,
+    "salaryM": 0.199,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Brian Serven",
     "key": "brianserven",
     "svc": 1.089,
@@ -7920,8 +7929,8 @@
     "key": "yuniortur",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.253,
-    "remM": 0.1,
+    "salaryM": 0.089,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -7956,7 +7965,7 @@
     "key": "jonathanornelas",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.042,
+    "salaryM": 0.054,
     "remM": 0,
     "exactFA": false
    },
@@ -11509,8 +11518,8 @@
     "key": "davisschneider",
     "svc": 2.029,
     "control": 3.5,
-    "salaryM": 0.702,
-    "remM": 0.4,
+    "salaryM": 0.578,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -11608,7 +11617,7 @@
     "key": "jakebloss",
     "svc": 0.039,
     "control": 5.5,
-    "salaryM": 0.127,
+    "salaryM": 0.291,
     "remM": 0.1,
     "exactFA": false
    },
@@ -11644,7 +11653,7 @@
     "key": "lazaroestrada",
     "svc": 0.004,
     "control": 5.5,
-    "salaryM": 0.626,
+    "salaryM": 0.616,
     "remM": 0.3,
     "exactFA": false
    },
@@ -11671,17 +11680,8 @@
     "key": "chaselee",
     "svc": 0.095,
     "control": 5.5,
-    "salaryM": 0.274,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
-    "name": "Willie MacIver",
-    "key": "williemaciver",
-    "svc": 0.094,
-    "control": 5.5,
-    "salaryM": 0.169,
-    "remM": 0.1,
+    "salaryM": 0.413,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -11698,8 +11698,8 @@
     "key": "charlesmcadoo",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.164,
-    "remM": 0.1,
+    "salaryM": 0.335,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -11710,6 +11710,15 @@
     "salaryM": 0.351,
     "remM": 0.2,
     "exactFA": false
+   },
+   {
+    "name": "Paul Sewald",
+    "key": "paulsewald",
+    "svc": 7.072,
+    "control": 0.5,
+    "salaryM": 0.369,
+    "remM": 0.2,
+    "exactFA": true
    },
    {
     "name": "Josh H. Smith",
@@ -11793,11 +11802,29 @@
     "exactFA": false
    },
    {
+    "name": "Simeon Woods-Richardson",
+    "key": "simeonwoodsrichardson",
+    "svc": 1.153,
+    "control": 4.5,
+    "salaryM": 0.328,
+    "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Willie MacIver",
+    "key": "williemaciver",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.117,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Rudy Martin Jr.",
     "key": "rudymartinjr",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.063,
+    "salaryM": 0.075,
     "remM": 0,
     "exactFA": false
    },
@@ -11880,15 +11907,6 @@
     "control": 0.5,
     "salaryM": 0.468,
     "remM": 0.2,
-    "exactFA": false
-   },
-   {
-    "name": "Simeon Woods-Richardson",
-    "key": "simeonwoodsrichardson",
-    "svc": null,
-    "control": 0.5,
-    "salaryM": 0.119,
-    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -15218,15 +15236,6 @@
     "exactFA": false
    },
    {
-    "name": "Lyon Richardson",
-    "key": "lyonrichardson",
-    "svc": 0.15,
-    "control": 5.5,
-    "salaryM": 0.213,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
     "name": "JoJo Romero",
     "key": "jojoromero",
     "svc": 5.045,
@@ -15251,6 +15260,15 @@
     "control": 5.5,
     "salaryM": 0.092,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Bryse Wilson",
+    "key": "brysewilson",
+    "svc": 4.036,
+    "control": 1.5,
+    "salaryM": 0.449,
+    "remM": 0.2,
     "exactFA": false
    },
    {
