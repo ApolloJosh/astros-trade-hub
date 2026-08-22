@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-21T11:32:40.800Z",
+ "updated": "2026-08-22T11:26:44.991Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -6958,6 +6958,15 @@
     "exactFA": false
    },
    {
+    "name": "Carson Palmquist",
+    "key": "carsonpalmquist",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Jackson Rutledge",
     "key": "jacksonrutledge",
     "svc": null,
@@ -6973,6 +6982,15 @@
     "control": 0.5,
     "salaryM": 1.395,
     "remM": 0.7,
+    "exactFA": false
+   },
+   {
+    "name": "Richard Lovelady",
+    "key": "richardlovelady",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -7007,8 +7025,8 @@
     "key": "stephenstrasburg",
     "svc": null,
     "control": 0.5,
-    "salaryM": 32.811,
-    "remM": 16.4,
+    "salaryM": 33.4,
+    "remM": 16.7,
     "exactFA": false
    }
   ],
