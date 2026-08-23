@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-22T11:26:44.991Z",
+ "updated": "2026-08-23T11:27:27.932Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -8073,7 +8073,7 @@
     "key": "kademorris",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.133,
+    "salaryM": 0.265,
     "remM": 0.1,
     "exactFA": false
    },
@@ -8100,7 +8100,7 @@
     "key": "taylorrashi",
     "svc": 0.033,
     "control": 5.5,
-    "salaryM": 0.033,
+    "salaryM": 0.044,
     "remM": 0,
     "exactFA": false
    },
@@ -8118,7 +8118,7 @@
     "key": "johnathanrodriguez",
     "svc": 0.097,
     "control": 5.5,
-    "salaryM": 0.038,
+    "salaryM": 0.037,
     "remM": 0,
     "exactFA": false
    },
@@ -8138,6 +8138,15 @@
     "control": 4.5,
     "salaryM": 0.315,
     "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Michael Stefanic",
+    "key": "michaelstefanic",
+    "svc": 1.092,
+    "control": 4.5,
+    "salaryM": 0.19,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -8318,15 +8327,6 @@
     "control": 0.5,
     "salaryM": 0.258,
     "remM": 0.1,
-    "exactFA": false
-   },
-   {
-    "name": "Michael Stefanic",
-    "key": "michaelstefanic",
-    "svc": null,
-    "control": 0.5,
-    "salaryM": 0.03,
-    "remM": 0,
     "exactFA": false
    },
    {
