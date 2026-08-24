@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-23T11:27:27.932Z",
+ "updated": "2026-08-24T11:36:01.014Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -215,8 +215,8 @@
     "key": "gustavocampero",
     "svc": 0.158,
     "control": 5.5,
-    "salaryM": 0.296,
-    "remM": 0.1,
+    "salaryM": 0.389,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -244,15 +244,6 @@
     "control": 5.5,
     "salaryM": 0.653,
     "remM": 0.3,
-    "exactFA": false
-   },
-   {
-    "name": "Michael Fulmer",
-    "key": "michaelfulmer",
-    "svc": 7.157,
-    "control": 0.5,
-    "salaryM": 0.235,
-    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -314,8 +305,8 @@
     "key": "christianmoore",
     "svc": 0.096,
     "control": 5.5,
-    "salaryM": 0.228,
-    "remM": 0.1,
+    "salaryM": 0.343,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -406,6 +397,15 @@
     "control": 5.5,
     "salaryM": 0.229,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Michael Fulmer",
+    "key": "michaelfulmer",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.048,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -960,15 +960,6 @@
     "exactFA": false
    },
    {
-    "name": "Zack Littell",
-    "key": "zacklittell",
-    "svc": 6.043,
-    "control": 0.5,
-    "salaryM": 0.2,
-    "remM": 0.1,
-    "exactFA": true
-   },
-   {
     "name": "Lars Nootbaar",
     "key": "larsnootbaar",
     "svc": 4.076,
@@ -1020,6 +1011,15 @@
     "control": 5.5,
     "salaryM": 0.501,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Zack Littell",
+    "key": "zacklittell",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.058,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -1398,7 +1398,7 @@
     "key": "anthonynunez",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.529,
+    "salaryM": 0.661,
     "remM": 0.3,
     "exactFA": false
    },
@@ -1553,6 +1553,15 @@
     "control": 5.5,
     "salaryM": 0.062,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Albert Suárez",
+    "key": "albertsuarez",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.684,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -1742,15 +1751,6 @@
     "control": 0.5,
     "salaryM": 2.625,
     "remM": 1.3,
-    "exactFA": false
-   },
-   {
-    "name": "Albert Suárez",
-    "key": "albertsuarez",
-    "svc": null,
-    "control": 0.5,
-    "salaryM": 0.23,
-    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -2739,15 +2739,6 @@
     "exactFA": false
    },
    {
-    "name": "Owen Miller",
-    "key": "owenmiller",
-    "svc": 2.108,
-    "control": 3.5,
-    "salaryM": 0.18,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
     "name": "Jayden Murray",
     "key": "jaydenmurray",
     "svc": 0.026,
@@ -3303,7 +3294,7 @@
     "key": "ivanjohnson",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.108,
+    "salaryM": 0.246,
     "remM": 0.1,
     "exactFA": false
    },
@@ -3321,8 +3312,8 @@
     "key": "zachmaxwell",
     "svc": 0.038,
     "control": 5.5,
-    "salaryM": 0.389,
-    "remM": 0.2,
+    "salaryM": 0.256,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -4270,8 +4261,8 @@
     "key": "ryanritter",
     "svc": 0.115,
     "control": 5.5,
-    "salaryM": 0.258,
-    "remM": 0.1,
+    "salaryM": 0.364,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -4306,8 +4297,8 @@
     "key": "adaelamador",
     "svc": 0.085,
     "control": 5.5,
-    "salaryM": 0.318,
-    "remM": 0.2,
+    "salaryM": 0.193,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -4450,7 +4441,7 @@
     "key": "parkermushinski",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.068,
+    "salaryM": 0.08,
     "remM": 0,
     "exactFA": false
    },
@@ -4943,15 +4934,6 @@
     "exactFA": false
    },
    {
-    "name": "James Outman",
-    "key": "jamesoutman",
-    "svc": 2.007,
-    "control": 3.5,
-    "salaryM": 0.461,
-    "remM": 0.2,
-    "exactFA": false
-   },
-   {
     "name": "Wenceel Pérez",
     "key": "wenceelperez",
     "svc": 2,
@@ -4975,6 +4957,15 @@
     "svc": 1.07,
     "control": 4.5,
     "salaryM": 0.115,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Andrew Sears",
+    "key": "andrewsears",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.15,
     "remM": 0.1,
     "exactFA": false
    },
@@ -5228,7 +5219,7 @@
     "key": "bryanking",
     "svc": 1.1,
     "control": 4.5,
-    "salaryM": 0.789,
+    "salaryM": 0.704,
     "remM": 0.4,
     "exactFA": false
    },
@@ -5264,7 +5255,7 @@
     "key": "kaiweiteng",
     "svc": 0.072,
     "control": 5.5,
-    "salaryM": 0.561,
+    "salaryM": 0.695,
     "remM": 0.3,
     "exactFA": false
    },
@@ -5662,7 +5653,7 @@
     "key": "josecuas",
     "svc": 2.019,
     "control": 3.5,
-    "salaryM": 0.179,
+    "salaryM": 0.29,
     "remM": 0.1,
     "exactFA": false
    },
@@ -5680,8 +5671,8 @@
     "key": "carlosduran",
     "svc": 0.003,
     "control": 5.5,
-    "salaryM": 0.185,
-    "remM": 0.1,
+    "salaryM": 0.048,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -5734,8 +5725,8 @@
     "key": "matthewlugo",
     "svc": 0.066,
     "control": 5.5,
-    "salaryM": 0.08,
-    "remM": 0,
+    "salaryM": 0.212,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -6051,8 +6042,8 @@
     "key": "emmetsheehan",
     "svc": 2.08,
     "control": 3.5,
-    "salaryM": 0.775,
-    "remM": 0.4,
+    "salaryM": 0.686,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -6186,8 +6177,8 @@
     "key": "paulgervase",
     "svc": 0.021,
     "control": 5.5,
-    "salaryM": 0.2,
-    "remM": 0.1,
+    "salaryM": 0.333,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -6267,7 +6258,7 @@
     "key": "jonathanhernandez",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.342,
+    "salaryM": 0.353,
     "remM": 0.2,
     "exactFA": false
    },
@@ -6814,6 +6805,15 @@
     "exactFA": false
    },
    {
+    "name": "Matt Waldron",
+    "key": "mattwaldron",
+    "svc": 1.107,
+    "control": 4.5,
+    "salaryM": 0.153,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Eddy Yean",
     "key": "eddyyean",
     "svc": 0,
@@ -6854,8 +6854,8 @@
     "key": "zacklittell",
     "svc": null,
     "control": 0.5,
-    "salaryM": 6.8,
-    "remM": 3.4,
+    "salaryM": 6.937,
+    "remM": 3.5,
     "exactFA": false
    },
    {
@@ -8579,8 +8579,8 @@
     "key": "kristiancurtis",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.052,
-    "remM": 0,
+    "salaryM": 0.178,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -8660,8 +8660,8 @@
     "key": "antwonekelly",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.31,
-    "remM": 0.2,
+    "salaryM": 0.16,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -8868,10 +8868,10 @@
     "name": "Nick Pivetta",
     "key": "nickpivetta",
     "svc": 7.166,
-    "control": 2.5,
-    "salaryM": 16.9,
-    "remM": 42.3,
-    "exactFA": true
+    "control": 0.5,
+    "salaryM": 20.5,
+    "remM": 10.3,
+    "exactFA": false
    },
    {
     "name": "Joe Musgrove",
@@ -9488,11 +9488,20 @@
     "exactFA": false
    },
    {
+    "name": "Kade Anderson",
+    "key": "kadeanderson",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.154,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Nick Davila",
     "key": "nickdavila",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.68,
+    "salaryM": 0.535,
     "remM": 0.3,
     "exactFA": false
    },
@@ -9502,15 +9511,6 @@
     "svc": 0.017,
     "control": 5.5,
     "salaryM": 0.134,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
-    "name": "Jhonathan Diaz",
-    "key": "jhonathandiaz",
-    "svc": 0.128,
-    "control": 5.5,
-    "salaryM": 0.167,
     "remM": 0.1,
     "exactFA": false
    },
@@ -9650,6 +9650,15 @@
     "exactFA": false
    },
    {
+    "name": "Jhonathan Diaz",
+    "key": "jhonathandiaz",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.017,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
     "name": "Stuart Fairchild",
     "key": "stuartfairchild",
     "svc": null,
@@ -9710,6 +9719,15 @@
     "control": 0.5,
     "salaryM": 0.479,
     "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Buddy Kennedy",
+    "key": "buddykennedy",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -9791,6 +9809,33 @@
     "control": 0.5,
     "salaryM": 0.8,
     "remM": 0.4,
+    "exactFA": false
+   },
+   {
+    "name": "Josh Simpson",
+    "key": "joshsimpson",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Jhonny Pereda",
+    "key": "jhonnypereda",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Cooper Criswell",
+    "key": "coopercriswell",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    }
   ],
@@ -10354,6 +10399,15 @@
     "exactFA": false
    },
    {
+    "name": "Dylan Smith",
+    "key": "dylansmith",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Luis Matos",
     "key": "luismatos",
     "svc": null,
@@ -10603,8 +10657,8 @@
     "key": "ryanfernandez",
     "svc": 1.09,
     "control": 4.5,
-    "salaryM": 0.443,
-    "remM": 0.2,
+    "salaryM": 0.547,
+    "remM": 0.3,
     "exactFA": false
    },
    {
@@ -10657,8 +10711,8 @@
     "key": "quinnmathews",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.053,
-    "remM": 0,
+    "salaryM": 0.183,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -11064,17 +11118,8 @@
     "key": "kennypiper",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.176,
+    "salaryM": 0.181,
     "remM": 0.1,
-    "exactFA": false
-   },
-   {
-    "name": "Chris Roycroft",
-    "key": "chrisroycroft",
-    "svc": 0.15,
-    "control": 5.5,
-    "salaryM": 0.339,
-    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -11093,6 +11138,15 @@
     "control": 1.5,
     "salaryM": 0.722,
     "remM": 0.4,
+    "exactFA": false
+   },
+   {
+    "name": "Chris Roycroft",
+    "key": "chrisroycroft",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.192,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -11219,6 +11273,33 @@
     "control": 0.5,
     "salaryM": 0.18,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Justyn-Henry Malloy",
+    "key": "justynhenrymalloy",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Tyler Glasnow",
+    "key": "tylerglasnow",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 2,
+    "remM": 1,
+    "exactFA": false
+   },
+   {
+    "name": "Wander Franco",
+    "key": "wanderfranco",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.455,
+    "remM": 0.2,
     "exactFA": false
    }
   ],
@@ -11521,15 +11602,6 @@
     "exactFA": false
    },
    {
-    "name": "Jarred Kelenic",
-    "key": "jarredkelenic",
-    "svc": 3.035,
-    "control": 2.5,
-    "salaryM": 0.326,
-    "remM": 0.2,
-    "exactFA": false
-   },
-   {
     "name": "Leandro Lopez",
     "key": "leandrolopez",
     "svc": 0,
@@ -11779,7 +11851,7 @@
     "key": "davisschneider",
     "svc": 2.029,
     "control": 3.5,
-    "salaryM": 0.578,
+    "salaryM": 0.581,
     "remM": 0.3,
     "exactFA": false
    },
@@ -11896,8 +11968,8 @@
     "key": "brendancellucci",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.167,
-    "remM": 0.1,
+    "salaryM": 0.034,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -12067,7 +12139,7 @@
     "key": "mattwaldron",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.06,
+    "salaryM": 0.072,
     "remM": 0,
     "exactFA": false
    },
@@ -12202,8 +12274,26 @@
     "key": "tylerheineman",
     "svc": null,
     "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Tyler Heineman",
+    "key": "tylerheineman",
+    "svc": null,
+    "control": 0.5,
     "salaryM": 0.563,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Connor Seabold",
+    "key": "connorseabold",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -12231,6 +12321,15 @@
     "control": 0.5,
     "salaryM": 0.016,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Simeon Woods-Richardson",
+    "key": "simeonwoodsrichardson",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -12279,6 +12378,15 @@
     "exactFA": false
    },
    {
+    "name": "Willie MacIver",
+    "key": "williemaciver",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Josh Fleming",
     "key": "joshfleming",
     "svc": null,
@@ -12303,6 +12411,15 @@
     "control": 0.5,
     "salaryM": 0.021,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Justin Bruihl",
+    "key": "justinbruihl",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -13286,7 +13403,7 @@
     "key": "briankeller",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.039,
+    "salaryM": 0.04,
     "remM": 0,
     "exactFA": false
    },
@@ -13738,7 +13855,7 @@
     "key": "brewerhicklen",
     "svc": 0.038,
     "control": 5.5,
-    "salaryM": 0.127,
+    "salaryM": 0.252,
     "remM": 0.1,
     "exactFA": false
    },
@@ -13869,21 +13986,21 @@
     "exactFA": false
    },
    {
+    "name": "Danny Young",
+    "key": "dannyyoung",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.752,
+    "remM": 0.4,
+    "exactFA": false
+   },
+   {
     "name": "Tyler Kinley",
     "key": "tylerkinley",
     "svc": null,
     "control": 0.5,
     "salaryM": 4.25,
     "remM": 2.1,
-    "exactFA": false
-   },
-   {
-    "name": "Danny Young",
-    "key": "dannyyoung",
-    "svc": null,
-    "control": 0.5,
-    "salaryM": 0.717,
-    "remM": 0.4,
     "exactFA": false
    },
    {
@@ -14127,6 +14244,15 @@
     "control": 0.5,
     "salaryM": 0.034,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Brett Wisely",
+    "key": "brettwisely",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
     "exactFA": false
    }
   ],
@@ -14557,15 +14683,6 @@
     "exactFA": false
    },
    {
-    "name": "John King",
-    "key": "johnking",
-    "svc": 4.148,
-    "control": 1.5,
-    "salaryM": 1.5,
-    "remM": 0.8,
-    "exactFA": false
-   },
-   {
     "name": "Max Meyer",
     "key": "maxmeyer",
     "svc": 2.166,
@@ -14687,7 +14804,7 @@
     "key": "grahampauley",
     "svc": 1.005,
     "control": 4.5,
-    "salaryM": 0.604,
+    "salaryM": 0.505,
     "remM": 0.3,
     "exactFA": false
    },
@@ -14777,8 +14894,17 @@
     "key": "deyvisondelossantos",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.159,
+    "salaryM": 0.288,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Logan Driscoll",
+    "key": "logandriscoll",
+    "svc": 0.029,
+    "control": 5.5,
+    "salaryM": 0.029,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -15040,8 +15166,8 @@
     "key": "brendanbeck",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.057,
-    "remM": 0,
+    "salaryM": 0.195,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -15175,7 +15301,7 @@
     "key": "maxschuemann",
     "svc": 2,
     "control": 3.5,
-    "salaryM": 0.594,
+    "salaryM": 0.596,
     "remM": 0.3,
     "exactFA": false
    }
@@ -15519,7 +15645,7 @@
     "key": "bonaylor",
     "svc": 2.113,
     "control": 3.5,
-    "salaryM": 0.12,
+    "salaryM": 0.203,
     "remM": 0.1,
     "exactFA": false
    },
