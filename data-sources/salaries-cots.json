@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T11:36:19.708Z",
+ "updated": "2026-08-27T20:57:32.665Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -7743,6 +7743,24 @@
     "exactFA": false
    },
    {
+    "name": "Bryan Hudson",
+    "key": "bryanhudson",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Vidal Bruján",
+    "key": "vidalbrujan",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Jeff McNeil",
     "key": "jeffmcneil",
     "svc": null,
@@ -9247,8 +9265,8 @@
     "key": "robbieray",
     "svc": 11.007,
     "control": 0.5,
-    "salaryM": 8.353,
-    "remM": 4.2,
+    "salaryM": 7.353,
+    "remM": 3.7,
     "exactFA": true
    },
    {
