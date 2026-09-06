@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-05T13:48:57.481Z",
+ "updated": "2026-09-06T14:04:46.813Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -14928,7 +14928,7 @@
     "key": "drewromo",
     "svc": 0.073,
     "control": 5.5,
-    "salaryM": 0.651,
+    "salaryM": 0.567,
     "remM": 0.3,
     "exactFA": false
    },
