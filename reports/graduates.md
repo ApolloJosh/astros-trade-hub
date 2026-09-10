@@ -1,4 +1,4 @@
-# Young graduates — 2026-09-09
+# Young graduates — 2026-09-10
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,99 +6,99 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Marcelo Mayer | Giants | 23 | 364 | 27th | #12 top-100 | -8.3 | 35.9 | +44.2 |
-| Colt Emerson | Mariners | 21 | 241 | 21th | #20 top-100 | -10.5 | 31.2 | +41.7 |
+| Marcelo Mayer | Giants | 23 | 364 | 27th | #12 top-100 | -8.4 | 35.9 | +44.3 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -10.6 | 31.5 | +42.1 |
+| Rhett Lowder | Reds | 24 | 150 | 22th | #34 top-100 | -9.1 | 20.8 | +29.9 |
 | Carson Williams | Rays | 23 | 146 | 13th | #9 top-100 | 4.4 | 32.9 | +28.5 |
 | Moisés Ballesteros | Angels | 22 | 365 | 65th | #69 top-100 | 3 | 30.7 | +27.7 |
 | Jasson Domínguez | Yankees | 23 | 746 | 46th | #21 top-100 | 2 | 28.5 | +26.5 |
-| Rhett Lowder | Reds | 24 | 147 | 25th | #34 top-100 | -4.7 | 21.4 | +26.1 |
-| Roki Sasaki | Dodgers | 24 | 156 | 43th | #1 top-100 | 9.6 | 32.7 | +23.1 |
-| Dylan Crews | Nationals | 24 | 837 | 71th | #4 top-100 | 2 | 25.1 | +23.1 |
-| Owen Caissie | Marlins | 24 | 349 | 73th | #47 top-100 | 4.1 | 24.6 | +20.5 |
-| Roman Anthony | Red Sox | 22 | 481 | 88th | #2 top-100 | 43.2 | 63.1 | +19.9 |
-| Christian Moore | Angels | 23 | 271 | 37th | #68 top-100 | 5.5 | 25.3 | +19.8 |
-| Edgar Quero | White Sox | 23 | 614 | 41th | #66 top-100 | 7.8 | 25.7 | +17.9 |
-| Braden Montgomery | White Sox | 23 | 310 | 55th | #55 top-100 | 10.8 | 27.9 | +17.1 |
+| Roki Sasaki | Dodgers | 24 | 156 | 43th | #1 top-100 | 9.8 | 32.7 | +22.9 |
+| Dylan Crews | Nationals | 24 | 841 | 71th | #4 top-100 | 2 | 24.9 | +22.9 |
+| Christian Moore | Angels | 23 | 275 | 36th | #68 top-100 | 4.8 | 25.1 | +20.3 |
+| Roman Anthony | Red Sox | 22 | 486 | 90th | #2 top-100 | 44.7 | 63.8 | +19.1 |
+| Edgar Quero | White Sox | 23 | 615 | 42th | #66 top-100 | 7.7 | 25.9 | +18.2 |
 | Edwin Arroyo | Reds | 23 | 160 | 29th | #67 top-100 | 4.8 | 21.7 | +16.9 |
-| Evan Carter | Rangers | 24 | 869 | 34th | #5 top-100 | 2.9 | 17.4 | +14.5 |
-| Angel Genao | Guardians | 22 | 110 | 55th | #62 top-100 | 18.2 | 29.7 | +11.5 |
+| Owen Caissie | Marlins | 24 | 355 | 77th | #47 top-100 | 8.9 | 25.2 | +16.3 |
+| Evan Carter | Rangers | 24 | 871 | 34th | #5 top-100 | 2 | 17.3 | +15.3 |
+| Braden Montgomery | White Sox | 23 | 314 | 56th | #55 top-100 | 15.5 | 28.1 | +12.6 |
 | Tommy Troy | D-backs | 24 | 140 | 44th | #74 top-100 | 7.1 | 17.7 | +10.6 |
-| Brady House | Nationals | 23 | 586 | 80th | #48 top-100 | 27.9 | 37.4 | +9.5 |
-| Noelvi Marte | Reds | 24 | 926 | 24th | #21 top-100 | 2 | 10.9 | +8.9 |
-| Luisangel Acuña | White Sox | 24 | 440 | 30th | #66 top-100 | 9.5 | 18.1 | +8.6 |
-| Cam Smith | Astros | 23 | 998 | 72th | #59 top-100 | 4.5 | 11.3 | +6.8 |
+| Brady House | Nationals | 23 | 587 | 79th | #48 top-100 | 26.5 | 37.1 | +10.6 |
+| Noelvi Marte | Reds | 24 | 926 | 25th | #21 top-100 | 2 | 10.9 | +8.9 |
+| Luisangel Acuña | White Sox | 24 | 440 | 30th | #66 top-100 | 9.4 | 18.1 | +8.7 |
+| Angel Genao | Guardians | 22 | 114 | 58th | #62 top-100 | 21.9 | 30.3 | +8.4 |
 | Jace Jung | Tigers | 25 | 157 | 80th | #60 top-100 | 9.4 | 15.9 | +6.5 |
 | Connor Phillips | Reds | 25 | 73 | 24th | #70 top-100 | 3.7 | 9.9 | +6.2 |
-| Jordan Lawlar | D-backs | 24 | 203 | 32th | #11 top-100 | 22.9 | 28.4 | +5.5 |
-| Alex Freeland | Dodgers | 25 | 337 | 42th | #72 top-100 | 6.4 | 11.7 | +5.3 |
-| Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 32.7 | 36.9 | +4.2 |
-| Kevin Alcántara | Cubs | 24 | 50 | 37th | #65 top-100 | 15.7 | 19.3 | +3.6 |
+| Cam Smith | Astros | 23 | 1002 | 74th | #59 top-100 | 6.2 | 11.2 | +5 |
+| Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 32.5 | 36.9 | +4.4 |
+| Jordan Lawlar | D-backs | 24 | 207 | 34th | #11 top-100 | 25.1 | 28.8 | +3.7 |
+| Kevin Alcántara | Cubs | 24 | 50 | 37th | #65 top-100 | 15.6 | 19.3 | +3.7 |
 | Jordan Beck | Rockies | 25 | 920 | 19th | #81 top-100 | 2 | 4.3 | +2.3 |
+| Alex Freeland | Dodgers | 25 | 342 | 44th | #72 top-100 | 10.2 | 11.9 | +1.7 |
 
-## Young graduates with NO pedigree on file (249)
+## Young graduates with NO pedigree on file (248)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
 | Player | Team | Age | Pos | Sample | Statcast | Value |
 |---|---|---:|---|---:|---:|---:|
-| Didier Fuentes | Braves | 21 | P | 78 | 81th | 69.7 |
-| Luis Lara | Brewers | 21 | RF | 168 | 50th | 28.1 |
-| Esmerlyn Valdez | Pirates | 22 | RF | 281 | 89th | 84.8 |
-| Bradgley Rodriguez | Padres | 22 | P | 73 | 91th | 90.3 |
-| Denzer Guzman | Angels | 22 | 3B | 280 | 27th | 3.5 |
-| Jose Fernandez | D-backs | 22 | DH | 207 | 37th | 7.3 |
-| Pedro Ramírez | Cubs | 22 | 2B | 213 | 46th | 60.5 |
-| A.J. Ewing | Mets | 22 | CF | 425 | 64th | 41.9 |
-| Henry Bolte | Athletics | 23 | CF | 403 | 69th | 83.6 |
-| Tommy White | Athletics | 23 | 3B | 158 | 42th | 8.8 |
-| Blaze Jordan | Cardinals | 23 | 3B | 199 | 70th | 18.8 |
-| Alejandro Osuna | Rangers | 23 | LF | 396 | 22th | 9.5 |
-| Cam Cauley | Rangers | 23 | CF | 65 | 12th | 18.7 |
-| Sam Antonacci | White Sox | 23 | LF | 497 | 45th | 60.1 |
-| Joe Mack | Marlins | 23 | C | 292 | 52th | 44.3 |
-| Nacho Alvarez Jr. | Angels | 23 | SS | 240 | — | 19.8 |
-| Ryan Waldschmidt | D-backs | 23 | CF | 272 | 38th | 45.4 |
-| Payton Tolle | Red Sox | 23 | P | 153 | 78th | 113.3 |
-| Hao-Yu Lee | Tigers | 23 | 2B | 292 | 61th | 41.8 |
-| Daylen Lile | Nationals | 23 | LF | 950 | 66th | 42.6 |
-| Carson Benge | Mets | 23 | RF | 576 | 63th | 47.5 |
+| Didier Fuentes | Braves | 21 | P | 78 | 81th | 70 |
+| Luis Lara | Brewers | 21 | RF | 168 | 50th | 27.9 |
+| Esmerlyn Valdez | Pirates | 22 | RF | 284 | 90th | 93.7 |
+| Bradgley Rodriguez | Padres | 22 | P | 73 | 91th | 90.6 |
+| Denzer Guzman | Angels | 22 | 3B | 284 | 30th | 4.9 |
+| Jose Fernandez | D-backs | 22 | DH | 207 | 38th | 7.2 |
+| Pedro Ramírez | Cubs | 22 | 2B | 217 | 44th | 53 |
+| A.J. Ewing | Mets | 22 | CF | 430 | 64th | 46.1 |
+| Henry Bolte | Athletics | 23 | CF | 407 | 72th | 85.3 |
+| Tommy White | Athletics | 23 | 3B | 161 | 42th | 8.8 |
+| Blaze Jordan | Cardinals | 23 | 3B | 199 | 70th | 18.5 |
+| Alejandro Osuna | Rangers | 23 | LF | 396 | 22th | 9.4 |
+| Cam Cauley | Rangers | 23 | CF | 65 | 12th | 18.6 |
+| Sam Antonacci | White Sox | 23 | LF | 502 | 45th | 58.2 |
+| Joe Mack | Marlins | 23 | C | 297 | 55th | 53.2 |
+| Nacho Alvarez Jr. | Angels | 23 | SS | 240 | — | 19.6 |
+| Ryan Waldschmidt | D-backs | 23 | CF | 272 | 38th | 45.1 |
+| Payton Tolle | Red Sox | 23 | P | 153 | 78th | 113.7 |
+| Hao-Yu Lee | Tigers | 23 | 2B | 297 | 62th | 43.6 |
+| Daylen Lile | Nationals | 23 | LF | 954 | 66th | 39 |
+| Carson Benge | Mets | 23 | RF | 582 | 62th | 45.6 |
 | Joey Estes | Athletics | 24 | P | 153 | — | 3.1 |
-| Max Muncy | Athletics | 24 | 3B | 490 | 59th | 15.5 |
-| Jacob Gonzalez | Pirates | 24 | SS | 211 | 46th | 18.5 |
-| Nick Yorke | Pirates | 24 | 3B | 231 | 44th | 7.9 |
+| Max Muncy | Athletics | 24 | 3B | 493 | 62th | 19.8 |
+| Jacob Gonzalez | Pirates | 24 | SS | 213 | 48th | 20.1 |
+| Nick Yorke | Pirates | 24 | 3B | 231 | 45th | 7.8 |
 | Anthony Molina | Giants | 24 | P | 114 | 67th | 9.8 |
-| Drew Cavanaugh | Giants | 24 | C | 137 | 35th | 30.9 |
-| Victor Bericoto | Giants | 24 | LF | 87 | 77th | 9.9 |
-| Thomas Saggese | Cardinals | 24 | LF | 468 | 67th | 32 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 16.5 |
-| Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 71th | 23.2 |
-| Grant Taylor | White Sox | 24 | P | 112 | 68th | 74.8 |
-| Agustín Ramírez | Marlins | 24 | DH | 794 | 35th | 2 |
-| Javier Sanoja | Marlins | 24 | 3B | 799 | 26th | 69.1 |
+| Drew Cavanaugh | Giants | 24 | C | 141 | 33th | 29.6 |
+| Victor Bericoto | Giants | 24 | LF | 87 | 77th | 9.7 |
+| Thomas Saggese | Cardinals | 24 | LF | 472 | 69th | 29.8 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 16th | 16.3 |
+| Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 71th | 23.1 |
+| Grant Taylor | White Sox | 24 | P | 112 | 69th | 75.1 |
+| Javier Sanoja | Marlins | 24 | 3B | 805 | 28th | 68.1 |
 | Angel Chivilli | Yankees | 24 | P | 107 | — | 2 |
-| José Fermin | Angels | 24 | P | 84 | 35th | 23.4 |
-| Kyren Paris | Angels | 24 | 2B | 252 | 16th | 4.8 |
-| Ryan Johnson | Angels | 24 | P | 93 | 29th | 2 |
+| José Fermin | Angels | 24 | P | 84 | 35th | 23.6 |
+| Kyren Paris | Angels | 24 | 2B | 256 | 13th | 4.3 |
+| Ryan Johnson | Angels | 24 | P | 99 | 30th | 2 |
 | Angel Martínez | Guardians | 24 | LF | 1022 | 47th | 2 |
-| CJ Kayfus | Guardians | 24 | LF | 163 | 68th | 17 |
+| CJ Kayfus | Guardians | 24 | LF | 163 | 67th | 17 |
 | Petey Halpin | Guardians | 24 | CF | 181 | 27th | 8.3 |
-| Cole Carrigg | Rockies | 24 | CF | 297 | 45th | 83.3 |
-| Kyle Karros | Rockies | 24 | 3B | 562 | 67th | 72.8 |
-| Zac Veen | Rockies | 24 | LF | 84 | 52th | 37.3 |
+| Cole Carrigg | Rockies | 24 | CF | 301 | 44th | 80.1 |
+| Kyle Karros | Rockies | 24 | 3B | 566 | 67th | 73.5 |
+| Zac Veen | Rockies | 24 | LF | 87 | 57th | 40.5 |
 | Brice Matthews | Astros | 24 | CF | 273 | 37th | 2 |
-| Edgardo Henriquez | Dodgers | 24 | P | 81 | 94th | 65.9 |
+| Edgardo Henriquez | Dodgers | 24 | P | 81 | 94th | 66.2 |
 | Abimelec Ortiz | Nationals | 24 | 1B | 112 | 56th | 6.7 |
-| Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.6 |
-| Rafael Flores Jr. | Pirates | 25 | C | 127 | 90th | 83.7 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 24.4 |
-| Grant McCray | Giants | 25 | CF | 230 | 71th | 5.9 |
+| Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
+| Rafael Flores Jr. | Pirates | 25 | C | 131 | 92th | 82 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 24.1 |
+| Grant McCray | Giants | 25 | CF | 233 | 60th | 5 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
-| Jonah Cox | Giants | 25 | CF | 100 | 56th | 67.4 |
-| Osleivis Basabe | Giants | 25 | 2B | 215 | 39th | 10.7 |
+| Jonah Cox | Giants | 25 | CF | 104 | 54th | 64 |
+| Osleivis Basabe | Giants | 25 | 2B | 215 | 39th | 10.5 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
-| Jimmy Crooks | Cardinals | 25 | C | 195 | 75th | 7.9 |
+| Jimmy Crooks | Cardinals | 25 | C | 195 | 75th | 7.8 |
 | Victor Scott II | Cardinals | 25 | CF | 804 | 17th | 3.7 |
-| Ben Williamson | Rays | 25 | 2B | 565 | 26th | 10.7 |
-| Chandler Simpson | Rays | 25 | LF | 994 | 9th | 30 |
-| Victor Mesa Jr. | Rays | 25 | RF | 244 | 64th | 27.8 |
-| _…189 more_ | | | | | | |
+| Ben Williamson | Rays | 25 | 2B | 565 | 26th | 10.4 |
+| Chandler Simpson | Rays | 25 | LF | 998 | 9th | 31.9 |
+| Victor Mesa Jr. | Rays | 25 | RF | 248 | 68th | 37.1 |
+| Cody Freeman | Rangers | 25 | 3B | 213 | 7th | 11.9 |
+| _…188 more_ | | | | | | |

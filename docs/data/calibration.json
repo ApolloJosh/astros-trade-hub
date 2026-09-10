@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-09T15:06:04.472Z",
+ "updated": "2026-09-10T14:58:22.220Z",
  "tradesAnalyzed": 69,
  "tradesTotal": 70,
  "marketTemp": 1.91,
@@ -11,7 +11,7 @@
   "weightedTrades": 0.1,
   "last24h": 0,
   "last72h": 0,
-  "hoursSinceLast": 207.1,
+  "hoursSinceLast": 231,
   "halfLifeDays": 3,
   "windowDays": 14
  }
