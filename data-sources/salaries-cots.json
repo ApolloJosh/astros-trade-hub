@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-12T13:58:34.168Z",
+ "updated": "2026-09-13T14:53:18.479Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -5145,8 +5145,8 @@
     "key": "andrewsears",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.073,
-    "remM": 0,
+    "salaryM": 0.129,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -8145,7 +8145,7 @@
     "key": "darellhernaiz",
     "svc": 1.04,
     "control": 4.5,
-    "salaryM": 0.582,
+    "salaryM": 0.531,
     "remM": 0.3,
     "exactFA": false
    },
@@ -9002,8 +9002,8 @@
     "key": "ronnysimon",
     "svc": 0.088,
     "control": 5.5,
-    "salaryM": 0.096,
-    "remM": 0,
+    "salaryM": 0.152,
+    "remM": 0.1,
     "exactFA": false
    },
    {
