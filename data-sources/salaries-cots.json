@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-14T16:54:56.807Z",
+ "updated": "2026-09-15T15:30:47.720Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -987,6 +987,15 @@
     "exactFA": false
    },
    {
+    "name": "Jesús Sánchez",
+    "key": "jesussanchez",
+    "svc": 4.118,
+    "control": 1.5,
+    "salaryM": 0.473,
+    "remM": 0.2,
+    "exactFA": false
+   },
+   {
     "name": "Dennis Santana",
     "key": "dennissantana",
     "svc": 5.126,
@@ -1053,10 +1062,10 @@
     "name": "Lourdes Gurriel Jr.",
     "key": "lourdesgurrieljr",
     "svc": null,
-    "control": 0.5,
-    "salaryM": 18,
-    "remM": 9,
-    "exactFA": false
+    "control": 1.5,
+    "salaryM": 7.667,
+    "remM": 11.5,
+    "exactFA": true
    },
    {
     "name": "Max Kepler",
@@ -12580,8 +12589,8 @@
     "key": "jesussanchez",
     "svc": null,
     "control": 0.5,
-    "salaryM": 6.8,
-    "remM": 3.4,
+    "salaryM": 6.327,
+    "remM": 3.2,
     "exactFA": false
    },
    {
