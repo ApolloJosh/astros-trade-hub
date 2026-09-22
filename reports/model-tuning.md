@@ -1,4 +1,4 @@
-# Model tuning report — 2026-09-21
+# Model tuning report — 2026-09-22
 
 - Trades analyzed: 69 of 70 (fully valued)
 - Median balance: 1.9 (1.0 = model matches market)

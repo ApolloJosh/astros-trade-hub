@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-21T16:56:58.611Z",
+ "updated": "2026-09-22T15:28:35.348Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1664,6 +1664,15 @@
     "exactFA": false
    },
    {
+    "name": "Andrew Kittredge",
+    "key": "andrewkittredge",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.2,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Albert Suárez",
     "key": "albertsuarez",
     "svc": null,
@@ -2437,6 +2446,15 @@
     "control": 2.5,
     "salaryM": 0.265,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Jarren Duran",
+    "key": "jarrenduran",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.075,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -3578,12 +3596,39 @@
     "exactFA": false
    },
    {
+    "name": "JJ Bleday",
+    "key": "jjbleday",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.45,
+    "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Pierce Johnson",
+    "key": "piercejohnson",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.2,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "TJ Friedl",
     "key": "tjfriedl",
     "svc": null,
     "control": 0.5,
     "salaryM": 3.8,
     "remM": 1.9,
+    "exactFA": false
+   },
+   {
+    "name": "Sam Moll",
+    "key": "sammoll",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.15,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -4144,6 +4189,15 @@
     "control": 5.5,
     "salaryM": 0.238,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Rhys Hoskins",
+    "key": "rhyshoskins",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.9,
+    "remM": 0.5,
     "exactFA": false
    },
    {
@@ -14675,6 +14729,15 @@
     "svc": 0.039,
     "control": 5.5,
     "salaryM": 0.022,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Lane Thomas",
+    "key": "lanethomas",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.025,
     "remM": 0,
     "exactFA": false
    },
