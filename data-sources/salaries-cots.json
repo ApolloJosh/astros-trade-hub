@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-22T15:28:35.348Z",
+ "updated": "2026-09-23T15:23:43.606Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -3384,7 +3384,7 @@
     "key": "connorphillips",
     "svc": 0.081,
     "control": 5.5,
-    "salaryM": 0.352,
+    "salaryM": 0.372,
     "remM": 0.2,
     "exactFA": false
    },
@@ -4810,7 +4810,7 @@
     "key": "michaellorenzen",
     "svc": null,
     "control": 1.5,
-    "salaryM": 2.718,
+    "salaryM": 2.714,
     "remM": 4.1,
     "exactFA": true
    },
@@ -5235,8 +5235,8 @@
     "key": "jacejung",
     "svc": 0.079,
     "control": 5.5,
-    "salaryM": 0.644,
-    "remM": 0.3,
+    "salaryM": 0.169,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -5325,7 +5325,7 @@
     "key": "riverryan",
     "svc": 1.07,
     "control": 4.5,
-    "salaryM": 0.115,
+    "salaryM": 0.13,
     "remM": 0.1,
     "exactFA": false
    },
@@ -5995,7 +5995,7 @@
     "key": "spencerbivens",
     "svc": 1.077,
     "control": 4.5,
-    "salaryM": 0.05,
+    "salaryM": 0.035,
     "remM": 0,
     "exactFA": false
    },
@@ -6420,7 +6420,7 @@
     "key": "emmetsheehan",
     "svc": 2.08,
     "control": 3.5,
-    "salaryM": 0.721,
+    "salaryM": 0.704,
     "remM": 0.4,
     "exactFA": false
    },
@@ -6528,7 +6528,7 @@
     "key": "eliezeralfonzo",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.168,
+    "salaryM": 0.222,
     "remM": 0.1,
     "exactFA": false
    },
@@ -6614,21 +6614,21 @@
     "exactFA": true
    },
    {
-    "name": "Ryan Ward",
-    "key": "ryanward",
-    "svc": 0,
-    "control": 5.5,
-    "salaryM": 0.19,
-    "remM": 0.1,
-    "exactFA": false
-   },
-   {
     "name": "Max Muncy",
     "key": "maxmuncy",
     "svc": null,
     "control": 0.5,
     "salaryM": 2.25,
     "remM": 1.1,
+    "exactFA": false
+   },
+   {
+    "name": "Ryan Ward",
+    "key": "ryanward",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.231,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -6958,15 +6958,6 @@
     "exactFA": false
    },
    {
-    "name": "Cole Henry",
-    "key": "colehenry",
-    "svc": 0.169,
-    "control": 5.5,
-    "salaryM": 0.39,
-    "remM": 0.2,
-    "exactFA": false
-   },
-   {
     "name": "Brady House",
     "key": "bradyhouse",
     "svc": 0.105,
@@ -7187,8 +7178,8 @@
     "key": "jaredsimpson",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.113,
-    "remM": 0.1,
+    "salaryM": 0.088,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -7225,6 +7216,15 @@
     "control": 5.5,
     "salaryM": 0.124,
     "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Cole Henry",
+    "key": "colehenry",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.386,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -9097,15 +9097,6 @@
     "exactFA": false
    },
    {
-    "name": "Camilo Doval",
-    "key": "camilodoval",
-    "svc": 4.071,
-    "control": 1.5,
-    "salaryM": 1.859,
-    "remM": 0.9,
-    "exactFA": false
-   },
-   {
     "name": "Brandon Eisert",
     "key": "brandoneisert",
     "svc": 1.034,
@@ -10606,15 +10597,6 @@
     "exactFA": true
    },
    {
-    "name": "Philip Abner",
-    "key": "philipabner",
-    "svc": 0.011,
-    "control": 5.5,
-    "salaryM": 0.072,
-    "remM": 0,
-    "exactFA": false
-   },
-   {
     "name": "Scott Bandura",
     "key": "scottbandura",
     "svc": 0,
@@ -10666,6 +10648,15 @@
     "control": 5.5,
     "salaryM": 0.466,
     "remM": 0.2,
+    "exactFA": false
+   },
+   {
+    "name": "Bo Davidson",
+    "key": "bodavidson",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.029,
+    "remM": 0,
     "exactFA": false
    },
    {
@@ -10844,7 +10835,7 @@
     "key": "braxtonroxby",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.064,
+    "salaryM": 0.085,
     "remM": 0,
     "exactFA": false
    },
@@ -12263,7 +12254,7 @@
     "key": "adammacko",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.121,
+    "salaryM": 0.1,
     "remM": 0.1,
     "exactFA": false
    },
@@ -12571,8 +12562,8 @@
     "key": "spencerarrighetti",
     "svc": 2,
     "control": 3.5,
-    "salaryM": 0.755,
-    "remM": 0.4,
+    "salaryM": 0.22,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -12625,7 +12616,7 @@
     "key": "chaddallas",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.25,
+    "salaryM": 0.274,
     "remM": 0.1,
     "exactFA": false
    },
@@ -12654,15 +12645,6 @@
     "control": 5.5,
     "salaryM": 0.285,
     "remM": 0.1,
-    "exactFA": false
-   },
-   {
-    "name": "Joe Mantiply",
-    "key": "joemantiply",
-    "svc": 4.029,
-    "control": 1.5,
-    "salaryM": 1.412,
-    "remM": 0.7,
     "exactFA": false
    },
    {
@@ -12783,12 +12765,30 @@
     "exactFA": false
    },
    {
+    "name": "Max Scherzer",
+    "key": "maxscherzer",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 1,
+    "remM": 0.5,
+    "exactFA": false
+   },
+   {
+    "name": "Joe Mantiply",
+    "key": "joemantiply",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 1.412,
+    "remM": 0.7,
+    "exactFA": false
+   },
+   {
     "name": "Michael Lorenzen",
     "key": "michaellorenzen",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.096,
-    "remM": 0,
+    "salaryM": 0.108,
+    "remM": 0.1,
     "exactFA": false
    },
    {
@@ -13397,15 +13397,6 @@
     "exactFA": true
    },
    {
-    "name": "Alex Jackson",
-    "key": "alexjackson",
-    "svc": 3.036,
-    "control": 2.5,
-    "salaryM": 1.35,
-    "remM": 0.7,
-    "exactFA": false
-   },
-   {
     "name": "Walker Jenkins",
     "key": "walkerjenkins",
     "svc": 0,
@@ -13538,6 +13529,24 @@
     "control": 5.5,
     "salaryM": 0.099,
     "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Aaron Sabato",
+    "key": "aaronsabato",
+    "svc": 0,
+    "control": 5.5,
+    "salaryM": 0.029,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Alex Jackson",
+    "key": "alexjackson",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 1.35,
+    "remM": 0.7,
     "exactFA": false
    },
    {
@@ -16129,7 +16138,7 @@
     "key": "maxschuemann",
     "svc": 2,
     "control": 3.5,
-    "salaryM": 0.617,
+    "salaryM": 0.603,
     "remM": 0.3,
     "exactFA": false
    }
