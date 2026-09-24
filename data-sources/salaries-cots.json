@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-23T15:23:43.606Z",
+ "updated": "2026-09-24T15:46:45.331Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -1668,7 +1668,7 @@
     "key": "andrewkittredge",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.2,
+    "salaryM": 0.25,
     "remM": 0.1,
     "exactFA": false
    },
@@ -3609,8 +3609,8 @@
     "key": "piercejohnson",
     "svc": null,
     "control": 0.5,
-    "salaryM": 0.2,
-    "remM": 0.1,
+    "salaryM": 0.3,
+    "remM": 0.2,
     "exactFA": false
    },
    {
@@ -3797,10 +3797,10 @@
     "name": "Jeimer Candelario",
     "key": "jeimercandelario",
     "svc": null,
-    "control": 0.5,
-    "salaryM": 15.92,
-    "remM": 8,
-    "exactFA": false
+    "control": 1.5,
+    "salaryM": 6.307,
+    "remM": 9.5,
+    "exactFA": true
    }
   ],
   "114": [
@@ -7860,6 +7860,15 @@
     "exactFA": false
    },
    {
+    "name": "Brooks Raley",
+    "key": "brooksraley",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 1.367,
+    "remM": 0.7,
+    "exactFA": false
+   },
+   {
     "name": "Chris Devenski",
     "key": "chrisdevenski",
     "svc": null,
@@ -9286,6 +9295,24 @@
     "exactFA": false
    },
    {
+    "name": "Braxton Ashcraft",
+    "key": "braxtonashcraft",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.01,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
+    "name": "Paul Skenes",
+    "key": "paulskenes",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.01,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
     "name": "Davis Wendzel",
     "key": "daviswendzel",
     "svc": null,
@@ -10160,6 +10187,15 @@
     "control": 1.5,
     "salaryM": 0.565,
     "remM": 0.3,
+    "exactFA": false
+   },
+   {
+    "name": "Andrés Muñoz",
+    "key": "andresmunoz",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 2,
+    "remM": 1,
     "exactFA": false
    },
    {
@@ -12329,6 +12365,24 @@
     "salaryM": 0.087,
     "remM": 0,
     "exactFA": false
+   },
+   {
+    "name": "Tyler Alexander",
+    "key": "tyleralexander",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.2,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
+    "name": "Jalen Beeks",
+    "key": "jalenbeeks",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.325,
+    "remM": 0.2,
+    "exactFA": false
    }
   ],
   "141": [
@@ -12765,12 +12819,21 @@
     "exactFA": false
    },
    {
+    "name": "Jeff Hoffman",
+    "key": "jeffhoffman",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.4,
+    "remM": 0.2,
+    "exactFA": false
+   },
+   {
     "name": "Max Scherzer",
     "key": "maxscherzer",
     "svc": null,
     "control": 0.5,
-    "salaryM": 1,
-    "remM": 0.5,
+    "salaryM": 2,
+    "remM": 1,
     "exactFA": false
    },
    {
@@ -13541,6 +13604,15 @@
     "exactFA": false
    },
    {
+    "name": "Jeff Hoffman",
+    "key": "jeffhoffman",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.1,
+    "remM": 0.1,
+    "exactFA": false
+   },
+   {
     "name": "Alex Jackson",
     "key": "alexjackson",
     "svc": null,
@@ -14135,6 +14207,15 @@
     "salaryM": 0.08,
     "remM": 0,
     "exactFA": true
+   },
+   {
+    "name": "Brooks Raley",
+    "key": "brooksraley",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.133,
+    "remM": 0.1,
+    "exactFA": false
    },
    {
     "name": "Christian Cairo",
@@ -16229,10 +16310,10 @@
     "name": "Gary Sánchez",
     "key": "garysanchez",
     "svc": 9.05,
-    "control": 0.5,
-    "salaryM": 1.5,
-    "remM": 0.8,
-    "exactFA": false
+    "control": 1.5,
+    "salaryM": 0.667,
+    "remM": 1,
+    "exactFA": true
    },
    {
     "name": "Akil Baddoo",
@@ -16568,6 +16649,15 @@
     "exactFA": false
    },
    {
+    "name": "William Contreras",
+    "key": "williamcontreras",
+    "svc": null,
+    "control": 0.5,
+    "salaryM": 0.05,
+    "remM": 0,
+    "exactFA": false
+   },
+   {
     "name": "Braden Shewmake",
     "key": "bradenshewmake",
     "svc": null,
@@ -16607,10 +16697,10 @@
     "name": "Luis Rengifo",
     "key": "luisrengifo",
     "svc": null,
-    "control": 0.5,
-    "salaryM": 3.158,
-    "remM": 1.6,
-    "exactFA": false
+    "control": 1.5,
+    "salaryM": 1.553,
+    "remM": 2.3,
+    "exactFA": true
    },
    {
     "name": "Jake Woodford",
