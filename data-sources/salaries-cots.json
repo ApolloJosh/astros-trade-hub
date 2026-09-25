@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T15:46:45.331Z",
+ "updated": "2026-09-25T15:46:43.692Z",
  "season": 2026,
  "teams": {
   "108": [
@@ -14764,7 +14764,7 @@
     "key": "owenmurphy",
     "svc": 0,
     "control": 5.5,
-    "salaryM": 0.137,
+    "salaryM": 0.12,
     "remM": 0.1,
     "exactFA": false
    },
