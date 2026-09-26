@@ -1,12 +1,12 @@
-# Model tuning report — 2026-09-25
+# Model tuning report — 2026-09-26
 
 - Trades analyzed: 69 of 70 (fully valued)
-- Median balance: 1.9 (1.0 = model matches market)
-- Star-side median: 1.9016393442622952 · Prospect-package median: 1.2941176470588236
+- Median balance: 1.86 (1.0 = model matches market)
+- Star-side median: 1.8557692307692308 · Prospect-package median: 1.3777777777777778
 - Hot Stove: 0/10 (Cold) — 0 trades, 0 value pts in last 14d
 
 ## Suggestions
-- Market trades landing 90% lopsided by our values — consider LOWERING sv.tv.prospectAnchors or RAISING sv.tv.wSur (buyers' MLB pieces may be undervalued).
-- Prospect-heavy packages exchange at 1.2941176470588236x — adjust sv.tv.prospectAnchors DOWN.
+- Market trades landing 86% lopsided by our values — consider LOWERING sv.tv.prospectAnchors or RAISING sv.tv.wSur (buyers' MLB pieces may be undervalued).
+- Prospect-heavy packages exchange at 1.3777777777777778x — adjust sv.tv.prospectAnchors DOWN.
 
 Knobs live in config.json under sv.tv (mirror any change in Code.gs).
