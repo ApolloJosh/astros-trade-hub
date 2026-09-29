@@ -1,4 +1,4 @@
-# Young graduates — 2026-09-28
+# Young graduates — 2026-09-29
 
 Former prospects past graduation, still inside the protection window.
 
@@ -23,18 +23,18 @@ Former prospects past graduation, still inside the protection window.
 | Owen Caissie | Marlins | 24 | 357 | 78th | #47 top-100 | 7.5 | 25.4 | +17.9 |
 | Edwin Arroyo | Reds | 23 | 160 | 29th | #67 top-100 | 4.8 | 21.7 | +16.9 |
 | Luisangel Acuña | White Sox | 24 | 457 | 33th | #66 top-100 | 5.4 | 18.6 | +13.2 |
+| Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 24.3 | 36.9 | +12.6 |
 | Tommy Troy | D-backs | 24 | 143 | 43th | #74 top-100 | 5 | 17.5 | +12.5 |
 | Noelvi Marte | Reds | 24 | 926 | 25th | #21 top-100 | 2 | 10.9 | +8.9 |
 | Samuel Basallo | Orioles | 22 | 517 | 79th | #13 top-100 | 44.2 | 51.1 | +6.9 |
 | Connor Phillips | Reds | 25 | 76 | 29th | #70 top-100 | 3.7 | 9.8 | +6.1 |
-| Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 32.6 | 36.9 | +4.3 |
 | Cam Smith | Astros | 23 | 1061 | 71th | #59 top-100 | 3.6 | 7.7 | +4.1 |
 | Kevin Alcántara | Cubs | 24 | 50 | 37th | #65 top-100 | 15.6 | 19.3 | +3.7 |
 | Jace Jung | Tigers | 25 | 160 | 77th | #60 top-100 | 12.9 | 15.7 | +2.8 |
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
-## Young graduates with NO pedigree on file (255)
+## Young graduates with NO pedigree on file (253)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -63,7 +63,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Payton Tolle | Red Sox | 23 | P | 165 | 80th | 120.9 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 364 | 63th | 58.8 |
 | Daylen Lile | Nationals | 23 | LF | 1006 | 66th | 32.3 |
-| Carson Benge | Mets | 23 | RF | 654 | 66th | 63.2 |
+| Carson Benge | Mets | 23 | RF | 654 | 66th | 63.1 |
 | Joey Estes | Athletics | 24 | P | 156 | — | 2 |
 | Max Muncy | Athletics | 24 | 3B | 504 | 61th | 14.6 |
 | Jacob Gonzalez | Pirates | 24 | SS | 227 | 48th | 21.1 |
@@ -74,7 +74,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Thomas Saggese | Cardinals | 24 | SS | 527 | 72th | 26.8 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.3 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 14.5 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 14.4 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.1 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
@@ -84,20 +84,20 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Kyren Paris | Angels | 24 | 2B | 263 | 5th | 2 |
 | Ryan Johnson | Angels | 24 | P | 115 | 37th | 2 |
 | Angel Martínez | Guardians | 24 | LF | 1069 | 49th | 11.3 |
-| CJ Kayfus | Guardians | 24 | LF | 163 | 69th | 17 |
+| CJ Kayfus | Guardians | 24 | 1B | 163 | 69th | 15.1 |
 | Petey Halpin | Guardians | 24 | CF | 203 | 31th | 10.8 |
 | Cole Carrigg | Rockies | 24 | CF | 372 | 55th | 100.9 |
 | Kyle Karros | Rockies | 24 | 3B | 631 | 70th | 65.3 |
 | Zac Veen | Rockies | 24 | LF | 116 | 34th | 27.5 |
 | Brett Callahan | Tigers | 24 | LF | 80 | 53th | 13.7 |
 | Brice Matthews | Astros | 24 | CF | 280 | 36th | 2 |
-| Edgardo Henriquez | Dodgers | 24 | P | 82 | 93th | 59.8 |
+| Edgardo Henriquez | Dodgers | 24 | P | 82 | 93th | 59.7 |
 | Abimelec Ortiz | Nationals | 24 | 1B | 136 | 53th | 3.5 |
 | Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 22.3 |
-| Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 22.2 |
 | Grant McCray | Giants | 25 | CF | 247 | 44th | 4.5 |
+| Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 35.7 |
-| _…195 more_ | | | | | | |
+| _…193 more_ | | | | | | |
