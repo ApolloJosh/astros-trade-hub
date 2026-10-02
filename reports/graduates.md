@@ -1,4 +1,4 @@
-# Young graduates — 2026-10-01
+# Young graduates — 2026-10-02
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,7 +6,7 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -11.4 | 31.5 | +42.9 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -11.5 | 31.5 | +43 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
 | Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
 | Carson Williams | Rays | 23 | 146 | 13th | #9 top-100 | 4.4 | 32.9 | +28.5 |
@@ -74,7 +74,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Thomas Saggese | Cardinals | 24 | SS | 527 | 72th | 26.7 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.3 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 14.2 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 14.1 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.1 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
@@ -96,7 +96,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 22 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 21.9 |
 | Grant McCray | Giants | 25 | CF | 247 | 44th | 4.5 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 35.7 |
