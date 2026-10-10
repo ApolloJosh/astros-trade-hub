@@ -1,8 +1,8 @@
-# Model tuning report — 2026-10-09
+# Model tuning report — 2026-10-10
 
 - Trades analyzed: 70 of 70 (fully valued)
 - Median balance: 1.885 (1.0 = model matches market)
-- Star-side median: 1.887206301779166 · Prospect-package median: 1.3820224719101124
+- Star-side median: 1.885950020372131 · Prospect-package median: 1.3820224719101124
 - Hot Stove: 0/10 (Cold) — 0 trades, 0 value pts in last 14d
 
 ## Suggestions

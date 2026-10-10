@@ -1,4 +1,4 @@
-# Young graduates — 2026-10-09
+# Young graduates — 2026-10-10
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,7 +6,7 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -4.8 | 31.5 | +36.3 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -4.9 | 31.5 | +36.4 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
 | Jasson Domínguez | Yankees | 23 | 751 | 45th | #21 top-100 | -3 | 28 | +31 |
 | Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
@@ -51,7 +51,6 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Henry Bolte | Athletics | 23 | CF | 473 | 73th | 88.2 |
 | Tommy White | Athletics | 23 | 1B | 195 | 38th | 3.3 |
 | Blaze Jordan | Cardinals | 23 | 3B | 199 | 71th | 16.9 |
-| Alejandro Osuna | Rangers | 23 | LF | 409 | 23th | 11.5 |
 | Cam Cauley | Rangers | 23 | CF | 65 | 12th | 19.5 |
 | Kaelen Culpepper | Twins | 23 | SS | 128 | 30th | 56.8 |
 | Sam Antonacci | White Sox | 23 | LF | 557 | 50th | 65.3 |
@@ -69,9 +68,10 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Drew Cavanaugh | Giants | 24 | C | 166 | 26th | 30.4 |
 | Victor Bericoto | Giants | 24 | LF | 116 | 83th | 9.5 |
 | Thomas Saggese | Cardinals | 24 | SS | 527 | 72th | 25.2 |
+| Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 10.8 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 10.7 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.3 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
@@ -95,8 +95,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Joey Estes | Athletics | 25 | P | 156 | — | 2 |
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 22 |
-| Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 21.9 |
 | Grant McCray | Giants | 25 | CF | 247 | 44th | 4.4 |
+| Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | _…190 more_ | | | | | | |
