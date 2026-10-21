@@ -1,4 +1,4 @@
-# Young graduates — 2026-10-20
+# Young graduates — 2026-10-21
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,13 +6,12 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -5.7 | 31.5 | +37.2 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -5.8 | 31.5 | +37.3 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
 | Jasson Domínguez | Yankees | 23 | 751 | 45th | #21 top-100 | -3 | 28 | +31 |
 | Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
 | Carson Williams | Rays | 23 | 146 | 13th | #9 top-100 | 4.2 | 32.9 | +28.7 |
 | Moisés Ballesteros | Angels | 22 | 418 | 62th | #69 top-100 | 3.1 | 30.1 | +27 |
-| Christian Moore | Angels | 23 | 331 | 43th | #68 top-100 | 2.8 | 26.5 | +23.7 |
 | Evan Carter | Rangers | 24 | 912 | 32th | #5 top-100 | -8 | 14.9 | +22.9 |
 | Roman Anthony | Red Sox | 22 | 545 | 85th | #2 top-100 | 40.7 | 62 | +21.3 |
 | Dylan Crews | Nationals | 24 | 897 | 74th | #4 top-100 | 2 | 21.4 | +19.4 |
@@ -22,6 +21,7 @@ Former prospects past graduation, still inside the protection window.
 | Owen Caissie | Marlins | 24 | 357 | 78th | #47 top-100 | 7.5 | 25.4 | +17.9 |
 | Edwin Arroyo | Reds | 23 | 160 | 29th | #67 top-100 | 5 | 21.7 | +16.7 |
 | Roki Sasaki | Dodgers | 24 | 159 | 46th | #1 top-100 | 17.5 | 33.5 | +16 |
+| Christian Moore | Angels | 24 | 331 | 43th | #68 top-100 | 2.9 | 18.1 | +15.2 |
 | Luisangel Acuña | White Sox | 24 | 457 | 33th | #66 top-100 | 4.8 | 18.6 | +13.8 |
 | Tommy Troy | D-backs | 24 | 143 | 43th | #74 top-100 | 6.2 | 17.5 | +11.3 |
 | Samuel Basallo | Orioles | 22 | 517 | 79th | #13 top-100 | 41.9 | 51.1 | +9.2 |
@@ -71,7 +71,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 9.7 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 9.6 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.3 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
@@ -95,7 +95,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Joey Estes | Athletics | 25 | P | 156 | — | 2 |
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 20.9 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 20.8 |
 | Grant McCray | Giants | 25 | CF | 247 | 44th | 4.4 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
