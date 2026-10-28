@@ -1,4 +1,4 @@
-# Young graduates — 2026-10-27
+# Young graduates — 2026-10-28
 
 Former prospects past graduation, still inside the protection window.
 
@@ -33,7 +33,7 @@ Former prospects past graduation, still inside the protection window.
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
-## Young graduates with NO pedigree on file (250)
+## Young graduates with NO pedigree on file (249)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -69,20 +69,19 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Victor Bericoto | Giants | 24 | LF | 116 | 83th | 9.5 |
 | Thomas Saggese | Cardinals | 24 | SS | 527 | 72th | 25.2 |
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
-| Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 9 |
-| Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
+| Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 8.9 |
+| Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.3 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
-| Josh Ekness | Marlins | 24 | P | 31 | 78th | 17.3 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
+| Josh Ekness | Marlins | 24 | P | 31 | 78th | 17.3 |
 | Angel Chivilli | Yankees | 24 | P | 107 | — | 2 |
 | José Fermin | Angels | 24 | P | 88 | 54th | 15.6 |
 | Kyren Paris | Angels | 24 | 2B | 263 | 5th | 2 |
 | Ryan Johnson | Angels | 24 | P | 115 | 37th | 2 |
 | Ryan Waldschmidt | D-backs | 24 | CF | 284 | 34th | 42.3 |
 | Angel Martínez | Guardians | 24 | LF | 1069 | 49th | 11.3 |
-| CJ Kayfus | Guardians | 24 | 1B | 163 | 69th | 14.9 |
 | Petey Halpin | Guardians | 24 | CF | 203 | 31th | 10.8 |
 | Cole Carrigg | Rockies | 24 | CF | 372 | 55th | 101 |
 | Kyle Karros | Rockies | 24 | 3B | 631 | 70th | 65.3 |
@@ -95,8 +94,9 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Joey Estes | Athletics | 25 | P | 156 | — | 2 |
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 20.2 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 20.1 |
 | Grant McCray | Giants | 25 | CF | 247 | 44th | 4.4 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
-| _…190 more_ | | | | | | |
+| Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
+| _…189 more_ | | | | | | |
