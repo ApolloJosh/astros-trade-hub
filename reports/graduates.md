@@ -1,4 +1,4 @@
-# Young graduates — 2026-10-31
+# Young graduates — 2026-11-01
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,7 +6,7 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -6.5 | 31.5 | +38 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -6.6 | 31.5 | +38.1 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
 | Jasson Domínguez | Yankees | 23 | 751 | 45th | #21 top-100 | -3 | 28 | +31 |
 | Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
@@ -33,7 +33,7 @@ Former prospects past graduation, still inside the protection window.
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
-## Young graduates with NO pedigree on file (242)
+## Young graduates with NO pedigree on file (241)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -57,10 +57,9 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Joe Mack | Marlins | 23 | C | 330 | 55th | 46.8 |
 | Nacho Alvarez Jr. | Angels | 23 | SS | 240 | — | 17.1 |
 | Jose Fernandez | D-backs | 23 | DH | 222 | 37th | 3.9 |
-| Payton Tolle | Red Sox | 23 | P | 165 | 80th | 120.9 |
 | Hao-Yu Lee | Tigers | 23 | 2B | 364 | 63th | 59.1 |
 | Daylen Lile | Nationals | 23 | LF | 1006 | 66th | 32.3 |
-| Carson Benge | Mets | 23 | RF | 654 | 66th | 63.4 |
+| Carson Benge | Mets | 23 | RF | 654 | 66th | 63.3 |
 | Max Muncy | Athletics | 24 | 3B | 504 | 61th | 14.6 |
 | Jacob Gonzalez | Pirates | 24 | SS | 227 | 48th | 21.2 |
 | Nick Yorke | Pirates | 24 | 3B | 231 | 46th | 6.9 |
@@ -71,15 +70,16 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 8.6 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 8.5 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
-| Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
 | Josh Ekness | Marlins | 24 | P | 31 | 78th | 17.3 |
+| Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
 | Angel Chivilli | Yankees | 24 | P | 107 | — | 2 |
 | José Fermin | Angels | 24 | P | 88 | 54th | 15.6 |
 | Ryan Johnson | Angels | 24 | P | 115 | 37th | 2 |
 | Ryan Waldschmidt | D-backs | 24 | CF | 284 | 34th | 42.3 |
+| Payton Tolle | Red Sox | 24 | P | 165 | 80th | 120 |
 | Angel Martínez | Guardians | 24 | LF | 1069 | 49th | 11.3 |
 | Petey Halpin | Guardians | 24 | CF | 203 | 31th | 10.8 |
 | Cole Carrigg | Rockies | 24 | CF | 372 | 55th | 101 |
@@ -94,9 +94,9 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 19.8 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 19.7 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
-| _…182 more_ | | | | | | |
+| _…181 more_ | | | | | | |
