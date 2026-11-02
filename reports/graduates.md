@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-01
+# Young graduates — 2026-11-02
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,7 +6,7 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -6.6 | 31.5 | +38.1 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -6.7 | 31.5 | +38.2 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
 | Jasson Domínguez | Yankees | 23 | 751 | 45th | #21 top-100 | -3 | 28 | +31 |
 | Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
@@ -70,11 +70,11 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 8.5 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 8.4 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
-| Josh Ekness | Marlins | 24 | P | 31 | 78th | 17.3 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
+| Josh Ekness | Marlins | 24 | P | 31 | 78th | 17.3 |
 | Angel Chivilli | Yankees | 24 | P | 107 | — | 2 |
 | José Fermin | Angels | 24 | P | 88 | 54th | 15.6 |
 | Ryan Johnson | Angels | 24 | P | 115 | 37th | 2 |
@@ -85,7 +85,6 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Cole Carrigg | Rockies | 24 | CF | 372 | 55th | 101 |
 | Kyle Karros | Rockies | 24 | 3B | 631 | 70th | 65.3 |
 | Zac Veen | Rockies | 24 | LF | 116 | 34th | 27.3 |
-| Brett Callahan | Tigers | 24 | LF | 80 | 53th | 14.5 |
 | Brice Matthews | Astros | 24 | CF | 280 | 36th | 2 |
 | Edgardo Henriquez | Dodgers | 24 | P | 82 | 93th | 59.6 |
 | Abimelec Ortiz | Nationals | 24 | 1B | 136 | 53th | 3.2 |
@@ -94,9 +93,10 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 19.7 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 19.6 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
+| Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |
 | _…181 more_ | | | | | | |
