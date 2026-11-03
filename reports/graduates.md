@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-02
+# Young graduates — 2026-11-03
 
 Former prospects past graduation, still inside the protection window.
 
@@ -6,7 +6,7 @@ Former prospects past graduation, still inside the protection window.
 
 | Player | Team | Age | Sample | Statcast | Pedigree | Was | Now | +/- |
 |---|---|---:|---:|---:|---|---:|---:|---:|
-| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -6.7 | 31.5 | +38.2 |
+| Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -5.8 | 31.5 | +37.3 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
 | Jasson Domínguez | Yankees | 23 | 751 | 45th | #21 top-100 | -3 | 28 | +31 |
 | Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
@@ -20,20 +20,20 @@ Former prospects past graduation, still inside the protection window.
 | Edgar Quero | White Sox | 23 | 620 | 42th | #66 top-100 | 7.8 | 25.7 | +17.9 |
 | Owen Caissie | Marlins | 24 | 357 | 78th | #47 top-100 | 7.5 | 25.4 | +17.9 |
 | Edwin Arroyo | Reds | 23 | 160 | 29th | #67 top-100 | 5 | 21.7 | +16.7 |
-| Roki Sasaki | Dodgers | 24 | 159 | 46th | #1 top-100 | 17.5 | 33.5 | +16 |
 | Christian Moore | Angels | 24 | 331 | 43th | #68 top-100 | 2.9 | 18.1 | +15.2 |
 | Luisangel Acuña | White Sox | 24 | 457 | 33th | #66 top-100 | 4.8 | 18.6 | +13.8 |
 | Tommy Troy | D-backs | 24 | 143 | 43th | #74 top-100 | 6.2 | 17.5 | +11.3 |
 | Samuel Basallo | Orioles | 22 | 517 | 79th | #13 top-100 | 41.9 | 51.1 | +9.2 |
 | Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 27.8 | 36.9 | +9.1 |
 | Connor Phillips | Reds | 25 | 76 | 29th | #70 top-100 | 3.6 | 9.8 | +6.2 |
+| Roki Sasaki | Dodgers | 25 | 159 | 46th | #1 top-100 | 16.2 | 22.3 | +6.1 |
 | Kevin Alcántara | Cubs | 24 | 50 | 37th | #65 top-100 | 13.5 | 19.3 | +5.8 |
 | Noelvi Marte | Reds | 25 | 926 | 25th | #21 top-100 | 2 | 7.3 | +5.3 |
 | Cam Smith | Astros | 23 | 1061 | 71th | #59 top-100 | 3.9 | 7.7 | +3.8 |
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
-## Young graduates with NO pedigree on file (241)
+## Young graduates with NO pedigree on file (240)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -70,7 +70,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
-| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 8.4 |
+| Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 16.3 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
@@ -88,15 +88,15 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Brice Matthews | Astros | 24 | CF | 280 | 36th | 2 |
 | Edgardo Henriquez | Dodgers | 24 | P | 82 | 93th | 59.6 |
 | Abimelec Ortiz | Nationals | 24 | 1B | 136 | 53th | 3.2 |
-| Kyren Paris | Mets | 24 | 2B | 263 | 5th | 2 |
 | Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
 | Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 19.6 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 27 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
 | Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |
-| _…181 more_ | | | | | | |
+| Victor Scott II | Cardinals | 25 | CF | 813 | 15th | 3.6 |
+| _…180 more_ | | | | | | |
