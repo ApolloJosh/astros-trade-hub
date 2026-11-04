@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-03
+# Young graduates — 2026-11-04
 
 Former prospects past graduation, still inside the protection window.
 
@@ -68,8 +68,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Victor Bericoto | Giants | 24 | LF | 116 | 83th | 9.5 |
 | Thomas Saggese | Cardinals | 24 | SS | 527 | 72th | 25.2 |
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
-| Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
+| Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
 | Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 16.3 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
