@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-05
+# Young graduates — 2026-11-06
 
 Former prospects past graduation, still inside the protection window.
 
@@ -93,8 +93,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
 | Daniel Susac | Giants | 25 | C | 161 | 35th | 27 |
-| Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
+| Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
 | Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |
