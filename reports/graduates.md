@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-06
+# Young graduates — 2026-11-07
 
 Former prospects past graduation, still inside the protection window.
 
@@ -89,14 +89,14 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Edgardo Henriquez | Dodgers | 24 | P | 82 | 93th | 59.6 |
 | Abimelec Ortiz | Nationals | 24 | 1B | 136 | 53th | 3.2 |
 | Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
-| Rafael Flores Jr. | Pirates | 25 | C | 180 | 90th | 110.2 |
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
 | Daniel Susac | Giants | 25 | C | 161 | 35th | 27 |
-| Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
+| Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
 | Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |
 | Victor Scott II | Cardinals | 25 | CF | 813 | 15th | 3.6 |
+| Chandler Simpson | Rays | 25 | LF | 1053 | 9th | 28.6 |
 | _…180 more_ | | | | | | |
