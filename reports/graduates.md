@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-09
+# Young graduates — 2026-11-10
 
 Former prospects past graduation, still inside the protection window.
 
@@ -68,8 +68,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Victor Bericoto | Giants | 24 | LF | 116 | 83th | 9.5 |
 | Thomas Saggese | Cardinals | 24 | SS | 527 | 72th | 25.2 |
 | Alejandro Osuna | Rangers | 24 | LF | 409 | 23th | 11.2 |
-| Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
 | Brett Bateman | Blue Jays | 24 | CF | 181 | 23th | 112.6 |
+| Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
 | Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 16.3 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
 | Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
@@ -92,8 +92,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
 | Daniel Susac | Giants | 25 | C | 161 | 35th | 27 |
-| Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
+| Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
 | Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |

@@ -1,17 +1,17 @@
 {
- "updated": "2026-11-09T21:25:23.848Z",
+ "updated": "2026-11-10T18:36:32.530Z",
  "tradesAnalyzed": 74,
  "tradesTotal": 74,
  "marketTemp": 1.96,
  "hotStove": {
-  "score": 0.8,
+  "score": 0.6,
   "label": "Cold",
   "recentTrades": 4,
   "recentValue": 8.4,
-  "weightedTrades": 0.8,
+  "weightedTrades": 0.7,
   "last24h": 0,
   "last72h": 0,
-  "hoursSinceLast": 93.4,
+  "hoursSinceLast": 114.6,
   "halfLifeDays": 3,
   "windowDays": 14
  }
