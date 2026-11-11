@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-10
+# Young graduates — 2026-11-11
 
 Former prospects past graduation, still inside the protection window.
 

@@ -1,9 +1,9 @@
-# Model tuning report — 2026-11-10
+# Model tuning report — 2026-11-11
 
 - Trades analyzed: 74 of 74 (fully valued)
 - Median balance: 1.96 (1.0 = model matches market)
 - Star-side median: 1.9593984962406017 · Prospect-package median: 1.3820224719101124
-- Hot Stove: 0.6/10 (Cold) — 4 trades, 8.4 value pts in last 14d
+- Hot Stove: 0.5/10 (Cold) — 4 trades, 8.4 value pts in last 14d
 
 ## Suggestions
 - Market trades landing 96% lopsided by our values — consider LOWERING sv.tv.prospectAnchors or RAISING sv.tv.wSur (buyers' MLB pieces may be undervalued).
