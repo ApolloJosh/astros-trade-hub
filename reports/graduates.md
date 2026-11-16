@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-15
+# Young graduates — 2026-11-16
 
 Former prospects past graduation, still inside the protection window.
 
@@ -43,13 +43,13 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | George Lombard Jr. | Yankees | 21 | SS | 166 | 47th | 42.2 |
 | Luis Lara | Brewers | 21 | RF | 212 | 40th | 6.5 |
 | Esmerlyn Valdez | Pirates | 22 | RF | 287 | 90th | 85.5 |
-| Bradgley Rodriguez | Padres | 22 | P | 82 | 89th | 75.5 |
 | Denzer Guzman | Angels | 22 | 3B | 347 | 27th | 3.3 |
 | Pedro Ramírez | Cubs | 22 | 2B | 266 | 42th | 53.4 |
 | Héctor Rodríguez | Reds | 22 | RF | 152 | 34th | 13.4 |
 | A.J. Ewing | Mets | 22 | CF | 492 | 67th | 49.9 |
 | Henry Bolte | Athletics | 23 | CF | 473 | 73th | 88.2 |
 | Tommy White | Athletics | 23 | 1B | 195 | 38th | 3.3 |
+| Bradgley Rodriguez | Padres | 23 | P | 82 | 89th | 74.7 |
 | Blaze Jordan | Cardinals | 23 | 3B | 199 | 71th | 16.9 |
 | Cam Cauley | Rangers | 23 | CF | 65 | 12th | 19.5 |
 | Kaelen Culpepper | Twins | 23 | SS | 128 | 30th | 56.8 |
@@ -92,8 +92,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
 | Daniel Susac | Giants | 25 | C | 161 | 35th | 27 |
-| Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
+| Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
 | Jimmy Crooks | Cardinals | 25 | C | 195 | 76th | 7.7 |
 | Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |
