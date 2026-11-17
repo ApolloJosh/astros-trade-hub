@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-16
+# Young graduates — 2026-11-17
 
 Former prospects past graduation, still inside the protection window.
 
@@ -33,7 +33,7 @@ Former prospects past graduation, still inside the protection window.
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
-## Young graduates with NO pedigree on file (240)
+## Young graduates with NO pedigree on file (239)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -41,8 +41,8 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 |---|---|---:|---|---:|---:|---:|
 | Didier Fuentes | Braves | 21 | P | 86 | 81th | 64.7 |
 | George Lombard Jr. | Yankees | 21 | SS | 166 | 47th | 42.2 |
-| Luis Lara | Brewers | 21 | RF | 212 | 40th | 6.5 |
 | Esmerlyn Valdez | Pirates | 22 | RF | 287 | 90th | 85.5 |
+| Luis Lara | Brewers | 22 | RF | 212 | 40th | 6.9 |
 | Denzer Guzman | Angels | 22 | 3B | 347 | 27th | 3.3 |
 | Pedro Ramírez | Cubs | 22 | 2B | 266 | 42th | 53.4 |
 | Héctor Rodríguez | Reds | 22 | RF | 152 | 34th | 13.4 |
@@ -99,4 +99,4 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Luis Gastelum | Cardinals | 25 | P | 37 | 52th | 13.6 |
 | Victor Scott II | Cardinals | 25 | CF | 813 | 15th | 3.6 |
 | Chandler Simpson | Rays | 25 | LF | 1053 | 9th | 28.6 |
-| _…180 more_ | | | | | | |
+| _…179 more_ | | | | | | |
