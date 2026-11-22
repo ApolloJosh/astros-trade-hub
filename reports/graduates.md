@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-21
+# Young graduates — 2026-11-22
 
 Former prospects past graduation, still inside the protection window.
 
@@ -8,8 +8,8 @@ Former prospects past graduation, still inside the protection window.
 |---|---|---:|---:|---:|---|---:|---:|---:|
 | Colt Emerson | Mariners | 21 | 241 | 22th | #20 top-100 | -5.8 | 31.5 | +37.3 |
 | Marcelo Mayer | Giants | 23 | 381 | 27th | #12 top-100 | 2 | 35.9 | +33.9 |
-| Rhett Lowder | Reds | 24 | 164 | 33th | #34 top-100 | -9.2 | 22.8 | +32 |
 | Jasson Domínguez | Yankees | 23 | 751 | 45th | #21 top-100 | -3 | 28 | +31 |
+| Rhett Lowder | Reds | 24 | 164 | 23th | #34 top-100 | -9.2 | 21 | +30.2 |
 | Carson Williams | Rays | 23 | 146 | 13th | #9 top-100 | 4.2 | 32.9 | +28.7 |
 | Moisés Ballesteros | Angels | 23 | 418 | 62th | #69 top-100 | 3.3 | 30.1 | +26.8 |
 | Evan Carter | Rangers | 24 | 912 | 32th | #5 top-100 | -8 | 14.9 | +22.9 |
@@ -26,10 +26,10 @@ Former prospects past graduation, still inside the protection window.
 | Samuel Basallo | Orioles | 22 | 517 | 79th | #13 top-100 | 41.9 | 51.1 | +9.2 |
 | Kristian Campbell | Red Sox | 24 | 263 | — | #7 top-100 | 27.8 | 36.9 | +9.1 |
 | Connor Phillips | Reds | 25 | 76 | 29th | #70 top-100 | 3.6 | 9.8 | +6.2 |
+| Roki Sasaki | Dodgers | 25 | 159 | 46th | #1 top-100 | 16.2 | 22.3 | +6.1 |
 | Kevin Alcántara | Cubs | 24 | 50 | 37th | #65 top-100 | 13.5 | 19.3 | +5.8 |
 | Noelvi Marte | Reds | 25 | 926 | 25th | #21 top-100 | 2 | 7.3 | +5.3 |
 | Cam Smith | Astros | 23 | 1061 | 71th | #59 top-100 | 3.9 | 7.7 | +3.8 |
-| Roki Sasaki | Dodgers | 25 | 159 | 30th | #1 top-100 | 16.2 | 19.7 | +3.5 |
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
@@ -39,7 +39,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 
 | Player | Team | Age | Pos | Sample | Statcast | Value |
 |---|---|---:|---|---:|---:|---:|
-| Didier Fuentes | Braves | 21 | P | 86 | 76th | 64.7 |
+| Didier Fuentes | Braves | 21 | P | 86 | 81th | 64.7 |
 | George Lombard Jr. | Yankees | 21 | SS | 166 | 47th | 42.2 |
 | Esmerlyn Valdez | Pirates | 22 | RF | 287 | 90th | 85.5 |
 | Luis Lara | Brewers | 22 | RF | 212 | 40th | 6.9 |
@@ -49,7 +49,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | A.J. Ewing | Mets | 22 | CF | 492 | 67th | 49.9 |
 | Henry Bolte | Athletics | 23 | CF | 473 | 73th | 88.2 |
 | Tommy White | Athletics | 23 | 1B | 195 | 38th | 3.3 |
-| Bradgley Rodriguez | Padres | 23 | P | 82 | 93th | 74.7 |
+| Bradgley Rodriguez | Padres | 23 | P | 82 | 89th | 74.7 |
 | Blaze Jordan | Cardinals | 23 | 3B | 199 | 71th | 16.9 |
 | Cam Cauley | Rangers | 23 | CF | 65 | 12th | 19.5 |
 | Kaelen Culpepper | Twins | 23 | SS | 128 | 30th | 56.8 |
@@ -71,21 +71,21 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Charles McAdoo | Blue Jays | 24 | 2B | 106 | 28th | 36.5 |
 | Jonatan Clase | Blue Jays | 24 | LF | 203 | 15th | 16.3 |
 | Yohendrick Piñango | Blue Jays | 24 | LF | 180 | 72th | 23.2 |
-| Grant Taylor | White Sox | 24 | P | 121 | 56th | 83.9 |
+| Grant Taylor | White Sox | 24 | P | 121 | 68th | 83.9 |
 | Javier Sanoja | Marlins | 24 | 3B | 868 | 32th | 78.5 |
 | Josh Ekness | Marlins | 24 | P | 31 | 78th | 17.3 |
 | Angel Chivilli | Yankees | 24 | P | 107 | — | 2 |
-| José Fermin | Angels | 24 | P | 88 | 37th | 15.6 |
-| Ryan Johnson | Angels | 24 | P | 115 | 44th | 2 |
+| José Fermin | Angels | 24 | P | 88 | 54th | 15.6 |
+| Ryan Johnson | Angels | 24 | P | 115 | 37th | 2 |
 | Ryan Waldschmidt | D-backs | 24 | CF | 284 | 34th | 42.3 |
-| Payton Tolle | Red Sox | 24 | P | 165 | 82th | 120 |
+| Payton Tolle | Red Sox | 24 | P | 165 | 80th | 120 |
 | Angel Martínez | Guardians | 24 | LF | 1069 | 49th | 11.3 |
 | Petey Halpin | Guardians | 24 | CF | 203 | 31th | 10.8 |
 | Cole Carrigg | Rockies | 24 | CF | 372 | 55th | 101 |
 | Kyle Karros | Rockies | 24 | 3B | 631 | 70th | 65.3 |
 | Zac Veen | Rockies | 24 | LF | 116 | 34th | 27.3 |
 | Brice Matthews | Astros | 24 | CF | 280 | 36th | 2 |
-| Edgardo Henriquez | Dodgers | 24 | P | 82 | 97th | 59.6 |
+| Edgardo Henriquez | Dodgers | 24 | P | 82 | 93th | 59.6 |
 | Abimelec Ortiz | Nationals | 24 | 1B | 136 | 53th | 3.2 |
 | Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
