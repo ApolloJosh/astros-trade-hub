@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-22
+# Young graduates — 2026-11-23
 
 Former prospects past graduation, still inside the protection window.
 
@@ -17,7 +17,7 @@ Former prospects past graduation, still inside the protection window.
 | Dylan Crews | Nationals | 24 | 897 | 74th | #4 top-100 | 2 | 21.4 | +19.4 |
 | Braden Montgomery | White Sox | 23 | 365 | 57th | #55 top-100 | 9.4 | 28.3 | +18.9 |
 | Angel Genao | Guardians | 22 | 139 | 56th | #62 top-100 | 11.3 | 29.9 | +18.6 |
-| Edgar Quero | White Sox | 23 | 620 | 42th | #66 top-100 | 7.8 | 25.7 | +17.9 |
+| Edgar Quero | White Sox | 23 | 620 | 42th | #66 top-100 | 7.7 | 25.7 | +18 |
 | Owen Caissie | Marlins | 24 | 357 | 78th | #47 top-100 | 7.5 | 25.4 | +17.9 |
 | Edwin Arroyo | Reds | 23 | 160 | 29th | #67 top-100 | 5 | 21.7 | +16.7 |
 | Christian Moore | Angels | 24 | 331 | 43th | #68 top-100 | 2.9 | 18.1 | +15.2 |
@@ -90,7 +90,7 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Darell Hernaiz | Athletics | 25 | SS | 489 | 11th | 5.5 |
 | Grant McCray | Mariners | 25 | CF | 247 | 44th | 4.4 |
 | Troy Taylor | Mariners | 25 | P | 29 | — | 2 |
-| Daniel Susac | Giants | 25 | C | 161 | 35th | 27 |
+| Daniel Susac | Giants | 25 | C | 161 | 35th | 26.9 |
 | Hayden Birdsong | Giants | 25 | P | 138 | — | 2 |
 | Jonah Cox | Giants | 25 | CF | 169 | 33th | 36.3 |
 | Everson Pereira | Cardinals | 25 | RF | 287 | 65th | 2 |
