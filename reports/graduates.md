@@ -1,4 +1,4 @@
-# Young graduates — 2026-11-25
+# Young graduates — 2026-11-26
 
 Former prospects past graduation, still inside the protection window.
 
@@ -33,7 +33,7 @@ Former prospects past graduation, still inside the protection window.
 | Jordan Beck | Rockies | 25 | 952 | 21th | #81 top-100 | 2 | 3.9 | +1.9 |
 | Brady House | Nationals | 23 | 629 | 80th | #48 top-100 | 34.9 | 35.6 | +0.7 |
 
-## Young graduates with NO pedigree on file (234)
+## Young graduates with NO pedigree on file (233)
 
 _These get no protection. Any who were genuinely well-regarded belong in the `manual` block of `data-sources/pedigree.json` — auto-capture only sees players still on a list, so anyone who graduated before tracking began has to be added by hand._
 
@@ -99,4 +99,4 @@ _These get no protection. Any who were genuinely well-regarded belong in the `ma
 | Victor Scott II | Cardinals | 25 | CF | 813 | 15th | 3.6 |
 | Victor Mesa Jr. | Rays | 25 | RF | 300 | 75th | 67 |
 | Adam Macko | Rangers | 25 | P | 31 | 52th | 3.6 |
-| _…174 more_ | | | | | | |
+| _…173 more_ | | | | | | |
